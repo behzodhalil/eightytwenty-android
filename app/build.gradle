@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -29,6 +31,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -40,4 +45,32 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // Hilt
+    def hiltVersion = "2.38.1"
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
+
+    // Room
+    def roomVersion = "2.4.2"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+
+    // Coroutine
+    def coroutineVersion = "1.6.2"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+
+    // Lifecycle KTX x Fragment KTX
+    def lifecycleKtxVersion = "2.4.1"
+    def fragmentKtxVersion = "1.4.1"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleKtxVersion")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleKtxVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleKtxVersion")
+    implementation("androidx.fragment:fragment-ktx:$fragmentKtxVersion")
+
+    // ViewPager2
+    def viewPagerVersion = "1.0.0"
+    implementation("androidx.viewpager2:viewpager2:$viewPagerVersion")
 }
