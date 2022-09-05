@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">EightyTwenty</string>
+    <string name="text_description">Записывай идеи в ту же секунду, как они \n приходят. Добавляй в заметки картинки,\n меняй оформление и делись с друзьями</string>
+    <string name="text_skip">Пропустить</string>
+    <string name="text_next">Продолжить</string>
+    <string name="text_become_productivity">Стать продуктивнее</string>
+
+    <string name="text_task_title">Создавай задачи</string>
+    <string name="text_task_description">Задачи с большой, но очень простой \nкастомизацией для любых нужд и целей. Не \nдумай, мы подумали за тебя, просто делай</string>
+
+    <string name="text_note_title">Пиши заметки</string>
+    <string name="text_note_description">Записывай идеи в ту же секунду, как они \nприходят. Добавляй в заметки картинки,\nменяй оформление и делись с друзьями</string>
+
+    <string name="text_habit_title">Формируй привычки</string>
+    <string name="text_habit_description">Выработай в себе полезные и очень важные \nпривычки. Становись лучшей версией себя \nкаждый день</string>
+
+    <string name="text_time_title">Всё по полочкам</string>
+    <string name="text_time_description">Благодаря умной системе списков, тебе \nникогда не придётся искать свою задачу \nили заметку среди списка всех задач</string>
 </resources>
