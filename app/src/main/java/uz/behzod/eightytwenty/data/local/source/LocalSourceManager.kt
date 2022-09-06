@@ -16,7 +16,7 @@ interface LocalSourceManager {
     suspend fun deleteNoteCategory(category: NoteCategoryEntity)
     suspend fun incrementNoteCount(noteCategoryId: Long)
     suspend fun decrementNoteCount(noteCategoryId: Long)
-    suspend fun fetchAllCategories(): List<NoteCategoryEntity>
+    fun fetchAllCategories(): Flow<List<NoteCategoryEntity>>
     suspend fun fetchIfCategoryIdExists(noteCategoryId: Int): Boolean
 
 }

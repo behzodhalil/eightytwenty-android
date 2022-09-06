@@ -52,7 +52,7 @@ class LocalSourceManagerImpl @Inject constructor(
         return noteCategoryDao.decrementNoteCount(noteCategoryId)
     }
 
-    override suspend fun fetchAllCategories(): List<NoteCategoryEntity> {
+    override fun fetchAllCategories(): Flow<List<NoteCategoryEntity>> {
         return noteCategoryDao.fetchAllCategories()
     }
 
