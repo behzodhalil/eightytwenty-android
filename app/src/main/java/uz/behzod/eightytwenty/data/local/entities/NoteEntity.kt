@@ -1,10 +1,8 @@
 package uz.behzod.eightytwenty.data.local.entities
 
-import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.parcelize.Parcelize
 import uz.behzod.eightytwenty.utils.ext.Empty
 import uz.behzod.eightytwenty.utils.ext.Zero
 import java.time.ZonedDateTime
@@ -12,7 +10,6 @@ import java.time.ZonedDateTime
 @Entity(
     tableName = "note_table"
 )
-@Parcelize
 data class NoteEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = Schema.ID)
@@ -31,7 +28,7 @@ data class NoteEntity(
 
     @ColumnInfo(name = Schema.CATEGORY_ID)
     val categoryId: Long = Long.Zero
-): Parcelable {
+) {
     private object Schema {
         const val TABLE_NAME = "note_table"
         const val ID = "note_id"
