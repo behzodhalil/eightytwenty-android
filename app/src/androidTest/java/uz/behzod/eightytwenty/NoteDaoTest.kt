@@ -1,7 +1,6 @@
 package uz.behzod.eightytwenty
 
 import android.content.Context
-import android.nfc.Tag
 import android.util.Log
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.asLiveData
