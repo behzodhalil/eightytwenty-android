@@ -1,6 +1,7 @@
 package uz.behzod.eightytwenty.data.local.dao
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
 
 @Dao
@@ -21,5 +22,5 @@ interface NoteDao {
 
     @Transaction
     @Query("SELECT * FROM note_table WHERE note_is_trashed <> 1")
-    suspend fun fetchAllNotes(): List<NoteEntity>
+    fun fetchAllNotes(): Flow<List<NoteEntity>>
 }
