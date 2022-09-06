@@ -1,4 +1,4 @@
-package uz.behzod.eightytwenty.data.local.source
+package uz.behzod.eightytwenty.data.source
 
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.NoteCategoryEntity
@@ -8,7 +8,7 @@ interface LocalSourceManager {
     suspend fun insertNote(note: NoteEntity)
     suspend fun updateNote(note: NoteEntity)
     suspend fun deleteNote(note: NoteEntity)
-    suspend fun fetchTrashedNotes(): List<NoteEntity>
+    fun fetchTrashedNotes(): Flow<List<NoteEntity>>
     fun fetchAllNotes(): Flow<List<NoteEntity>>
 
     suspend fun insertNoteCategory(category: NoteCategoryEntity)
