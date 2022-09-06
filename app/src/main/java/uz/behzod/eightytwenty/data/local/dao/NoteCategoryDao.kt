@@ -1,6 +1,7 @@
 package uz.behzod.eightytwenty.data.local.dao
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.NoteCategoryEntity
 
 @Dao
@@ -22,7 +23,7 @@ interface NoteCategoryDao {
     suspend fun decrementNoteCount(noteCategoryId: Long)
 
     @Query("SELECT * FROM note_category_table ORDER BY note_category_name")
-    suspend fun fetchAllCategories(): List<NoteCategoryEntity>
+    fun fetchAllCategories(): Flow<List<NoteCategoryEntity>>
 
     @Query("SELECT EXISTS (SELECT note_category_id FROM note_category_table WHERE note_category_id = :noteCategoryId LIMIT 1)")
     suspend fun fetchIfCategoryIdExists(noteCategoryId: Int): Boolean
