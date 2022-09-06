@@ -1,4 +1,8 @@
 package uz.behzod.eightytwenty.features.note
 
-class NoteEvent {
+sealed interface NoteEvent {
+    object NewNoteEvent: NoteEvent
+    object CategoryEvent: NoteEvent
+    object DetailEvent: NoteEvent
+    object SearchEvent: NoteEvent
 }
