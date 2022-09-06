@@ -9,8 +9,9 @@ import dagger.hilt.components.SingletonComponent
 import uz.behzod.eightytwenty.data.local.dao.NoteCategoryDao
 import uz.behzod.eightytwenty.data.local.dao.NoteDao
 import uz.behzod.eightytwenty.data.local.db.EightyTwentyDatabase
-import uz.behzod.eightytwenty.data.local.source.LocalSourceManager
-import uz.behzod.eightytwenty.data.local.source.LocalSourceManagerImpl
+import uz.behzod.eightytwenty.data.source.LocalSourceManager
+import uz.behzod.eightytwenty.data.source.LocalSourceManagerImpl
+import uz.behzod.eightytwenty.domain.repository.NoteRepository
 import javax.inject.Singleton
 
 @Module
@@ -43,4 +44,5 @@ object DatabaseModule {
     ): LocalSourceManager {
         return LocalSourceManagerImpl(noteCategoryDao = noteCategoryDao, noteDao = noteDao)
     }
+
 }
