@@ -1,5 +1,6 @@
 package uz.behzod.eightytwenty.data.local.source
 
+import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.dao.NoteCategoryDao
 import uz.behzod.eightytwenty.data.local.dao.NoteDao
 import uz.behzod.eightytwenty.data.local.entities.NoteCategoryEntity
@@ -27,7 +28,7 @@ class LocalSourceManagerImpl @Inject constructor(
         return noteDao.fetchTrashedNotes()
     }
 
-    override suspend fun fetchAllNotes(): List<NoteEntity> {
+    override fun fetchAllNotes(): Flow<List<NoteEntity>> {
         return noteDao.fetchAllNotes()
     }
 
