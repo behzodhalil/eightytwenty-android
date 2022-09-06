@@ -18,7 +18,7 @@ interface NoteDao {
 
     @Transaction
     @Query("SELECT * FROM note_table WHERE note_is_trashed = 1")
-    suspend fun fetchTrashedNotes(): List<NoteEntity>
+    fun fetchTrashedNotes(): Flow<List<NoteEntity>>
 
     @Transaction
     @Query("SELECT * FROM note_table WHERE note_is_trashed <> 1")
