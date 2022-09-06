@@ -3,10 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/activity_main.xml" value="0.4" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/menu/bottom_menu.xml" value="0.3796875" />
+        <entry key="app/src/main/res/drawable/bg_oval.xml" value="0.205" />
+        <entry key="app/src/main/res/drawable/bg_oval_undo_redo.xml" value="0.205" />
+        <entry key="app/src/main/res/drawable/ic_add.xml" value="0.205" />
+        <entry key="app/src/main/res/drawable/ic_folder.xml" value="0.205" />
         <entry key="app/src/main/res/drawable/ic_right.xml" value="0.205" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.205" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.4895833333333333" />
+        <entry key="app/src/main/res/layout/fragment_note.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/view_holder_note.xml" value="0.5740740740740741" />
         <entry key="app/src/main/res/layout/view_holder_onboarding.xml" value="0.4895833333333333" />
       </map>
     </option>
