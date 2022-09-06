@@ -8,6 +8,7 @@ import androidx.lifecycle.asLiveData
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SmallTest
 import kotlinx.coroutines.runBlocking
 import org.junit.*
 import org.junit.runner.RunWith
@@ -17,6 +18,7 @@ import uz.behzod.eightytwenty.data.local.entities.NoteEntity
 import java.time.ZonedDateTime
 
 @RunWith(AndroidJUnit4::class)
+@SmallTest
 class NoteDaoTest {
 
     @get:Rule
@@ -28,6 +30,8 @@ class NoteDaoTest {
     @Before
     fun setup() {
         val context = ApplicationProvider.getApplicationContext<Context>()
+        // Using an in-memory database because the information stored here disappears when the
+        // process is killed
         database = Room.inMemoryDatabaseBuilder(
             context,
             EightyTwentyDatabase::class.java
@@ -40,7 +44,7 @@ class NoteDaoTest {
     }
 
     @After
-    fun close() {
+    fun cleanUp() {
         database.close()
         Log.i(TAG, "Database is closed")
     }
