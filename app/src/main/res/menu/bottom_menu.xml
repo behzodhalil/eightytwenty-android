@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/productivityFragment"
+        android:icon="@drawable/ic_check"
+        android:title="Продуктивность"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/taskFragment"
+        android:icon="@drawable/ic_check"
+        android:title="Задачи"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/noteFragment"
+        android:icon="@drawable/ic_check"
+        android:title="Заметки"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/habitFragment"
+        android:icon="@drawable/ic_check"
+        android:title="Привычки"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/goalAndChallengeFragment"
+        android:icon="@drawable/ic_check"
+        android:title="Цели"
+        app:showAsAction="ifRoom" />
+</menu>
