@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/menu/bottom_menu.xml" value="0.3796875" />
         <entry key="app/src/main/res/drawable/ic_right.xml" value="0.205" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/view_holder_onboarding.xml" value="0.4895833333333333" />
