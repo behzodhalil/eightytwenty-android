@@ -3,6 +3,7 @@ package uz.behzod.eightytwenty.data.source
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.dao.NoteCategoryDao
 import uz.behzod.eightytwenty.data.local.dao.NoteDao
+import uz.behzod.eightytwenty.data.local.entities.CategoryAndNotes
 import uz.behzod.eightytwenty.data.local.entities.NoteCategoryEntity
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
 import javax.inject.Inject
@@ -58,5 +59,9 @@ class LocalSourceManagerImpl @Inject constructor(
 
     override suspend fun fetchIfCategoryIdExists(noteCategoryId: Int): Boolean {
         return noteCategoryDao.fetchIfCategoryIdExists(noteCategoryId)
+    }
+
+    override fun fetchAllCategoriesAndNotes(): Flow<List<CategoryAndNotes>> {
+        return noteCategoryDao.fetchAllCategoriesWithNotes()
     }
 }
