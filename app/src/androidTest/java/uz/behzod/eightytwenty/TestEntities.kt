@@ -4,7 +4,7 @@ import uz.behzod.eightytwenty.data.local.entities.NoteCategoryEntity
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
 import java.time.ZonedDateTime
 
-fun createNoteCategory(): NoteCategoryEntity {
+internal fun createNoteCategory(): NoteCategoryEntity {
     return NoteCategoryEntity(
         id = 1,
         name = "All",
@@ -12,7 +12,7 @@ fun createNoteCategory(): NoteCategoryEntity {
     )
 }
 
-fun createNote(): NoteEntity {
+internal fun createNote(): NoteEntity {
     return NoteEntity(
         id = 1,
         title = "Google Manager",

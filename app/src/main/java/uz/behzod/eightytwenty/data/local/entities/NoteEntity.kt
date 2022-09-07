@@ -3,6 +3,7 @@ package uz.behzod.eightytwenty.data.local.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import uz.behzod.eightytwenty.domain.NoteDomainModel
 import uz.behzod.eightytwenty.utils.ext.Empty
 import uz.behzod.eightytwenty.utils.ext.Zero
 import java.time.ZonedDateTime
@@ -38,4 +39,34 @@ data class NoteEntity(
         const val IS_TRASHED = "note_is_trashed"
         const val CATEGORY_ID = "note_category_id"
     }
+}
+
+fun NoteEntity.asDomain(): NoteDomainModel {
+    return NoteDomainModel(
+        id = id,
+        title = title,
+        description = description,
+        timestamp = timestamp,
+        isTrashed = false,
+        categoryId = categoryId
+    )
+}
+
+fun NoteDomainModel.asEntity(): NoteEntity {
+    return NoteEntity(
+        id = id,
+        title = title,
+        description = description,
+        timestamp = timestamp,
+        isTrashed = false,
+        categoryId = categoryId
+    )
+}
+
+fun List<NoteEntity>.asListOfDomain(): List<NoteDomainModel> = this.flatMap {
+    listOf(it.asDomain())
+}
+
+fun List<NoteDomainModel>.asListOfEntity(): List<NoteEntity> = this.flatMap {
+    listOf(it.asEntity())
 }

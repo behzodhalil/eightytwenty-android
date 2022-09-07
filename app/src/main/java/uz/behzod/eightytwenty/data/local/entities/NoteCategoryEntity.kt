@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import uz.behzod.eightytwenty.domain.NoteCategoryDomainModel
 import uz.behzod.eightytwenty.utils.ext.Empty
 import uz.behzod.eightytwenty.utils.ext.Zero
 
@@ -23,8 +24,38 @@ data class NoteCategoryEntity(
     val count: Int = Int.Zero
 ) {
     private object Schema {
-        const val ID = "note_category_id"
+        const val ID = "id"
         const val NAME = "note_category_name"
         const val COUNT = "note_count"
     }
 }
+
+fun NoteCategoryEntity.asDomain(): NoteCategoryDomainModel {
+    return NoteCategoryDomainModel(
+        id = id,
+        name = name,
+        count = count
+    )
+}
+
+fun NoteCategoryDomainModel.asEntity() : NoteCategoryEntity {
+    return NoteCategoryEntity(
+        id = id,
+        name = name,
+        count = count
+    )
+}
+
+fun List<NoteCategoryEntity>.asListOfDomain(): List<NoteCategoryDomainModel> {
+    return this.flatMap {
+        listOf(it.asDomain())
+    }
+}
+
+fun List<NoteCategoryDomainModel>.asListOfEntity(): List<NoteCategoryEntity> {
+    return this.flatMap {
+        listOf(it.asEntity())
+    }
+}
+
+
