@@ -62,3 +62,11 @@ fun NoteDomainModel.asEntity(): NoteEntity {
         categoryId = categoryId
     )
 }
+
+fun List<NoteEntity>.asListOfDomain(): List<NoteDomainModel> = this.flatMap {
+    listOf(it.asDomain())
+}
+
+fun List<NoteDomainModel>.asListOfEntity(): List<NoteEntity> = this.flatMap {
+    listOf(it.asEntity())
+}
