@@ -31,3 +31,12 @@ fun CategoryAndNotesDomainModel.asEntity(): CategoryAndNotes {
         notes = listNotes.map { it.asEntity() }
     )
 }
+
+fun List<CategoryAndNotes>.asListOfDomain(): List<CategoryAndNotesDomainModel> = this.flatMap {
+    listOf(it.asDomain())
+}
+
+fun List<CategoryAndNotesDomainModel>.asListOfEntity(): List<CategoryAndNotes> =
+    this.flatMap {
+        listOf(it.asEntity())
+}
