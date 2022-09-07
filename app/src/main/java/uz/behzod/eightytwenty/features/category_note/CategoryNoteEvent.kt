@@ -1,0 +1,3 @@
+package uz.behzod.eightytwenty.features.category_note
+
+sealed interface CategoryNoteEvent
