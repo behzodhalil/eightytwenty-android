@@ -14,7 +14,9 @@ import org.junit.runner.RunWith
 import uz.behzod.eightytwenty.data.local.dao.NoteCategoryDao
 import uz.behzod.eightytwenty.data.local.dao.NoteDao
 import uz.behzod.eightytwenty.data.local.db.EightyTwentyDatabase
+import uz.behzod.eightytwenty.data.local.entities.NoteEntity
 import uz.behzod.eightytwenty.data.source.LocalSourceManagerImpl
+import kotlin.jvm.Throws
 
 @RunWith(AndroidJUnit4::class)
 @SmallTest
@@ -48,6 +50,7 @@ class LocalSourceManagerTest {
     }
 
     @Test
+    @Throws(Exception::class)
     fun insertAndGetNotes() = runBlocking {
         // Given
         val note = createNote()
@@ -62,6 +65,7 @@ class LocalSourceManagerTest {
     }
 
     @Test
+    @Throws(Exception::class)
     fun updateAndGetNotes() = runBlocking {
         val note = createNote()
         sourceManager.insertNote(note)
@@ -79,6 +83,7 @@ class LocalSourceManagerTest {
     }
 
     @Test
+    @Throws(Exception::class)
     fun deleteAndGetNotes() = runBlocking {
         val note = createNote()
         sourceManager.insertNote(note)
@@ -90,6 +95,7 @@ class LocalSourceManagerTest {
     }
 
     @Test
+    @Throws(Exception::class)
     fun getTrashedNotes() = runBlocking {
         val notes = createTrashedNote()
         sourceManager.insertNote(notes)
@@ -99,6 +105,7 @@ class LocalSourceManagerTest {
     }
 
     @Test
+    @Throws(Exception::class)
     fun checkTrashedNotesIfEmpty() = runBlocking {
         val note = createNote()
         sourceManager.insertNote(note)
@@ -108,6 +115,89 @@ class LocalSourceManagerTest {
     }
 
 
+    @Test
+    @Throws(Exception::class)
+    fun insertCategoryAndGetCategories() = runBlocking {
+        val category = createNoteCategory()
+        sourceManager.insertNoteCategory(category)
+
+        val categories = sourceManager.fetchAllCategories().asLiveData().getOrAwaitValue()
+        Assert.assertEquals(1, categories.size)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun updateCategoryAndGetCategories() = runBlocking {
+        val category = createNoteCategory()
+        sourceManager.insertNoteCategory(category)
+
+        val expected = category.copy(name = "Unread")
+        sourceManager.updateNoteCategory(expected)
+
+        val categories = sourceManager.fetchAllCategories().asLiveData().getOrAwaitValue()
+        categories.forEach {
+            Assert.assertEquals("Unread",it.name)
+        }
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun deleteCategoryAndGetCategories() = runBlocking {
+        val category = createNoteCategory()
+        sourceManager.insertNoteCategory(category)
+
+        sourceManager.deleteNoteCategory(category)
+        val categories = sourceManager.fetchAllCategories().asLiveData().getOrAwaitValue()
+        Assert.assertEquals(0,categories.size)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun incrementNoteCountAndGetCategories() = runBlocking {
+        val category = createNoteCategory()
+        sourceManager.insertNoteCategory(category)
+
+        sourceManager.incrementNoteCount(category.id)
+
+        val categories = sourceManager.fetchAllCategories().asLiveData().getOrAwaitValue()
+        categories.forEach {
+            Assert.assertEquals(2,it.count)
+        }
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun decrementNoteCountAndGetCategories() = runBlocking {
+        val category = createNoteCategory()
+        sourceManager.insertNoteCategory(category)
+
+        sourceManager.decrementNoteCount(category.id)
+
+        val categories = sourceManager.fetchAllCategories().asLiveData().getOrAwaitValue()
+        categories.forEach {
+            Assert.assertEquals(0,it.count)
+        }
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun fetchAllCategoriesAndNotes() = runBlocking {
+        val note = createNote()
+        val category = createNoteCategory()
+        sourceManager.insertNoteCategory(category)
+        sourceManager.incrementNoteCount(note.categoryId)
+        sourceManager.insertNote(note)
+
+        val categoriesAndNotes = sourceManager.fetchAllCategoriesAndNotes().asLiveData().getOrAwaitValue()
+
+        categoriesAndNotes.forEach {
+            Log.i(TAG, it.notes[0].toString())
+            Assert.assertEquals(1,it.notes.size)
+            Log.i(TAG, "Note is ${it.notes[0]}")
+            Log.i(TAG,"Note size is ${it.notes.size}")
+            Assert.assertEquals(2,it.noteCategoryEntity.count)
+        }
+    }
 
     companion object {
         private const val TAG = "LocalSourceManagerTest"
