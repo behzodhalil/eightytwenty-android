@@ -1,6 +1,7 @@
 package uz.behzod.eightytwenty.data.source
 
 import kotlinx.coroutines.flow.Flow
+import uz.behzod.eightytwenty.data.local.entities.CategoryAndNotes
 import uz.behzod.eightytwenty.data.local.entities.NoteCategoryEntity
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
 
@@ -17,6 +18,7 @@ interface LocalSourceManager {
     suspend fun incrementNoteCount(noteCategoryId: Long)
     suspend fun decrementNoteCount(noteCategoryId: Long)
     fun fetchAllCategories(): Flow<List<NoteCategoryEntity>>
+    fun fetchAllCategoriesAndNotes(): Flow<List<CategoryAndNotes>>
     suspend fun fetchIfCategoryIdExists(noteCategoryId: Int): Boolean
 
 }
