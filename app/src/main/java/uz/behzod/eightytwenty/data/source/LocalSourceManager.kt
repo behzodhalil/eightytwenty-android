@@ -11,6 +11,7 @@ interface LocalSourceManager {
     suspend fun deleteNote(note: NoteEntity)
     fun fetchTrashedNotes(): Flow<List<NoteEntity>>
     fun fetchAllNotes(): Flow<List<NoteEntity>>
+    fun fetchNotesByCategoryId(categoryId: Long): Flow<List<NoteEntity>>
 
     suspend fun insertNoteCategory(category: NoteCategoryEntity)
     suspend fun updateNoteCategory(category: NoteCategoryEntity)
