@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_noteFragment_to_newNoteFragment"
             app:destination="@id/newNoteFragment" />
+        <action
+            android:id="@+id/action_noteFragment_to_categoryNoteFragment"
+            app:destination="@id/categoryNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/newNoteFragment"
@@ -19,6 +22,9 @@
         <action
             android:id="@+id/action_newNoteFragment_to_categoryNoteFragment2"
             app:destination="@id/categoryNoteFragment" />
+        <action
+            android:id="@+id/action_newNoteFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryNoteFragment"
@@ -27,5 +33,8 @@
         <action
             android:id="@+id/action_categoryNoteFragment_to_newNoteFragment"
             app:destination="@id/newNoteFragment" />
+        <action
+            android:id="@+id/action_categoryNoteFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
     </fragment>
 </navigation>

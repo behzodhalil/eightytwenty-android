@@ -92,4 +92,7 @@ dependencies {
 
     androidTestImplementation 'com.google.dagger:hilt-android-testing:2.36'
     kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.36'
+
+
+    debugImplementation 'com.guolindev.glance:glance:1.1.0'
 }
