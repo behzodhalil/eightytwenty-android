@@ -17,14 +17,14 @@ class NoteViewModel @Inject constructor() : ViewModel() {
 
     fun onEvent(event: NoteEvent) {
         when(event) {
-            NoteEvent.CategoryEvent -> observeEffects(NoteViewEffect.CategoryViewEffect)
-            NoteEvent.DetailEvent -> observeEffects(NoteViewEffect.DetailViewEffect)
-            NoteEvent.NewNoteEvent -> observeEffects(NoteViewEffect.NewNoteViewEffect)
-            NoteEvent.SearchEvent -> observeEffects(NoteViewEffect.DetailViewEffect)
+            NoteEvent.CategoryEvent -> onObserveEffects(NoteViewEffect.CategoryViewEffect)
+            NoteEvent.DetailEvent -> onObserveEffects(NoteViewEffect.DetailViewEffect)
+            NoteEvent.NewNoteEvent -> onObserveEffects(NoteViewEffect.NewNoteClickViewEffect)
+            NoteEvent.SearchEvent -> onObserveEffects(NoteViewEffect.DetailViewEffect)
         }
     }
 
-    private fun observeEffects(effect: NoteViewEffect) {
+    private fun onObserveEffects(effect: NoteViewEffect) {
         viewModelScope.launch {
             when(effect) {
                 NoteViewEffect.CategoryViewEffect -> {
@@ -33,8 +33,8 @@ class NoteViewModel @Inject constructor() : ViewModel() {
                 NoteViewEffect.DetailViewEffect -> {
                     _viewEffect.trySend(NoteViewEffect.DetailViewEffect)
                 }
-                NoteViewEffect.NewNoteViewEffect -> {
-                    _viewEffect.trySend(NoteViewEffect.NewNoteViewEffect)
+                NoteViewEffect.NewNoteClickViewEffect -> {
+                    _viewEffect.trySend(NoteViewEffect.NewNoteClickViewEffect)
                 }
                 NoteViewEffect.SearchViewEffect -> {
                     _viewEffect.trySend(NoteViewEffect.SearchViewEffect)
