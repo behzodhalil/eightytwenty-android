@@ -4,14 +4,14 @@ import java.lang.Exception
 
 // Result Wrapper <Left = Exception, Right = Value/Success>
 
-sealed class Result<out E, out V> {
-    object Loading : Result<Nothing, Nothing>()
-    data class Success<out V>(val data: V) : Result<Nothing, V>()
-    data class Failure<out E>(val exception: E) : Result<E, Nothing>()
+sealed class Resource<out E, out V> {
+    object Loading : Resource<Nothing, Nothing>()
+    data class Success<out V>(val data: V) : Resource<Nothing, V>()
+    data class Failure<out E>(val exception: E) : Resource<E, Nothing>()
 
     companion object Factory {
 
-        inline fun <V> build(action: () -> V): Result<Exception, V> {
+        inline fun <V> build(action: () -> V): Resource<Exception, V> {
             return try {
                 Success(action.invoke())
             } catch (e: Exception) {
@@ -19,7 +19,7 @@ sealed class Result<out E, out V> {
             }
         }
 
-        fun buildLoading(): Result<Exception,Nothing> {
+        fun buildLoading(): Resource<Exception,Nothing> {
             return Loading
         }
     }
