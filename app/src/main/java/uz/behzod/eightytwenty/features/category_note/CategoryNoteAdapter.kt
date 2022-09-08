@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import uz.behzod.eightytwenty.databinding.ViewHolderCategoryNoteBinding
-import uz.behzod.eightytwenty.domain.NoteCategoryDomainModel
+import uz.behzod.eightytwenty.domain.model.NoteCategoryDomainModel
 
 class CategoryNoteAdapter :
     ListAdapter<NoteCategoryDomainModel, CategoryNoteAdapter.CategoryNoteViewHolder>(COMPARATOR) {
