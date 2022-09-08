@@ -2,8 +2,8 @@ package uz.behzod.eightytwenty
 
 import uz.behzod.eightytwenty.data.local.entities.NoteCategoryEntity
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
-import uz.behzod.eightytwenty.domain.NoteCategoryDomainModel
-import uz.behzod.eightytwenty.domain.NoteDomainModel
+import uz.behzod.eightytwenty.domain.model.NoteCategoryDomainModel
+import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import java.time.ZonedDateTime
 
 fun createNoteEntity(): NoteEntity {
