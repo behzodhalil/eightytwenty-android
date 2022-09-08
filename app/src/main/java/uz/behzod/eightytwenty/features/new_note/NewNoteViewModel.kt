@@ -8,12 +8,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.domain.interactor.note.InsertNote
+import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import uz.behzod.eightytwenty.utils.providers.IDispatcherProvider
 import javax.inject.Inject
 
 @HiltViewModel
 class NewNoteViewModel @Inject constructor(
-    private val insertNote: InsertNote,
+    private val insertNoteInteractor: InsertNote,
     private val dispatcherProvider: IDispatcherProvider
 ) : ViewModel() {
 
@@ -37,4 +38,13 @@ class NewNoteViewModel @Inject constructor(
             }
         }
     }
+
+    fun insertNote(categoryId: Long, note: NoteDomainModel) {
+        viewModelScope.launch {
+            insertNoteInteractor.invoke(
+                note.copy(categoryId = categoryId)
+            )
+        }
+    }
+
 }
