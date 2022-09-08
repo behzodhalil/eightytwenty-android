@@ -1,4 +1,4 @@
-package uz.behzod.eightytwenty.domain
+package uz.behzod.eightytwenty.domain.model
 
 import uz.behzod.eightytwenty.utils.ext.Empty
 import uz.behzod.eightytwenty.utils.ext.Zero
