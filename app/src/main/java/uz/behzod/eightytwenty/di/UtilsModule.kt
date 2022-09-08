@@ -1,25 +1,31 @@
 package uz.behzod.eightytwenty.di
 
+import android.content.Context
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import uz.behzod.eightytwenty.utils.providers.DispatcherProvider
 import uz.behzod.eightytwenty.utils.providers.IDispatcherProvider
 import uz.behzod.eightytwenty.utils.providers.StringProvider
 import uz.behzod.eightytwenty.utils.providers.StringProviderImpl
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface UtilsModule {
+object UtilsModule {
 
-    @Binds
-    fun providesStringProvider(
-        provider: StringProviderImpl
-    ): StringProvider
+    @Provides
+    @Singleton
+    fun providesStringProvider(@ApplicationContext context: Context): StringProvider {
+        return StringProviderImpl(context)
+    }
 
-    @Binds
-    fun providesDispatcherProvider(
-        provider: DispatcherProvider
-    ): IDispatcherProvider
+    @Provides
+    @Singleton
+    fun providesDispatcherProvider(): IDispatcherProvider {
+        return DispatcherProvider()
+    }
 }
