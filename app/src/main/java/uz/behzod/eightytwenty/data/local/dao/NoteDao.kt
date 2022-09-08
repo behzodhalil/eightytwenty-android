@@ -23,4 +23,8 @@ interface NoteDao {
     @Transaction
     @Query("SELECT * FROM note_table WHERE note_is_trashed <> 1")
     fun fetchAllNotes(): Flow<List<NoteEntity>>
+
+    @Query("SELECT * FROM note_table WHERE note_category_id = :categoryId AND note_is_trashed <>1")
+    fun fetchNotesByCategoryId(categoryId: Long): Flow<List<NoteEntity>>
+
 }
