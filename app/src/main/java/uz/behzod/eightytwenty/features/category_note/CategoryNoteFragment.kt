@@ -30,6 +30,8 @@ class CategoryNoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupUI()
     }
 
     override fun onDestroyView() {
@@ -38,16 +40,21 @@ class CategoryNoteFragment : Fragment() {
     }
 
     private fun setupUI() {
-
+        onNavigateNote()
+        onNavigateNotesByName()
     }
 
-    private fun onNavigateNewNote() {
+    private fun onNavigateNote() {
         binding.ivBack.setOnClickListener {
-            findNavController().navigate(R.id.action_categoryNoteFragment_to_newNoteFragment)
+            findNavController().navigate(R.id.action_categoryNoteFragment_to_noteFragment)
         }
     }
 
     private fun onNavigateNotesByName() {
+
+    }
+
+    private fun onNavigateToSearchNote() {
 
     }
 }
