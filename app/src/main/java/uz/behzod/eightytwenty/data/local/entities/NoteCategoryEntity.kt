@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import uz.behzod.eightytwenty.domain.NoteCategoryDomainModel
+import uz.behzod.eightytwenty.domain.model.NoteCategoryDomainModel
 import uz.behzod.eightytwenty.utils.ext.Empty
 import uz.behzod.eightytwenty.utils.ext.Zero
 
