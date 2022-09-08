@@ -2,10 +2,8 @@ package uz.behzod.eightytwenty
 
 import org.junit.Assert
 import org.junit.Test
-import uz.behzod.eightytwenty.data.local.entities.CategoryAndNotes
-import uz.behzod.eightytwenty.data.local.entities.asDomain
-import uz.behzod.eightytwenty.data.local.entities.asEntity
-import uz.behzod.eightytwenty.domain.repository.CategoryAndNotesDomainModel
+import uz.behzod.eightytwenty.data.local.entities.*
+import uz.behzod.eightytwenty.domain.model.CategoryAndNotesDomainModel
 
 class MapperTest {
 
@@ -62,5 +60,13 @@ class MapperTest {
         val listEntity = listDomain.asEntity()
 
         Assert.assertEquals(listEntity.noteCategoryEntity.id,listDomain.category.id)
+    }
+
+    @Test
+    fun `assign map to list entities to domain list models`() {
+        val listEntity = listOf(createNoteEntity(), createNoteEntity())
+        val listDomain = listEntity.map { it.asDomain() }
+
+        Assert.assertEquals(listDomain.size,listEntity.size)
     }
 }
