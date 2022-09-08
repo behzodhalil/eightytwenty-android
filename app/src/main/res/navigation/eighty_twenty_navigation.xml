@@ -7,5 +7,25 @@
     <fragment
         android:id="@+id/noteFragment"
         android:name="uz.behzod.eightytwenty.features.note.NoteFragment"
-        android:label="NoteFragment" />
+        android:label="NoteFragment" >
+        <action
+            android:id="@+id/action_noteFragment_to_newNoteFragment"
+            app:destination="@id/newNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newNoteFragment"
+        android:name="uz.behzod.eightytwenty.features.new_note.NewNoteFragment"
+        android:label="NewNoteFragment" >
+        <action
+            android:id="@+id/action_newNoteFragment_to_categoryNoteFragment2"
+            app:destination="@id/categoryNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryNoteFragment"
+        android:name="uz.behzod.eightytwenty.features.category_note.CategoryNoteFragment"
+        android:label="CategoryNoteFragment" >
+        <action
+            android:id="@+id/action_categoryNoteFragment_to_newNoteFragment"
+            app:destination="@id/newNoteFragment" />
+    </fragment>
 </navigation>
