@@ -2,7 +2,7 @@ package uz.behzod.eightytwenty.data.local.entities
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import uz.behzod.eightytwenty.domain.repository.CategoryAndNotesDomainModel
+import uz.behzod.eightytwenty.domain.model.CategoryAndNotesDomainModel
 
 data class CategoryAndNotes(
     @Embedded val noteCategoryEntity: NoteCategoryEntity,
