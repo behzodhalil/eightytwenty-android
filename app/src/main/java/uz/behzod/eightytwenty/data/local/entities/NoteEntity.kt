@@ -3,7 +3,7 @@ package uz.behzod.eightytwenty.data.local.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import uz.behzod.eightytwenty.domain.NoteDomainModel
+import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import uz.behzod.eightytwenty.utils.ext.Empty
 import uz.behzod.eightytwenty.utils.ext.Zero
 import java.time.ZonedDateTime
@@ -63,10 +63,10 @@ fun NoteDomainModel.asEntity(): NoteEntity {
     )
 }
 
-fun List<NoteEntity>.asListOfDomain(): List<NoteDomainModel> = this.flatMap {
+internal fun List<NoteEntity>.asListOfDomain(): List<NoteDomainModel> = this.flatMap {
     listOf(it.asDomain())
 }
 
-fun List<NoteDomainModel>.asListOfEntity(): List<NoteEntity> = this.flatMap {
+internal fun List<NoteDomainModel>.asListOfEntity(): List<NoteEntity> = this.flatMap {
     listOf(it.asEntity())
 }
