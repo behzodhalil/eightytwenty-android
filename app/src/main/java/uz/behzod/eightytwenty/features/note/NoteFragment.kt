@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentNoteBinding
 
 @AndroidEntryPoint
@@ -31,5 +33,19 @@ class NoteFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setupUI() {
+        onNavigateNewNote()
+    }
+
+    private fun onNavigateNewNote() {
+        binding.btnNewNote.setOnClickListener {
+            findNavController().navigate(R.id.action_noteFragment_to_newNoteFragment)
+        }
+    }
+
+    private fun onNavigateByItem() {
+
     }
 }
