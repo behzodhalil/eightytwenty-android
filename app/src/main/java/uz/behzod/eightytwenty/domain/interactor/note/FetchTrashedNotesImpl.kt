@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import uz.behzod.eightytwenty.data.local.entities.asListOfDomain
-import uz.behzod.eightytwenty.domain.NoteDomainModel
+import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import uz.behzod.eightytwenty.domain.repository.NoteRepository
 import uz.behzod.eightytwenty.utils.providers.IDispatcherProvider
 import javax.inject.Inject
