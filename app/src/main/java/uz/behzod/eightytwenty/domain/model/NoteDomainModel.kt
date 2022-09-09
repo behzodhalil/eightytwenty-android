@@ -9,9 +9,9 @@ import java.time.ZonedDateTime
 @Parcelize
 data class NoteDomainModel(
     val id: Long = Long.Zero,
-    val title: String = String.Empty,
-    val description: String = String.Empty,
-    val timestamp: ZonedDateTime = ZonedDateTime.now(),
+    var title: String = String.Empty,
+    var description: String = String.Empty,
+    var timestamp: ZonedDateTime = ZonedDateTime.now(),
     val isTrashed: Boolean = false,
     val categoryId: Long = Long.Zero
 ) : Parcelable
