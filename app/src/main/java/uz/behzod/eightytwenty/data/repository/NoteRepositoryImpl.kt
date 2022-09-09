@@ -4,7 +4,6 @@ import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
 import uz.behzod.eightytwenty.data.source.LocalSourceManager
 import uz.behzod.eightytwenty.domain.repository.NoteRepository
-import uz.behzod.eightytwenty.utils.Resource
 import javax.inject.Inject
 
 class NoteRepositoryImpl @Inject constructor(
@@ -34,5 +33,9 @@ class NoteRepositoryImpl @Inject constructor(
 
     override fun fetchNotesByCategoryId(categoryId: Long): Flow<List<NoteEntity>> {
         return sourceManager.fetchNotesByCategoryId(categoryId)
+    }
+
+    override fun fetchNoteById(noteId: Long): Flow<NoteEntity> {
+        return sourceManager.fetchNoteById(noteId)
     }
 }
