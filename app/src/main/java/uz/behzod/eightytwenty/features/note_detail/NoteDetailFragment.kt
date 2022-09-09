@@ -1,6 +1,7 @@
 package uz.behzod.eightytwenty.features.note_detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,7 @@ class NoteDetailFragment : Fragment() {
     private val binding: FragmentNoteDetailBinding get() = _binding!!
     private val viewModel: NoteDetailViewModel by viewModels()
     private val args: NoteDetailFragmentArgs by navArgs()
-    private var data: NoteDomainModel? = null
+    private lateinit var data: NoteDomainModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +48,7 @@ class NoteDetailFragment : Fragment() {
 
         onUpdate()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -68,8 +70,11 @@ class NoteDetailFragment : Fragment() {
 
                         }
                         is NoteDetailUIState.Success -> {
+
+                            Log.d("NoteDetailFragment", "Detail data is ${state.data}")
+                            initNote(state.data)
                             data = state.data
-                            initNote()
+
                         }
                     }
                 }
@@ -82,30 +87,39 @@ class NoteDetailFragment : Fragment() {
             updateNote()
         }
     }
+
     private fun updateNote() {
         lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.updateNote(
-                    data!!.copy(
-                        title = binding.etTitle.text.toString(),
-                        description = binding.etDesc.text.toString(),
-                        timestamp = ZonedDateTime.now()
-                    )
-                ).run {
-                    Toast.makeText(requireContext(), "Note is updated", Toast.LENGTH_SHORT).show()
-                    val action = NoteDetailFragmentDirections.actionNoteDetailFragmentToNoteFragment()
-                    findNavController().navigate(action)
-                }
+            data.title = binding.etTitle.text.toString()
+            data.description = binding.etDesc.text.toString()
+            data.timestamp = ZonedDateTime.now()
+
+            viewModel.updateNote(
+                data
+            ).run {
+                Toast.makeText(requireContext(), "Note is updated", Toast.LENGTH_SHORT).show()
+                val action = NoteDetailFragmentDirections.actionNoteDetailFragmentToNoteFragment()
+                Log.d("TAG", "Note detail value is ${getNotes()}")
+                findNavController().navigate(action)
             }
+
         }
 
     }
 
-    private fun initNote() {
+    private fun initNote(data: NoteDomainModel) {
         with(binding) {
-            etTitle.setText(data?.title)
-            etDesc.setText(data?.description)
-            tvDate.text = data?.timestamp?.toString()
+            etTitle.setText(data.title)
+            etDesc.setText(data.description)
+            tvDate.text = data.timestamp.toString()
         }
+    }
+
+    private fun getNotes(): NoteDomainModel {
+        val title = binding.etTitle.text.toString()
+        val description = binding.etDesc.text.toString()
+        val timestamp = ZonedDateTime.now()
+        return NoteDomainModel(title = title, description = description, timestamp = timestamp)
+
     }
 }
