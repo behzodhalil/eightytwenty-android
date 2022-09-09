@@ -37,6 +37,10 @@ class LocalSourceManagerImpl @Inject constructor(
         return noteDao.fetchNotesByCategoryId(categoryId)
     }
 
+    override fun fetchNoteById(noteId: Long): Flow<NoteEntity> {
+        return noteDao.fetchNoteById(noteId)
+    }
+
     override suspend fun insertNoteCategory(category: NoteCategoryEntity) {
         return noteCategoryDao.insert(category)
     }
