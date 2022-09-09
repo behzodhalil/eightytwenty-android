@@ -5,17 +5,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.domain.interactor.note.FetchNotes
+import uz.behzod.eightytwenty.domain.interactor.note.FetchNotesByCategoryId
 import javax.inject.Inject
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(
-    private val iFetchNotes: FetchNotes
+    private val iFetchNotes: FetchNotes,
+    private val iFetchNotesByCategoryId: FetchNotesByCategoryId
 ) : ViewModel() {
 
     private var _viewEffect = Channel<NoteViewEffect>(Channel.BUFFERED)
@@ -24,19 +23,17 @@ class NoteViewModel @Inject constructor(
     private var _uiState: MutableStateFlow<NoteUIState> = MutableStateFlow(NoteUIState.Loading)
     val uiState: Flow<NoteUIState> = _uiState.asStateFlow()
 
+    private var _uiStateById: MutableStateFlow<NoteUIState> = MutableStateFlow(NoteUIState.Loading)
+    val uiStateById: Flow<NoteUIState> = _uiStateById.asStateFlow()
+
     init {
         viewModelScope.launch {
-            Log.d("NoteViewModel","fetchNotes is called in viewModelScope")
             iFetchNotes.invoke().collect { result ->
-                Log.d("NoteViewModel","fetchNotes is collected")
-                Log.d("NoteViewModel","${result[0]}")
                 _uiState.value = NoteUIState.Loading
                 if (result.isNullOrEmpty()) {
-                    Log.d("NoteViewModel","NoteUIState value is empty")
                     _uiState.value = NoteUIState.Empty
                 } else {
                     _uiState.value = NoteUIState.Success(result)
-                    Log.d("NoteViewModel","NoteUIState value is success")
                 }
             }
         }
@@ -70,5 +67,17 @@ class NoteViewModel @Inject constructor(
         }
     }
 
+    fun fetchNotesByCategoryId(value: Long) {
+        iFetchNotesByCategoryId.invoke(value)
+            .onEach { result ->
+                _uiStateById.value = NoteUIState.Loading
+                if (result.isNullOrEmpty()) {
+                    _uiStateById.value = NoteUIState.Empty
+                } else {
+                    _uiStateById.value = NoteUIState.Success(result)
+                }
+            }
+            .launchIn(viewModelScope)
+    }
 
 }
