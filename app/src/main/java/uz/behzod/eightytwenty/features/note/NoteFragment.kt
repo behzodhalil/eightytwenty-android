@@ -12,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.R
@@ -23,7 +24,7 @@ class NoteFragment : Fragment() {
     private var _binding: FragmentNoteBinding? = null
     private val binding: FragmentNoteBinding get() = _binding!!
     private val viewModel: NoteViewModel by viewModels()
-
+    private val args: NoteFragmentArgs by navArgs()
     private lateinit var adapter: NoteAdapter
 
     override fun onCreateView(
@@ -49,16 +50,57 @@ class NoteFragment : Fragment() {
 
     private fun setupUI() {
         initAdapter()
+        val id = args.categoryId
+        val name = args.categoryName
+        if (name.isEmpty()) {
+        } else {
+            binding.tvTitleCategory.text = name
+        }
 
-        fetchNotes()
-
+        onInitializerById(value = id)
         onNavigateNewNote()
         onNavigateToCategory()
     }
 
     private fun initAdapter() {
-        adapter = NoteAdapter()
+        adapter = NoteAdapter {
+            val action = NoteFragmentDirections.actionNoteFragmentToNoteDetailFragment(it.id)
+            findNavController().navigate(action)
+        }
         binding.rvNote.adapter = adapter
+    }
+
+    private fun onInitializerById(value: Long) {
+        if (value == 0L) {
+            Log.d("NoteFragment","Category identifier is $value")
+            fetchNotes()
+        } else {
+            Log.d("NoteFragment","Category identifier is $value")
+            fetchNotesById(value)
+        }
+    }
+    private fun fetchNotesById(value: Long) {
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.fetchNotesByCategoryId(value)
+                viewModel.uiStateById.collect { state ->
+                    when(state) {
+                        is NoteUIState.Empty -> {
+
+                        }
+                        is NoteUIState.Failure -> {
+
+                        }
+                        is NoteUIState.Loading -> {
+
+                        }
+                        is NoteUIState.Success -> {
+                            adapter.submitList(state.data)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun fetchNotes() = lifecycleScope.launch {
