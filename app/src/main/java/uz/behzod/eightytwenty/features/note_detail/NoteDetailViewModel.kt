@@ -7,14 +7,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import uz.behzod.eightytwenty.data.local.dao.NoteDao
+import uz.behzod.eightytwenty.data.local.entities.asEntity
+import uz.behzod.eightytwenty.data.source.LocalSourceManager
 import uz.behzod.eightytwenty.domain.interactor.note.FetchNoteById
 import uz.behzod.eightytwenty.domain.interactor.note.UpdateNote
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
+import uz.behzod.eightytwenty.domain.repository.NoteRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class NoteDetailViewModel @Inject constructor(
-    private val iUpdateNote: UpdateNote,
+    private val iUpdateNote: NoteDao,
     private val iFetchNoteById: FetchNoteById
 ) : ViewModel() {
 
@@ -38,7 +42,7 @@ class NoteDetailViewModel @Inject constructor(
 
     fun updateNote(data: NoteDomainModel) {
         viewModelScope.launch {
-            iUpdateNote.invoke(data)
+            iUpdateNote.update(data.asEntity())
         }
     }
 
