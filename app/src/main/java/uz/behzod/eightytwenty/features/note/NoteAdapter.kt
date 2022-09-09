@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.behzod.eightytwenty.databinding.ViewHolderNoteBinding
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 
-class NoteAdapter: ListAdapter<NoteDomainModel,NoteAdapter.NoteViewHolder>(COMPARATOR) {
+class NoteAdapter (private val onClickListener: (data: NoteDomainModel) -> Unit): ListAdapter<NoteDomainModel,NoteAdapter.NoteViewHolder>(COMPARATOR) {
 
     inner class NoteViewHolder(val binding: ViewHolderNoteBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -33,11 +33,14 @@ class NoteAdapter: ListAdapter<NoteDomainModel,NoteAdapter.NoteViewHolder>(COMPA
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.apply {
-            currentList[position].let {
+            currentList[position].let { data ->
                 binding.apply {
-                    tvTitle.text = it.title
-                    tvDesc.text = it.description
-                    tvDate.text = it.timestamp.toString()
+                    tvTitle.text = data.title
+                    tvDesc.text = data.description
+                    tvDate.text = data.timestamp.toString()
+                }
+                binding.root.setOnClickListener {
+                    onClickListener(data)
                 }
             }
         }
