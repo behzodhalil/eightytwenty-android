@@ -14,6 +14,17 @@
         <action
             android:id="@+id/action_noteFragment_to_categoryNoteFragment"
             app:destination="@id/categoryNoteFragment" />
+        <argument
+            android:name="category_id"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <argument
+            android:name="category_name"
+            app:argType="string"
+            android:defaultValue="" />
+        <action
+            android:id="@+id/action_noteFragment_to_noteDetailFragment"
+            app:destination="@id/noteDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/newNoteFragment"
@@ -36,5 +47,17 @@
         <action
             android:id="@+id/action_categoryNoteFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteDetailFragment"
+        android:name="uz.behzod.eightytwenty.features.note_detail.NoteDetailFragment"
+        android:label="NoteDetailFragment" >
+        <action
+            android:id="@+id/action_noteDetailFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+        <argument
+            android:name="noteId"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
 </navigation>
