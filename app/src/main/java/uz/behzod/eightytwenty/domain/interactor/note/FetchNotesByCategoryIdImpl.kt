@@ -6,12 +6,12 @@ import kotlinx.coroutines.flow.flowOn
 import uz.behzod.eightytwenty.data.local.entities.asListOfDomain
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import uz.behzod.eightytwenty.domain.repository.NoteRepository
-import uz.behzod.eightytwenty.utils.providers.DispatcherProvider
+import uz.behzod.eightytwenty.utils.providers.IDispatcherProvider
 import javax.inject.Inject
 
 class FetchNotesByCategoryIdImpl @Inject constructor(
     private val iNoteRepository: NoteRepository,
-    private val dispatcherProvider: DispatcherProvider
+    private val dispatcherProvider: IDispatcherProvider
 ) : FetchNotesByCategoryId {
 
     override fun invoke(categoryId: Long): Flow<List<NoteDomainModel>> {
