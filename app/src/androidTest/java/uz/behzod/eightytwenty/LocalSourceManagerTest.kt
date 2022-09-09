@@ -16,6 +16,7 @@ import uz.behzod.eightytwenty.data.local.dao.NoteDao
 import uz.behzod.eightytwenty.data.local.db.EightyTwentyDatabase
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
 import uz.behzod.eightytwenty.data.source.LocalSourceManagerImpl
+import java.time.ZonedDateTime
 import kotlin.jvm.Throws
 
 @RunWith(AndroidJUnit4::class)
@@ -70,14 +71,17 @@ class LocalSourceManagerTest {
         val note = createNote()
         sourceManager.insertNote(note)
 
-        val expected = note.copy(title = "Cloud Manager")
+        val expected = note.copy(title = "Cloud Manager", timestamp = ZonedDateTime.now(), description = "Note")
         sourceManager.updateNote(expected)
 
         val notes = sourceManager.fetchAllNotes().asLiveData().getOrAwaitValue()
 
         notes.forEach {
             Log.i(TAG,it.title)
+            Log.i(TAG,it.description)
             Assert.assertEquals("Cloud Manager",it.title)
+            Assert.assertEquals("Note",it.description)
+
         }
 
     }
