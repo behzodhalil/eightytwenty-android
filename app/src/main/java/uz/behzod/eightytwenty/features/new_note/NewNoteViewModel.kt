@@ -39,10 +39,10 @@ class NewNoteViewModel @Inject constructor(
         }
     }
 
-    fun insertNote(categoryId: Long, note: NoteDomainModel) {
+    fun insertNote(note: NoteDomainModel) {
         viewModelScope.launch {
             insertNoteInteractor.invoke(
-                note.copy(categoryId = categoryId)
+                note
             )
         }
     }
