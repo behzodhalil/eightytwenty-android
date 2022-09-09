@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rv_note_categories" />
@@ -54,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/all_notes_category"
+        app:layout_constraintTop_toBottomOf="@id/et_new_category"
         tools:itemCount="3"
         tools:listitem="@layout/view_holder_category_note" />
 
@@ -80,7 +81,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="15dp"
         android:backgroundTint="@color/sun_glow"
-        android:paddingTop="4dp"
+        android:paddingTop="8dp"
         android:visibility="invisible"
         app:cornerRadius="360dp"
         app:icon="@drawable/ic_folder"
@@ -122,4 +123,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <EditText
+        android:id="@+id/et_new_category"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:hint="новая списка"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/all_notes_category" />
 </androidx.constraintlayout.widget.ConstraintLayout>
