@@ -13,6 +13,7 @@ interface LocalSourceManager {
     fun fetchAllNotes(): Flow<List<NoteEntity>>
     fun fetchNotesByCategoryId(categoryId: Long): Flow<List<NoteEntity>>
     fun fetchNoteById(noteId: Long): Flow<NoteEntity>
+    fun searchNotes(query: String): Flow<List<NoteEntity>>
 
     suspend fun insertNoteCategory(category: NoteCategoryEntity)
     suspend fun updateNoteCategory(category: NoteCategoryEntity)
