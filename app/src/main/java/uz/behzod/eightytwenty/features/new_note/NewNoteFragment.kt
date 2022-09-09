@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentNewNoteBinding
@@ -20,6 +21,7 @@ class NewNoteFragment : Fragment() {
     private var _binding: FragmentNewNoteBinding? = null
     private val binding: FragmentNewNoteBinding get() = _binding!!
     private val viewModel: NewNoteViewModel by viewModels()
+    private val args: NewNoteFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +54,7 @@ class NewNoteFragment : Fragment() {
 
     private fun insertNote() {
         binding.btnSaveOrCancel.setOnClickListener {
-            viewModel.insertNote(categoryId = 1,createNote()).run {
+            viewModel.insertNote(createNote()).run {
                 Toast.makeText(requireContext(),"Note is saved",Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_newNoteFragment_to_noteFragment)
             }
@@ -65,7 +67,7 @@ class NewNoteFragment : Fragment() {
         val description = binding.etDesc.text.toString()
         val timestamp = ZonedDateTime.now()
         val isTrashed = false
-        val categoryId = 1L
+        val categoryId = args.categoryId
 
         return NoteDomainModel(
             title = title,
