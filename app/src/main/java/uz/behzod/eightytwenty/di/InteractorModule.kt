@@ -55,6 +55,12 @@ interface InteractorModule {
     @Binds
     @Singleton
     fun providesFetchNotesByCategoryId(
-        interactor: FetchNotesByCategoryId
-    ): FetchNotesByCategoryIdImpl
+        interactor: FetchNotesByCategoryIdImpl
+    ): FetchNotesByCategoryId
+
+    @Binds
+    @Singleton
+    fun providesFetchNoteById(
+        interactor: FetchNoteByIdImpl
+    ): FetchNoteById
 }
