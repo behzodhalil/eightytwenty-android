@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.behzod.eightytwenty.databinding.ViewHolderCategoryNoteBinding
 import uz.behzod.eightytwenty.domain.model.NoteCategoryDomainModel
 
-class CategoryNoteAdapter :
+class CategoryNoteAdapter(private val onClickListener: (data: NoteCategoryDomainModel) -> Unit) :
     ListAdapter<NoteCategoryDomainModel, CategoryNoteAdapter.CategoryNoteViewHolder>(COMPARATOR) {
 
     companion object {
@@ -43,10 +43,13 @@ class CategoryNoteAdapter :
 
     override fun onBindViewHolder(holder: CategoryNoteViewHolder, position: Int) {
         holder.apply {
-            currentList[position].let {
+            currentList[position].let { data ->
                 binding.apply {
-                    tvCategoryName.text = it.name
-                    tvCategoryNoteCount.text = it.count.toString()
+                    tvCategoryName.text = data.name
+                    tvCategoryNoteCount.text = data.count.toString()
+                    root.setOnClickListener {
+                        onClickListener(data)
+                    }
                 }
             }
         }
