@@ -60,6 +60,7 @@ class NoteFragment : Fragment() {
         onInitializerById(value = id)
         onNavigateNewNote()
         onNavigateToCategory()
+        onNavigateToSearchNotes()
     }
 
     private fun initAdapter() {
@@ -136,6 +137,12 @@ class NoteFragment : Fragment() {
     private fun onNavigateToCategory() {
         binding.ivFolder.setOnClickListener {
             findNavController().navigate(R.id.action_noteFragment_to_categoryNoteFragment)
+        }
+    }
+
+    private fun onNavigateToSearchNotes() {
+        binding.ivSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_noteFragment_to_searchNotesFragment)
         }
     }
 
