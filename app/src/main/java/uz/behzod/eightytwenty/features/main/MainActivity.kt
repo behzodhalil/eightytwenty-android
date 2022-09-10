@@ -9,8 +9,6 @@ import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.ActivityMainBinding
-import uz.behzod.eightytwenty.utils.ext.gone
-import uz.behzod.eightytwenty.utils.ext.show
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         NavigationUI.setupWithNavController(binding.bottomNav, navHost.navController)
 
-        navHost.navController.addOnDestinationChangedListener { _, destination, _ ->
+        navHost.navController.addOnDestinationChangedListener { _, _, _ ->
 
         }
 
