@@ -36,6 +36,10 @@
         <action
             android:id="@+id/action_newNoteFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+        <argument
+            android:name="category_id"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
     <fragment
         android:id="@+id/categoryNoteFragment"
