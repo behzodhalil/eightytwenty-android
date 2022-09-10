@@ -12,4 +12,5 @@ interface NoteRepository {
     fun fetchAllNotes(): Flow<List<NoteEntity>>
     fun fetchNotesByCategoryId(categoryId: Long): Flow<List<NoteEntity>>
     fun fetchNoteById(noteId: Long): Flow<NoteEntity>
+    fun searchNotes(query: String): Flow<List<NoteEntity>>
 }
