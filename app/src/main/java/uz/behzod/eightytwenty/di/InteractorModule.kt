@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import uz.behzod.eightytwenty.domain.interactor.habit.*
 import uz.behzod.eightytwenty.domain.interactor.note.*
 import uz.behzod.eightytwenty.domain.interactor.note_category.*
 import javax.inject.Singleton
@@ -69,4 +70,40 @@ interface InteractorModule {
     fun providesSearchNotes(
         interactor: SearchNotesImpl
     ): SearchNotes
+
+    @Binds
+    @Singleton
+    fun providesInsertHabit(
+        interactor: InsertHabitImpl
+    ): InsertHabit
+
+    @Binds
+    @Singleton
+    fun providesUpdateHabit(
+        interactor: UpdateHabitImpl
+    ): UpdateHabit
+
+    @Binds
+    @Singleton
+    fun providesDeleteHabit(
+        interactor: DeleteHabitImpl
+    ): DeleteHabit
+
+    @Binds
+    @Singleton
+    fun providesFetchAllHabits(
+        interactor: FetchAllHabitsImpl
+    ): FetchAllHabits
+
+    @Binds
+    @Singleton
+    fun providesFetchHabitByUid(
+        interactor: FetchHabitByUidImpl
+    ): FetchHabitByUid
+
+    @Binds
+    @Singleton
+    fun providesFetchHabitsByDate(
+        interactor: FetchHabitsByDateImpl
+    ): FetchHabitsByDate
 }
