@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import uz.behzod.eightytwenty.data.local.dao.HabitDao
 import uz.behzod.eightytwenty.data.local.dao.NoteCategoryDao
 import uz.behzod.eightytwenty.data.local.dao.NoteDao
 import uz.behzod.eightytwenty.data.local.db.EightyTwentyDatabase
@@ -38,11 +39,18 @@ object DatabaseModule {
 
     @Provides
     @Singleton
+    fun providesHabitDao(database: EightyTwentyDatabase): HabitDao {
+        return database.getHabitDao()
+    }
+
+    @Provides
+    @Singleton
     fun providesLocalSourceManager(
         noteCategoryDao: NoteCategoryDao,
         noteDao: NoteDao
     ): LocalSourceManager {
         return LocalSourceManagerImpl(noteCategoryDao = noteCategoryDao, noteDao = noteDao)
     }
+
 
 }
