@@ -13,34 +13,20 @@ import dagger.hilt.android.AndroidEntryPoint
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentNewNoteBinding
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
+import uz.behzod.eightytwenty.utils.view.viewBinding
 import java.time.ZonedDateTime
 
 @AndroidEntryPoint
-class NewNoteFragment : Fragment() {
+class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
 
-    private var _binding: FragmentNewNoteBinding? = null
-    private val binding: FragmentNewNoteBinding get() = _binding!!
+    private val binding by viewBinding(FragmentNewNoteBinding::bind)
     private val viewModel: NewNoteViewModel by viewModels()
     private val args: NewNoteFragmentArgs by navArgs()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentNewNoteBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupUI()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun setupUI() {
