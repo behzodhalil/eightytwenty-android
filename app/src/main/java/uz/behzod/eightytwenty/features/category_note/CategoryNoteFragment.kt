@@ -59,11 +59,15 @@ class CategoryNoteFragment : Fragment() {
 
         onNavigateNote()
         onNavigateNotesByName()
+        onNavigateToSearchNote()
     }
 
     private fun initRecyclerView() {
         adapter = CategoryNoteAdapter {
-            val action = CategoryNoteFragmentDirections.actionCategoryNoteFragmentToNoteFragment(it.id,it.name)
+            val action = CategoryNoteFragmentDirections.actionCategoryNoteFragmentToNoteFragment(
+                it.id,
+                it.name
+            )
             findNavController().navigate(action)
         }
         binding.rvNoteCategories.adapter = adapter
@@ -80,7 +84,11 @@ class CategoryNoteFragment : Fragment() {
     }
 
     private fun onNavigateToSearchNote() {
-
+        binding.ivSearch.setOnClickListener {
+            val action =
+                CategoryNoteFragmentDirections.actionCategoryNoteFragmentToSearchNotesFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun onDoNewCategory() {
