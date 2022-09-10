@@ -38,4 +38,8 @@ class NoteRepositoryImpl @Inject constructor(
     override fun fetchNoteById(noteId: Long): Flow<NoteEntity> {
         return sourceManager.fetchNoteById(noteId)
     }
+
+    override fun searchNotes(query: String): Flow<List<NoteEntity>> {
+        return sourceManager.searchNotes(query)
+    }
 }
