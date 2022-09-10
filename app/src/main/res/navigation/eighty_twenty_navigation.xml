@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_noteFragment_to_noteDetailFragment"
             app:destination="@id/noteDetailFragment" />
+        <action
+            android:id="@+id/action_noteFragment_to_searchNotesFragment"
+            app:destination="@id/searchNotesFragment" />
     </fragment>
     <fragment
         android:id="@+id/newNoteFragment"
@@ -51,6 +54,9 @@
         <action
             android:id="@+id/action_categoryNoteFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_categoryNoteFragment_to_searchNotesFragment"
+            app:destination="@id/searchNotesFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteDetailFragment"
@@ -64,4 +70,8 @@
             app:argType="long"
             android:defaultValue="0L" />
     </fragment>
+    <fragment
+        android:id="@+id/searchNotesFragment"
+        android:name="uz.behzod.eightytwenty.features.search_notes.SearchNotesFragment"
+        android:label="SearchNotesFragment" />
 </navigation>
