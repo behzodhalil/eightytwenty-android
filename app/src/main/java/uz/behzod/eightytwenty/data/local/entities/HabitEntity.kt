@@ -63,4 +63,16 @@ fun HabitEntity.asDomain(): HabitDomainModel {
     )
 }
 
+fun HabitDomainModel.asEntity(): HabitEntity {
+    return HabitEntity(
+        this.title,
+        this.description,
+        this.perDayGoalCount,
+        this.endGoalCount,
+        this.frequency,
+        this.timestamp,
+        this.color,
+        this.uid
+    )
+}
 
