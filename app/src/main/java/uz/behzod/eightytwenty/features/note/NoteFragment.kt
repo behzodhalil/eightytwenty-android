@@ -128,7 +128,8 @@ class NoteFragment : Fragment() {
 
     private fun onNavigateNewNote() {
         binding.btnNewNote.setOnClickListener {
-            findNavController().navigate(R.id.action_noteFragment_to_newNoteFragment)
+            val action = NoteFragmentDirections.actionNoteFragmentToNewNoteFragment(args.categoryId)
+            findNavController().navigate(action)
         }
     }
 
