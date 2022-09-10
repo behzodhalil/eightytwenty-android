@@ -63,4 +63,10 @@ interface InteractorModule {
     fun providesFetchNoteById(
         interactor: FetchNoteByIdImpl
     ): FetchNoteById
+
+    @Binds
+    @Singleton
+    fun providesSearchNotes(
+        interactor: SearchNotesImpl
+    ): SearchNotes
 }
