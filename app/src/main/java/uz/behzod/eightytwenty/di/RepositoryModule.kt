@@ -4,9 +4,11 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import uz.behzod.eightytwenty.data.repository.HabitRecommendRepositoryImpl
 import uz.behzod.eightytwenty.data.repository.HabitRepositoryImpl
 import uz.behzod.eightytwenty.data.repository.NoteCategoryRepositoryImpl
 import uz.behzod.eightytwenty.data.repository.NoteRepositoryImpl
+import uz.behzod.eightytwenty.domain.repository.HabitRecommendRepository
 import uz.behzod.eightytwenty.domain.repository.HabitRepository
 import uz.behzod.eightytwenty.domain.repository.NoteCategoryRepository
 import uz.behzod.eightytwenty.domain.repository.NoteRepository
@@ -33,4 +35,10 @@ interface RepositoryModule {
     fun providesHabitRepository(
         repository: HabitRepositoryImpl
     ): HabitRepository
+
+    @Binds
+    @Singleton
+    fun providesHabitRecommendRepository(
+        repository: HabitRecommendRepositoryImpl
+    ): HabitRecommendRepository
 }
