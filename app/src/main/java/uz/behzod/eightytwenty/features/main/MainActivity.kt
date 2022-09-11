@@ -9,16 +9,18 @@ import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.ActivityMainBinding
+import uz.behzod.eightytwenty.utils.ext.gone
+import uz.behzod.eightytwenty.utils.ext.show
+import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private val binding by viewBinding(ActivityMainBinding::inflate)
     private lateinit var navHost: NavHostFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setFullContent()
         setContentView(binding.root)
         setupNavHost()
@@ -31,20 +33,29 @@ class MainActivity : AppCompatActivity() {
 
         NavigationUI.setupWithNavController(binding.bottomNav, navHost.navController)
 
-        navHost.navController.addOnDestinationChangedListener { _, _, _ ->
-
+        navHost.navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.newNoteFragment, R.id.categoryNoteFragment
+                -> {
+                    binding.bottomNav.gone()
+                }
+                else -> {
+                    binding.bottomNav.show()
+                }
+            }
         }
-
     }
 
-    private fun setFullContent() {
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
 
-        supportActionBar?.hide()
-    }
-}
+            private fun setFullContent() {
+                requestWindowFeature(Window.FEATURE_NO_TITLE)
+
+                window.setFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN
+                )
+
+                supportActionBar?.hide()
+            }
+        }
