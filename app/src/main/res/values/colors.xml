@@ -16,4 +16,19 @@
     <color name="coral_red">#ff4444</color>
     <color name="solitude">#f0f4fd</color>
     <color name="lemon_slice">#f6efad</color>
+
+    <!-- A set of colors to express transparency with black color -->
+
+    <color name="black_5">#0D000000</color>
+    <color name="black_10">#1A000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="black_30">#4D000000</color>
+    <color name="black_40">#66000000</color>
+    <color name="black_50">#80000000</color>
+    <color name="black_60">#99000000</color>
+    <color name="black_70">#B3000000</color>
+    <color name="black_80">#CC000000</color>
+    <color name="black_90">#E6000000</color>
+    <color name="black_100">#000000</color>
+
 </resources>

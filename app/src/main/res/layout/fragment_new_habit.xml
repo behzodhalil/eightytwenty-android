@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="Новая привычка"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/iv_back"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:viewBindingIgnore="true" />
+
+    <TextView
+        android:id="@+id/tv_habit_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="Название привычки"
+        android:textColor="@color/black_60"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <EditText
+        android:id="@+id/et_habit_name"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_new_habit"
+        android:elevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_habit_name" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="10dp"
+        android:text="Мотивация и описания"
+        android:textColor="@color/black_60"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_habit_name" />
+
+    <EditText
+        android:id="@+id/et_description"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_new_habit"
+        android:elevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+    <TextView
+        android:id="@+id/tv_per_day_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="Количество за выполнения"
+        android:textColor="@color/black_60"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_description" />
+
+    <EditText
+        android:id="@+id/et_per_day_count"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_new_habit"
+        android:elevation="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_per_day_count" />
+
+    <EditText
+        android:id="@+id/et_per_day_type"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:autofillHints=""
+        android:background="@drawable/bg_new_habit"
+        android:elevation="2dp"
+        android:hint="Раз"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="@color/black_60"
+        android:textColorHint="@color/black_60"
+        app:layout_constraintBottom_toBottomOf="@id/et_per_day_count"
+        app:layout_constraintStart_toEndOf="@id/et_per_day_count"
+        app:layout_constraintTop_toTopOf="@id/et_per_day_count" />
+
+    <TextView
+        android:id="@+id/tv_frequency_doing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="Частота выполнения"
+        android:textStyle="bold"
+        android:textColor="@color/black_60"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_per_day_type" />
+
+    <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+        android:id="@+id/select_frequency_type_toggle_group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="24dp"
+        app:justifyContent="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_frequency_doing">
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="По дням"
+            android:textAllCaps="false"
+            />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="По неделям"
+            android:textAllCaps="false"
+            />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Произвольно"
+            android:textAllCaps="false"
+            />
+    </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+    <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+        android:id="@+id/select_day_toggle_group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/select_frequency_type_toggle_group"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        app:toggle_selectableAmount="7"
+        app:justifyContent="space_between"
+        app:flexWrap="nowrap">
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="Пн"
+            />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="Вт"
+            />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="Ср"
+             />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="Чт"
+             />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="Пт"
+            />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="Сб"
+             />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="Вс"
+             />
+
+    </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:cornerRadius="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/sun_glow"
+        android:text="Продолжить"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
