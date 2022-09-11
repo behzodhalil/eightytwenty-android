@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import uz.behzod.eightytwenty.domain.interactor.habit.*
+import uz.behzod.eightytwenty.domain.interactor.habit_recommend.*
 import uz.behzod.eightytwenty.domain.interactor.note.*
 import uz.behzod.eightytwenty.domain.interactor.note_category.*
 import javax.inject.Singleton
@@ -106,4 +107,28 @@ interface InteractorModule {
     fun providesFetchHabitsByDate(
         interactor: FetchHabitsByDateImpl
     ): FetchHabitsByDate
+
+    @Binds
+    @Singleton
+    fun providesInsertHabitRecommend(
+        interactor: InsertHabitRecommendImpl
+    ): InsertHabitRecommend
+
+    @Binds
+    @Singleton
+    fun providesUpdateHabitRecommend(
+        interactor: UpdateHabitRecommendImpl
+    ): UpdateHabitRecommend
+
+    @Binds
+    @Singleton
+    fun providesDeleteHabitRecommend(
+        interactor: DeleteHabitRecommendImpl
+    ): DeleteHabitRecommend
+
+    @Binds
+    @Singleton
+    fun providesFetchHabitRecommendsByCategory(
+        interactor: FetchHabitRecommendsByCategoryImpl
+    ): FetchHabitRecommendsByCategory
 }
