@@ -11,25 +11,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentSearchNotesBinding
+import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
 class SearchNotesFragment : Fragment(R.layout.fragment_search_notes) {
 
-    private var _binding: FragmentSearchNotesBinding? = null
-    private val binding: FragmentSearchNotesBinding get() = _binding!!
+    private val binding by viewBinding(FragmentSearchNotesBinding::bind)
 
     private val viewModel: SearchNotesViewModel by viewModels()
 
     private lateinit var adapter: SearchNotesAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentSearchNotesBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
