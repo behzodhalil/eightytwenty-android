@@ -25,13 +25,16 @@ data class HabitEntity(
     val endGoalCount: Long = Long.Zero,
 
     @ColumnInfo(name = FREQUENCY)
-    val frequency: String = String.Empty,
+    val frequency: Frequency = Frequency.DAILY,
 
     @ColumnInfo(name = TIMESTAMP)
     val timestamp: Long = Long.Zero,
 
     @ColumnInfo(name = COLOR)
     val color: String = String.Empty,
+
+    @ColumnInfo(name = IS_COMPLETE)
+    val isComplete: Boolean = false,
 
     @ColumnInfo(name = UID)
     @PrimaryKey(autoGenerate = true)
@@ -46,6 +49,7 @@ data class HabitEntity(
         private const val FREQUENCY = "frequency"
         private const val TIMESTAMP = "timestamp"
         private const val COLOR = "color"
+        private const val IS_COMPLETE = "is_complete"
         private const val UID = "uid"
     }
 }
@@ -59,6 +63,7 @@ fun HabitEntity.asDomain(): HabitDomainModel {
         this.frequency,
         this.timestamp,
         this.color,
+        this.isComplete,
         this.uid
     )
 }
@@ -72,6 +77,7 @@ fun HabitDomainModel.asEntity(): HabitEntity {
         this.frequency,
         this.timestamp,
         this.color,
+        this.isComplete,
         this.uid
     )
 }
