@@ -74,4 +74,8 @@
         android:id="@+id/searchNotesFragment"
         android:name="uz.behzod.eightytwenty.features.search_notes.SearchNotesFragment"
         android:label="SearchNotesFragment" />
+    <fragment
+        android:id="@+id/habitFragment"
+        android:name="uz.behzod.eightytwenty.features.habit.HabitFragment"
+        android:label="HabitFragment" />
 </navigation>
