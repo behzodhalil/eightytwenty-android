@@ -2,9 +2,7 @@ package uz.behzod.eightytwenty.features.note
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,35 +15,21 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentNoteBinding
+import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
-class NoteFragment : Fragment() {
+class NoteFragment : Fragment(R.layout.fragment_note) {
 
-    private var _binding: FragmentNoteBinding? = null
-    private val binding: FragmentNoteBinding get() = _binding!!
+    private val binding by viewBinding(FragmentNoteBinding::bind)
     private val viewModel: NoteViewModel by viewModels()
     private val args: NoteFragmentArgs by navArgs()
     private lateinit var adapter: NoteAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentNoteBinding.inflate(inflater,container,false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG,"onViewCreated() is created")
         setupUI()
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun setupUI() {
