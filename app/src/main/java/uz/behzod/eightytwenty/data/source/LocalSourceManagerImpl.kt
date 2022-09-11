@@ -2,18 +2,17 @@ package uz.behzod.eightytwenty.data.source
 
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.dao.HabitDao
+import uz.behzod.eightytwenty.data.local.dao.HabitRecommendDao
 import uz.behzod.eightytwenty.data.local.dao.NoteCategoryDao
 import uz.behzod.eightytwenty.data.local.dao.NoteDao
-import uz.behzod.eightytwenty.data.local.entities.CategoryAndNotes
-import uz.behzod.eightytwenty.data.local.entities.HabitEntity
-import uz.behzod.eightytwenty.data.local.entities.NoteCategoryEntity
-import uz.behzod.eightytwenty.data.local.entities.NoteEntity
+import uz.behzod.eightytwenty.data.local.entities.*
 import javax.inject.Inject
 
 class LocalSourceManagerImpl @Inject constructor(
     private val noteDao: NoteDao,
     private val noteCategoryDao: NoteCategoryDao,
-    private val habitDao: HabitDao
+    private val habitDao: HabitDao,
+    private val habitRecommendDao: HabitRecommendDao
 ): LocalSourceManager {
 
     override suspend fun insertNote(note: NoteEntity) {
@@ -102,5 +101,23 @@ class LocalSourceManagerImpl @Inject constructor(
 
     override fun fetchHabitsByDate(timestamp: Long): Flow<List<HabitEntity>> {
         return habitDao.fetchHabitsByDate(timestamp)
+    }
+
+    // Habit Recommend: SourceManager functions
+
+    override suspend fun insertHabitRecommend(habitRecommend: HabitRecommendEntity) {
+        return habitRecommendDao.insertHabitRecommend(habitRecommend)
+    }
+
+    override suspend fun updateHabitRecommend(habitRecommend: HabitRecommendEntity) {
+        return habitRecommendDao.updateHabitRecommend(habitRecommend)
+    }
+
+    override suspend fun deleteHabitRecommend(habitRecommend: HabitRecommendEntity) {
+        return habitRecommendDao.deleteHabitRecommend(habitRecommend)
+    }
+
+    override fun fetchHabitRecommendsByCategory(category: String):Flow<List<HabitRecommendEntity>> {
+       return habitRecommendDao.fetchHabitRecommendsByCategory(category)
     }
 }
