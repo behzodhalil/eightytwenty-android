@@ -1,10 +1,7 @@
 package uz.behzod.eightytwenty.data.source
 
 import kotlinx.coroutines.flow.Flow
-import uz.behzod.eightytwenty.data.local.entities.CategoryAndNotes
-import uz.behzod.eightytwenty.data.local.entities.HabitEntity
-import uz.behzod.eightytwenty.data.local.entities.NoteCategoryEntity
-import uz.behzod.eightytwenty.data.local.entities.NoteEntity
+import uz.behzod.eightytwenty.data.local.entities.*
 
 interface LocalSourceManager {
     // Note: Dao functions
@@ -34,4 +31,10 @@ interface LocalSourceManager {
     fun fetchHabitByUid(uid: Long): Flow<HabitEntity>
     fun fetchAllHabits(): Flow<List<HabitEntity>>
     fun fetchHabitsByDate(timestamp: Long): Flow<List<HabitEntity>>
+
+    // HabitRecommend: Dao functions
+    suspend fun insertHabitRecommend(habitRecommend: HabitRecommendEntity)
+    suspend fun updateHabitRecommend(habitRecommend: HabitRecommendEntity)
+    suspend fun deleteHabitRecommend(habitRecommend: HabitRecommendEntity)
+    fun fetchHabitRecommendsByCategory(category: String):Flow<List<HabitRecommendEntity>>
 }
