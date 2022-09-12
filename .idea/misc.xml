@@ -8,7 +8,10 @@
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/drawable/bg_oval.xml" value="0.1525" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/drawable/bg_oval_blue.xml" value="0.2445" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/drawable/bg_selected_filled.xml" value="0.1" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/drawable/bg_selected_tab.xml" value="0.1" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/drawable/bg_table_layout.xml" value="0.1" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/drawable/bg_unselected_filled.xml" value="0.1" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/drawable/bg_unselected_tab.xml" value="0.1" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/drawable/bg_weekly_calendar.xml" value="0.2445" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/drawable/ic_add.xml" value="0.169" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/drawable/ic_back.xml" value="0.169" />
@@ -24,12 +27,18 @@
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_category_note.xml" value="0.264" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_habit.xml" value="0.264" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_habit_recommend.xml" value="0.3546875" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_health_habit_recommend.xml" value="0.3546875" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_new_habit.xml" value="0.3546875" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_new_note.xml" value="0.35989583333333336" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_note.xml" value="0.1" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_note_detail.xml" value="0.3546875" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_our_choice_habit_recommend.xml" value="0.14360313315926893" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_recommend_habit.xml" value="0.3546875" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_search_notes.xml" value="0.3546875" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_sport_habit_recommend.xml" value="0.3546875" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_study_habit_recommend.xml" value="0.3546875" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_thinking_habit_recommend.xml" value="0.3546875" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/item_weekly_calendar.xml" value="0.32625994694960214" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/view_holder_category_note.xml" value="0.35989583333333336" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/view_holder_category_trashed_note.xml" value="0.24270833333333333" />

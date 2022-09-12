@@ -99,6 +99,13 @@ dependencies {
     implementation 'com.nex3z:toggle-button-group:1.2.3'
     implementation 'nl.bryanderidder:themed-toggle-button-group:1.4.1'
     //Calendar
-    implementation 'com.github.kizitonwose:CalendarView:1.0.4'
     implementation 'com.github.tejpratap46:RecyclerCalendarAndroid:2.0.1'
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    def workManagerVersion = "2.7.1"
+    implementation "androidx.work:work-runtime-ktx:$workManagerVersion"
+
+    implementation 'androidx.hilt:hilt-work:1.0.0'
+    // When using Kotlin.
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
 }
