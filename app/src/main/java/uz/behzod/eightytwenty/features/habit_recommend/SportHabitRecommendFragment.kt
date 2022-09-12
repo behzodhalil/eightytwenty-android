@@ -7,13 +7,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentSportHabitRecommendBinding
 import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
-class SportHabitRecommendFragment: Fragment() {
+class SportHabitRecommendFragment : Fragment(R.layout.fragment_sport_habit_recommend) {
 
     private val binding by viewBinding(FragmentSportHabitRecommendBinding::bind)
     private val viewModel: HabitRecommendViewModel by viewModels()
@@ -33,7 +35,9 @@ class SportHabitRecommendFragment: Fragment() {
 
     private fun initRecyclerView() {
         adapter = HabitRecommendAdapter {
-
+            val action =
+                HabitRecommendFragmentDirections.actionHabitRecommendFragmentToNewHabitFragment(it.uid)
+            findNavController().navigate(action)
         }
         binding.rvRecommendHabit.adapter = adapter
         binding.rvRecommendHabit.setHasFixedSize(true)
@@ -43,7 +47,7 @@ class SportHabitRecommendFragment: Fragment() {
         viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
             viewModel.fetchHabitRecommendByCategory("Sport")
             viewModel.uiState.collect { result ->
-                when(result) {
+                when (result) {
                     is HabitRecommendUIState.Empty -> {
 
                     }
