@@ -9,8 +9,13 @@ interface HabitRecommendDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHabitRecommend(habitRecommend: HabitRecommendEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertHabitRecommends(list: List<HabitRecommendEntity>)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateHabitRecommend(habitRecommend: HabitRecommendEntity)
+
     @Delete
     suspend fun deleteHabitRecommend(habitRecommend: HabitRecommendEntity)
 
