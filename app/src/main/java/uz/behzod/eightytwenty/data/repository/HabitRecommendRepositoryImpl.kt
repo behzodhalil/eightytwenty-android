@@ -29,4 +29,8 @@ class HabitRecommendRepositoryImpl @Inject constructor(
     override fun fetchHabitRecommendsByCategory(category: String):Flow<List<HabitRecommendEntity>> {
         return sourceManager.fetchHabitRecommendsByCategory(category)
     }
+
+    override fun fetchHabitRecommendByUid(uid: Long): Flow<HabitRecommendEntity> {
+        return sourceManager.fetchHabitRecommendByUid(uid)
+    }
 }
