@@ -16,4 +16,11 @@
 
     <string name="text_time_title">Всё по полочкам</string>
     <string name="text_time_description">Благодаря умной системе списков, тебе \nникогда не придётся искать свою задачу \nили заметку среди списка всех задач</string>
+
+    <string name="our_choice_text">Наш выбор</string>
+    <string name="health_text">Здоровье</string>
+    <string name="sport_text">Спорт</string>
+    <string name="study_text">Учёба</string>
+    <string name="thinking_text">Мышление</string>
+
 </resources>

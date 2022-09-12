@@ -1,51 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
 
     <ImageView
         android:id="@+id/iv_back"
         android:layout_width="26dp"
         android:layout_height="26dp"
-        android:src="@drawable/ic_back"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Привычки"
         android:fontFamily="@font/roboto_medium"
+        android:text="Привычки"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/iv_back"
-        app:layout_constraintTop_toTopOf="@id/iv_back"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
-        />
+        app:layout_constraintStart_toEndOf="@id/iv_back"
+        app:layout_constraintTop_toTopOf="@id/iv_back" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_new_habit"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
+        android:backgroundTint="@color/white"
         android:drawableEnd="@drawable/ic_add"
         android:drawablePadding="10dp"
+        android:drawableTint="@color/sun_glow"
         android:text="Создать новую привычку"
         android:textAllCaps="false"
-        android:drawableTint="@color/sun_glow"
-        android:backgroundTint="@color/white"
         android:textColor="@color/sun_glow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_back"
-        />
+        app:layout_constraintTop_toBottomOf="@id/iv_back" />
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        style="@style/Widget.MaterialComponents.TabLayout"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_new_habit"
+        app:tabBackground="@drawable/bg_table_layout"
+        app:tabIndicator="@color/sun_glow"
+        app:tabMode="auto"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextAppearance="@style/TableLayout"
+        app:tabUnboundedRipple="true" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
