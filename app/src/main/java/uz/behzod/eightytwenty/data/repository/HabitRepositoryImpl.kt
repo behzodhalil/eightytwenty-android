@@ -31,7 +31,7 @@ class HabitRepositoryImpl @Inject constructor(
         return sourceManager.fetchAllHabits()
     }
 
-    override fun fetchHabitsByDate(timestamp: Long): Flow<List<HabitEntity>> {
+    override fun fetchHabitsByDate(timestamp: String): Flow<List<HabitEntity>> {
         return sourceManager.fetchHabitsByDate(timestamp)
     }
 }
