@@ -137,4 +137,10 @@ interface InteractorModule {
     fun providesInsertHabitRecommends(
         interactor: InsertHabitRecommendsImpl
     ): InsertHabitRecommends
+
+    @Binds
+    @Singleton
+    fun providesFetchHabitRecommendByUid(
+        interactor: FetchHabitRecommendByUidImpl
+    ): FetchHabitRecommendByUid
 }
