@@ -131,4 +131,10 @@ interface InteractorModule {
     fun providesFetchHabitRecommendsByCategory(
         interactor: FetchHabitRecommendsByCategoryImpl
     ): FetchHabitRecommendsByCategory
+
+    @Binds
+    @Singleton
+    fun providesInsertHabitRecommends(
+        interactor: InsertHabitRecommendsImpl
+    ): InsertHabitRecommends
 }
