@@ -17,10 +17,7 @@ import uz.behzod.eightytwenty.worker.HabitRecommendWorker
     entities = [
         NoteEntity::class, NoteCategoryEntity::class,
         HabitEntity::class, HabitRecommendEntity::class],
-    version = 8,
-    autoMigrations = [
-        AutoMigration(from = 7, to = 8, spec = SpecMigration::class)
-    ],
+    version = 1,
     exportSchema = true
 )
 @TypeConverters(ZonedDateTimeConverter::class)
