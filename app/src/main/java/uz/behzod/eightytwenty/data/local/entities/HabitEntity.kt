@@ -31,7 +31,7 @@ data class HabitEntity(
     val frequency: Frequency = Frequency.DAILY,
 
     @ColumnInfo(name = TIMESTAMP)
-    val timestamp: Long = Long.Zero,
+    val timestamp: String = String.Empty,
 
     @ColumnInfo(name = COLOR)
     val color: String = String.Empty,
