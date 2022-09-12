@@ -15,7 +15,7 @@ class FetchHabitsByDateImpl @Inject constructor(
     private val dispatcherProvider: IDispatcherProvider
 ): FetchHabitsByDate {
 
-    override fun invoke(timestamp: Long): Flow<List<HabitDomainModel>> {
+    override fun invoke(timestamp: String): Flow<List<HabitDomainModel>> {
         return flow {
             repository.fetchHabitsByDate(timestamp).collect { result ->
                 if (result.isNotEmpty()) {
