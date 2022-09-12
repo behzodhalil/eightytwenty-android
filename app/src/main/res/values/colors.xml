@@ -31,4 +31,13 @@
     <color name="black_90">#E6000000</color>
     <color name="black_100">#000000</color>
 
+    <!-- A set of colors to habit recommends -->
+
+    <color name="gloomy_purple">#865fde</color>
+    <color name="coral_commander">#ed6d62</color>
+    <color name="pan_purple">#6270ed</color>
+    <color name="light_badland">#ffb444</color>
+    <color name="paris_green">#ed6d62</color>
+    <color name="alexis_blue">#425e86</color>
+
 </resources>
