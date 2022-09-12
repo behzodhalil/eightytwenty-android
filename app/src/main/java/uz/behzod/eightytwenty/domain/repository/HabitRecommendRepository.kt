@@ -9,4 +9,5 @@ interface HabitRecommendRepository {
     suspend fun updateHabitRecommend(habitRecommend: HabitRecommendEntity)
     suspend fun deleteHabitRecommend(habitRecommend: HabitRecommendEntity)
     fun fetchHabitRecommendsByCategory(category: String): Flow<List<HabitRecommendEntity>>
+    fun fetchHabitRecommendByUid(uid: Long): Flow<HabitRecommendEntity>
 }
