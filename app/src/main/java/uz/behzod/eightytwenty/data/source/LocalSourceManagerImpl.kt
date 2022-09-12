@@ -99,7 +99,7 @@ class LocalSourceManagerImpl @Inject constructor(
         return habitDao.fetchAllHabits()
     }
 
-    override fun fetchHabitsByDate(timestamp: Long): Flow<List<HabitEntity>> {
+    override fun fetchHabitsByDate(timestamp: String): Flow<List<HabitEntity>> {
         return habitDao.fetchHabitsByDate(timestamp)
     }
 
