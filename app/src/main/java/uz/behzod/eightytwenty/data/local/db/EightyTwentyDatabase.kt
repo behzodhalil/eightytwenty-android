@@ -2,6 +2,7 @@ package uz.behzod.eightytwenty.data.local.db
 
 import android.content.Context
 import androidx.room.*
+import androidx.room.migration.AutoMigrationSpec
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -9,18 +10,18 @@ import uz.behzod.eightytwenty.data.local.dao.HabitDao
 import uz.behzod.eightytwenty.data.local.dao.HabitRecommendDao
 import uz.behzod.eightytwenty.data.local.dao.NoteCategoryDao
 import uz.behzod.eightytwenty.data.local.dao.NoteDao
-import uz.behzod.eightytwenty.data.local.entities.HabitEntity
-import uz.behzod.eightytwenty.data.local.entities.HabitRecommendEntity
-import uz.behzod.eightytwenty.data.local.entities.NoteCategoryEntity
-import uz.behzod.eightytwenty.data.local.entities.NoteEntity
+import uz.behzod.eightytwenty.data.local.entities.*
 import uz.behzod.eightytwenty.worker.HabitRecommendWorker
 
 @Database(
     entities = [
         NoteEntity::class, NoteCategoryEntity::class,
         HabitEntity::class, HabitRecommendEntity::class],
-    version = 6,
-    exportSchema = false
+    version = 8,
+    autoMigrations = [
+        AutoMigration(from = 7, to = 8, spec = SpecMigration::class)
+    ],
+    exportSchema = true
 )
 @TypeConverters(ZonedDateTimeConverter::class)
 abstract class EightyTwentyDatabase : RoomDatabase() {
@@ -43,9 +44,16 @@ abstract class EightyTwentyDatabase : RoomDatabase() {
             context.applicationContext,
             EightyTwentyDatabase::class.java,
             "eighty_database"
-        ).createFromAsset("database/habit_recommend")
-            .fallbackToDestructiveMigration()
-            .build()
+        ).addCallback(object : RoomDatabase.Callback() {
+            override fun onOpen(db: SupportSQLiteDatabase) {
+                super.onOpen(db)
+                val request = OneTimeWorkRequestBuilder<HabitRecommendWorker>().build()
+                WorkManager.getInstance(context).enqueue(request)
+            }
+        }).fallbackToDestructiveMigration().build()
 
     }
 }
+
+
+class SpecMigration : AutoMigrationSpec
