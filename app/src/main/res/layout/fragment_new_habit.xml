@@ -52,6 +52,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:paddingStart="10dp"
         android:background="@drawable/bg_new_habit"
         android:elevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,11 +65,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
         android:text="Мотивация и описания"
         android:textColor="@color/black_60"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_habit_name" />
 
@@ -79,6 +80,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:paddingStart="10dp"
         android:background="@drawable/bg_new_habit"
         android:elevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,8 +96,8 @@
         android:fontFamily="@font/roboto"
         android:text="Количество за выполнения"
         android:textColor="@color/black_60"
-        android:textStyle="bold"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_description" />
 
@@ -107,25 +109,32 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_new_habit"
         android:elevation="2dp"
+        android:paddingStart="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_per_day_count" />
 
-    <EditText
-        android:id="@+id/et_per_day_type"
-        android:layout_width="120dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_goal_type"
+        style="@style/DropDown"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
-        android:autofillHints=""
-        android:background="@drawable/bg_new_habit"
-        android:elevation="2dp"
-        android:hint="Раз"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textColor="@color/black_60"
-        android:textColorHint="@color/black_60"
         app:layout_constraintBottom_toBottomOf="@id/et_per_day_count"
         app:layout_constraintStart_toEndOf="@id/et_per_day_count"
-        app:layout_constraintTop_toTopOf="@id/et_per_day_count" />
+        app:layout_constraintTop_toTopOf="@id/et_per_day_count"
+        android:hint="Тип выполнения">
+
+        <AutoCompleteTextView
+            android:id="@+id/act_goal_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:inputType="none"
+            android:backgroundTint="@color/white"
+            android:labelFor="@id/til_goal_type"
+            tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <TextView
         android:id="@+id/tv_frequency_doing"
@@ -135,11 +144,11 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:text="Частота выполнения"
-        android:textStyle="bold"
         android:textColor="@color/black_60"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_per_day_type" />
+        app:layout_constraintTop_toBottomOf="@id/til_goal_type" />
 
     <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
         android:id="@+id/select_frequency_type_toggle_group"
@@ -157,98 +166,87 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="По дням"
-            android:textAllCaps="false"
-            />
+            android:textAllCaps="false" />
 
         <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="По неделям"
-            android:textAllCaps="false"
-            />
+            android:textAllCaps="false" />
 
         <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="Произвольно"
-            android:textAllCaps="false"
-            />
+            android:textAllCaps="false" />
     </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
 
     <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
         android:id="@+id/select_day_toggle_group"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/select_frequency_type_toggle_group"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
-        app:toggle_selectableAmount="7"
+        app:flexWrap="nowrap"
         app:justifyContent="space_between"
-        app:flexWrap="nowrap">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/select_frequency_type_toggle_group"
+        app:toggle_selectableAmount="7">
 
         <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:text="Пн"
-            />
+            android:text="Пн" />
 
         <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:text="Вт"
-            />
+            android:text="Вт" />
 
         <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:text="Ср"
-             />
+            android:text="Ср" />
 
         <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:text="Чт"
-             />
+            android:text="Чт" />
 
         <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:text="Пт"
-            />
+            android:text="Пт" />
 
         <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:text="Сб"
-             />
+            android:text="Сб" />
 
         <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:text="Вс"
-             />
+            android:text="Вс" />
 
     </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="0dp"
         android:layout_height="60dp"
-        app:cornerRadius="16dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="40dp"
         android:backgroundTint="@color/sun_glow"
+        android:fontFamily="@font/roboto"
         android:text="Продолжить"
         android:textAllCaps="false"
-        android:fontFamily="@font/roboto"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
