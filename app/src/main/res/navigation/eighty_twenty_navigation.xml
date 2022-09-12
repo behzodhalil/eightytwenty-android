@@ -85,5 +85,30 @@
     <fragment
         android:id="@+id/habitRecommendFragment"
         android:name="uz.behzod.eightytwenty.features.habit_recommend.HabitRecommendFragment"
-        android:label="HabitRecommendFragment" />
+        android:label="HabitRecommendFragment" >
+        <action
+            android:id="@+id/action_habitRecommendFragment_to_newHabitFragment"
+            app:destination="@id/newHabitFragment" />
+        <action
+            android:id="@+id/action_habitRecommendFragment_to_habitFragment"
+            app:destination="@id/habitFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newHabitFragment"
+        android:name="uz.behzod.eightytwenty.features.new_habit.NewHabitFragment"
+        android:label="NewHabitFragment" >
+        <action
+            android:id="@+id/action_newHabitFragment_to_habitFragment"
+            app:destination="@id/habitFragment" />
+        <argument
+            android:name="recommendUid"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_newHabitFragment_to_habitFragment2"
+            app:destination="@id/habitFragment" />
+        <action
+            android:id="@+id/action_newHabitFragment_to_habitRecommendFragment"
+            app:destination="@id/habitRecommendFragment" />
+    </fragment>
 </navigation>
