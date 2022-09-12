@@ -13,7 +13,7 @@ data class HabitDomainModel(
     val endGoalCount: Long = Long.Zero,
     val perDayGoalType: PerDayGoalType,
     val frequency: Frequency = Frequency.DAILY,
-    val timestamp: Long = Long.Zero,
+    val timestamp: String = String.Empty,
     val color: String = String.Empty,
     val isComplete: Boolean = false,
     val uid: Long = Long.Zero
