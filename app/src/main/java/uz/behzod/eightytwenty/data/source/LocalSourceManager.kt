@@ -25,6 +25,7 @@ interface LocalSourceManager {
     suspend fun fetchIfCategoryIdExists(noteCategoryId: Int): Boolean
 
     // Habit: Dao functions
+
     suspend fun insertHabit(habit: HabitEntity)
     suspend fun updateHabit(habit: HabitEntity)
     suspend fun deleteHabit(habit: HabitEntity)
@@ -33,9 +34,11 @@ interface LocalSourceManager {
     fun fetchHabitsByDate(timestamp: Long): Flow<List<HabitEntity>>
 
     // HabitRecommend: Dao functions
+
     suspend fun insertHabitRecommend(habitRecommend: HabitRecommendEntity)
     suspend fun insertHabitRecommends(list: List<HabitRecommendEntity>)
     suspend fun updateHabitRecommend(habitRecommend: HabitRecommendEntity)
     suspend fun deleteHabitRecommend(habitRecommend: HabitRecommendEntity)
     fun fetchHabitRecommendsByCategory(category: String):Flow<List<HabitRecommendEntity>>
+    fun fetchHabitRecommendByUid(uid: Long): Flow<HabitRecommendEntity>
 }
