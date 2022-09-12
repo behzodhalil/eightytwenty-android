@@ -9,5 +9,5 @@ interface HabitRepository {
     suspend fun deleteHabit(habit: HabitEntity)
     fun fetchHabitByUid(uid: Long): Flow<HabitEntity>
     fun fetchAllHabits(): Flow<List<HabitEntity>>
-    fun fetchHabitsByDate(timestamp: Long): Flow<List<HabitEntity>>
+    fun fetchHabitsByDate(timestamp: String): Flow<List<HabitEntity>>
 }
