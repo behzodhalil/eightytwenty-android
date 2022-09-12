@@ -3,6 +3,7 @@ package uz.behzod.eightytwenty.features.habit_recommend
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import uz.behzod.eightytwenty.R
@@ -18,6 +19,9 @@ class HabitRecommendFragment : Fragment(R.layout.fragment_recommend_habit) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUI()
+
+        onNavigateToNewHabit()
+        onNavigateToHabit()
     }
 
     private fun setupUI() {
@@ -27,6 +31,22 @@ class HabitRecommendFragment : Fragment(R.layout.fragment_recommend_habit) {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
+    }
+
+    private fun onNavigateToNewHabit() {
+        binding.btnNewHabit.setOnClickListener {
+            val action =
+                HabitRecommendFragmentDirections.actionHabitRecommendFragmentToNewHabitFragment()
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun onNavigateToHabit() {
+        binding.ivBack.setOnClickListener {
+            val action =
+                HabitRecommendFragmentDirections.actionHabitRecommendFragmentToHabitFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun getTabTitle(position: Int): String? = when (position) {
