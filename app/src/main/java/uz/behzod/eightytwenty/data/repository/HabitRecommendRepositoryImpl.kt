@@ -14,6 +14,10 @@ class HabitRecommendRepositoryImpl @Inject constructor(
         return sourceManager.insertHabitRecommend(habitRecommend)
     }
 
+    override suspend fun insertHabitRecommends(list: List<HabitRecommendEntity>) {
+        return sourceManager.insertHabitRecommends(list)
+    }
+
     override suspend fun updateHabitRecommend(habitRecommend: HabitRecommendEntity) {
         return sourceManager.updateHabitRecommend(habitRecommend)
     }
