@@ -124,4 +124,8 @@ class LocalSourceManagerImpl @Inject constructor(
     override fun fetchHabitRecommendsByCategory(category: String):Flow<List<HabitRecommendEntity>> {
        return habitRecommendDao.fetchHabitRecommendsByCategory(category)
     }
+
+    override fun fetchHabitRecommendByUid(uid: Long): Flow<HabitRecommendEntity> {
+        return habitRecommendDao.fetchHabitRecommendByUid(uid)
+    }
 }
