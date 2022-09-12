@@ -109,6 +109,10 @@ class LocalSourceManagerImpl @Inject constructor(
         return habitRecommendDao.insertHabitRecommend(habitRecommend)
     }
 
+    override suspend fun insertHabitRecommends(list: List<HabitRecommendEntity>) {
+        return habitRecommendDao.insertHabitRecommends(list)
+    }
+
     override suspend fun updateHabitRecommend(habitRecommend: HabitRecommendEntity) {
         return habitRecommendDao.updateHabitRecommend(habitRecommend)
     }
