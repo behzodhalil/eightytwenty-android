@@ -2,6 +2,9 @@ package uz.behzod.eightytwenty.data.local.db
 
 import android.content.Context
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import uz.behzod.eightytwenty.data.local.dao.HabitDao
 import uz.behzod.eightytwenty.data.local.dao.HabitRecommendDao
 import uz.behzod.eightytwenty.data.local.dao.NoteCategoryDao
@@ -10,12 +13,13 @@ import uz.behzod.eightytwenty.data.local.entities.HabitEntity
 import uz.behzod.eightytwenty.data.local.entities.HabitRecommendEntity
 import uz.behzod.eightytwenty.data.local.entities.NoteCategoryEntity
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
+import uz.behzod.eightytwenty.worker.HabitRecommendWorker
 
 @Database(
     entities = [
         NoteEntity::class, NoteCategoryEntity::class,
         HabitEntity::class, HabitRecommendEntity::class],
-    version = 4,
+    version = 6,
     exportSchema = false
 )
 @TypeConverters(ZonedDateTimeConverter::class)
@@ -39,7 +43,8 @@ abstract class EightyTwentyDatabase : RoomDatabase() {
             context.applicationContext,
             EightyTwentyDatabase::class.java,
             "eighty_database"
-        ).fallbackToDestructiveMigration()
+        ).createFromAsset("database/habit_recommend")
+            .fallbackToDestructiveMigration()
             .build()
 
     }
