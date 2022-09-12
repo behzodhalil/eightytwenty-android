@@ -135,7 +135,31 @@
             tools:ignore="LabelFor,SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/tv_end_goal_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="Конечная цель для выполнения"
+        android:textColor="@color/black_60"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_goal_type" />
 
+    <EditText
+        android:id="@+id/et_end_goal_count"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_new_habit"
+        android:elevation="2dp"
+        android:paddingStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_end_goal_count" />
     <TextView
         android:id="@+id/tv_frequency_doing"
         android:layout_width="wrap_content"
@@ -148,7 +172,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_goal_type" />
+        app:layout_constraintTop_toBottomOf="@id/et_end_goal_count" />
 
     <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
         android:id="@+id/select_frequency_type_toggle_group"
@@ -233,6 +257,7 @@
     </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save_habit"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="24dp"

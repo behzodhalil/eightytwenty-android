@@ -24,28 +24,29 @@
         android:id="@+id/rv_calendar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
         android:orientation="horizontal"
-        tools:itemCount="10"
-        tools:listitem="@layout/item_weekly_calendar"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_weekly_calendar" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_habits"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="24dp"
-        tools:listitem="@layout/view_holder_habit"
-        app:layout_constraintTop_toBottomOf="@id/rv_calendar"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_calendar"
+        tools:listitem="@layout/view_holder_habit" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_new_note"
         android:layout_width="70dp"
