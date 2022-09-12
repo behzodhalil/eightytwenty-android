@@ -3,6 +3,7 @@ package uz.behzod.eightytwenty.features.habit
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.tejpratapsingh.recyclercalendar.model.RecyclerCalendarConfiguration
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,7 +13,7 @@ import uz.behzod.eightytwenty.utils.view.viewBinding
 import java.util.*
 
 @AndroidEntryPoint
-class HabitFragment: Fragment(R.layout.fragment_habit) {
+class HabitFragment : Fragment(R.layout.fragment_habit) {
 
     private val binding by viewBinding(FragmentHabitBinding::bind)
     private lateinit var horizontalAdapter: HorizontalCalendarAdapter
@@ -21,8 +22,12 @@ class HabitFragment: Fragment(R.layout.fragment_habit) {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerConfiguration()
+        setupUI()
     }
 
+    private fun setupUI() {
+        onNavigateHabitRecommend()
+    }
     private fun setupRecyclerConfiguration() {
 
         val date = Date()
@@ -32,7 +37,7 @@ class HabitFragment: Fragment(R.layout.fragment_habit) {
         val endCalendar = Calendar.getInstance()
 
         endCalendar.time = date
-        endCalendar.add(Calendar.MONTH,1)
+        endCalendar.add(Calendar.MONTH, 1)
 
         val configuration =
             RecyclerCalendarConfiguration(
@@ -60,6 +65,13 @@ class HabitFragment: Fragment(R.layout.fragment_habit) {
 
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(binding.rvCalendar)
+    }
+
+    private fun onNavigateHabitRecommend() {
+        binding.btnNewNote.setOnClickListener {
+            val action = HabitFragmentDirections.actionHabitFragmentToHabitRecommendFragment()
+            findNavController().navigate(action)
+        }
     }
 
 }
