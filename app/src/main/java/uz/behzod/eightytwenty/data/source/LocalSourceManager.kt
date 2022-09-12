@@ -34,6 +34,7 @@ interface LocalSourceManager {
 
     // HabitRecommend: Dao functions
     suspend fun insertHabitRecommend(habitRecommend: HabitRecommendEntity)
+    suspend fun insertHabitRecommends(list: List<HabitRecommendEntity>)
     suspend fun updateHabitRecommend(habitRecommend: HabitRecommendEntity)
     suspend fun deleteHabitRecommend(habitRecommend: HabitRecommendEntity)
     fun fetchHabitRecommendsByCategory(category: String):Flow<List<HabitRecommendEntity>>
