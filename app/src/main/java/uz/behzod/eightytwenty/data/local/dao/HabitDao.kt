@@ -23,5 +23,5 @@ interface HabitDao {
     fun fetchAllHabits(): Flow<List<HabitEntity>>
 
     @Query("SELECT * FROM habit_table WHERE timestamp LIKE :timestamp")
-    fun fetchHabitsByDate(timestamp: Long): Flow<List<HabitEntity>>
+    fun fetchHabitsByDate(timestamp: String): Flow<List<HabitEntity>>
 }
