@@ -24,6 +24,9 @@ data class HabitEntity(
     @ColumnInfo(name = END_GOAL_COUNT)
     val endGoalCount: Long = Long.Zero,
 
+    @ColumnInfo(name = PER_DAY_GOAL_TYPE)
+    val perDayGoalType: PerDayGoalType = PerDayGoalType.ONCE,
+
     @ColumnInfo(name = FREQUENCY)
     val frequency: Frequency = Frequency.DAILY,
 
@@ -46,6 +49,7 @@ data class HabitEntity(
         private const val DESCRIPTION = "description"
         private const val PER_DAY_GOAL_COUNT = "per_day_goal_count"
         private const val END_GOAL_COUNT = "end_goal_count"
+        private const val PER_DAY_GOAL_TYPE = "per_day_goal_type"
         private const val FREQUENCY = "frequency"
         private const val TIMESTAMP = "timestamp"
         private const val COLOR = "color"
@@ -60,6 +64,7 @@ fun HabitEntity.asDomain(): HabitDomainModel {
         this.description,
         this.perDayGoalCount,
         this.endGoalCount,
+        this.perDayGoalType,
         this.frequency,
         this.timestamp,
         this.color,
@@ -74,6 +79,7 @@ fun HabitDomainModel.asEntity(): HabitEntity {
         this.description,
         this.perDayGoalCount,
         this.endGoalCount,
+        this.perDayGoalType,
         this.frequency,
         this.timestamp,
         this.color,
