@@ -19,6 +19,9 @@ interface HabitRecommendDao {
     @Delete
     suspend fun deleteHabitRecommend(habitRecommend: HabitRecommendEntity)
 
-    @Query("SELECT * FROM habit_recommend_table_name WHERE category LIKE :category")
+    @Query("SELECT * FROM habit_recommend_table WHERE category =:category")
     fun fetchHabitRecommendsByCategory(category: String): Flow<List<HabitRecommendEntity>>
+
+    @Query("SELECT * FROM habit_recommend_table WHERE uid =:uid")
+    fun fetchHabitRecommendByUid(uid: Long): Flow<HabitRecommendEntity>
 }
