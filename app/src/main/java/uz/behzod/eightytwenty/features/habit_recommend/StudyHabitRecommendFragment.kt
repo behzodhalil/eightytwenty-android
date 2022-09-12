@@ -9,11 +9,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentStudyHabitRecommendBinding
 import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
-class StudyHabitRecommendFragment: Fragment() {
+class StudyHabitRecommendFragment: Fragment(R.layout.fragment_study_habit_recommend) {
 
     private val binding by viewBinding(FragmentStudyHabitRecommendBinding::bind)
     private val viewModel: HabitRecommendViewModel by viewModels()
