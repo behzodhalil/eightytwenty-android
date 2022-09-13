@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.behzod.eightytwenty.databinding.ViewHolderHabitBinding
 import uz.behzod.eightytwenty.domain.model.HabitDomainModel
 
-class HabitAdapter : ListAdapter<HabitDomainModel, HabitAdapter.HabitViewHolder>(COMPARATOR) {
+class HabitAdapter (private val onClickListener: (data: HabitDomainModel) -> Unit) : ListAdapter<HabitDomainModel, HabitAdapter.HabitViewHolder>(COMPARATOR) {
 
     inner class HabitViewHolder(val binding: ViewHolderHabitBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -44,6 +44,10 @@ class HabitAdapter : ListAdapter<HabitDomainModel, HabitAdapter.HabitViewHolder>
                 binding.apply {
                     tvHabitTitle.text = data.title
                     tvHabitCount.text = data.perDayGoalCount.toString()
+
+                    root.setOnClickListener {
+                        onClickListener(data)
+                    }
                 }
             }
         }
