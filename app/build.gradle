@@ -123,4 +123,6 @@ dependencies {
     implementation 'androidx.hilt:hilt-work:1.0.0'
     // When using Kotlin.
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
+
+    implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
 }
