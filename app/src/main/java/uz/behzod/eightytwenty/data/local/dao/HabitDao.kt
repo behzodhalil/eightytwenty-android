@@ -22,6 +22,7 @@ interface HabitDao {
     @Query("SELECT * FROM habit_table ORDER BY timestamp")
     fun fetchAllHabits(): Flow<List<HabitEntity>>
 
-    @Query("SELECT * FROM habit_table WHERE timestamp LIKE :timestamp")
+    @Transaction
+    @Query("SELECT * FROM habit_table WHERE timestamp LIKE :timestamp AND is_complete <> 1")
     fun fetchHabitsByDate(timestamp: String): Flow<List<HabitEntity>>
 }
