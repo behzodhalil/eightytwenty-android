@@ -1,10 +1,7 @@
 package uz.behzod.eightytwenty.data.source
 
 import kotlinx.coroutines.flow.Flow
-import uz.behzod.eightytwenty.data.local.dao.HabitDao
-import uz.behzod.eightytwenty.data.local.dao.HabitRecommendDao
-import uz.behzod.eightytwenty.data.local.dao.NoteCategoryDao
-import uz.behzod.eightytwenty.data.local.dao.NoteDao
+import uz.behzod.eightytwenty.data.local.dao.*
 import uz.behzod.eightytwenty.data.local.entities.*
 import javax.inject.Inject
 
@@ -12,8 +9,10 @@ class LocalSourceManagerImpl @Inject constructor(
     private val noteDao: NoteDao,
     private val noteCategoryDao: NoteCategoryDao,
     private val habitDao: HabitDao,
-    private val habitRecommendDao: HabitRecommendDao
-): LocalSourceManager {
+    private val habitRecommendDao: HabitRecommendDao,
+    private val taskDao: TaskDao,
+    private val taskCatalogDao: TaskCatalogDao
+) : LocalSourceManager {
 
     override suspend fun insertNote(note: NoteEntity) {
         return noteDao.insert(note)
@@ -121,11 +120,59 @@ class LocalSourceManagerImpl @Inject constructor(
         return habitRecommendDao.deleteHabitRecommend(habitRecommend)
     }
 
-    override fun fetchHabitRecommendsByCategory(category: String):Flow<List<HabitRecommendEntity>> {
-       return habitRecommendDao.fetchHabitRecommendsByCategory(category)
+    override fun fetchHabitRecommendsByCategory(category: String): Flow<List<HabitRecommendEntity>> {
+        return habitRecommendDao.fetchHabitRecommendsByCategory(category)
     }
 
     override fun fetchHabitRecommendByUid(uid: Long): Flow<HabitRecommendEntity> {
         return habitRecommendDao.fetchHabitRecommendByUid(uid)
+    }
+
+    override suspend fun insertTask(task: TaskEntity) {
+        return taskDao.insertTask(task)
+    }
+
+    override suspend fun updateTask(task: TaskEntity) {
+        return taskDao.updateTask(task)
+    }
+
+    override suspend fun deleteTask(task: TaskEntity) {
+        return taskDao.deleteTask(task)
+    }
+
+    override fun fetchTaskByUid(uid: Long): Flow<List<TaskEntity>> {
+        return taskDao.fetchTaskByUid(uid)
+    }
+
+    override fun fetchTasks(): Flow<List<TaskEntity>> {
+        return taskDao.fetchTasks()
+    }
+
+    override suspend fun insertTaskCatalog(taskCatalog: TaskCatalogEntity) {
+        return taskCatalogDao.insertTaskCatalog(taskCatalog)
+    }
+
+    override suspend fun updateTaskCatalog(taskCatalog: TaskCatalogEntity) {
+        return taskCatalogDao.updateTaskCatalog(taskCatalog)
+    }
+
+    override suspend fun deleteTaskCatalog(taskCatalog: TaskCatalogEntity) {
+        return taskCatalogDao.deleteTaskCatalog(taskCatalog)
+    }
+
+    override suspend fun incrementTaskCount(catalogUid: Long) {
+        return taskCatalogDao.incrementTaskCount(catalogUid)
+    }
+
+    override suspend fun decrementTaskCount(catalogUid: Long) {
+        return taskCatalogDao.decrementTaskCount(catalogUid)
+    }
+
+    override fun fetchTaskCatalogs(): Flow<List<TaskCatalogEntity>> {
+        return taskCatalogDao.fetchTaskCatalogs()
+    }
+
+    override fun fetchTaskAndCatalogs(): Flow<List<CatalogAndTasks>> {
+        return taskCatalogDao.fetchTaskAndCatalogs()
     }
 }
