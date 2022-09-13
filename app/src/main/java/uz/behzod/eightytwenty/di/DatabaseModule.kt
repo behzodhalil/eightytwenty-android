@@ -6,10 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import uz.behzod.eightytwenty.data.local.dao.HabitDao
-import uz.behzod.eightytwenty.data.local.dao.HabitRecommendDao
-import uz.behzod.eightytwenty.data.local.dao.NoteCategoryDao
-import uz.behzod.eightytwenty.data.local.dao.NoteDao
+import uz.behzod.eightytwenty.data.local.dao.*
 import uz.behzod.eightytwenty.data.local.db.EightyTwentyDatabase
 import uz.behzod.eightytwenty.data.source.LocalSourceManager
 import uz.behzod.eightytwenty.data.source.LocalSourceManagerImpl
@@ -56,15 +53,34 @@ object DatabaseModule {
         noteCategoryDao: NoteCategoryDao,
         noteDao: NoteDao,
         habitDao: HabitDao,
-        habitRecommendDao: HabitRecommendDao
+        habitRecommendDao: HabitRecommendDao,
+        taskDao: TaskDao,
+        taskCatalogDao: TaskCatalogDao
     ): LocalSourceManager {
         return LocalSourceManagerImpl(
             noteCategoryDao = noteCategoryDao,
             noteDao = noteDao,
             habitDao = habitDao,
-            habitRecommendDao = habitRecommendDao
+            habitRecommendDao = habitRecommendDao,
+            taskDao = taskDao,
+            taskCatalogDao = taskCatalogDao
         )
     }
 
+    @Provides
+    @Singleton
+    fun providesTaskDao(
+        database: EightyTwentyDatabase
+    ): TaskDao {
+        return database.getTaskDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providesTaskCatalogDao(
+        database: EightyTwentyDatabase
+    ): TaskCatalogDao {
+        return database.getTaskCatalogDao()
+    }
 
 }
