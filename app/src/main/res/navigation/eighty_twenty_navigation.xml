@@ -81,6 +81,9 @@
         <action
             android:id="@+id/action_habitFragment_to_habitRecommendFragment"
             app:destination="@id/habitRecommendFragment" />
+        <action
+            android:id="@+id/action_habitFragment_to_habitDetailFragment"
+            app:destination="@id/habitDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/habitRecommendFragment"
@@ -110,5 +113,17 @@
         <action
             android:id="@+id/action_newHabitFragment_to_habitRecommendFragment"
             app:destination="@id/habitRecommendFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/habitDetailFragment"
+        android:name="uz.behzod.eightytwenty.features.habit_detail.HabitDetailFragment"
+        android:label="HabitDetailFragment" >
+        <action
+            android:id="@+id/action_habitDetailFragment_to_habitFragment"
+            app:destination="@id/habitFragment" />
+        <argument
+            android:name="habitUid"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
 </navigation>

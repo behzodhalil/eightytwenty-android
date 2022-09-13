@@ -23,4 +23,6 @@
     <string name="study_text">Учёба</string>
     <string name="thinking_text">Мышление</string>
 
+    <string name="per_day_count">%d /</string>
+
 </resources>
