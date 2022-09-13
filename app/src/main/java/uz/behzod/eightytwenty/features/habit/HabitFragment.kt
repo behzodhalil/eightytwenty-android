@@ -17,8 +17,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentHabitBinding
+import uz.behzod.eightytwenty.utils.ext.hide
+import uz.behzod.eightytwenty.utils.ext.show
 import uz.behzod.eightytwenty.utils.view.viewBinding
-import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -26,7 +27,6 @@ class HabitFragment : Fragment(R.layout.fragment_habit) {
 
     private val binding by viewBinding(FragmentHabitBinding::bind)
     private lateinit var horizontalAdapter: HorizontalCalendarAdapter
-
     private lateinit var adapter: HabitAdapter
 
     private val viewModel: HabitViewModel by viewModels()
@@ -40,7 +40,6 @@ class HabitFragment : Fragment(R.layout.fragment_habit) {
 
     private fun setupUI() {
         initRecyclerView()
-        fetchHabitsByDate()
         onNavigateHabitRecommend()
     }
 
@@ -72,14 +71,14 @@ class HabitFragment : Fragment(R.layout.fragment_habit) {
 
             dateSelectListener = object : HorizontalCalendarAdapter.OnDateSelected {
                 override fun onDateSelected(date: Date) {
-                    val format = SimpleDateFormat("YYYY-MM-DD")
                     val timestamp = CalendarUtils.dateStringFromFormat(
                         locale = configuration.calendarLocale,
                         date = date,
                         format = "yyyy-MM-dd"
-                    )
-                    Log.d("Tag","Current date is $timestamp")
-                    viewModel.fetchHabitsByDate(timestamp!!)
+                    ) ?: ""
+                    Log.d("Tag", "Current date is $timestamp")
+                    searchByDate(timestamp)
+
                 }
             }
         )
@@ -93,31 +92,38 @@ class HabitFragment : Fragment(R.layout.fragment_habit) {
     private fun initRecyclerView() {
         adapter = HabitAdapter()
         binding.rvHabits.adapter = adapter
+        binding.rvHabits.setHasFixedSize(true)
     }
 
-    private fun fetchHabitsByDate() {
+    private fun searchByDate(date: String) {
+        fetchHabitsByDate(timestamp =date )
+    }
+    private fun fetchHabitsByDate(timestamp: String) {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.fetchHabitsByDate(timestamp)
                 viewModel.uiState.collect { state ->
-                    when(state) {
+                    when (state) {
                         is HabitUIState.Empty -> {
-
+                            binding.rvHabits.hide()
+                            Log.d("Tag", "State is empty")
                         }
                         is HabitUIState.Failure -> {
-
+                            Log.d("Tag", "State is failure")
                         }
                         is HabitUIState.Loading -> {
-
+                            Log.d("Tag", "State is loading")
                         }
                         is HabitUIState.Success -> {
-                            Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                            binding.rvHabits.show()
                             adapter.submitList(state.data)
-                            Log.d("Tag","Result data is ${state.data}")
+                            Log.d("Tag", "Result data is ${state.data}")
                         }
                     }
                 }
             }
-        }
+            }
+
     }
 
     private fun onNavigateHabitRecommend() {
