@@ -54,6 +54,7 @@ class HabitFragment : Fragment(R.layout.fragment_habit) {
         endCalendar.time = date
         endCalendar.add(Calendar.MONTH, 1)
 
+
         val configuration =
             RecyclerCalendarConfiguration(
                 calenderViewType = RecyclerCalendarConfiguration.CalenderViewType.HORIZONTAL,
@@ -63,6 +64,12 @@ class HabitFragment : Fragment(R.layout.fragment_habit) {
 
         configuration.weekStartOffset = RecyclerCalendarConfiguration.START_DAY_OF_WEEK.SUNDAY
 
+        val timestamp = CalendarUtils.dateStringFromFormat(
+            locale = configuration.calendarLocale,
+            date = date,
+            format = "yyyy-MM-dd"
+        ) ?: ""
+        searchByDate(timestamp)
         horizontalAdapter = HorizontalCalendarAdapter(
             startDate = startCalendar.time,
             endDate = endCalendar.time,
@@ -90,7 +97,10 @@ class HabitFragment : Fragment(R.layout.fragment_habit) {
     }
 
     private fun initRecyclerView() {
-        adapter = HabitAdapter()
+        adapter = HabitAdapter {
+            val action = HabitFragmentDirections.actionHabitFragmentToHabitDetailFragment(it.uid)
+            findNavController().navigate(action)
+        }
         binding.rvHabits.adapter = adapter
         binding.rvHabits.setHasFixedSize(true)
     }
