@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.behzod.eightytwenty.databinding.ViewHolderHabitBinding
 import uz.behzod.eightytwenty.domain.model.HabitDomainModel
 
-class HabitAdapter : ListAdapter<HabitDomainModel,HabitAdapter.HabitViewHolder>(COMPARATOR) {
+class HabitAdapter : ListAdapter<HabitDomainModel, HabitAdapter.HabitViewHolder>(COMPARATOR) {
 
     inner class HabitViewHolder(val binding: ViewHolderHabitBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -33,7 +33,7 @@ class HabitAdapter : ListAdapter<HabitDomainModel,HabitAdapter.HabitViewHolder>(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitViewHolder {
         val binding = ViewHolderHabitBinding.inflate(
-            LayoutInflater.from(parent.context),parent,false
+            LayoutInflater.from(parent.context), parent, false
         )
         return HabitViewHolder(binding)
     }
