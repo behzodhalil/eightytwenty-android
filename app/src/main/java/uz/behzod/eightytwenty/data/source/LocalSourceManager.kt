@@ -1,5 +1,6 @@
 package uz.behzod.eightytwenty.data.source
 
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.*
 
@@ -41,4 +42,22 @@ interface LocalSourceManager {
     suspend fun deleteHabitRecommend(habitRecommend: HabitRecommendEntity)
     fun fetchHabitRecommendsByCategory(category: String):Flow<List<HabitRecommendEntity>>
     fun fetchHabitRecommendByUid(uid: Long): Flow<HabitRecommendEntity>
+
+    // Task: Dao functions
+
+    suspend fun insertTask(task: TaskEntity)
+    suspend fun updateTask(task: TaskEntity)
+    suspend fun deleteTask(task: TaskEntity)
+    fun fetchTaskByUid(uid: Long): Flow<List<TaskEntity>>
+    fun fetchTasks(): Flow<List<TaskEntity>>
+
+    // TaskCatalog: Dao functions
+
+    suspend fun insertTaskCatalog(taskCatalog: TaskCatalogEntity)
+    suspend fun updateTaskCatalog(taskCatalog: TaskCatalogEntity)
+    suspend fun deleteTaskCatalog(taskCatalog: TaskCatalogEntity)
+    suspend fun incrementTaskCount(catalogUid: Long)
+    suspend fun decrementTaskCount(catalogUid: Long)
+    fun fetchTaskCatalogs(): Flow<List<TaskCatalogEntity>>
+    fun fetchTaskAndCatalogs(): Flow<List<CatalogAndTasks>>
 }
