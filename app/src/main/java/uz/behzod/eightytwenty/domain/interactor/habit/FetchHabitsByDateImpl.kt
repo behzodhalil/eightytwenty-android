@@ -3,7 +3,6 @@ package uz.behzod.eightytwenty.domain.interactor.habit
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.withContext
 import uz.behzod.eightytwenty.data.local.entities.asDomain
 import uz.behzod.eightytwenty.domain.model.HabitDomainModel
 import uz.behzod.eightytwenty.domain.repository.HabitRepository
@@ -20,6 +19,8 @@ class FetchHabitsByDateImpl @Inject constructor(
             repository.fetchHabitsByDate(timestamp).collect { result ->
                 if (result.isNotEmpty()) {
                     emit(result.map { it.asDomain() })
+                } else {
+                    emit(emptyList<HabitDomainModel>())
                 }
             }
         }.flowOn(dispatcherProvider.io)
