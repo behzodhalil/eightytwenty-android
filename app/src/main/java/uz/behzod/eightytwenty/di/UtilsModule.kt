@@ -7,6 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import uz.behzod.eightytwenty.utils.providers.DispatcherProvider
 import uz.behzod.eightytwenty.utils.providers.IDispatcherProvider
 import uz.behzod.eightytwenty.utils.providers.StringProvider
@@ -27,5 +29,12 @@ object UtilsModule {
     @Singleton
     fun providesDispatcherProvider(): IDispatcherProvider {
         return DispatcherProvider()
+    }
+
+    @Provides
+    @Singleton
+    @CallbackScope
+    fun provideCoroutineScope(): CoroutineScope {
+        return CoroutineScope(SupervisorJob())
     }
 }
