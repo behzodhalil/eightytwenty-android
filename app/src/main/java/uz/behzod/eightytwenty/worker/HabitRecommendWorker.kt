@@ -20,6 +20,7 @@ import java.time.LocalDateTime
 import java.time.ZonedDateTime
 import javax.inject.Inject
 
+/*
 @HiltWorker
 class HabitRecommendWorker @AssistedInject constructor(
     @Assisted context: Context,
@@ -101,13 +102,15 @@ class HabitRecommendWorker @AssistedInject constructor(
 
     override suspend fun doWork() = coroutineScope {
         withContext(Dispatchers.IO) {
-            try {
+            */
+/*try {
                 val database = EightyTwentyDatabase.invoke(applicationContext)
                 database.getHabitRecommendDao().insertHabitRecommends(habitRecommends.map { it.asEntity() })
                 Result.success()
             } catch (e: Exception) {
                 Result.failure()
-            }
+            }*//*
+
         }
     }
-}
+}*/
