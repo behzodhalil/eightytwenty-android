@@ -3,21 +3,36 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_btn_default.xml" value="0.2055" />
         <entry key="app/src/main/res/drawable/bg_habit_detail.xml" value="0.205" />
         <entry key="app/src/main/res/drawable/bg_new_habit.xml" value="0.205" />
         <entry key="app/src/main/res/drawable/bg_oval.xml" value="0.205" />
         <entry key="app/src/main/res/drawable/bg_oval_undo_redo.xml" value="0.205" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.205" />
+        <entry key="app/src/main/res/drawable/ic_arrow_right.xml" value="0.293" />
+        <entry key="app/src/main/res/drawable/ic_date.xml" value="0.293" />
+        <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.293" />
+        <entry key="app/src/main/res/drawable/ic_delete_default.xml" value="0.2055" />
         <entry key="app/src/main/res/drawable/ic_folder.xml" value="0.205" />
+        <entry key="app/src/main/res/drawable/ic_note.xml" value="0.293" />
+        <entry key="app/src/main/res/drawable/ic_notification.xml" value="0.293" />
+        <entry key="app/src/main/res/drawable/ic_repeat.xml" value="0.293" />
         <entry key="app/src/main/res/drawable/ic_right.xml" value="0.205" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.205" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_habit.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_habit_detail.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_new_habit.xml" value="0.33240740740740743" />
+        <entry key="app/src/main/res/layout/fragment_new_note.xml" value="0.4895833333333333" />
+        <entry key="app/src/main/res/layout/fragment_new_task_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_note.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.4895833333333333" />
+        <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.4895833333333333" />
+        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/view_holder_note.xml" value="0.5740740740740741" />
         <entry key="app/src/main/res/layout/view_holder_onboarding.xml" value="0.4895833333333333" />
+        <entry key="app/src/main/res/layout/view_holder_task.xml" value="0.4895833333333333" />
       </map>
     </option>
   </component>
