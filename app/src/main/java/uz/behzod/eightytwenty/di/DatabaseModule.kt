@@ -1,16 +1,21 @@
 package uz.behzod.eightytwenty.di
 
+import android.app.Application
 import android.content.Context
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import uz.behzod.eightytwenty.data.local.callback.HabitRecommendCallback
 import uz.behzod.eightytwenty.data.local.dao.*
 import uz.behzod.eightytwenty.data.local.db.EightyTwentyDatabase
 import uz.behzod.eightytwenty.data.source.LocalSourceManager
 import uz.behzod.eightytwenty.data.source.LocalSourceManagerImpl
-import uz.behzod.eightytwenty.domain.repository.NoteRepository
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module
@@ -19,8 +24,14 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideLocalDatabase(@ApplicationContext context: Context): EightyTwentyDatabase {
-        return EightyTwentyDatabase.invoke(context)
+    fun provideLocalDatabase(
+        context: Application,
+        callback: HabitRecommendCallback
+    ): EightyTwentyDatabase {
+        return Room.databaseBuilder(context, EightyTwentyDatabase::class.java, "eighty_database")
+            .fallbackToDestructiveMigration()
+            .addCallback(callback)
+            .build()
     }
 
     @Provides
@@ -82,5 +93,6 @@ object DatabaseModule {
     ): TaskCatalogDao {
         return database.getTaskCatalogDao()
     }
+
 
 }
