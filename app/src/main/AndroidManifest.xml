@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EightyTwenty">
+        tools:ignore="AllowBackup"
         <activity
             android:name=".features.onboarding.OnboardingActivity"
             android:exported="true">
