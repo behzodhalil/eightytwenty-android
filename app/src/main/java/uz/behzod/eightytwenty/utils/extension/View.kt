@@ -1,4 +1,4 @@
-package uz.behzod.eightytwenty.utils.ext
+package uz.behzod.eightytwenty.utils.extension
 
 import android.content.Context
 import android.graphics.Paint
@@ -40,16 +40,3 @@ fun View.gone(): View {
  * in the view, and the status determines whether to add or remove the effect
  * to the text.
  */
-fun TextView.setStrikethrough(status: Boolean) {
-    if (status) {
-        this.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-    } else {
-        this.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-    }
-}
-
-fun TextView.setTextColorFromResource(
-    @ColorRes colorId: Int
-) {
-    this.setTextColor(ContextCompat.getColor(this.context,colorId))
-}

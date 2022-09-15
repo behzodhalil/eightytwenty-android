@@ -1,4 +1,4 @@
-package uz.behzod.eightytwenty.utils.ext
+package uz.behzod.eightytwenty.utils.extension
 
 val Long.Companion.Zero
     get() = 0L
