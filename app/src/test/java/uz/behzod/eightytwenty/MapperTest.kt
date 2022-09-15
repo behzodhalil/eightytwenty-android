@@ -28,7 +28,7 @@ class MapperTest {
         val categoryEntity = createNoteCategoryEntity()
         val categoryDomain = categoryEntity.asDomain()
 
-        Assert.assertEquals(categoryDomain.id,categoryEntity.id)
+        Assert.assertEquals(categoryDomain.uid,categoryEntity.id)
     }
 
     @Test
@@ -36,7 +36,7 @@ class MapperTest {
         val categoryDomain = createNoteCategoryDomainModel()
         val categoryEntity = categoryDomain.asEntity()
 
-        Assert.assertEquals(categoryEntity.id, categoryDomain.id)
+        Assert.assertEquals(categoryEntity.id, categoryDomain.uid)
     }
 
     @Test
@@ -47,7 +47,7 @@ class MapperTest {
 
         val listDomain = listEntity.asDomain()
 
-        Assert.assertEquals(listDomain.category.id,listEntity.noteCategoryEntity.id)
+        Assert.assertEquals(listDomain.category.uid,listEntity.noteCategoryEntity.id)
     }
 
     @Test
@@ -59,7 +59,7 @@ class MapperTest {
 
         val listEntity = listDomain.asEntity()
 
-        Assert.assertEquals(listEntity.noteCategoryEntity.id,listDomain.category.id)
+        Assert.assertEquals(listEntity.noteCategoryEntity.id,listDomain.category.uid)
     }
 
     @Test
