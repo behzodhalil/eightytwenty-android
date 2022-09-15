@@ -9,8 +9,8 @@ import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.ActivityMainBinding
-import uz.behzod.eightytwenty.utils.ext.gone
-import uz.behzod.eightytwenty.utils.ext.show
+import uz.behzod.eightytwenty.utils.extension.gone
+import uz.behzod.eightytwenty.utils.extension.show
 import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
