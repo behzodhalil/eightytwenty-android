@@ -17,7 +17,7 @@ class CategoryNoteAdapter(private val onClickListener: (data: NoteCategoryDomain
                 oldItem: NoteCategoryDomainModel,
                 newItem: NoteCategoryDomainModel
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.uid == newItem.uid
             }
 
             override fun areContentsTheSame(
