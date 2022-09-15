@@ -5,8 +5,8 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import uz.behzod.eightytwenty.domain.model.NoteCategoryDomainModel
-import uz.behzod.eightytwenty.utils.ext.Empty
-import uz.behzod.eightytwenty.utils.ext.Zero
+import uz.behzod.eightytwenty.utils.extension.Empty
+import uz.behzod.eightytwenty.utils.extension.Zero
 
 @Entity(
     tableName = "note_category_table",
@@ -32,7 +32,7 @@ data class NoteCategoryEntity(
 
 fun NoteCategoryEntity.asDomain(): NoteCategoryDomainModel {
     return NoteCategoryDomainModel(
-        id = id,
+        uid = id,
         name = name,
         count = count
     )
@@ -40,7 +40,7 @@ fun NoteCategoryEntity.asDomain(): NoteCategoryDomainModel {
 
 fun NoteCategoryDomainModel.asEntity() : NoteCategoryEntity {
     return NoteCategoryEntity(
-        id = id,
+        id = uid,
         name = name,
         count = count
     )
