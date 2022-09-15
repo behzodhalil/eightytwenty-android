@@ -14,9 +14,9 @@ import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentCategoryNoteBinding
 import uz.behzod.eightytwenty.domain.model.NoteCategoryDomainModel
-import uz.behzod.eightytwenty.utils.ext.gone
-import uz.behzod.eightytwenty.utils.ext.hide
-import uz.behzod.eightytwenty.utils.ext.show
+import uz.behzod.eightytwenty.utils.extension.gone
+import uz.behzod.eightytwenty.utils.extension.hide
+import uz.behzod.eightytwenty.utils.extension.show
 import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
@@ -50,7 +50,7 @@ class CategoryNoteFragment : Fragment(R.layout.fragment_category_note) {
     private fun initRecyclerView() {
         adapter = CategoryNoteAdapter {
             val action = CategoryNoteFragmentDirections.actionCategoryNoteFragmentToNoteFragment(
-                it.id,
+                it.uid,
                 it.name
             )
             findNavController().navigate(action)
