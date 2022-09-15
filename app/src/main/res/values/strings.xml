@@ -25,4 +25,16 @@
 
     <string name="per_day_count">%d /</string>
 
+    <string name="text_abbreviation_mon">Пн</string>
+    <string name="text_abbreviation_tue">Вт</string>
+    <string name="text_abbreviation_wed">Ср</string>
+    <string name="text_abbreviation_thurs">Чт</string>
+    <string name="text_abbreviation_fri">Пт</string>
+    <string name="text_abbreviation_sat">Сб</string>
+    <string name="text_abbreviation_sun">Вс</string>
+
+    <string name="text_frequency_daily">По дням</string>
+    <string name="text_frequency_weekly">По неделям</string>
+    <string name="text_frequency_random">Произвольно</string>
+
 </resources>
