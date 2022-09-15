@@ -5,8 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import uz.behzod.eightytwenty.data.local.entities.HabitRecommendEntity.Companion.TABLE_NAME
 import uz.behzod.eightytwenty.domain.model.HabitRecommendDomainModel
-import uz.behzod.eightytwenty.utils.ext.Empty
-import uz.behzod.eightytwenty.utils.ext.Zero
+import uz.behzod.eightytwenty.utils.extension.Empty
+import uz.behzod.eightytwenty.utils.extension.Zero
 
 @Entity(
     tableName = TABLE_NAME
