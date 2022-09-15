@@ -2,8 +2,8 @@ package uz.behzod.eightytwenty.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import uz.behzod.eightytwenty.utils.ext.Empty
-import uz.behzod.eightytwenty.utils.ext.Zero
+import uz.behzod.eightytwenty.utils.extension.Empty
+import uz.behzod.eightytwenty.utils.extension.Zero
 import java.time.ZonedDateTime
 
 @Parcelize

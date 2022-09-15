@@ -13,9 +13,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.databinding.ActivityOnboardingBinding
 import uz.behzod.eightytwenty.features.main.MainActivity
-import uz.behzod.eightytwenty.utils.ext.Zero
-import uz.behzod.eightytwenty.utils.ext.hide
-import uz.behzod.eightytwenty.utils.ext.show
+import uz.behzod.eightytwenty.utils.extension.Zero
+import uz.behzod.eightytwenty.utils.extension.hide
+import uz.behzod.eightytwenty.utils.extension.show
 
 @AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import uz.behzod.eightytwenty.R
-import uz.behzod.eightytwenty.utils.ext.layoutInflaterService
+import uz.behzod.eightytwenty.utils.extension.layoutInflaterService
 import android.widget.TextView as TextView1
 
 class OnboardingViewPagerAdapter(
