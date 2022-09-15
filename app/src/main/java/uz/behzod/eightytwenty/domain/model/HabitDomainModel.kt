@@ -2,8 +2,8 @@ package uz.behzod.eightytwenty.domain.model
 
 import uz.behzod.eightytwenty.data.local.entities.Frequency
 import uz.behzod.eightytwenty.data.local.entities.PerDayGoalType
-import uz.behzod.eightytwenty.utils.ext.Empty
-import uz.behzod.eightytwenty.utils.ext.Zero
+import uz.behzod.eightytwenty.utils.extension.Empty
+import uz.behzod.eightytwenty.utils.extension.Zero
 
 
 data class HabitDomainModel(
