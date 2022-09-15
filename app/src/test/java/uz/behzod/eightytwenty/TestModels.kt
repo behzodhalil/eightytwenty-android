@@ -38,7 +38,7 @@ fun createNoteCategoryEntity(): NoteCategoryEntity {
 
 fun createNoteCategoryDomainModel(): NoteCategoryDomainModel {
     return NoteCategoryDomainModel(
-        id = 1,
+        uid = 1,
         name = "All",
         count = 1
     )
