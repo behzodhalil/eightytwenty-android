@@ -1,10 +1,10 @@
 package uz.behzod.eightytwenty.domain.model
 
-import uz.behzod.eightytwenty.utils.ext.Empty
-import uz.behzod.eightytwenty.utils.ext.Zero
+import uz.behzod.eightytwenty.utils.extension.Empty
+import uz.behzod.eightytwenty.utils.extension.Zero
 
 data class NoteCategoryDomainModel(
-    val id: Long = Long.Zero,
+    val uid: Long = Long.Zero,
     val name: String = String.Empty,
     val count: Int = Int.Zero
 )
