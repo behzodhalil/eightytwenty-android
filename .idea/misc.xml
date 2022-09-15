@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/activity_onboarding.xml" value="0.24322916666666666" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_new_habit.xml" value="0.35572916666666665" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_new_task_detail.xml" value="0.24322916666666666" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_task.xml" value="0.24322916666666666" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/view_holder_frequency_types.xml" value="0.16296296296296298" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/view_holder_week_types.xml" value="0.16296296296296298" />
         <entry key="app/src/main/res/drawable/bg_btn_default.xml" value="0.2055" />
         <entry key="app/src/main/res/drawable/bg_habit_detail.xml" value="0.205" />
         <entry key="app/src/main/res/drawable/bg_new_habit.xml" value="0.205" />
