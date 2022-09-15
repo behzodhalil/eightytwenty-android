@@ -4,8 +4,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import uz.behzod.eightytwenty.data.local.entities.Frequency
 import uz.behzod.eightytwenty.data.local.entities.PerDayGoalType
-import uz.behzod.eightytwenty.utils.ext.Empty
-import uz.behzod.eightytwenty.utils.ext.Zero
+import uz.behzod.eightytwenty.utils.extension.Empty
+import uz.behzod.eightytwenty.utils.extension.Zero
 
 @Parcelize
 data class HabitRecommendDomainModel(
