@@ -3,7 +3,6 @@ package uz.behzod.eightytwenty.features.habit
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,8 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentHabitBinding
-import uz.behzod.eightytwenty.utils.ext.hide
-import uz.behzod.eightytwenty.utils.ext.show
+import uz.behzod.eightytwenty.utils.extension.hide
+import uz.behzod.eightytwenty.utils.extension.show
 import uz.behzod.eightytwenty.utils.view.viewBinding
 import java.util.*
 
