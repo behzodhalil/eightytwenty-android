@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import uz.behzod.eightytwenty.data.local.entities.TaskGroupEntity.Companion.TASK_GROUP_TABLE_NAME
-import uz.behzod.eightytwenty.utils.ext.Empty
-import uz.behzod.eightytwenty.utils.ext.Zero
+import uz.behzod.eightytwenty.utils.extension.Empty
+import uz.behzod.eightytwenty.utils.extension.Zero
 
 @Entity(
     tableName = TASK_GROUP_TABLE_NAME
