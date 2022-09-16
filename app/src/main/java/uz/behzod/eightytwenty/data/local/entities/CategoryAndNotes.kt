@@ -10,7 +10,7 @@ data class CategoryAndNotes(
         parentColumn = Schema.ID,
         entityColumn = Schema.NOTE_CATEGORY_ID
     )
-    val notes: List<NoteEntity>
+    val notes: List<NoteEntity> = emptyList()
 ) {
     private object Schema {
         const val ID = "id"
