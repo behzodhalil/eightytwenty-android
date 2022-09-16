@@ -9,5 +9,5 @@ data class CatalogAndTasks(
         parentColumn = "catalog_uid",
         entityColumn = "task_catalog_uid"
     )
-    val tasks: List<TaskEntity>
+    val tasks: List<TaskEntity> = emptyList()
 )
