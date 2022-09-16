@@ -63,10 +63,10 @@ fun NoteDomainModel.asEntity(): NoteEntity {
     )
 }
 
-internal fun List<NoteEntity>.asListOfDomain(): List<NoteDomainModel> = this.flatMap {
+fun List<NoteEntity>.asListOfDomain(): List<NoteDomainModel> = this.flatMap {
     listOf(it.asDomain())
 }
 
-internal fun List<NoteDomainModel>.asListOfEntity(): List<NoteEntity> = this.flatMap {
+fun List<NoteDomainModel>.asListOfEntity(): List<NoteEntity> = this.flatMap {
     listOf(it.asEntity())
 }
