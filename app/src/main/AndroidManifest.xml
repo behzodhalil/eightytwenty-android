@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="uz.behzod.eightytwenty">
 
     <application
@@ -9,8 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EightyTwenty">
-        tools:ignore="AllowBackup"
+        android:theme="@style/Theme.EightyTwenty"
+        tools:ignore="AllowBackup">
+
         <activity
             android:name=".features.onboarding.OnboardingActivity"
             android:exported="true">
@@ -23,8 +25,8 @@
 
         <activity
             android:name=".features.main.MainActivity"
-            android:exported="true"
-            />
+            android:exported="true" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
