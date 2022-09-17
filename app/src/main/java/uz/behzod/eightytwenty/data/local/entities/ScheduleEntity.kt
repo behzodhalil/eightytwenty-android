@@ -18,13 +18,21 @@ import java.util.*
             parentColumns = ["uid"],
             childColumns = ["schedule_habit_uid"],
             onDelete = CASCADE
-        )]
+        ),
+        ForeignKey(
+            entity = TaskEntity::class,
+            parentColumns = ["task_uid"],
+            childColumns = arrayOf("schedule_task_uid"),
+            onDelete = CASCADE
+        )
+    ]
 )
 data class ScheduleEntity(
     val frequencyTypes: Int = Int.Zero,
     val daysOfWeek: Int = Int.Zero,
     val dateOfCompletion: String = String.Empty,
     @ColumnInfo(name = "schedule_habit_uid") val habitId: Long? = null,
+    @ColumnInfo(name = "schedule_task_uid") val taskUid: Long? = null,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "schedule_uid")
     val uid: Long = Long.Zero
