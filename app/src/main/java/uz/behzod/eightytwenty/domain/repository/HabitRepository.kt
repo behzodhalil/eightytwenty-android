@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.HabitEntity
 
 interface HabitRepository {
-    suspend fun insertHabit(habit: HabitEntity)
+    suspend fun insertHabit(habit: HabitEntity):Long
     suspend fun updateHabit(habit: HabitEntity)
     suspend fun deleteHabit(habit: HabitEntity)
     fun fetchHabitByUid(uid: Long): Flow<HabitEntity>
