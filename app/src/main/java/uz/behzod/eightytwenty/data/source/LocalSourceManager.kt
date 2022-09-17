@@ -50,6 +50,7 @@ interface LocalSourceManager {
     suspend fun deleteTask(task: TaskEntity)
     fun fetchTaskByUid(uid: Long): Flow<List<TaskEntity>>
     fun fetchTasks(): Flow<List<TaskEntity>>
+    fun fetchTaskAndSchedule(): Flow<List<TaskAndSchedule>>
 
     // TaskCatalog: Dao functions
 
