@@ -8,32 +8,23 @@ import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
 import java.time.DayOfWeek
-import java.time.LocalTime
+import java.util.*
 
 @Entity(
     tableName = "schedule_table",
-    foreignKeys = [ForeignKey(
-        entity = TaskEntity::class,
-        parentColumns = ["task_schedule_uid"],
-        childColumns = ["task_uid"],
-        onDelete = CASCADE
-    ),
+    foreignKeys = [
         ForeignKey(
             entity = HabitEntity::class,
-            parentColumns = ["habit_schedule_uid"],
+            parentColumns = ["uid"],
             childColumns = ["schedule_habit_uid"],
             onDelete = CASCADE
-        )],
-    indices = [Index(value = ["schedule_habit_uid"], name = "index_schedule_habit_uid", unique = true)]
+        )]
 )
 data class ScheduleEntity(
     val frequencyTypes: Int = Int.Zero,
     val daysOfWeek: Int = Int.Zero,
     val dateOfCompletion: String = String.Empty,
-    @ColumnInfo(name = "task_uid", index = true)
-    val taskId: Long = Long.Zero,
-    @ColumnInfo(name = "schedule_habit_uid", index = true)
-    val habitId: Long = Long.Zero,
+    @ColumnInfo(name = "schedule_habit_uid") val habitId: Long? = null,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "schedule_uid")
     val uid: Long = Long.Zero
@@ -41,6 +32,10 @@ data class ScheduleEntity(
 
     fun parseDaysOfWeek(): List<Int> {
         return Companion.parseDaysOfWeek(daysOfWeek)
+    }
+
+    fun parseFrequencyTypes(): List<Int> {
+        return Companion.parseFrequencyType(frequencyTypes)
     }
 
     // Ushbu funksiyamiz, o'qishga oson bo'lgan shaklga o'zgartirishga yordam beradi.
@@ -62,6 +57,20 @@ data class ScheduleEntity(
         }
 
         return stringBuilder.toString()
+    }
+
+
+    fun formatAsFrequencyTypes(context: Context): String {
+        val builder = StringBuilder()
+        val list = parseFrequencyTypes()
+
+        list.forEachIndexed { index, i ->
+            val resourceId = getStringFromResourceForFrequencyType(i)
+
+            builder.append(context.getString(resourceId))
+        }
+
+        return builder.toString()
     }
 
     // Ushbu metodimiz hafta kunlarini tanlab olib, bizga
@@ -157,6 +166,20 @@ data class ScheduleEntity(
         const val BIT_VALUE_OF_SATURDAY = 32
         const val BIT_VALUE_OF_SUNDAY = 64
 
+        const val BIT_VALUE_DAILY = 1
+        const val BIT_VALUE_WEEKLY = 2
+        const val BIT_VALUE_RANDOM = 4
+
+        fun parseFrequencyType(type: Int): List<Int> {
+            val types = mutableListOf<Int>()
+
+            if (type and 1 == BIT_VALUE_DAILY) types.add(FrequencyTypes.DAILY.ordinal)
+            if (type and 2 == BIT_VALUE_WEEKLY) types.add(FrequencyTypes.WEEKLY.ordinal)
+            if (type and 4 == BIT_VALUE_RANDOM) types.add(FrequencyTypes.RANDOM.ordinal)
+
+            return types
+        }
+
         fun parseDaysOfWeek(day: Int): List<Int> {
             val days = mutableListOf<Int>()
 
@@ -172,7 +195,6 @@ data class ScheduleEntity(
         }
     }
 }
-
 
 private enum class FrequencyTypes {
     DAILY,
