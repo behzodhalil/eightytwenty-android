@@ -15,7 +15,7 @@ interface TaskDao {
     @Delete
     suspend fun deleteTask(task: TaskEntity)
 
-    @Query("SELECT * FROM task_entity_table_name WHERE uid =:uid")
+    @Query("SELECT * FROM task_entity_table_name WHERE task_uid =:uid")
     fun fetchTaskByUid(uid: Long): Flow<List<TaskEntity>>
 
     @Query("SELECT * FROM task_entity_table_name WHERE task_is_complete <>1 AND task_is_trashed <>1 ORDER BY task_timestamp")
