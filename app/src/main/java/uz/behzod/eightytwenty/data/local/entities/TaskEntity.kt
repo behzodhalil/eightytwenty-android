@@ -4,6 +4,9 @@ import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
+import uz.behzod.eightytwenty.utils.extension.isToday
+import uz.behzod.eightytwenty.utils.extension.isTomorrow
+import java.time.ZonedDateTime
 
 @Entity(
     tableName = "task_entity_table_name",
@@ -19,7 +22,7 @@ data class TaskEntity(
     @ColumnInfo(name = TITLE) val title: String = String.Empty,
     @ColumnInfo(name = DUE_DATE) val dueDate: String = String.Empty,
     @ColumnInfo(name = FREQUENCY) val frequency: Frequency = Frequency.DAILY,
-    @ColumnInfo(name = TIMESTAMP) val timestamp: String = String.Empty,
+    @ColumnInfo(name = TIMESTAMP) val timestamp: ZonedDateTime? = null,
     @ColumnInfo(name = DEADLINE) val deadline: String = String.Empty,
     @ColumnInfo(name = IS_COMPLETE) val isComplete: Boolean = false,
     @ColumnInfo(name = IS_TRASHED) val isTrashed: Boolean = false,
@@ -36,5 +39,21 @@ data class TaskEntity(
         private const val IS_TRASHED = "task_is_trashed"
         private const val CATALOG_UID = "task_catalog_uid"
         private const val UID = "task_uid"
+    }
+
+    fun hasEndDate(): Boolean {
+        return timestamp != null
+    }
+
+    fun isEndDateToday(): Boolean {
+        return timestamp?.isToday() == true
+    }
+
+    fun isEndDateTomorrow(): Boolean {
+        return timestamp?.isTomorrow() == true
+    }
+
+    fun formatEndDate(): String {
+
     }
 }
