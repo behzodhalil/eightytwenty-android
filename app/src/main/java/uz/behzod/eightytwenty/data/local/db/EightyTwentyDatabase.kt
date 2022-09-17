@@ -11,10 +11,10 @@ import uz.behzod.eightytwenty.data.local.entities.*
         HabitEntity::class, HabitRecommendEntity::class,
         TaskEntity::class, TaskCatalogEntity::class,
         ScheduleEntity::class],
-    version = 28,
+    version = 30,
     autoMigrations = [
         AutoMigration(
-            from = 27, to = 28, spec = SpecMigration::class
+            from = 29, to = 30, spec = SpecMigration::class
         )
     ],
     exportSchema = true
