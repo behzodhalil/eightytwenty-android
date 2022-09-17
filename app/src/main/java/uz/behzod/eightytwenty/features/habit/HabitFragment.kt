@@ -77,13 +77,13 @@ class HabitFragment : Fragment(R.layout.fragment_habit) {
 
             dateSelectListener = object : HorizontalCalendarAdapter.OnDateSelected {
                 override fun onDateSelected(date: Date) {
-                    val timestamp = CalendarUtils.dateStringFromFormat(
+                    val currentTimestamp = CalendarUtils.dateStringFromFormat(
                         locale = configuration.calendarLocale,
                         date = date,
                         format = "yyyy-MM-dd"
                     ) ?: ""
-                    Log.d("Tag", "Current date is $timestamp")
-                    searchByDate(timestamp)
+                    Log.d("Tag", "Current date is $currentTimestamp")
+                    searchByDate(currentTimestamp)
 
                 }
             }
