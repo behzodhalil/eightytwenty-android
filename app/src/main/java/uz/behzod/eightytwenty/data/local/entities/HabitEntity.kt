@@ -1,14 +1,16 @@
 package uz.behzod.eightytwenty.data.local.entities
 
+import android.graphics.Color
 import androidx.room.*
 import uz.behzod.eightytwenty.data.local.entities.HabitEntity.Companion.HABIT_TABLE
 import uz.behzod.eightytwenty.domain.model.HabitDomainModel
 import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
+import uz.behzod.eightytwenty.utils.view.Colors
+import java.util.HashMap
 
 @Entity(
-    tableName = HABIT_TABLE,
-    indices = [Index(value = ["habit_schedule_uid"], unique = true)]
+    tableName = HABIT_TABLE
 )
 data class HabitEntity(
     @ColumnInfo(name = TITLE)
@@ -33,15 +35,12 @@ data class HabitEntity(
     val timestamp: String = String.Empty,
 
     @ColumnInfo(name = COLOR)
-    val color: String = String.Empty,
+    val color: Int = Colors.list[0],
 
     @ColumnInfo(name = IS_COMPLETE)
     val isComplete: Boolean = false,
 
-    @ColumnInfo(name = SCHEDULE_UID)
-    val scheduleId: Long = Long.Zero,
-
-    @ColumnInfo(name = UID)
+    @ColumnInfo(name = UID, index = true)
     @PrimaryKey(autoGenerate = true)
     val uid: Long = Long.Zero
 ) {
@@ -56,38 +55,36 @@ data class HabitEntity(
         private const val TIMESTAMP = "timestamp"
         private const val COLOR = "color"
         private const val IS_COMPLETE = "is_complete"
-        private const val SCHEDULE_UID = "habit_schedule_uid"
         private const val UID = "uid"
     }
+
 }
 
 fun HabitEntity.asDomain(): HabitDomainModel {
     return HabitDomainModel(
-        this.title,
-        this.description,
-        this.perDayGoalCount,
-        this.endGoalCount,
-        this.perDayGoalType,
-        this.frequency,
-        this.timestamp,
-        this.color,
-        this.isComplete,
-        this.uid
+        title = this.title,
+        description = this.description,
+        perDayGoalCount = this.perDayGoalCount,
+        endGoalCount = this.endGoalCount,
+        frequency = this.frequency,
+        timestamp = this.timestamp,
+        color = this.color,
+        isComplete = this.isComplete,
+        uid = this.uid
     )
 }
 
 fun HabitDomainModel.asEntity(): HabitEntity {
     return HabitEntity(
-        this.title,
-        this.description,
-        this.perDayGoalCount,
-        this.endGoalCount,
-        this.perDayGoalType,
-        this.frequency,
-        this.timestamp,
-        this.color,
-        this.isComplete,
-        this.uid
+        title = this.title,
+        description = this.description,
+        perDayGoalCount = this.perDayGoalCount,
+        endGoalCount = this.endGoalCount,
+        frequency = this.frequency,
+        timestamp = this.timestamp,
+        color = this.color,
+        isComplete = this.isComplete,
+        uid = this.uid
     )
 }
 
