@@ -1,11 +1,11 @@
 package uz.behzod.eightytwenty.data.source
 
-import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.*
 
 interface LocalSourceManager {
     // Note: Dao functions
+
     suspend fun insertNote(note: NoteEntity)
     suspend fun updateNote(note: NoteEntity)
     suspend fun deleteNote(note: NoteEntity)
@@ -27,7 +27,7 @@ interface LocalSourceManager {
 
     // Habit: Dao functions
 
-    suspend fun insertHabit(habit: HabitEntity)
+    suspend fun insertHabit(habit: HabitEntity):Long
     suspend fun updateHabit(habit: HabitEntity)
     suspend fun deleteHabit(habit: HabitEntity)
     fun fetchHabitByUid(uid: Long): Flow<HabitEntity>
@@ -45,7 +45,7 @@ interface LocalSourceManager {
 
     // Task: Dao functions
 
-    suspend fun insertTask(task: TaskEntity)
+    suspend fun insertTask(task: TaskEntity): Long
     suspend fun updateTask(task: TaskEntity)
     suspend fun deleteTask(task: TaskEntity)
     fun fetchTaskByUid(uid: Long): Flow<List<TaskEntity>>
@@ -60,4 +60,12 @@ interface LocalSourceManager {
     suspend fun decrementTaskCount(catalogUid: Long)
     fun fetchTaskCatalogs(): Flow<List<TaskCatalogEntity>>
     fun fetchTaskAndCatalogs(): Flow<List<CatalogAndTasks>>
+
+    // Schedule: Dao functions
+
+    suspend fun insertSchedule(schedule: ScheduleEntity)
+    suspend fun updateSchedule(schedule: ScheduleEntity)
+    suspend fun deleteByUid(taskUid: Long)
+    fun fetchSchedules(): Flow<List<ScheduleEntity>>
+    fun fetchSchedulesByUid(uid: Long): Flow<ScheduleEntity>
 }
