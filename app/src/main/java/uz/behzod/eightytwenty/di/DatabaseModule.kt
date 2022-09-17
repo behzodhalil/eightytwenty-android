@@ -1,21 +1,16 @@
 package uz.behzod.eightytwenty.di
 
 import android.app.Application
-import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineScope
 import uz.behzod.eightytwenty.data.local.callback.HabitRecommendCallback
 import uz.behzod.eightytwenty.data.local.dao.*
 import uz.behzod.eightytwenty.data.local.db.EightyTwentyDatabase
 import uz.behzod.eightytwenty.data.source.LocalSourceManager
 import uz.behzod.eightytwenty.data.source.LocalSourceManagerImpl
-import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module
@@ -66,7 +61,8 @@ object DatabaseModule {
         habitDao: HabitDao,
         habitRecommendDao: HabitRecommendDao,
         taskDao: TaskDao,
-        taskCatalogDao: TaskCatalogDao
+        taskCatalogDao: TaskCatalogDao,
+        scheduleDao: ScheduleDao
     ): LocalSourceManager {
         return LocalSourceManagerImpl(
             noteCategoryDao = noteCategoryDao,
@@ -74,7 +70,8 @@ object DatabaseModule {
             habitDao = habitDao,
             habitRecommendDao = habitRecommendDao,
             taskDao = taskDao,
-            taskCatalogDao = taskCatalogDao
+            taskCatalogDao = taskCatalogDao,
+            scheduleDao = scheduleDao
         )
     }
 
@@ -94,5 +91,12 @@ object DatabaseModule {
         return database.getTaskCatalogDao()
     }
 
+    @Provides
+    @Singleton
+    fun providesScheduleDao(
+        database: EightyTwentyDatabase
+    ): ScheduleDao {
+        return database.getScheduleDao()
+    }
 
 }
