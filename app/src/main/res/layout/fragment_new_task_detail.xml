@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/tv_new_task_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,9 +29,9 @@
         android:fontFamily="@font/roboto_medium"
         android:textColor="@color/black"
         android:textSize="22sp"
+        android:hint="Добавить задачу"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_save_new_task"
-        tools:text="Моя новая задача" />
+        app:layout_constraintTop_toBottomOf="@id/btn_save_new_task" />
 
     <ImageView
         android:id="@+id/iv_date_of_completion"
