@@ -1,9 +1,10 @@
 package uz.behzod.eightytwenty.features.new_habit
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -11,14 +12,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.R
-import uz.behzod.eightytwenty.data.local.entities.Frequency
 import uz.behzod.eightytwenty.data.local.entities.PerDayGoalType
+import uz.behzod.eightytwenty.data.local.entities.ScheduleEntity
 import uz.behzod.eightytwenty.databinding.FragmentNewHabitBinding
 import uz.behzod.eightytwenty.domain.model.HabitDomainModel
 import uz.behzod.eightytwenty.domain.model.HabitRecommendDomainModel
+import uz.behzod.eightytwenty.utils.extension.Zero
+import uz.behzod.eightytwenty.utils.view.Colors
 import uz.behzod.eightytwenty.utils.view.viewBinding
 import java.time.LocalDate
 
@@ -28,6 +34,10 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
     private val binding by viewBinding(FragmentNewHabitBinding::bind)
     private val args: NewHabitFragmentArgs by navArgs()
     private val viewModel: NewHabitViewModel by viewModels()
+
+    private var daysOfWeekModel: Int = Int.Zero
+    private var frequencyTypeModel: Int = Int.Zero
+    private var currentColorPosition = Colors.list[0]
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,14 +58,33 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
 
         binding.actGoalType.setAdapter(perDayGoalTypeAdapter)
 
-       /* binding.viewHolderSchedule.chipGroupDayOfWeek.setOnSelectListener {
-            Toast.makeText(requireContext(), it.text, Toast.LENGTH_SHORT).show()
-        }
-*/
         binding.btnSaveHabit.setOnClickListener {
-            insertHabit()
+            insertHabitWithSchedule()
         }
 
+        initColorRecyclerView()
+    }
+
+    private fun initColorRecyclerView() {
+        binding.rvColors.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvColors.adapter = HabitColorAdapter { view, position ->
+            val button = view as? MaterialButton ?: return@HabitColorAdapter
+            button.setBackgroundColor(button.context.getColor(Colors.list[position]))
+
+            button.setOnClickListener {
+                (binding.rvColors.layoutManager as LinearLayoutManager).getChildAt(
+                    currentColorPosition
+                ).let {
+                    (it as? MaterialButton)?.setStrokeWidthResource(R.dimen.eight)
+                    (it as? MaterialButton)?.setStrokeColorResource(R.color.solitude)
+                }
+                currentColorPosition = position
+                button.setStrokeColorResource(R.color.color_primary_dark)
+                button.setStrokeWidthResource(R.dimen.color_button_stroke_width)
+            }
+
+        }
     }
 
     private fun fetchHabitRecommendUi() {
@@ -107,11 +136,13 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
         }
     }
 
-    private fun insertHabit() {
+    private fun insertHabitWithSchedule() {
+
         val title = binding.etHabitName.text.toString()
         val description = binding.etDescription.text.toString()
         val perDayCount = binding.etPerDayCount.text.toString()
         val endGoalCount = binding.etEndGoalCount.text.toString().toLong()
+
         var perDayCountType = PerDayGoalType.ONCE
 
         when (binding.actGoalType.text.toString()) {
@@ -131,42 +162,62 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
                 perDayCountType = PerDayGoalType.MINUTES
             }
         }
+        val timestamp = LocalDate.now().toString()
 
-        var selectDay = Frequency.DAILY
-
-        /*binding.selectFrequencyTypeToggleGroup.setOnSelectListener {
-            when (it.text) {
-                "По дням" -> {
-                    selectDay = Frequency.DAILY
-                }
-                "По неделям " -> {
-                    selectDay = Frequency.WEEK
-                }
-                "Произвольно" -> {
-                    selectDay = Frequency.RANDOM
+        binding.viewHolderSchedule.chipGroupDayOfWeek.forEach {
+            if ((it as? Chip)?.isChecked == true) {
+                daysOfWeekModel += when (it.id) {
+                    R.id.chip_monday -> ScheduleEntity.BIT_VALUE_OF_MONDAY
+                    R.id.chip_tuesday -> ScheduleEntity.BIT_VALUE_OF_TUESDAY
+                    R.id.chip_wednesday -> ScheduleEntity.BIT_VALUE_OF_WEDNESDAY
+                    R.id.chip_thursday -> ScheduleEntity.BIT_VALUE_OF_THURSDAY
+                    R.id.chip_friday -> ScheduleEntity.BIT_VALUE_OF_FRIDAY
+                    R.id.chip_saturday -> ScheduleEntity.BIT_VALUE_OF_SATURDAY
+                    R.id.chip_sunday -> ScheduleEntity.BIT_VALUE_OF_SUNDAY
+                    else -> 0
                 }
             }
-        }*/
-
-        val timestamp = LocalDate.now().toString()
-        val color = "Blue"
-        val isComplete = false
-
-        viewModel.insertHabit(
-            HabitDomainModel(
-                title = title,
-                description = description,
-                perDayGoalCount = perDayCount.toLong(),
-                endGoalCount =endGoalCount,
-                perDayGoalType = perDayCountType,
-                frequency = selectDay,
-                timestamp = timestamp,
-                color = color,
-                isComplete = isComplete
-            )
-        ).run {
-            Log.d("Tag","Habit is successfully saved")
         }
 
+        binding.viewHolderSchedule.chipGroupFrequencyType.forEach {
+            if ((it as? Chip)?.isChecked == true) {
+                frequencyTypeModel += when (it.id) {
+                    R.id.chip_daily -> ScheduleEntity.BIT_VALUE_DAILY
+                    R.id.chip_weekly -> ScheduleEntity.BIT_VALUE_WEEKLY
+                    R.id.chip_random -> ScheduleEntity.BIT_VALUE_RANDOM
+                    else -> 0
+                }
+            }
+        }
+
+        val habit = HabitDomainModel(
+            title = title,
+            description = description,
+            perDayGoalCount = perDayCount.toLong(),
+            perDayGoalType = perDayCountType,
+            endGoalCount = endGoalCount,
+            timestamp = timestamp,
+            color = Colors.list[currentColorPosition],
+            isComplete = false
+        )
+
+        val schedule = ScheduleEntity(
+            frequencyTypes = frequencyTypeModel,
+            daysOfWeek = daysOfWeekModel,
+            dateOfCompletion = LocalDate.now().toString(),
+            habitId = habit.uid
+        )
+
+        val schedules = arrayListOf<ScheduleEntity>()
+        schedules.add(
+            schedule
+        )
+        viewModel.insertHabit(
+            habit,
+            schedules
+        ).run {
+            Toast.makeText(requireContext(), "Successfully saved", Toast.LENGTH_SHORT).show()
+        }
     }
+
 }
