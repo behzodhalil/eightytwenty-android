@@ -1,15 +1,14 @@
 package uz.behzod.eightytwenty.data.local.entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 import uz.behzod.eightytwenty.data.local.entities.HabitEntity.Companion.HABIT_TABLE
 import uz.behzod.eightytwenty.domain.model.HabitDomainModel
 import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
 
 @Entity(
-    tableName = HABIT_TABLE
+    tableName = HABIT_TABLE,
+    indices = [Index(value = ["habit_schedule_uid"], unique = true)]
 )
 data class HabitEntity(
     @ColumnInfo(name = TITLE)
@@ -39,6 +38,9 @@ data class HabitEntity(
     @ColumnInfo(name = IS_COMPLETE)
     val isComplete: Boolean = false,
 
+    @ColumnInfo(name = SCHEDULE_UID)
+    val scheduleId: Long = Long.Zero,
+
     @ColumnInfo(name = UID)
     @PrimaryKey(autoGenerate = true)
     val uid: Long = Long.Zero
@@ -54,6 +56,7 @@ data class HabitEntity(
         private const val TIMESTAMP = "timestamp"
         private const val COLOR = "color"
         private const val IS_COMPLETE = "is_complete"
+        private const val SCHEDULE_UID = "habit_schedule_uid"
         private const val UID = "uid"
     }
 }
