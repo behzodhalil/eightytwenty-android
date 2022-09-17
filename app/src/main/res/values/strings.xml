@@ -33,6 +33,14 @@
     <string name="text_abbreviation_sat">Сб</string>
     <string name="text_abbreviation_sun">Вс</string>
 
+    <string name="text_monday">Понедельник</string>
+    <string name="text_tuesday">Вторник</string>
+    <string name="text_wednesday">Среда</string>
+    <string name="text_thursday">Четверг</string>
+    <string name="text_friday">Пятница</string>
+    <string name="text_saturday">Суббота</string>
+    <string name="text_sunday">Воскресенье</string>
+
     <string name="text_frequency_daily">По дням</string>
     <string name="text_frequency_weekly">По неделям</string>
     <string name="text_frequency_random">Произвольно</string>

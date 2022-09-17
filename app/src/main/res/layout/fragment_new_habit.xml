@@ -174,87 +174,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_end_goal_count" />
 
-    <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
-        android:id="@+id/select_frequency_type_toggle_group"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="24dp"
-        app:justifyContent="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_frequency_doing">
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="По дням"
-            android:textAllCaps="false" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="По неделям"
-            android:textAllCaps="false" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Произвольно"
-            android:textAllCaps="false" />
-    </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
-
-    <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
-        android:id="@+id/select_day_toggle_group"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="12dp"
-        app:flexWrap="nowrap"
-        app:justifyContent="space_between"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/select_frequency_type_toggle_group"
-        app:toggle_selectableAmount="7">
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Пн" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Вт" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Ср" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Чт" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Пт" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Сб" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Вс" />
-
-    </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+  <include
+      android:id="@+id/view_holder_schedule"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      app:layout_constraintTop_toBottomOf="@id/tv_frequency_doing"
+      layout="@layout/view_holder_schedule"
+      />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save_habit"

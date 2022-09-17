@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group_frequency_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipStrokeColor="@color/sun_glow"
+            app:chipBackgroundColor="@color/solitude"
+            android:textColor="#2197fe"
+            app:chipStrokeWidth="1dp"
+            android:layout_marginStart="28dp"
+            android:text="@string/text_frequency_daily"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipStrokeColor="@color/sun_glow"
+            app:chipBackgroundColor="@color/solitude"
+            android:textColor="#2197fe"
+            app:chipStrokeWidth="1dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/text_frequency_weekly"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipStrokeColor="@color/sun_glow"
+            app:chipBackgroundColor="@color/solitude"
+            android:textColor="#2197fe"
+            app:chipStrokeWidth="1dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/text_frequency_random"
+            />
+
+    </com.google.android.material.chip.ChipGroup>
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group_day_of_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="16dp"
+        >
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipStrokeColor="@color/sun_glow"
+            app:chipBackgroundColor="@color/solitude"
+            android:textColor="#2197fe"
+            app:chipStrokeWidth="1dp"
+            android:text="@string/text_abbreviation_mon"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipStrokeColor="@color/sun_glow"
+            app:chipBackgroundColor="@color/solitude"
+            android:textColor="#2197fe"
+            app:chipStrokeWidth="1dp"
+            android:text="@string/text_abbreviation_tue"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipStrokeColor="@color/sun_glow"
+            app:chipBackgroundColor="@color/solitude"
+            android:textColor="#2197fe"
+            app:chipStrokeWidth="1dp"
+            android:text="@string/text_abbreviation_wed"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipStrokeColor="@color/sun_glow"
+            app:chipBackgroundColor="@color/solitude"
+            android:textColor="#2197fe"
+            app:chipStrokeWidth="1dp"
+            android:text="@string/text_abbreviation_thurs"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipStrokeColor="@color/sun_glow"
+            app:chipBackgroundColor="@color/solitude"
+            android:textColor="#2197fe"
+            app:chipStrokeWidth="1dp"
+            android:text="@string/text_abbreviation_fri"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipStrokeColor="@color/sun_glow"
+            app:chipBackgroundColor="@color/solitude"
+            android:textColor="#2197fe"
+            app:chipStrokeWidth="1dp"
+            android:text="@string/text_abbreviation_sat"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipStrokeColor="@color/sun_glow"
+            app:chipBackgroundColor="@color/solitude"
+            android:textColor="#2197fe"
+            app:chipStrokeWidth="1dp"
+            android:text="@string/text_abbreviation_sun"
+            />
+    </com.google.android.material.chip.ChipGroup>
+</FrameLayout>
