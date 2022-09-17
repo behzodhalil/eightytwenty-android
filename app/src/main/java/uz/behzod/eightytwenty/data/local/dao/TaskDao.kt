@@ -7,7 +7,7 @@ import uz.behzod.eightytwenty.data.local.entities.TaskEntity
 @Dao
 interface TaskDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTask(task: TaskEntity)
+    suspend fun insertTask(task: TaskEntity): Long
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateTask(task: TaskEntity)
