@@ -13,8 +13,7 @@ import uz.behzod.eightytwenty.utils.extension.Zero
         childColumns = ["task_catalog_uid"],
         onDelete = CASCADE
     )],
-    indices = [Index(value = ["task_schedule_uid"], unique = true),
-        Index(value = ["task_catalog_uid"], unique = true)]
+    indices = [Index(value = ["task_catalog_uid"], unique = true)]
 )
 data class TaskEntity(
     @ColumnInfo(name = TITLE) val title: String = String.Empty,
@@ -25,7 +24,6 @@ data class TaskEntity(
     @ColumnInfo(name = IS_COMPLETE) val isComplete: Boolean = false,
     @ColumnInfo(name = IS_TRASHED) val isTrashed: Boolean = false,
     @ColumnInfo(name = CATALOG_UID) val catalogUid: Long = Long.Zero,
-    @ColumnInfo(name = SCHEDULE_UID) val scheduleUid: Long = Long.Zero,
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = UID) val uid: Long = Long.Zero,
 ) {
     companion object {
@@ -37,7 +35,6 @@ data class TaskEntity(
         private const val IS_COMPLETE = "task_is_complete"
         private const val IS_TRASHED = "task_is_trashed"
         private const val CATALOG_UID = "task_catalog_uid"
-        private const val SCHEDULE_UID = "task_schedule_uid"
         private const val UID = "task_uid"
     }
 }
