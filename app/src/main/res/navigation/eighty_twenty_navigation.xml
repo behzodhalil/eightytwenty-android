@@ -126,4 +126,16 @@
             app:argType="long"
             android:defaultValue="0L" />
     </fragment>
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="uz.behzod.eightytwenty.features.task.TaskFragment"
+        android:label="TaskFragment" >
+        <action
+            android:id="@+id/action_taskFragment_to_newTaskFragment"
+            app:destination="@id/newTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newTaskFragment"
+        android:name="uz.behzod.eightytwenty.features.new_task_detail.NewTaskFragment"
+        android:label="NewTaskFragment" />
 </navigation>
