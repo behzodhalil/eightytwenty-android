@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -49,10 +48,10 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
 
         binding.actGoalType.setAdapter(perDayGoalTypeAdapter)
 
-        binding.selectFrequencyTypeToggleGroup.setOnSelectListener {
+       /* binding.viewHolderSchedule.chipGroupDayOfWeek.setOnSelectListener {
             Toast.makeText(requireContext(), it.text, Toast.LENGTH_SHORT).show()
         }
-
+*/
         binding.btnSaveHabit.setOnClickListener {
             insertHabit()
         }
@@ -135,7 +134,7 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
 
         var selectDay = Frequency.DAILY
 
-        binding.selectFrequencyTypeToggleGroup.setOnSelectListener {
+        /*binding.selectFrequencyTypeToggleGroup.setOnSelectListener {
             when (it.text) {
                 "По дням" -> {
                     selectDay = Frequency.DAILY
@@ -147,7 +146,7 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
                     selectDay = Frequency.RANDOM
                 }
             }
-        }
+        }*/
 
         val timestamp = LocalDate.now().toString()
         val color = "Blue"
