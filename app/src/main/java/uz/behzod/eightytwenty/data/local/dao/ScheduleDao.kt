@@ -12,8 +12,11 @@ interface ScheduleDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateSchedule(schedule: ScheduleEntity)
 
-    @Query("DELETE FROM schedule_table WHERE task_uid = :taskUid")
+    @Query("DELETE FROM schedule_table WHERE schedule_habit_uid = :taskUid")
     suspend fun deleteByUid(taskUid: Long)
+
+    @Query("DELETE FROM schedule_table WHERE schedule_habit_uid =:habitUid")
+    suspend fun deleteByHabitUid(habitUid: Long)
 
     @Query("SELECT * FROM schedule_table")
     fun fetchSchedules(): Flow<List<ScheduleEntity>>
