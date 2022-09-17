@@ -14,6 +14,9 @@ data class TaskGroupEntity(
     @ColumnInfo(name = NAME)
     val name: String = String.Empty,
 
+    @ColumnInfo(name = TASK_COUNT)
+    val taskCount: String = String.Empty,
+
     @ColumnInfo(name = UID)
     @PrimaryKey(autoGenerate = true)
     val uid: Long = Long.Zero
@@ -21,6 +24,7 @@ data class TaskGroupEntity(
     companion object {
         const val TASK_GROUP_TABLE_NAME = "task_group_table"
         private const val NAME = "task_group_name"
+        private const val TASK_COUNT = "task_count"
         private const val UID = "task_group_uid"
     }
 }
