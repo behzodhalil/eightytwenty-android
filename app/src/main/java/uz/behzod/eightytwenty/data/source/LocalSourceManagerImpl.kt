@@ -196,4 +196,8 @@ class LocalSourceManagerImpl @Inject constructor(
     override fun fetchSchedulesByUid(uid: Long): Flow<ScheduleEntity> {
         return scheduleDao.fetchSchedulesByUid(uid)
     }
+
+    override fun fetchTaskAndSchedule(): Flow<List<TaskAndSchedule>> {
+        return taskDao.fetchTaskAndSchedule()
+    }
 }
