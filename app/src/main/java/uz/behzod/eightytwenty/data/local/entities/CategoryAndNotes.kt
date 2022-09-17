@@ -4,6 +4,8 @@ import androidx.room.Embedded
 import androidx.room.Relation
 import uz.behzod.eightytwenty.domain.model.CategoryAndNotesDomainModel
 
+// One-to-many relationship
+
 data class CategoryAndNotes(
     @Embedded val noteCategoryEntity: NoteCategoryEntity,
     @Relation(
