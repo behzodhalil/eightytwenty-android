@@ -125,4 +125,15 @@ dependencies {
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
 
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    // Logger
+    implementation 'com.orhanobut:logger:2.2.0'
+
+    implementation 'com.afollestad.material-dialogs:core:3.3.0'
+    implementation 'com.afollestad.material-dialogs:color:3.3.0'
+    implementation 'com.afollestad.material-dialogs:datetime:3.3.0'
+    implementation 'com.afollestad.material-dialogs:lifecycle:3.3.0'
 }
