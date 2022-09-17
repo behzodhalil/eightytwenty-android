@@ -11,7 +11,7 @@ class HabitRepositoryImpl @Inject constructor(
     private val sourceManager: LocalSourceManager
 ): HabitRepository {
 
-    override suspend fun insertHabit(habit: HabitEntity) {
+    override suspend fun insertHabit(habit: HabitEntity):Long {
         return sourceManager.insertHabit(habit)
     }
 
