@@ -11,7 +11,8 @@ class LocalSourceManagerImpl @Inject constructor(
     private val habitDao: HabitDao,
     private val habitRecommendDao: HabitRecommendDao,
     private val taskDao: TaskDao,
-    private val taskCatalogDao: TaskCatalogDao
+    private val taskCatalogDao: TaskCatalogDao,
+    private val scheduleDao: ScheduleDao
 ) : LocalSourceManager {
 
     override suspend fun insertNote(note: NoteEntity) {
@@ -78,7 +79,7 @@ class LocalSourceManagerImpl @Inject constructor(
         return noteCategoryDao.fetchAllCategoriesWithNotes()
     }
 
-    override suspend fun insertHabit(habit: HabitEntity) {
+    override suspend fun insertHabit(habit: HabitEntity): Long {
         return habitDao.insertHabit(habit)
     }
 
@@ -128,7 +129,7 @@ class LocalSourceManagerImpl @Inject constructor(
         return habitRecommendDao.fetchHabitRecommendByUid(uid)
     }
 
-    override suspend fun insertTask(task: TaskEntity) {
+    override suspend fun insertTask(task: TaskEntity): Long {
         return taskDao.insertTask(task)
     }
 
@@ -174,5 +175,25 @@ class LocalSourceManagerImpl @Inject constructor(
 
     override fun fetchTaskAndCatalogs(): Flow<List<CatalogAndTasks>> {
         return taskCatalogDao.fetchTaskAndCatalogs()
+    }
+
+    override suspend fun insertSchedule(schedule: ScheduleEntity) {
+        return scheduleDao.insertSchedule(schedule)
+    }
+
+    override suspend fun updateSchedule(schedule: ScheduleEntity) {
+        return scheduleDao.updateSchedule(schedule)
+    }
+
+    override suspend fun deleteByUid(taskUid: Long) {
+        return scheduleDao.deleteByUid(taskUid)
+    }
+
+    override fun fetchSchedules(): Flow<List<ScheduleEntity>> {
+        return scheduleDao.fetchSchedules()
+    }
+
+    override fun fetchSchedulesByUid(uid: Long): Flow<ScheduleEntity> {
+        return scheduleDao.fetchSchedulesByUid(uid)
     }
 }
