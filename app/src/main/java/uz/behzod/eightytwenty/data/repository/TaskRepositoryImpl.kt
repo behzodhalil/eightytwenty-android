@@ -10,7 +10,7 @@ class TaskRepositoryImpl @Inject constructor(
     private val sourceManager: LocalSourceManager
 ): TaskRepository {
 
-    override suspend fun insertTask(task: TaskEntity) {
+    override suspend fun insertTask(task: TaskEntity):Long {
         return sourceManager.insertTask(task)
     }
 
