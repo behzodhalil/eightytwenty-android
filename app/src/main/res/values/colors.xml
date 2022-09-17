@@ -51,4 +51,50 @@
     <color name="paris_green">#ed6d62</color>
     <color name="alexis_blue">#425e86</color>
 
+    <color name="color_primary">@color/color_fokus_blue_500</color>
+    <color name="color_primary_dark">@color/color_fokus_blue_700</color>
+    <color name="color_on_primary">#ffffff</color>
+    <color name="color_widget_tint">#c1e4f8</color>
+    <color name="color_surface">#ffffff</color>
+    <color name="color_on_surface">#111111</color>
+    <color name="color_surface_secondary">#eeeeee</color>
+    <color name="color_on_surface_secondary">@color/color_on_surface</color>
+    <color name="color_error">#B00020</color>
+    <color name="color_on_error">#ffffff</color>
+
+    <color name="color_status_background">@color/color_surface</color>
+    <color name="color_toolbar_background">@color/color_surface</color>
+    <color name="color_window_background">@color/color_surface</color>
+    <color name="color_navigation_background">@color/color_window_background</color>
+
+    <color name="color_primary_text">@color/color_on_surface</color>
+    <color name="color_secondary_text">#808080</color>
+
+    <color name="color_chip_background_transparent">#392197fe</color>
+
+    <color name="color_fokus_blue_50">#e3f2ff</color>
+    <color name="color_fokus_blue_100">#bcdeff</color>
+    <color name="color_fokus_blue_500">#2197fe</color>
+    <color name="color_fokus_blue_700">#2076dc</color>
+    <color name="color_fokus_blue_900">#1a46aa</color>
+
+
+    <color name="habit_1">#FFB2B2</color>
+    <color name="habit_2">#FFBD99</color>
+    <color name="habit_3">#FFD980</color>
+    <color name="habit_4">#F9FF80</color>
+    <color name="habit_5">#CCFF80</color>
+    <color name="habit_6">#9FFF80</color>
+    <color name="habit_7">#80FF8C</color>
+    <color name="habit_8">#80FFB9</color>
+    <color name="habit_9">#80FFE5</color>
+    <color name="habit_10">#80ECFF</color>
+    <color name="habit_11">#99CCFF</color>
+    <color name="habit_12">#B2BEFF</color>
+    <color name="habit_13">#C2B2FF</color>
+    <color name="habit_14">#DDB2FF</color>
+    <color name="habit_15">#F7B2FF</color>
+    <color name="habit_16">#FFB2EC</color>
+    <color name="habit_17">#FF99C2</color>
+
 </resources>

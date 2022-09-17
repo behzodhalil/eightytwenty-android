@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chip_group_frequency_type"
@@ -10,115 +10,124 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip_daily"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:chipStrokeColor="@color/sun_glow"
-            app:chipBackgroundColor="@color/solitude"
-            android:textColor="#2197fe"
-            app:chipStrokeWidth="1dp"
             android:layout_marginStart="28dp"
             android:text="@string/text_frequency_daily"
-            />
+            android:textColor="@color/selector_chip_text_color"
+            app:chipBackgroundColor="@color/selector_chip_background"
+            app:chipStrokeColor="@color/selector_chip_stroke_color"
+            app:chipStrokeWidth="1dp" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip_weekly"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:chipStrokeColor="@color/sun_glow"
-            app:chipBackgroundColor="@color/solitude"
-            android:textColor="#2197fe"
-            app:chipStrokeWidth="1dp"
             android:layout_marginStart="24dp"
             android:text="@string/text_frequency_weekly"
-            />
+            android:textColor="@color/selector_chip_text_color"
+            app:chipBackgroundColor="@color/selector_chip_background"
+            app:chipStrokeColor="@color/selector_chip_stroke_color"
+            app:chipStrokeWidth="1dp" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip_random"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:chipStrokeColor="@color/sun_glow"
-            app:chipBackgroundColor="@color/solitude"
-            android:textColor="#2197fe"
-            app:chipStrokeWidth="1dp"
             android:layout_marginStart="24dp"
             android:text="@string/text_frequency_random"
-            />
+            android:textColor="@color/selector_chip_text_color"
+            app:chipBackgroundColor="@color/selector_chip_background"
+            app:chipStrokeColor="@color/selector_chip_stroke_color"
+            app:chipStrokeWidth="1dp" />
 
     </com.google.android.material.chip.ChipGroup>
+
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chip_group_day_of_week"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_marginStart="16dp"
-        >
+        android:layout_marginTop="50dp">
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip_monday"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:chipStrokeColor="@color/sun_glow"
-            app:chipBackgroundColor="@color/solitude"
-            android:textColor="#2197fe"
-            app:chipStrokeWidth="1dp"
             android:text="@string/text_abbreviation_mon"
-            />
+            android:textColor="@color/selector_chip_text_color"
+            app:chipBackgroundColor="@color/selector_chip_background"
+            app:chipStrokeColor="@color/selector_chip_stroke_color"
+            app:chipStrokeWidth="1dp" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip_tuesday"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:chipStrokeColor="@color/sun_glow"
-            app:chipBackgroundColor="@color/solitude"
-            android:textColor="#2197fe"
-            app:chipStrokeWidth="1dp"
             android:text="@string/text_abbreviation_tue"
-            />
+            android:textColor="@color/selector_chip_text_color"
+            app:chipBackgroundColor="@color/selector_chip_background"
+            app:chipStrokeColor="@color/selector_chip_stroke_color"
+            app:chipStrokeWidth="1dp" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip_wednesday"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:chipStrokeColor="@color/sun_glow"
-            app:chipBackgroundColor="@color/solitude"
-            android:textColor="#2197fe"
-            app:chipStrokeWidth="1dp"
             android:text="@string/text_abbreviation_wed"
-            />
+            android:textColor="@color/selector_chip_text_color"
+            app:chipBackgroundColor="@color/selector_chip_background"
+            app:chipStrokeColor="@color/selector_chip_stroke_color"
+            app:chipStrokeWidth="1dp" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip_thursday"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:chipStrokeColor="@color/sun_glow"
-            app:chipBackgroundColor="@color/solitude"
-            android:textColor="#2197fe"
-            app:chipStrokeWidth="1dp"
             android:text="@string/text_abbreviation_thurs"
-            />
+            android:textColor="@color/selector_chip_text_color"
+            app:chipBackgroundColor="@color/selector_chip_background"
+            app:chipStrokeColor="@color/selector_chip_stroke_color"
+            app:chipStrokeWidth="1dp" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip_friday"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:chipStrokeColor="@color/sun_glow"
-            app:chipBackgroundColor="@color/solitude"
-            android:textColor="#2197fe"
-            app:chipStrokeWidth="1dp"
             android:text="@string/text_abbreviation_fri"
-            />
+            android:textColor="@color/selector_chip_text_color"
+            app:chipBackgroundColor="@color/selector_chip_background"
+            app:chipStrokeColor="@color/selector_chip_stroke_color"
+            app:chipStrokeWidth="1dp" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip_saturday"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:chipStrokeColor="@color/sun_glow"
-            app:chipBackgroundColor="@color/solitude"
-            android:textColor="#2197fe"
-            app:chipStrokeWidth="1dp"
             android:text="@string/text_abbreviation_sat"
-            />
+            android:textColor="@color/selector_chip_text_color"
+            app:chipBackgroundColor="@color/selector_chip_background"
+            app:chipStrokeColor="@color/selector_chip_stroke_color"
+            app:chipStrokeWidth="1dp" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip_sunday"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:chipStrokeColor="@color/sun_glow"
-            app:chipBackgroundColor="@color/solitude"
-            android:textColor="#2197fe"
-            app:chipStrokeWidth="1dp"
             android:text="@string/text_abbreviation_sun"
-            />
+            android:textColor="@color/selector_chip_text_color"
+            app:chipBackgroundColor="@color/selector_chip_background"
+            app:chipStrokeColor="@color/selector_chip_stroke_color" />
     </com.google.android.material.chip.ChipGroup>
 </FrameLayout>

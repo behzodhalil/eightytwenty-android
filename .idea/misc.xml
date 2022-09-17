@@ -3,27 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/drawable/bg_chip_color.xml" value="0.1675" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/drawable/bg_chip_default_color.xml" value="0.1675" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/activity_main.xml" value="0.2635416666666667" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/activity_onboarding.xml" value="0.24322916666666666" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_category_note.xml" value="0.144" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_habit_detail.xml" value="0.2635416666666667" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_new_habit.xml" value="0.2" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_new_note.xml" value="0.2635416666666667" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_new_task_detail.xml" value="0.24322916666666666" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_note.xml" value="0.24322916666666666" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_note_detail.xml" value="0.2635416666666667" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_recommend_habit.xml" value="0.2635416666666667" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_search_notes.xml" value="0.2635416666666667" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_study_habit_recommend.xml" value="0.2635416666666667" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_task.xml" value="0.264" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/view_holder_frequency_types.xml" value="0.16296296296296298" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/view_holder_habit.xml" value="0.22796052631578947" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/view_holder_schedule.xml" value="0.22730263157894737" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/view_holder_task.xml" value="0.4" />
-        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/view_holder_week_types.xml" value="0.16296296296296298" />
         <entry key="app/src/main/res/drawable/bg_btn_default.xml" value="0.2055" />
+        <entry key="app/src/main/res/drawable/bg_habit_color.xml" value="0.155" />
         <entry key="app/src/main/res/drawable/bg_habit_detail.xml" value="0.205" />
         <entry key="app/src/main/res/drawable/bg_new_habit.xml" value="0.205" />
         <entry key="app/src/main/res/drawable/bg_oval.xml" value="0.205" />
@@ -43,15 +24,17 @@
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_habit.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_habit_detail.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_new_habit.xml" value="0.33240740740740743" />
+        <entry key="app/src/main/res/layout/fragment_new_habit.xml" value="0.5065359477124183" />
         <entry key="app/src/main/res/layout/fragment_new_note.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_new_task_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_note.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_task.xml" value="0.4895833333333333" />
+        <entry key="app/src/main/res/layout/view_holder_color.xml" value="1.0" />
         <entry key="app/src/main/res/layout/view_holder_note.xml" value="0.5740740740740741" />
         <entry key="app/src/main/res/layout/view_holder_onboarding.xml" value="0.4895833333333333" />
+        <entry key="app/src/main/res/layout/view_holder_schedule.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/view_holder_task.xml" value="0.4895833333333333" />
       </map>
     </option>
