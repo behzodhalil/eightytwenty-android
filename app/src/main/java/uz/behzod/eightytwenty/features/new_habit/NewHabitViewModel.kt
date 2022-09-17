@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import uz.behzod.eightytwenty.data.local.entities.ScheduleEntity
 import uz.behzod.eightytwenty.domain.interactor.habit.InsertHabit
 import uz.behzod.eightytwenty.domain.interactor.habit_recommend.FetchHabitRecommendByUid
 import uz.behzod.eightytwenty.domain.model.HabitDomainModel
@@ -34,9 +35,9 @@ class NewHabitViewModel @Inject constructor(
         }
     }
 
-    fun insertHabit(habit: HabitDomainModel) {
+    fun insertHabit(habit: HabitDomainModel, scheduleEntity: List<ScheduleEntity>) {
         viewModelScope.launch {
-            iInsertHabitInteractor.invoke(habit)
+            iInsertHabitInteractor.invoke(habit,scheduleEntity)
         }
     }
 }
