@@ -1,9 +1,7 @@
 package uz.behzod.eightytwenty.data.local.db
 
-import android.content.Context
 import androidx.room.*
 import androidx.room.migration.AutoMigrationSpec
-import uz.behzod.eightytwenty.data.local.callback.HabitRecommendCallback
 import uz.behzod.eightytwenty.data.local.dao.*
 import uz.behzod.eightytwenty.data.local.entities.*
 
@@ -13,10 +11,10 @@ import uz.behzod.eightytwenty.data.local.entities.*
         HabitEntity::class, HabitRecommendEntity::class,
         TaskEntity::class, TaskCatalogEntity::class,
         ScheduleEntity::class],
-    version = 13,
+    version = 28,
     autoMigrations = [
         AutoMigration(
-            from = 12, to = 13, spec = SpecMigration::class
+            from = 27, to = 28, spec = SpecMigration::class
         )
     ],
     exportSchema = true
@@ -30,6 +28,7 @@ abstract class EightyTwentyDatabase : RoomDatabase() {
     abstract fun getHabitRecommendDao(): HabitRecommendDao
     abstract fun getTaskDao(): TaskDao
     abstract fun getTaskCatalogDao(): TaskCatalogDao
+    abstract fun getScheduleDao(): ScheduleDao
 }
 
 
