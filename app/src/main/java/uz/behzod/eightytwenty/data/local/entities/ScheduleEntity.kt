@@ -25,7 +25,8 @@ import java.util.*
             childColumns = arrayOf("schedule_task_uid"),
             onDelete = CASCADE
         )
-    ]
+    ],
+    indices = [Index(value = ["schedule_habit_uid","schedule_task_uid"], unique = true)]
 )
 data class ScheduleEntity(
     val frequencyTypes: Int = Int.Zero,
