@@ -78,4 +78,7 @@ fun ZonedDateTime.toCalendar(): Calendar {
     return GregorianCalendar.from(this)
 }
 
+fun Calendar.toZonedDateTime(): ZonedDateTime? {
+    return ZonedDateTime.ofInstant(this.toInstant(), ZoneId.systemDefault())
+}
 private const val SUBTRACT = 1L
