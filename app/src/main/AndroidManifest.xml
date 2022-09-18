@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EightyTwenty"
-        tools:ignore="AllowBackup">
+        tools:ignore="AllowBackup"
+        android:hardwareAccelerated="false"
+        >
 
         <activity
             android:name=".features.onboarding.OnboardingActivity"
