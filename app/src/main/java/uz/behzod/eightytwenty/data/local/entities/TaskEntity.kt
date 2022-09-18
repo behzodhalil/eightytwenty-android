@@ -1,11 +1,13 @@
 package uz.behzod.eightytwenty.data.local.entities
 
+import android.content.Context
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
 import uz.behzod.eightytwenty.utils.extension.isToday
 import uz.behzod.eightytwenty.utils.extension.isTomorrow
+import uz.behzod.eightytwenty.utils.formatter.DateTimeFormatter
 import java.time.ZonedDateTime
 
 @Entity(
@@ -20,8 +22,9 @@ import java.time.ZonedDateTime
 )
 data class TaskEntity(
     @ColumnInfo(name = TITLE) val title: String = String.Empty,
-    @ColumnInfo(name = DUE_DATE) val dueDate: String = String.Empty,
+    @ColumnInfo(name = DUE_DATE) var endDate: ZonedDateTime? = null,
     @ColumnInfo(name = FREQUENCY) val frequency: Frequency = Frequency.DAILY,
+    @ColumnInfo(name = REMINDER) val reminderDateTime: ZonedDateTime? = null,
     @ColumnInfo(name = TIMESTAMP) val timestamp: ZonedDateTime? = null,
     @ColumnInfo(name = DEADLINE) val deadline: String = String.Empty,
     @ColumnInfo(name = IS_COMPLETE) val isComplete: Boolean = false,
@@ -31,10 +34,11 @@ data class TaskEntity(
 ) {
     companion object {
         private const val TITLE = "task_title"
-        private const val DUE_DATE = "task_due_date"
+        private const val DUE_DATE = "task_end_date"
         private const val FREQUENCY = "task_frequency"
         private const val TIMESTAMP = "task_timestamp"
         private const val DEADLINE = "task_deadline"
+        private const val REMINDER = "task_reminder"
         private const val IS_COMPLETE = "task_is_complete"
         private const val IS_TRASHED = "task_is_trashed"
         private const val CATALOG_UID = "task_catalog_uid"
@@ -42,18 +46,20 @@ data class TaskEntity(
     }
 
     fun hasEndDate(): Boolean {
-        return timestamp != null
+        return endDate != null
     }
 
     fun isEndDateToday(): Boolean {
-        return timestamp?.isToday() == true
+        return endDate?.isToday() == true
     }
 
     fun isEndDateTomorrow(): Boolean {
-        return timestamp?.isTomorrow() == true
+        return endDate?.isTomorrow() == true
     }
 
-    fun formatEndDate(): String {
-
+    fun formatEndDate(context: Context): String? {
+        return endDate?.let {
+            it.format(DateTimeFormatter.asTime(context, true))
+        }
     }
 }
