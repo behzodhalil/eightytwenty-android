@@ -2,7 +2,7 @@ package uz.behzod.eightytwenty.utils.extension
 
 import timber.log.Timber
 
-inline fun debug(t: Throwable? = null, message : () -> String) {
+inline fun debugger(t: Throwable? = null, message : () -> String) {
     return log {
         Timber.d(t,message())
     }
