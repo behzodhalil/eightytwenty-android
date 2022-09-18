@@ -23,6 +23,7 @@
     <string name="study_text">Учёба</string>
     <string name="thinking_text">Мышление</string>
 
+    <string name="text_btn_done">Done</string>
     <string name="per_day_count">%d /</string>
 
     <string name="text_abbreviation_mon">Пн</string>

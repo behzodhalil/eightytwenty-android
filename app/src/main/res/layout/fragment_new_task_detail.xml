@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/tv_new_task_title"
+        android:id="@+id/et_new_task_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -42,7 +42,7 @@
         android:background="@color/white"
         android:src="@drawable/ic_date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_new_task_title"
+        app:layout_constraintTop_toBottomOf="@id/et_new_task_title"
         tools:viewBindingIgnore="true" />
 
     <TextView
