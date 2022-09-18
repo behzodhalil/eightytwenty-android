@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 30,
-    "identityHash": "5d9d8622e1275cd770272b1d7695da00",
+    "version": 34,
+    "identityHash": "73e0a285af71f73929f0634b9e47228e",
     "entities": [
       {
         "tableName": "note_table",
@@ -262,7 +262,7 @@
       },
       {
         "tableName": "task_entity_table_name",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`task_title` TEXT NOT NULL, `task_end_date` TEXT, `task_frequency` TEXT NOT NULL, `task_timestamp` TEXT, `task_deadline` TEXT NOT NULL, `task_is_complete` INTEGER NOT NULL, `task_is_trashed` INTEGER NOT NULL, `task_catalog_uid` INTEGER NOT NULL, `task_uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, FOREIGN KEY(`task_catalog_uid`) REFERENCES `task_catalog_table_name`(`catalog_uid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`task_title` TEXT NOT NULL, `task_end_date` TEXT, `task_frequency` TEXT NOT NULL, `task_reminder` TEXT, `task_timestamp` TEXT, `task_deadline` TEXT NOT NULL, `task_is_complete` INTEGER NOT NULL, `task_is_trashed` INTEGER NOT NULL, `task_catalog_uid` INTEGER NOT NULL, `task_uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, FOREIGN KEY(`task_catalog_uid`) REFERENCES `task_catalog_table_name`(`catalog_uid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "title",
@@ -281,6 +281,12 @@
             "columnName": "task_frequency",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "reminderDateTime",
+            "columnName": "task_reminder",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "timestamp",
@@ -486,7 +492,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5d9d8622e1275cd770272b1d7695da00')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '73e0a285af71f73929f0634b9e47228e')"
     ]
   }
 }
