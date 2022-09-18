@@ -11,17 +11,17 @@ import uz.behzod.eightytwenty.data.local.entities.*
         HabitEntity::class, HabitRecommendEntity::class,
         TaskEntity::class, TaskCatalogEntity::class,
         ScheduleEntity::class],
-    version = 30,
+    version = 34,
     autoMigrations = [
         AutoMigration(
-            from = 29, to = 30, spec = SpecMigration::class
+            from = 33, to = 34, spec = SpecMigration::class
         )
     ],
     exportSchema = true
 )
+
 @TypeConverters(ZonedDateTimeConverter::class)
 abstract class EightyTwentyDatabase : RoomDatabase() {
-
     abstract fun getNoteDao(): NoteDao
     abstract fun getNoteCategoryDao(): NoteCategoryDao
     abstract fun getHabitDao(): HabitDao
@@ -30,6 +30,5 @@ abstract class EightyTwentyDatabase : RoomDatabase() {
     abstract fun getTaskCatalogDao(): TaskCatalogDao
     abstract fun getScheduleDao(): ScheduleDao
 }
-
 
 class SpecMigration : AutoMigrationSpec
