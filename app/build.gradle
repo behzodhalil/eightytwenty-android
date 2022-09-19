@@ -98,11 +98,15 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
-    testImplementation "com.google.truth:truth:1.1.3"
-    androidTestImplementation "junit:junit:4.13.2"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
-    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    testImplementation "com.google.truth:truth:1.1.3"
     androidTestImplementation "com.google.truth:truth:1.1.3"
+
+    androidTestImplementation "junit:junit:4.13.2"
+
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test:runner:1.4.0'
 
@@ -111,6 +115,7 @@ dependencies {
 
 
     debugImplementation 'com.guolindev.glance:glance:1.1.0'
+
     implementation 'com.nex3z:toggle-button-group:1.2.3'
     implementation 'nl.bryanderidder:themed-toggle-button-group:1.4.1'
     //Calendar

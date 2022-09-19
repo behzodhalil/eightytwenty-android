@@ -23,6 +23,7 @@ import uz.behzod.eightytwenty.data.local.entities.ScheduleEntity
 import uz.behzod.eightytwenty.databinding.FragmentNewHabitBinding
 import uz.behzod.eightytwenty.domain.model.HabitDomainModel
 import uz.behzod.eightytwenty.domain.model.HabitRecommendDomainModel
+import uz.behzod.eightytwenty.utils.constants.*
 import uz.behzod.eightytwenty.utils.extension.Zero
 import uz.behzod.eightytwenty.utils.view.Colors
 import uz.behzod.eightytwenty.utils.view.viewBinding
@@ -167,13 +168,13 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
         binding.viewHolderSchedule.chipGroupDayOfWeek.forEach {
             if ((it as? Chip)?.isChecked == true) {
                 daysOfWeekModel += when (it.id) {
-                    R.id.chip_monday -> ScheduleEntity.BIT_VALUE_OF_MONDAY
-                    R.id.chip_tuesday -> ScheduleEntity.BIT_VALUE_OF_TUESDAY
-                    R.id.chip_wednesday -> ScheduleEntity.BIT_VALUE_OF_WEDNESDAY
-                    R.id.chip_thursday -> ScheduleEntity.BIT_VALUE_OF_THURSDAY
-                    R.id.chip_friday -> ScheduleEntity.BIT_VALUE_OF_FRIDAY
-                    R.id.chip_saturday -> ScheduleEntity.BIT_VALUE_OF_SATURDAY
-                    R.id.chip_sunday -> ScheduleEntity.BIT_VALUE_OF_SUNDAY
+                    R.id.chip_monday -> BIT_VALUE_OF_MONDAY
+                    R.id.chip_tuesday -> BIT_VALUE_OF_TUESDAY
+                    R.id.chip_wednesday -> BIT_VALUE_OF_WEDNESDAY
+                    R.id.chip_thursday -> BIT_VALUE_OF_THURSDAY
+                    R.id.chip_friday -> BIT_VALUE_OF_FRIDAY
+                    R.id.chip_saturday -> BIT_VALUE_OF_SATURDAY
+                    R.id.chip_sunday -> BIT_VALUE_OF_SUNDAY
                     else -> 0
                 }
             }
@@ -182,9 +183,9 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
         binding.viewHolderSchedule.chipGroupFrequencyType.forEach {
             if ((it as? Chip)?.isChecked == true) {
                 frequencyTypeModel += when (it.id) {
-                    R.id.chip_daily -> ScheduleEntity.BIT_VALUE_DAILY
-                    R.id.chip_weekly -> ScheduleEntity.BIT_VALUE_WEEKLY
-                    R.id.chip_random -> ScheduleEntity.BIT_VALUE_RANDOM
+                    R.id.chip_daily -> BIT_VALUE_DAILY
+                    R.id.chip_weekly -> BIT_VALUE_WEEKLY
+                    R.id.chip_random -> BIT_VALUE_RANDOM
                     else -> 0
                 }
             }

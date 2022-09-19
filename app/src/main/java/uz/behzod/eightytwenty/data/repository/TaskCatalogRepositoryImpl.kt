@@ -32,10 +32,10 @@ class TaskCatalogRepositoryImpl @Inject constructor(
     }
 
     override fun fetchTaskCatalogs(): Flow<List<TaskCatalogEntity>> {
-        TODO("Not yet implemented")
+        return sourceManager.fetchTaskCatalogs()
     }
 
     override fun fetchTaskAndCatalogs(): Flow<List<CatalogAndTasks>> {
-        TODO("Not yet implemented")
+        return sourceManager.fetchTaskAndCatalogs()
     }
 }

@@ -27,9 +27,9 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_medium"
+        android:hint="Добавить задачу"
         android:textColor="@color/black"
         android:textSize="22sp"
-        android:hint="Добавить задачу"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_save_new_task" />
 
@@ -168,90 +168,45 @@
         app:layout_constraintStart_toEndOf="@id/tv_repeat"
         app:layout_constraintTop_toTopOf="@id/tv_repeat" />
 
-
-    <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
-        android:id="@+id/select_frequency_type_toggle_group"
-        android:layout_width="0dp"
+    <include
+        android:id="@+id/view_holder_schedule"
+        layout="@layout/view_holder_task_schedule"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_repeat" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_cancel_schedule"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        app:justifyContent="center"
+        android:backgroundTint="@color/solitude"
+        android:elevation="8dp"
+        android:text="Отменить"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_apply_schedule"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_repeat">
+        app:layout_constraintTop_toBottomOf="@id/view_holder_schedule" />
 
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="По дням"
-            android:textAllCaps="false" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="По неделям"
-            android:textAllCaps="false" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Произвольно"
-            android:textAllCaps="false" />
-    </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
-
-    <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
-        android:id="@+id/select_day_toggle_group"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_apply_schedule"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="12dp"
-        app:flexWrap="nowrap"
+        android:layout_height="50dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="@color/solitude"
+        android:elevation="8dp"
+        android:text="Применить"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
         android:visibility="gone"
-        app:justifyContent="space_between"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/select_frequency_type_toggle_group"
-        app:toggle_selectableAmount="7">
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Пн" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Вт" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Ср" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Чт" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Пт" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Сб" />
-
-        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:text="Вс" />
-
-    </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+        app:layout_constraintStart_toEndOf="@id/btn_cancel_schedule"
+        app:layout_constraintTop_toBottomOf="@id/view_holder_schedule" />
 
     <ImageView
         android:id="@+id/iv_folder"
@@ -262,7 +217,7 @@
         android:background="@color/white"
         android:src="@drawable/ic_folder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/select_day_toggle_group"
+        app:layout_constraintTop_toBottomOf="@id/btn_apply_schedule"
         tools:viewBindingIgnore="true" />
 
     <TextView
@@ -303,15 +258,14 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginTop="24dp"
-        app:cardCornerRadius="16dp"
-        android:backgroundTint="@null"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/bg_btn_default"
-        app:layout_constraintTop_toBottomOf="@id/iv_folder"
-        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@null"
+        app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_folder">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -321,8 +275,8 @@
                 android:id="@+id/iv_note"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
-                android:layout_marginTop="6dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
                 android:background="@color/white"
                 android:src="@drawable/ic_note"
                 app:layout_constraintStart_toStartOf="parent"
@@ -349,15 +303,14 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginTop="10dp"
-        app:cardCornerRadius="16dp"
-        android:backgroundTint="@null"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/bg_btn_default"
-        app:layout_constraintTop_toBottomOf="@id/cv_note"
-        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@null"
+        app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_note">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -367,8 +320,8 @@
                 android:id="@+id/iv_delete_task"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
-                android:layout_marginTop="6dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
                 android:background="@color/white"
                 android:src="@drawable/ic_delete_default"
                 app:layout_constraintStart_toStartOf="parent"
@@ -394,27 +347,26 @@
         android:id="@+id/tv_create_timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Создано:"
         android:layout_marginStart="120dp"
         android:layout_marginBottom="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:fontFamily="@font/roboto"
+        android:text="Создано:"
         android:textSize="16sp"
-        tools:viewBindingIgnore="true"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:viewBindingIgnore="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="2022.14.09"
         android:layout_marginStart="8dp"
+        android:fontFamily="@font/roboto"
 
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_create_timestamp"
         app:layout_constraintStart_toEndOf="@id/tv_create_timestamp"
         app:layout_constraintTop_toTopOf="@id/tv_create_timestamp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_create_timestamp"
-        android:fontFamily="@font/roboto"
-        android:textSize="14sp"
+        tools:text="2022.14.09"
 
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

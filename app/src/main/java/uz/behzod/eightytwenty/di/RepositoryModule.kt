@@ -42,4 +42,16 @@ interface RepositoryModule {
     fun providesScheduleRepository(
         repository: ScheduleRepositoryImpl
     ): ScheduleRepository
+
+    @Binds
+    @Singleton
+    fun providesTaskCatalogRepository(
+        repository: TaskCatalogRepositoryImpl
+    ): TaskCatalogRepository
+
+    @Binds
+    @Singleton
+    fun providesTaskRepository(
+        repository: TaskRepositoryImpl
+    ): TaskRepository
 }
