@@ -1,5 +1,6 @@
-package uz.behzod.eightytwenty.features.new_task_detail
+package uz.behzod.eightytwenty.features.new_task
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +15,13 @@ class NewTaskViewModel @Inject constructor(): ViewModel() {
 
     private var _task: MutableStateFlow<TaskEntity> = MutableStateFlow(value = TaskEntity())
     val task: StateFlow<TaskEntity> = _task.asStateFlow()
+
+    private var _endDate: MutableLiveData<Int> = MutableLiveData(0)
+    val endDate = _endDate
+
+    fun setEndDate(item: Int) {
+        _endDate.value = item
+    }
 
     fun setTask(task: TaskEntity?) {
         task?.let {
