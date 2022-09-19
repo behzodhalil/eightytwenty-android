@@ -8,6 +8,7 @@ import uz.behzod.eightytwenty.domain.interactor.habit.*
 import uz.behzod.eightytwenty.domain.interactor.habit_recommend.*
 import uz.behzod.eightytwenty.domain.interactor.note.*
 import uz.behzod.eightytwenty.domain.interactor.note_category.*
+import uz.behzod.eightytwenty.domain.interactor.task_catalog.*
 import javax.inject.Singleton
 
 @Module
@@ -143,4 +144,28 @@ interface InteractorModule {
     fun providesFetchHabitRecommendByUid(
         interactor: FetchHabitRecommendByUidImpl
     ): FetchHabitRecommendByUid
+
+    /**
+     * This part uses the declared interactors
+     * associated with the task catalog.
+     */
+
+    @Binds
+    @Singleton
+    fun providesInsertTaskCatalog(
+        interactor: InsertTaskCatalogImpl
+    ): InsertTaskCatalog
+
+
+    @Binds
+    @Singleton
+    fun providesUpdateTaskCatalog(
+        interactor: UpdateTaskCatalogImpl
+    ): UpdateTaskCatalog
+
+    @Binds
+    @Singleton
+    fun providesDeleteTaskCatalog(
+        interactor: DeleteTaskCatalogImpl
+    ): DeleteTaskCatalog
 }
