@@ -47,4 +47,45 @@
     <string name="text_frequency_weekly">По неделям</string>
     <string name="text_frequency_random">Произвольно</string>
 
+    <!-- This part includes texts which is related to category note screen  -->
+
+    <string name="text_category_note_new_list">новая списка</string>
+
+    <!-- This part includes texts which is related to habit screen -->
+
+    <string name="text_habit_my_habit">Мои привычки</string>
+
+    <!-- This part includes texts which is related to new habit screen -->
+
+    <string name="text_new_habit_title">Новая привычка</string>
+    <string name="text_new_habit_habit_name">Название привычки</string>
+    <string name="text_new_habit_habit_desc">Мотивация и описания</string>
+    <string name="text_new_habit_habit_per_day_count">Количество за выполнения</string>
+    <string name="text_new_habit_habit_goal_type">Тип выполнения</string>
+    <string name="text_new_habit_habit_select_color">Выберите цвет</string>
+    <string name="text_new_habit_habit_frequency_doing">Частота выполнения</string>
+    <string name="text_new_habit_habit_end_goal_count">Конечная цель для выполнения</string>
+
+    <!-- This part includes texts which is related to new note screen -->
+
+    <string name="text_new_note_title">Заголовок</string>
+    <string name="text_new_note_desc">Заметка</string>
+
+    <!-- This part includes texts which is related to new note screen -->
+
+    <string name="text_new_task_folder">Список</string>
+    <!-- This part includes texts which is related to common -->
+
+    <string name="text_iv_back">Back</string>
+    <string name="text_iv_search">Search</string>
+    <string name="text_iv_undo">Undo</string>
+    <string name="text_iv_image">Image</string>
+    <string name="text_iv_redo">Redo</string>
+    <string name="text_iv_move_to_inbox">Move to inbox</string>
+    <string name="text_iv_delete">Delete</string>
+    <string name="text_iv_folder">Folder</string>
+    <string name="text_btn_next">Продолжить</string>
+    <string name="text_btn_save">Сохранить</string>
+    <string name="text_btn_apply">Применить</string>
+
 </resources>

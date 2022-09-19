@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white">
 
     <com.google.android.material.button.MaterialButton
@@ -13,7 +14,7 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/sun_glow"
         android:fontFamily="@font/roboto_bold"
-        android:text="Сохранить"
+        android:text="@string/text_btn_save"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:cornerRadius="16dp"
@@ -28,6 +29,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/bg_oval_undo_redo"
         android:padding="6dp"
+        android:contentDescription="@string/text_iv_undo"
         android:src="@drawable/ic_undo"
         app:layout_constraintStart_toEndOf="@id/btn_save_or_cancel"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,6 +42,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/bg_oval_undo_redo"
         android:padding="6dp"
+        android:contentDescription="@string/text_iv_redo"
         android:src="@drawable/ic_redo"
         app:layout_constraintStart_toEndOf="@id/iv_undo"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,8 +54,10 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="#FFFFFF"
+        android:inputType="text"
         android:fontFamily="@font/roboto"
-        android:hint="Заголовок"
+        android:hint="@string/text_new_note_title"
+        android:autofillHints=""
         android:textSize="25sp"
         app:layout_constraintTop_toBottomOf="@id/btn_save_or_cancel" />
 
@@ -63,7 +68,7 @@
         android:layout_marginStart="22dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/roboto"
-        android:text="Создано: 20/12/2022 22:00"
+        tools:text="Создано: 20/12/2022 22:00"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/et_title" />
 
@@ -76,7 +81,9 @@
         android:background="#FFFFFF"
         android:fontFamily="@font/roboto"
         android:gravity="top"
-        android:hint="Заметка"
+        android:autofillHints=""
+        android:inputType="text"
+        android:hint="@string/text_new_note_desc"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
@@ -96,6 +103,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
+            android:contentDescription="@string/text_iv_image"
             android:src="@drawable/ic_image" />
 
         <ImageView
@@ -104,6 +112,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
+            android:contentDescription="@string/text_iv_move_to_inbox"
             android:src="@drawable/ic_move_to_inbox" />
 
         <ImageView
@@ -112,9 +121,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
+            android:contentDescription="@string/text_iv_delete"
             android:src="@drawable/ic_delete" />
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
