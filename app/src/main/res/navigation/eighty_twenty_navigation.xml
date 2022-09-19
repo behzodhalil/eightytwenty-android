@@ -136,6 +136,6 @@
     </fragment>
     <fragment
         android:id="@+id/newTaskFragment"
-        android:name="uz.behzod.eightytwenty.features.new_task_detail.NewTaskFragment"
+        android:name="uz.behzod.eightytwenty.features.new_task.NewTaskFragment"
         android:label="NewTaskFragment" />
 </navigation>
