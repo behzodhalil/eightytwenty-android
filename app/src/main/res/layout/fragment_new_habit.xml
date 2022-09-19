@@ -19,6 +19,7 @@
                 android:layout_height="26dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
+                android:contentDescription="@string/text_iv_back"
                 android:src="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +31,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto"
-                android:text="Новая привычка"
+                android:text="@string/text_new_habit_title"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -45,7 +46,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/roboto"
-                android:text="Название привычки"
+                android:text="@string/text_new_habit_habit_name"
                 android:textColor="@color/black_60"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -61,7 +62,10 @@
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_new_habit"
                 android:elevation="2dp"
+                android:autofillHints=""
+                android:inputType="textPersonName"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_habit_name" />
@@ -73,7 +77,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto"
-                android:text="Мотивация и описания"
+                android:text="@string/text_new_habit_habit_desc"
                 android:textColor="@color/black_60"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -90,6 +94,9 @@
                 android:background="@drawable/bg_new_habit"
                 android:elevation="2dp"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:autofillHints=""
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_description" />
@@ -101,7 +108,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto"
-                android:text="Количество за выполнения"
+                android:text="@string/text_new_habit_habit_per_day_count"
                 android:textColor="@color/black_60"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -117,6 +124,9 @@
                 android:background="@drawable/bg_new_habit"
                 android:elevation="2dp"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:inputType="numberDecimal"
+                android:autofillHints=""
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_per_day_count" />
 
@@ -126,7 +136,7 @@
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="24dp"
-                android:hint="Тип выполнения"
+                android:hint="@string/text_new_habit_habit_goal_type"
                 app:layout_constraintBottom_toBottomOf="@id/et_per_day_count"
                 app:layout_constraintStart_toEndOf="@id/et_per_day_count"
                 app:layout_constraintTop_toTopOf="@id/et_per_day_count">
@@ -140,6 +150,7 @@
                     android:inputType="none"
                     android:labelFor="@id/til_goal_type"
                     tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -149,7 +160,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto"
-                android:text="Конечная цель для выполнения"
+                android:text="@string/text_new_habit_habit_end_goal_count"
                 android:textColor="@color/black_60"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -165,6 +176,9 @@
                 android:background="@drawable/bg_new_habit"
                 android:elevation="2dp"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:autofillHints=""
+                android:inputType="numberDecimal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_end_goal_count" />
 
@@ -175,7 +189,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto"
-                android:text="Частота выполнения"
+                android:text="@string/text_new_habit_habit_frequency_doing"
                 android:textColor="@color/black_60"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -197,7 +211,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto"
-                android:text="Выберите цвет"
+                android:text="@string/text_new_habit_habit_select_color"
                 android:textColor="@color/black_60"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -211,30 +225,29 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="24dp"
-                android:clipToPadding="false"
                 android:background="@drawable/bg_habit_color"
+                android:clipToPadding="false"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_select_color"
                 tools:listitem="@layout/view_holder_color" />
 
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_save_habit"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="40dp"
                 android:backgroundTint="@color/sun_glow"
                 android:fontFamily="@font/roboto"
-                android:text="Продолжить"
+                android:text="@string/text_btn_next"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:cornerRadius="16dp"
-                android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_colors" />

@@ -23,13 +23,15 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/dialog_catalog.xml" value="0.4583333333333333" />
-        <entry key="app/src/main/res/layout/fragment_category_note.xml" value="0.4801587301587302" />
+        <entry key="app/src/main/res/layout/fragment_category_note.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_habit.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_habit_detail.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_new_habit.xml" value="0.5065359477124183" />
-        <entry key="app/src/main/res/layout/fragment_new_note.xml" value="0.4895833333333333" />
+        <entry key="app/src/main/res/layout/fragment_health_habit_recommend.xml" value="0.4895833333333333" />
+        <entry key="app/src/main/res/layout/fragment_new_habit.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_new_note.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_new_task_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_note.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_recommend_habit.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_task.xml" value="0.4895833333333333" />
@@ -38,6 +40,7 @@
         <entry key="app/src/main/res/layout/view_holder_color.xml" value="1.0" />
         <entry key="app/src/main/res/layout/view_holder_note.xml" value="0.5740740740740741" />
         <entry key="app/src/main/res/layout/view_holder_onboarding.xml" value="0.4895833333333333" />
+        <entry key="app/src/main/res/layout/view_holder_recommend_habit.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/view_holder_schedule.xml" value="0.1" />
         <entry key="app/src/main/res/layout/view_holder_task.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/view_holder_task_schedule.xml" value="0.1" />

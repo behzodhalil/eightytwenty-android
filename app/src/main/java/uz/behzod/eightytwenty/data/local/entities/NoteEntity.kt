@@ -28,7 +28,10 @@ data class NoteEntity(
     val isTrashed: Boolean = false,
 
     @ColumnInfo(name = Schema.CATEGORY_ID)
-    val categoryId: Long = Long.Zero
+    val categoryId: Long = Long.Zero,
+
+
+    val taskUid: Long = Long.Zero
 ) {
     private object Schema {
         const val TABLE_NAME = "note_table"
