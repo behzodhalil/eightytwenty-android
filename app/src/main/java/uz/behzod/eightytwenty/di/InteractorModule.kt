@@ -168,4 +168,28 @@ interface InteractorModule {
     fun providesDeleteTaskCatalog(
         interactor: DeleteTaskCatalogImpl
     ): DeleteTaskCatalog
+
+    @Binds
+    @Singleton
+    fun providesIncrementTaskCount(
+        interactor: IncrementTaskCountImpl
+    ): IncrementTaskCount
+
+    @Binds
+    @Singleton
+    fun providesDecrementTaskCount(
+        interactor: DecrementTaskCountImpl
+    ): DecrementTaskCountImpl
+
+    @Binds
+    @Singleton
+    fun providesFetchTaskCatalogs(
+        interactor: FetchTaskCatalogsImpl
+    ): FetchTaskCatalogs
+
+    @Binds
+    @Singleton
+    fun providesFetchTaskAndCatalogs(
+        interactor: FetchTaskAndCatalogsImpl
+    ): FetchTaskAndCatalogs
 }
