@@ -5,10 +5,11 @@ import androidx.annotation.StringRes
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 import uz.behzod.eightytwenty.R
+import uz.behzod.eightytwenty.utils.constants.*
 import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
+import uz.behzod.eightytwenty.utils.extension.debugger
 import java.time.DayOfWeek
-import java.util.*
 
 @Entity(
     tableName = "schedule_table",
@@ -167,17 +168,7 @@ data class ScheduleEntity(
     }
 
     companion object {
-        const val BIT_VALUE_OF_MONDAY = 1
-        const val BIT_VALUE_OF_TUESDAY = 2
-        const val BIT_VALUE_OF_WEDNESDAY = 4
-        const val BIT_VALUE_OF_THURSDAY = 8
-        const val BIT_VALUE_OF_FRIDAY = 16
-        const val BIT_VALUE_OF_SATURDAY = 32
-        const val BIT_VALUE_OF_SUNDAY = 64
 
-        const val BIT_VALUE_DAILY = 1
-        const val BIT_VALUE_WEEKLY = 2
-        const val BIT_VALUE_RANDOM = 4
 
         fun parseFrequencyType(type: Int): List<Int> {
             val types = mutableListOf<Int>()
