@@ -7,6 +7,7 @@ import uz.behzod.eightytwenty.data.local.entities.TaskCatalogEntity
 
 @Dao
 interface TaskCatalogDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTaskCatalog(taskCatalog: TaskCatalogEntity)
 
@@ -27,4 +28,7 @@ interface TaskCatalogDao {
 
     @Query("SELECT * FROM task_catalog_table_name ORDER BY catalog_name, catalog_uid <>1")
     fun fetchTaskAndCatalogs(): Flow<List<CatalogAndTasks>>
+
+    @Query("SELECT * FROM task_catalog_table_name WHERE catalog_name LIKE :catalog")
+    fun searchCatalog(catalog: String): Flow<List<TaskCatalogEntity>>
 }
