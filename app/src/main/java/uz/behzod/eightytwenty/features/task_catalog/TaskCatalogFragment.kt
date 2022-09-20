@@ -8,20 +8,24 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.data.local.entities.TaskCatalogEntity
 import uz.behzod.eightytwenty.databinding.FragmentCatalogTaskBinding
 import uz.behzod.eightytwenty.utils.extension.gone
 import uz.behzod.eightytwenty.utils.extension.hide
+import uz.behzod.eightytwenty.utils.extension.navController
 import uz.behzod.eightytwenty.utils.extension.show
 import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
-class TaskCatalogFragment : Fragment() {
+class TaskCatalogFragment : Fragment(R.layout.fragment_catalog_task) {
 
     private val binding by viewBinding(FragmentCatalogTaskBinding::bind)
     private val viewModel: TaskCatalogViewModel by viewModels()
+
     private lateinit var adapter: TaskCatalogAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,16 +33,38 @@ class TaskCatalogFragment : Fragment() {
 
         setupUI()
 
-        fetchCatalogs()
+
+
+        addNewCatalog()
+
+        onClickNewCatalog()
+        onNavigateToTask()
+        onNavigateToSearchTask()
+
     }
 
     private fun setupUI() {
         adapter = TaskCatalogAdapter()
         binding.rvTaskCatalogs.adapter = adapter
-        binding.rvTaskCatalogs.setHasFixedSize(true)
 
-        onClickNewCatalog()
-        addNewCatalog()
+        fetchCatalogs()
+    }
+
+    private fun onNavigateToTask() {
+        with(binding.ivBack) {
+            setOnClickListener {
+                val route = TaskCatalogFragmentDirections.actionTaskCatalogFragmentToTaskFragment()
+                navController.navigate(route)
+            }
+        }
+    }
+
+    private fun onNavigateToSearchTask() {
+        binding.ivSearch.setOnClickListener {
+            val route =
+                TaskCatalogFragmentDirections.actionTaskCatalogFragmentToSearchCatalogFragment()
+            navController.navigate(route)
+        }
     }
 
     private fun fetchCatalogs() = lifecycleScope.launch {
@@ -95,7 +121,7 @@ class TaskCatalogFragment : Fragment() {
     private fun insertNewCatalog() {
         viewModel.insertCatalog(
             TaskCatalogEntity(
-                name = binding.etNewCategory.toString()
+                name = binding.etNewCategory.text.toString().trim()
             )
         )
     }
