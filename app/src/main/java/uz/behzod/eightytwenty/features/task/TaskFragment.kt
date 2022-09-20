@@ -13,22 +13,36 @@ import uz.behzod.eightytwenty.utils.view.viewBinding
 class TaskFragment : Fragment(R.layout.fragment_task) {
 
     private val binding by viewBinding(FragmentTaskBinding::bind)
-
+    private lateinit var adapter: TaskAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupUi()
+
+        onNavigateToNewTask()
+        onNavigateToCatalog()
     }
 
     private fun setupUi() {
-        onNavigateNewTask()
+        adapter = TaskAdapter()
+        binding.rvTask.adapter = adapter
+        binding.rvTask.setHasFixedSize(true)
     }
 
-    private fun onNavigateNewTask() {
+    private fun onNavigateToNewTask() {
         binding.btnNewNote.setOnClickListener {
             val route = TaskFragmentDirections.actionTaskFragmentToNewTaskFragment()
             findNavController().navigate(route)
+        }
+    }
+
+    private fun onNavigateToCatalog() {
+        with(binding.ivFolder) {
+            setOnClickListener {
+                val route = TaskFragmentDirections.actionTaskFragmentToTaskCatalogFragment()
+                findNavController().navigate(route)
+            }
         }
     }
 
