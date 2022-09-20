@@ -12,4 +12,5 @@ interface TaskCatalogRepository {
     suspend fun decrementTaskCount(catalogUid: Long)
     fun fetchTaskCatalogs(): Flow<List<TaskCatalogEntity>>
     fun fetchTaskAndCatalogs(): Flow<List<CatalogAndTasks>>
+    fun searchCatalog(catalogName: String): Flow<List<TaskCatalogEntity>>
 }
