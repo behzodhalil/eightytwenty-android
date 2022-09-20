@@ -11,7 +11,8 @@ import java.time.ZonedDateTime
     foreignKeys = [ForeignKey(
         entity = TaskEntity::class,
         parentColumns = ["task_uid"],
-        childColumns = ["note_task_uid"]
+        childColumns = ["note_task_uid"],
+        onDelete = ForeignKey.CASCADE
     )],
     indices = [Index(value = ["note_task_uid"], unique = true)]
 )
@@ -28,6 +29,7 @@ data class NoteEntity(
 
     @ColumnInfo(name = Schema.TIMESTAMP)
     val timestamp: ZonedDateTime = ZonedDateTime.now(),
+
     @ColumnInfo(name = Schema.IS_TRASHED)
     val isTrashed: Boolean = false,
 
@@ -35,7 +37,7 @@ data class NoteEntity(
     val categoryId: Long = Long.Zero,
 
     @ColumnInfo(name = Schema.TASK_UID)
-    val taskUid: Long = Long.Zero
+    val taskUid: Long? = null
 ) {
     private object Schema {
         const val TABLE_NAME = "note_table"
