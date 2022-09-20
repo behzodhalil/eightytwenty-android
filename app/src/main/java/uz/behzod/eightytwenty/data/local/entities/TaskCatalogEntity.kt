@@ -5,8 +5,7 @@ import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
 
 @Entity(
-    tableName = "task_catalog_table_name",
-    indices = [Index(value =[ "catalog_task_uid"], unique = true)]
+    tableName = "task_catalog_table_name"
 )
 data class TaskCatalogEntity(
     @ColumnInfo(name = NAME)
