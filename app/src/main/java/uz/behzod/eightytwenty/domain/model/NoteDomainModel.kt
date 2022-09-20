@@ -14,5 +14,5 @@ data class NoteDomainModel(
     var timestamp: ZonedDateTime = ZonedDateTime.now(),
     val isTrashed: Boolean = false,
     val categoryId: Long = Long.Zero,
-    val taskUid: Long = Long.Zero
+    val taskUid: Long? = null
 ) : Parcelable
