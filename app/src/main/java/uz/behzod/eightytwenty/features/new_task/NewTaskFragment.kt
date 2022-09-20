@@ -182,6 +182,14 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
 
     }
 
+    private fun onNavigateCatalog() {
+        with(binding.btnSelectFolder) {
+            setOnClickListener {
+                val dialog = CatalogDialog()
+                transaction(dialog)
+            }
+        }
+    }
     private fun formatDayOfWeek(): String {
         val lists = StringFormatter.parseDayOfWeek(daysOfWeekModel)
         return StringFormatter.asDayOfWeek(requireContext(), true, lists)
