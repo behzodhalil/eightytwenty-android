@@ -133,9 +133,31 @@
         <action
             android:id="@+id/action_taskFragment_to_newTaskFragment"
             app:destination="@id/newTaskFragment" />
+        <action
+            android:id="@+id/action_taskFragment_to_taskCatalogFragment"
+            app:destination="@id/taskCatalogFragment" />
     </fragment>
     <fragment
         android:id="@+id/newTaskFragment"
         android:name="uz.behzod.eightytwenty.features.new_task.NewTaskFragment"
         android:label="NewTaskFragment" />
+    <fragment
+        android:id="@+id/taskCatalogFragment"
+        android:name="uz.behzod.eightytwenty.features.task_catalog.TaskCatalogFragment"
+        android:label="TaskCatalogFragment" >
+        <action
+            android:id="@+id/action_taskCatalogFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
+        <action
+            android:id="@+id/action_taskCatalogFragment_to_searchCatalogFragment"
+            app:destination="@id/searchCatalogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchCatalogFragment"
+        android:name="uz.behzod.eightytwenty.features.search_catalog.SearchCatalogFragment"
+        android:label="SearchCatalogFragment" >
+        <action
+            android:id="@+id/action_searchCatalogFragment_to_taskCatalogFragment"
+            app:destination="@id/taskCatalogFragment" />
+    </fragment>
 </navigation>
