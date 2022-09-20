@@ -8,31 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.behzod.eightytwenty.databinding.ViewHolderNoteBinding
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 
-class SearchNotesAdapter : ListAdapter<NoteDomainModel, SearchNotesAdapter.SearchNotesViewHolder>(
-    COMPARATOR
-) {
+class SearchNotesAdapter :
+    ListAdapter<NoteDomainModel, SearchNotesAdapter.SearchNotesViewHolder>(SearchNotesDiffUtil) {
 
     inner class SearchNotesViewHolder(
         val binding: ViewHolderNoteBinding
     ) : RecyclerView.ViewHolder(binding.root)
 
-    companion object {
-        private val COMPARATOR = object : DiffUtil.ItemCallback<NoteDomainModel>() {
-            override fun areItemsTheSame(
-                oldItem: NoteDomainModel,
-                newItem: NoteDomainModel
-            ): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-            override fun areContentsTheSame(
-                oldItem: NoteDomainModel,
-                newItem: NoteDomainModel
-            ): Boolean {
-                return oldItem == newItem
-            }
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchNotesViewHolder {
         val binding =
