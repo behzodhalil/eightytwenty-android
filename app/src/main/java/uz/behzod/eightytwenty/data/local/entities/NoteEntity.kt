@@ -1,15 +1,19 @@
 package uz.behzod.eightytwenty.data.local.entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
 import java.time.ZonedDateTime
 
 @Entity(
-    tableName = "note_table"
+    tableName = "note_table",
+    foreignKeys = [ForeignKey(
+        entity = TaskEntity::class,
+        parentColumns = ["task_uid"],
+        childColumns = ["note_task_uid"]
+    )],
+    indices = [Index(value = ["note_task_uid"], unique = true)]
 )
 data class NoteEntity(
     @PrimaryKey(autoGenerate = true)
@@ -30,7 +34,7 @@ data class NoteEntity(
     @ColumnInfo(name = Schema.CATEGORY_ID)
     val categoryId: Long = Long.Zero,
 
-
+    @ColumnInfo(name = Schema.TASK_UID)
     val taskUid: Long = Long.Zero
 ) {
     private object Schema {
@@ -41,6 +45,7 @@ data class NoteEntity(
         const val TIMESTAMP = "note_timestamp"
         const val IS_TRASHED = "note_is_trashed"
         const val CATEGORY_ID = "note_category_id"
+        const val TASK_UID = "note_task_uid"
     }
 }
 
@@ -51,7 +56,8 @@ fun NoteEntity.asDomain(): NoteDomainModel {
         description = description,
         timestamp = timestamp,
         isTrashed = false,
-        categoryId = categoryId
+        categoryId = categoryId,
+        taskUid = taskUid
     )
 }
 
@@ -62,7 +68,8 @@ fun NoteDomainModel.asEntity(): NoteEntity {
         description = description,
         timestamp = timestamp,
         isTrashed = false,
-        categoryId = categoryId
+        categoryId = categoryId,
+        taskUid = taskUid
     )
 }
 
