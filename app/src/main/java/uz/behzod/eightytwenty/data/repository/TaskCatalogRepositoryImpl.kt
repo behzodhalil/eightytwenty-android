@@ -38,4 +38,8 @@ class TaskCatalogRepositoryImpl @Inject constructor(
     override fun fetchTaskAndCatalogs(): Flow<List<CatalogAndTasks>> {
         return sourceManager.fetchTaskAndCatalogs()
     }
+
+    override fun searchCatalog(catalogName: String): Flow<List<TaskCatalogEntity>> {
+        return sourceManager.searchCatalog(catalogName)
+    }
 }
