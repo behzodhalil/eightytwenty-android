@@ -6,8 +6,14 @@
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/dialog_catalog.xml" value="0.12960526315789472" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_catalog_task.xml" value="0.22401315789473683" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_category_note.xml" value="0.22467105263157894" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_habit.xml" value="0.22467105263157894" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_note.xml" value="0.22467105263157894" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_search_catalog.xml" value="0.22401315789473683" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_search_notes.xml" value="0.22467105263157894" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/fragment_task.xml" value="0.22467105263157894" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/view_holder_catalog.xml" value="0.22467105263157894" />
         <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/view_holder_category_trashed_note.xml" value="0.22467105263157894" />
+        <entry key="..\:/Users/Behzod/StudioProjects/eightytwenty-android/app/src/main/res/layout/view_holder_task.xml" value="0.22467105263157894" />
         <entry key="app/src/main/res/drawable/bg_btn_default.xml" value="0.2055" />
         <entry key="app/src/main/res/drawable/bg_habit_color.xml" value="0.155" />
         <entry key="app/src/main/res/drawable/bg_habit_detail.xml" value="0.205" />
