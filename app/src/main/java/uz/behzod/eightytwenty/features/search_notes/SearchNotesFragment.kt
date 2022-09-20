@@ -17,19 +17,19 @@ import uz.behzod.eightytwenty.utils.view.viewBinding
 class SearchNotesFragment : Fragment(R.layout.fragment_search_notes) {
 
     private val binding by viewBinding(FragmentSearchNotesBinding::bind)
-
     private val viewModel: SearchNotesViewModel by viewModels()
 
     private lateinit var adapter: SearchNotesAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecyclerView()
+        setupUi()
+
         search()
     }
 
 
-    private fun initRecyclerView() {
+    private fun setupUi() {
         adapter = SearchNotesAdapter()
         binding.rvNote.adapter = adapter
     }
