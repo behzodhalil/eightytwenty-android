@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/all_task_catalogs"
+        android:id="@+id/all_notes_category"
         layout="@layout/view_holder_category_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,20 +48,20 @@
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_note_categories" />
+        app:layout_constraintTop_toBottomOf="@id/rv_task_catalogs" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_note_categories"
+        android:id="@+id/rv_task_catalogs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/et_new_category"
         tools:itemCount="3"
-        tools:listitem="@layout/view_holder_catalog" />
+        tools:listitem="@layout/view_holder_category_note" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_new_category_note"
+        android:id="@+id/btn_new_category_task"
         android:layout_width="70dp"
         android:layout_height="60dp"
         android:layout_marginBottom="20dp"
@@ -76,7 +76,7 @@
         tools:ignore="DuplicateClickableBoundsCheck" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_new_sub_category"
+        android:id="@+id/btn_new_sub_task"
         android:layout_width="70dp"
         android:layout_height="60dp"
         android:layout_marginEnd="10dp"
@@ -87,9 +87,9 @@
         app:cornerRadius="360dp"
         app:icon="@drawable/ic_folder"
         app:iconGravity="top"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_new_category_note"
-        app:layout_constraintEnd_toStartOf="@+id/btn_new_category_note"
-        app:layout_constraintTop_toTopOf="@+id/btn_new_category_note"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_new_category_task"
+        app:layout_constraintEnd_toStartOf="@+id/btn_new_category_task"
+        app:layout_constraintTop_toTopOf="@+id/btn_new_category_task"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.button.MaterialButton
@@ -104,9 +104,9 @@
         app:cornerRadius="360dp"
         app:icon="@drawable/ic_folder"
         app:iconGravity="top"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_new_category_note"
-        app:layout_constraintStart_toEndOf="@+id/btn_new_category_note"
-        app:layout_constraintTop_toTopOf="@+id/btn_new_category_note"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_new_category_task"
+        app:layout_constraintStart_toEndOf="@+id/btn_new_category_task"
+        app:layout_constraintTop_toTopOf="@+id/btn_new_category_task"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.button.MaterialButton
@@ -132,10 +132,10 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/text_category_note_new_list"
-        android:autofillHints=""
-        android:inputType="text"
         android:visibility="gone"
+        android:inputType="text"
+        android:autofillHints=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/all_task_catalogs" />
+        app:layout_constraintTop_toBottomOf="@id/all_notes_category" />
 </androidx.constraintlayout.widget.ConstraintLayout>
