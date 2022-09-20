@@ -173,6 +173,10 @@ class LocalSourceManagerImpl @Inject constructor(
         return taskCatalogDao.fetchTaskCatalogs()
     }
 
+    override fun searchCatalog(catalogName: String): Flow<List<TaskCatalogEntity>> {
+        return taskCatalogDao.searchCatalog(catalogName)
+    }
+
     override fun fetchTaskAndCatalogs(): Flow<List<CatalogAndTasks>> {
         return taskCatalogDao.fetchTaskAndCatalogs()
     }
