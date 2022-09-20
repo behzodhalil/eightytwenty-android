@@ -192,4 +192,10 @@ interface InteractorModule {
     fun providesFetchTaskAndCatalogs(
         interactor: FetchTaskAndCatalogsImpl
     ): FetchTaskAndCatalogs
+
+    @Binds
+    @Singleton
+    fun providesSearchTaskCatalog(
+        interactor: SearchTaskCatalogImpl
+    ): SearchTaskCatalog
 }
