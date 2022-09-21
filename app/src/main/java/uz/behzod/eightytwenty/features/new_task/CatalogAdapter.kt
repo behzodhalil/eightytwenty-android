@@ -8,7 +8,7 @@ import uz.behzod.eightytwenty.data.local.entities.TaskCatalogEntity
 import uz.behzod.eightytwenty.databinding.DialogCatalogBinding
 import uz.behzod.eightytwenty.databinding.ViewHolderCatalogBinding
 
-class CatalogAdapter :
+class CatalogAdapter(private val onClickListener: (TaskCatalogEntity) -> Unit) :
     ListAdapter<TaskCatalogEntity, CatalogAdapter.CatalogViewHolder>(CatalogDiffUtil) {
 
     inner class CatalogViewHolder(val binding: ViewHolderCatalogBinding) :
@@ -23,9 +23,12 @@ class CatalogAdapter :
 
     override fun onBindViewHolder(holder: CatalogViewHolder, position: Int) {
         holder.apply {
-            currentList[position].let {
+            currentList[position].let { data ->
                 binding.apply {
-                    tvCategoryName.text = it.name
+                    tvCategoryName.text = data.name
+                    root.setOnClickListener {
+                        onClickListener(data)
+                    }
                 }
             }
         }
