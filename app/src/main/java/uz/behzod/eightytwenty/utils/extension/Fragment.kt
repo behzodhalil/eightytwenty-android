@@ -15,6 +15,9 @@ fun Fragment.transaction(fragment: DialogFragment) {
     this
         .childFragmentManager
         .beginTransaction()
-        .add(fragment,"")
+        .add(fragment, "")
         .commitAllowingStateLoss()
 }
+
+val Fragment.supportFragmentManager
+    get() = requireActivity().supportFragmentManager
