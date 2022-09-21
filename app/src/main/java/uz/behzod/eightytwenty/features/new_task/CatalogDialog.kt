@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -25,7 +26,7 @@ class CatalogDialog : BottomSheetDialogFragment() {
     private val binding: DialogCatalogBinding get() = _binding!!
     private val viewModel: CatalogViewModel by viewModels()
     private lateinit var adapter: CatalogAdapter
-
+    private lateinit var catalogDialogListener: CatalogDialogListener
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,8 +60,21 @@ class CatalogDialog : BottomSheetDialogFragment() {
     }
 
     private fun setupUI() {
-        adapter = CatalogAdapter()
+        adapter = CatalogAdapter {
+            initUidAndName(it.name, it.uid)
+            catalogDialogListener.fetchNameAndUid()
+            dismiss()
+        }
         binding.rvCatalog.adapter = adapter
+    }
+
+    private fun initUidAndName(name: String, uid: Long) {
+        requireActivity().supportFragmentManager.setFragmentResult(
+            "TaskCatalogUid", bundleOf("TaskCatalogUid" to uid)
+        )
+        requireActivity().supportFragmentManager.setFragmentResult(
+            "TaskCatalogName", bundleOf("TaskCatalogName" to name)
+        )
     }
 
     private fun setupHeight(v: View) {
@@ -91,5 +105,11 @@ class CatalogDialog : BottomSheetDialogFragment() {
         }
     }
 
+    interface CatalogDialogListener {
+        fun fetchNameAndUid()
+    }
 
+    fun setFetchingNameAndUid(listener: CatalogDialogListener) {
+        catalogDialogListener = listener
+    }
 }
