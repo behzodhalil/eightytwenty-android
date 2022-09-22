@@ -43,6 +43,9 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
         initRepeat()
         initSchedule()
 
+        onNavigateCatalog()
+        onNavigateToNewNote()
+        displayNewNote()
     }
 
     private fun setupUi() {
@@ -168,7 +171,7 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
         binding.btnApplySchedule.setOnClickListener {
             val days = formatDayOfWeek()
 
-            if(days.isEmpty()) {
+            if (days.isEmpty()) {
                 binding.btnSelectRepeat.text = getString(R.string.text_don_t_repeat)
             } else {
                 binding.btnSelectRepeat.text = days
@@ -187,12 +190,77 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
             setOnClickListener {
                 val dialog = CatalogDialog()
                 transaction(dialog)
+                dialog.setFetchingNameAndUid(object : CatalogDialog.CatalogDialogListener {
+                    override fun fetchNameAndUid() {
+                        onUpdateCatalogNameAndUid()
+                    }
+                })
             }
         }
     }
+
     private fun formatDayOfWeek(): String {
         val lists = StringFormatter.parseDayOfWeek(daysOfWeekModel)
         return StringFormatter.asDayOfWeek(requireContext(), true, lists)
     }
 
+    private fun onUpdateCatalogNameAndUid() {
+        requireActivity().supportFragmentManager.setFragmentResultListener(
+            "TaskCatalogName",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            val result = bundle.getString("TaskCatalogName")
+            binding.btnSelectFolder.text = result.toString()
+        }
+        requireActivity().supportFragmentManager.setFragmentResultListener(
+            "TaskCatalogUid",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            val result = bundle.getString("TaskCatalogUid")
+
+        }
+    }
+
+    private fun onNavigateToNewNote() {
+        binding.cvNote.setOnClickListener {
+            val route = NewTaskFragmentDirections.actionNewTaskFragmentToNewNoteFragment()
+            navController.navigate(route)
+        }
+    }
+
+    private fun displayNewNote() {
+        binding.cvNote.setOnClickListener {
+            val screen = NewNoteDialog()
+            transaction(screen)
+            screen.setCloseListener(object : NewNoteDialog.NewNoteListener {
+                override fun close() {
+                    listenerNewNote()
+                }
+            })
+        }
+
+    }
+
+    private fun listenerNewNote() {
+        supportFragmentManager.setFragmentResultListener(
+            "NoteTitle",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            binding.viewHolderNote.tvTitle.text = bundle.getString("NoteTitle")
+        }
+        supportFragmentManager.setFragmentResultListener(
+            "NoteDescription",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            binding.viewHolderNote.tvDesc.text = bundle.getString("NoteDescription")
+        }
+        supportFragmentManager.setFragmentResultListener(
+            "NoteTimestamp",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            binding.viewHolderNote.tvDate.text = bundle.getString("NoteTimestamp")
+        }
+        binding.cvNote.gone()
+        binding.viewHolderNote.root.show()
+    }
 }
