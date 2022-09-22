@@ -15,7 +15,7 @@ import uz.behzod.eightytwenty.databinding.FragmentSearchCatalogBinding
 import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
-class SearchCatalogFragment: Fragment(R.layout.fragment_search_catalog) {
+class SearchCatalogFragment : Fragment(R.layout.fragment_search_catalog) {
 
     private val binding by viewBinding(FragmentSearchCatalogBinding::bind)
     private val viewModel: SearchCatalogViewModel by viewModels()
@@ -27,8 +27,6 @@ class SearchCatalogFragment: Fragment(R.layout.fragment_search_catalog) {
         setupUI()
 
         onQueryCatalogListener()
-
-
     }
 
     private fun setupUI() {
@@ -53,27 +51,26 @@ class SearchCatalogFragment: Fragment(R.layout.fragment_search_catalog) {
     }
 
     private fun searchCatalog(queryName: String) = lifecycleScope.launch {
-        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-            val query = "%$queryName%"
+        val query = "%$queryName%"
 
-            viewModel.searchCatalog(query)
-            viewModel.uiState.collect { state ->
-                when(state) {
-                    SearchCatalogUiState.Empty -> {
+        viewModel.searchCatalog(query)
+        viewModel.uiState.collect { state ->
+            when (state) {
+                SearchCatalogUiState.Empty -> {
 
-                    }
-                    is SearchCatalogUiState.Failure -> {
+                }
+                is SearchCatalogUiState.Failure -> {
 
-                    }
-                    SearchCatalogUiState.Loading -> {
+                }
+                SearchCatalogUiState.Loading -> {
 
-                    }
-                    is SearchCatalogUiState.Success -> {
-                        adapter.submitList(state.data)
-                    }
+                }
+                is SearchCatalogUiState.Success -> {
+                    adapter.submitList(state.data)
                 }
             }
         }
+
 
     }
 }
