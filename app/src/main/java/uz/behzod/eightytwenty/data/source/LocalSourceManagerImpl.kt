@@ -15,7 +15,7 @@ class LocalSourceManagerImpl @Inject constructor(
     private val scheduleDao: ScheduleDao
 ) : LocalSourceManager {
 
-    override suspend fun insertNote(note: NoteEntity) {
+    override suspend fun insertNote(note: NoteEntity): Long {
         return noteDao.insert(note)
     }
 
