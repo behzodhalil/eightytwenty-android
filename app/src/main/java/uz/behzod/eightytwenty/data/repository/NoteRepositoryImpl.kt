@@ -11,7 +11,7 @@ class NoteRepositoryImpl @Inject constructor(
 ) : NoteRepository {
 
 
-    override suspend fun insertNote(note: NoteEntity) {
+    override suspend fun insertNote(note: NoteEntity): Long {
         return sourceManager.insertNote(note)
     }
 
