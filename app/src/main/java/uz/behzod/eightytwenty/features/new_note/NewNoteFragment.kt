@@ -1,10 +1,9 @@
 package uz.behzod.eightytwenty.features.new_note
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,6 +12,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentNewNoteBinding
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
+import uz.behzod.eightytwenty.utils.extension.debugger
+import uz.behzod.eightytwenty.utils.extension.navController
+import uz.behzod.eightytwenty.utils.extension.supportFragmentManager
 import uz.behzod.eightytwenty.utils.view.viewBinding
 import java.time.ZonedDateTime
 
@@ -41,8 +43,20 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
     private fun insertNote() {
         binding.btnSaveOrCancel.setOnClickListener {
             viewModel.insertNote(createNote()).run {
-                Toast.makeText(requireContext(),"Note is saved",Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_newNoteFragment_to_noteFragment)
+                Toast.makeText(requireContext(), "Note is saved", Toast.LENGTH_SHORT).show()
+                if (navController.previousBackStackEntry?.destination?.id == R.id.noteFragment) {
+                    if (navController.currentDestination?.id == R.id.newNoteFragment) {
+                        findNavController().navigate(R.id.action_newNoteFragment_to_noteFragment)
+                    }
+
+                }
+                if (navController.previousBackStackEntry?.destination?.id == R.id.newTaskFragment) {
+                    if (navController.currentDestination?.id == R.id.newNoteFragment) {
+                        findNavController().navigate(R.id.action_newNoteFragment_to_newTaskFragment)
+                    }
+
+                }
+
             }
         }
 
@@ -63,4 +77,16 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
             categoryId = categoryId
         )
     }
+
+    private fun setNoteForTask() {
+        val title = binding.etTitle.text.toString()
+        val description = binding.etDesc.text.toString()
+
+        supportFragmentManager.setFragmentResult(
+            "NoteTitle",
+            bundleOf("NoteTitle" to title)
+        )
+    }
+
+
 }
