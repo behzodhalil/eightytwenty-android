@@ -18,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.databinding.DialogCatalogBinding
+import uz.behzod.eightytwenty.utils.extension.supportFragmentManager
 
 @AndroidEntryPoint
 class CatalogDialog : BottomSheetDialogFragment() {
@@ -27,6 +28,7 @@ class CatalogDialog : BottomSheetDialogFragment() {
     private val viewModel: CatalogViewModel by viewModels()
     private lateinit var adapter: CatalogAdapter
     private lateinit var catalogDialogListener: CatalogDialogListener
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -69,10 +71,10 @@ class CatalogDialog : BottomSheetDialogFragment() {
     }
 
     private fun initUidAndName(name: String, uid: Long) {
-        requireActivity().supportFragmentManager.setFragmentResult(
+        supportFragmentManager.setFragmentResult(
             "TaskCatalogUid", bundleOf("TaskCatalogUid" to uid)
         )
-        requireActivity().supportFragmentManager.setFragmentResult(
+        supportFragmentManager.setFragmentResult(
             "TaskCatalogName", bundleOf("TaskCatalogName" to name)
         )
     }
