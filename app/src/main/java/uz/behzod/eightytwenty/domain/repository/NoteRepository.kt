@@ -5,7 +5,7 @@ import uz.behzod.eightytwenty.data.local.entities.NoteEntity
 import uz.behzod.eightytwenty.utils.Resource
 
 interface NoteRepository {
-    suspend fun insertNote(note: NoteEntity)
+    suspend fun insertNote(note: NoteEntity): Long
     suspend fun updateNote(note: NoteEntity)
     suspend fun deleteNote(note: NoteEntity)
     fun fetchTrashedNotes(): Flow<List<NoteEntity>>
