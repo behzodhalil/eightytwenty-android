@@ -18,3 +18,7 @@ fun TextView.setTextColorFromResource(
 ) {
     this.setTextColor(ContextCompat.getColor(this.context,colorId))
 }
+
+fun TextView.asString(): String {
+    return this.text.toString()
+}
