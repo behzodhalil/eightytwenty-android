@@ -7,9 +7,7 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 
-fun TextView.asString(): String {
-    return this.text.toString()
-}
+
 
 val Context.layoutInflaterService: Any
     get() = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
