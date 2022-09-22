@@ -43,6 +43,9 @@
             android:name="category_id"
             app:argType="long"
             android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_newNoteFragment_to_newTaskFragment"
+            app:destination="@id/newTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryNoteFragment"
@@ -140,7 +143,11 @@
     <fragment
         android:id="@+id/newTaskFragment"
         android:name="uz.behzod.eightytwenty.features.new_task.NewTaskFragment"
-        android:label="NewTaskFragment" />
+        android:label="NewTaskFragment" >
+        <action
+            android:id="@+id/action_newTaskFragment_to_newNoteFragment"
+            app:destination="@id/newNoteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/taskCatalogFragment"
         android:name="uz.behzod.eightytwenty.features.task_catalog.TaskCatalogFragment"
