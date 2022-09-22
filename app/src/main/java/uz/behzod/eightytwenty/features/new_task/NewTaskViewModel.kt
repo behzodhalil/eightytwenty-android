@@ -11,7 +11,8 @@ import java.time.ZonedDateTime
 import javax.inject.Inject
 
 @HiltViewModel
-class NewTaskViewModel @Inject constructor(): ViewModel() {
+class NewTaskViewModel @Inject constructor() :
+    ViewModel() {
 
     private var _task: MutableStateFlow<TaskEntity> = MutableStateFlow(value = TaskEntity())
     val task: StateFlow<TaskEntity> = _task.asStateFlow()
