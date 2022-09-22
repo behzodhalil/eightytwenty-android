@@ -9,12 +9,14 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.domain.interactor.note.FetchNotes
 import uz.behzod.eightytwenty.domain.interactor.note.FetchNotesByCategoryId
+import uz.behzod.eightytwenty.domain.interactor.note_category.FetchAllCategoriesAndNotes
 import javax.inject.Inject
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(
     private val iFetchNotes: FetchNotes,
-    private val iFetchNotesByCategoryId: FetchNotesByCategoryId
+    private val iFetchNotesByCategoryId: FetchNotesByCategoryId,
+    privat val iFetchCategoryAndNotes: FetchAllCategoriesAndNotes
 ) : ViewModel() {
 
     private var _viewEffect = Channel<NoteViewEffect>(Channel.BUFFERED)
@@ -26,6 +28,10 @@ class NoteViewModel @Inject constructor(
     private var _uiStateById: MutableStateFlow<NoteUIState> = MutableStateFlow(NoteUIState.Loading)
     val uiStateById: Flow<NoteUIState> = _uiStateById.asStateFlow()
 
+    private var _uiStateCategoryAndNotes: MutableStateFlow<CategoryAndNotesUiState> =
+        MutableStateFlow(CategoryAndNotesUiState.Loading)
+    val uiStateCategoryAndNotes: Flow<CategoryAndNotesUiState> = _uiStateCategoryAndNotes.asStateFlow()
+
     init {
         viewModelScope.launch {
             iFetchNotes.invoke().collect { result ->
@@ -35,6 +41,12 @@ class NoteViewModel @Inject constructor(
                 } else {
                     _uiState.value = NoteUIState.Success(result)
                 }
+            }
+        }
+        iFetchCategoryAndNotes.invoke().onEach {
+            _uiStateCategoryAndNotes.value = CategoryAndNotesUiState.Loading
+            if (it.isNotEmpty()) {
+                _uiStateCategoryAndNotes.value = CategoryAndNotesUiState.Success(it)
             }
         }
     }
