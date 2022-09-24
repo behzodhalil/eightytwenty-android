@@ -1,6 +1,5 @@
 package uz.behzod.eightytwenty.features.note
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +15,7 @@ import javax.inject.Inject
 class NoteViewModel @Inject constructor(
     private val iFetchNotes: FetchNotes,
     private val iFetchNotesByCategoryId: FetchNotesByCategoryId,
-    privat val iFetchCategoryAndNotes: FetchAllCategoriesAndNotes
+    private val iFetchCategoryAndNotes: FetchAllCategoriesAndNotes
 ) : ViewModel() {
 
     private var _viewEffect = Channel<NoteViewEffect>(Channel.BUFFERED)
@@ -36,7 +35,7 @@ class NoteViewModel @Inject constructor(
         viewModelScope.launch {
             iFetchNotes.invoke().collect { result ->
                 _uiState.value = NoteUIState.Loading
-                if (result.isNullOrEmpty()) {
+                if (result.isEmpty()) {
                     _uiState.value = NoteUIState.Empty
                 } else {
                     _uiState.value = NoteUIState.Success(result)
@@ -47,6 +46,8 @@ class NoteViewModel @Inject constructor(
             _uiStateCategoryAndNotes.value = CategoryAndNotesUiState.Loading
             if (it.isNotEmpty()) {
                 _uiStateCategoryAndNotes.value = CategoryAndNotesUiState.Success(it)
+            } else {
+                _uiStateCategoryAndNotes.value = CategoryAndNotesUiState.Empty
             }
         }
     }
@@ -83,7 +84,7 @@ class NoteViewModel @Inject constructor(
         iFetchNotesByCategoryId.invoke(value)
             .onEach { result ->
                 _uiStateById.value = NoteUIState.Loading
-                if (result.isNullOrEmpty()) {
+                if (result.isEmpty()) {
                     _uiStateById.value = NoteUIState.Empty
                 } else {
                     _uiStateById.value = NoteUIState.Success(result)
