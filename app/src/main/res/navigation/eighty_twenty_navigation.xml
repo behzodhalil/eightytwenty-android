@@ -139,6 +139,9 @@
         <action
             android:id="@+id/action_taskFragment_to_taskCatalogFragment"
             app:destination="@id/taskCatalogFragment" />
+        <action
+            android:id="@+id/action_taskFragment_to_searchTasksFragment"
+            app:destination="@id/searchTasksFragment" />
     </fragment>
     <fragment
         android:id="@+id/newTaskFragment"
@@ -167,4 +170,8 @@
             android:id="@+id/action_searchCatalogFragment_to_taskCatalogFragment"
             app:destination="@id/taskCatalogFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/searchTasksFragment"
+        android:name="uz.behzod.eightytwenty.features.search_tasks.SearchTasksFragment"
+        android:label="SearchTasksFragment" />
 </navigation>
