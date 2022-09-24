@@ -56,7 +56,7 @@ data class ScheduleEntity(
         val stringBuilder = StringBuilder()
         val list = parseDaysOfWeek()
 
-        list.forEachIndexed { index, item ->
+        list.forEachIndexed { _, item ->
             val resourceId = if (isAbbreviated) {
                 getStringFromResourceForDayAbbreviated(item)
             } else {
