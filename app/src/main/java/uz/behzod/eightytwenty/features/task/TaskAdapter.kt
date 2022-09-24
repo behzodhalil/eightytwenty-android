@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.behzod.eightytwenty.data.local.entities.TaskEntity
 import uz.behzod.eightytwenty.databinding.ViewHolderTaskBinding
 
-class TaskAdapter: ListAdapter<TaskEntity,TaskAdapter.TaskViewHolder>(TaskDiffUtil) {
+class TaskAdapter : ListAdapter<TaskEntity, TaskAdapter.TaskViewHolder>(TaskDiffUtil) {
 
     inner class TaskViewHolder(
         val binding: ViewHolderTaskBinding
-    ): RecyclerView.ViewHolder(binding.root)
+    ) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val binding = ViewHolderTaskBinding.inflate(
-            LayoutInflater.from(parent.context),parent,
+            LayoutInflater.from(parent.context), parent,
             false
         )
 
