@@ -51,6 +51,7 @@ interface LocalSourceManager {
     fun fetchTaskByUid(uid: Long): Flow<List<TaskEntity>>
     fun fetchTasks(): Flow<List<TaskEntity>>
     fun fetchTaskAndSchedule(): Flow<List<TaskAndSchedule>>
+    fun searchTasks(taskName: String): Flow<List<TaskEntity>>
 
     // TaskCatalog: Dao functions
 
