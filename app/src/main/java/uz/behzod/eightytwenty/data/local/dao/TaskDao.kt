@@ -2,6 +2,7 @@ package uz.behzod.eightytwenty.data.local.dao
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
+import uz.behzod.eightytwenty.data.local.entities.TaskAndAttachment
 import uz.behzod.eightytwenty.data.local.entities.TaskAndSchedule
 import uz.behzod.eightytwenty.data.local.entities.TaskEntity
 
@@ -24,4 +25,10 @@ interface TaskDao {
 
     @Query("SELECT * FROM task_entity_table_name ORDER BY task_title")
     fun fetchTaskAndSchedule(): Flow<List<TaskAndSchedule>>
+
+    @Query("SELECT * FROM task_entity_table_name WHERE task_title LIKE :taskName")
+    fun searchTasks(taskName: String): Flow<List<TaskEntity>>
+
+    @Query("SELECT * FROM task_entity_table_name WHERE task_uid LIKE :taskUid")
+    fun fetchTaskAndAttachment(taskUid: Long): Flow<TaskAndAttachment>
 }
