@@ -1,6 +1,7 @@
 package uz.behzod.eightytwenty.domain.repository
 
 import kotlinx.coroutines.flow.Flow
+import uz.behzod.eightytwenty.data.local.entities.TaskAndSchedule
 import uz.behzod.eightytwenty.data.local.entities.TaskEntity
 
 interface TaskRepository {
@@ -9,4 +10,5 @@ interface TaskRepository {
     suspend fun deleteTask(task: TaskEntity)
     fun fetchTaskByUid(uid: Long): Flow<List<TaskEntity>>
     fun fetchTasks(): Flow<List<TaskEntity>>
+    fun searchTasks(taskName: String): Flow<List<TaskEntity>>
 }
