@@ -205,8 +205,7 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
         val schedule = ScheduleEntity(
             frequencyTypes = frequencyTypeModel,
             daysOfWeek = daysOfWeekModel,
-            dateOfCompletion = LocalDate.now().toString(),
-            habitId = habit.uid
+            dateOfCompletion = LocalDate.now().toString()
         )
 
         val schedules = arrayListOf<ScheduleEntity>()
