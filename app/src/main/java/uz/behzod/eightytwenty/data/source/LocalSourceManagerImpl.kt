@@ -204,4 +204,8 @@ class LocalSourceManagerImpl @Inject constructor(
     override fun fetchTaskAndSchedule(): Flow<List<TaskAndSchedule>> {
         return taskDao.fetchTaskAndSchedule()
     }
+
+    override fun searchTasks(taskName: String): Flow<List<TaskEntity>> {
+        return taskDao.searchTasks(taskName)
+    }
 }
