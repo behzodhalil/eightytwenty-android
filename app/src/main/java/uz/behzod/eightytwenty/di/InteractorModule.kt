@@ -8,8 +8,7 @@ import uz.behzod.eightytwenty.domain.interactor.habit.*
 import uz.behzod.eightytwenty.domain.interactor.habit_recommend.*
 import uz.behzod.eightytwenty.domain.interactor.note.*
 import uz.behzod.eightytwenty.domain.interactor.note_category.*
-import uz.behzod.eightytwenty.domain.interactor.task.InsertTask
-import uz.behzod.eightytwenty.domain.interactor.task.InsertTaskImpl
+import uz.behzod.eightytwenty.domain.interactor.task.*
 import uz.behzod.eightytwenty.domain.interactor.task_catalog.*
 import javax.inject.Singleton
 
@@ -206,4 +205,17 @@ interface InteractorModule {
     fun providesInsertTask(
         interactor: InsertTaskImpl
     ): InsertTask
+
+    @Binds
+    @Singleton
+    fun providesFetchTasks(
+        interactor: FetchTasksImpl
+    ): FetchTasks
+
+    @Binds
+    @Singleton
+    fun providesSearchTasks(
+        interactor: SearchTasksImpl
+    ): SearchTasks
+
 }
