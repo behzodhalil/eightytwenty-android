@@ -8,6 +8,7 @@ import uz.behzod.eightytwenty.data.local.entities.asEntity
 import uz.behzod.eightytwenty.domain.model.HabitDomainModel
 import uz.behzod.eightytwenty.domain.repository.HabitRepository
 import uz.behzod.eightytwenty.domain.repository.ScheduleRepository
+import uz.behzod.eightytwenty.utils.extension.debugger
 import uz.behzod.eightytwenty.utils.providers.IDispatcherProvider
 import javax.inject.Inject
 
@@ -24,7 +25,7 @@ class InsertHabitImpl @Inject constructor(
             scheduleEntity.forEach {
                 scheduleRepository.insertSchedule(it.copy(habitId = data))
             }
-            Log.d("InsertHabitImpl", "Inserted schedule is $scheduleEntity")
+            debugger { "Inserted schedule is $scheduleEntity" }
         }
     }
 }
