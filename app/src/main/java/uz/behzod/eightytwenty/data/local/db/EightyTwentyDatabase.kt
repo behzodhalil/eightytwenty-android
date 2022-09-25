@@ -10,7 +10,7 @@ import uz.behzod.eightytwenty.data.local.entities.*
         NoteEntity::class, NoteCategoryEntity::class,
         HabitEntity::class, HabitRecommendEntity::class,
         TaskEntity::class, TaskCatalogEntity::class,
-        ScheduleEntity::class],
+        ScheduleEntity::class, AttachmentEntity::class],
     version = 2,
     exportSchema = true
 )
@@ -24,6 +24,7 @@ abstract class EightyTwentyDatabase : RoomDatabase() {
     abstract fun getTaskDao(): TaskDao
     abstract fun getTaskCatalogDao(): TaskCatalogDao
     abstract fun getScheduleDao(): ScheduleDao
+    abstract fun getAttachmentDao(): AttachmentDao
 }
 
 class SpecMigration : AutoMigrationSpec
