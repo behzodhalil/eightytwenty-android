@@ -9,8 +9,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import uz.behzod.eightytwenty.data.local.entities.AttachmentEntity
 import uz.behzod.eightytwenty.data.local.entities.ScheduleEntity
 import uz.behzod.eightytwenty.data.local.entities.TaskEntity
+import uz.behzod.eightytwenty.domain.interactor.manager.ReadStorePermission
 import uz.behzod.eightytwenty.domain.interactor.task.InsertTask
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import uz.behzod.eightytwenty.utils.extension.debugger
@@ -19,7 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewTaskViewModel @Inject constructor(
-    private val iInsertTask: InsertTask
+    private val iInsertTask: InsertTask,
+    private val iReadStorePermission: ReadStorePermission
 ) : ViewModel() {
 
     private var _task: MutableStateFlow<TaskEntity> = MutableStateFlow(value = TaskEntity())
@@ -32,10 +35,15 @@ class NewTaskViewModel @Inject constructor(
         MutableStateFlow(NewTaskUiState.Loading)
     val uiState = _uiState.asStateFlow()
 
+    fun readStorePermission(): Boolean {
+        return iReadStorePermission.invoke()
+    }
+
     fun insertTaskWithScheduleAndNote(
         task: TaskEntity,
-        notes: List<NoteDomainModel>,
-        schedules: List<ScheduleEntity>
+        notes: List<NoteDomainModel> = emptyList(),
+        schedules: List<ScheduleEntity> = emptyList(),
+        attachments: List<AttachmentEntity> = emptyList()
     ) {
         viewModelScope.launch {
             _uiState.value = NewTaskUiState.Loading
@@ -43,10 +51,11 @@ class NewTaskViewModel @Inject constructor(
                 iInsertTask.invoke(
                     task = task,
                     noteList = notes,
-                    scheduleList = schedules
+                    scheduleList = schedules,
+                    attachmentList = attachments
                 )
                 _uiState.value = NewTaskUiState.Success(
-                    task,schedules,notes
+                    task, schedules, notes, attachments
                 )
             } catch (e: Exception) {
                 _uiState.value = NewTaskUiState.Empty
