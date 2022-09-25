@@ -341,4 +341,19 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
 
     }
 
+    private fun onNavigateToAttachment() {
+
+    }
+
+    private fun showAttachmentUi() {
+        val isReadPermission = viewModel.readStorePermission()
+
+        if (isReadPermission) {
+            MaterialDialog(requireContext()).show {
+                lifecycleOwner(viewLifecycleOwner)
+
+            }
+        }
+    }
+
 }
