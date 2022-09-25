@@ -1,5 +1,8 @@
 package uz.behzod.eightytwenty.data.source
 
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.*
 
@@ -71,4 +74,14 @@ interface LocalSourceManager {
     suspend fun deleteByUid(taskUid: Long)
     fun fetchSchedules(): Flow<List<ScheduleEntity>>
     fun fetchSchedulesByUid(uid: Long): Flow<ScheduleEntity>
+
+    // Attachment: Dao functions
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAttachment(attachment: AttachmentEntity)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateAttachment(attachment: AttachmentEntity)
+    suspend fun deleteAttachment(attachment: AttachmentEntity)
+    fun fetchAttachmentByUid(attachmentUid: Long)
+    fun fetchAttachments(): Flow<List<AttachmentEntity>>
 }
