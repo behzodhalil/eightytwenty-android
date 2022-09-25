@@ -54,4 +54,10 @@ interface RepositoryModule {
     fun providesTaskRepository(
         repository: TaskRepositoryImpl
     ): TaskRepository
+
+    @Binds
+    @Singleton
+    fun providesAttachmentRepository(
+        repository: AttachmentRepositoryImpl
+    ): AttachmentRepository
 }
