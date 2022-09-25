@@ -62,7 +62,8 @@ object DatabaseModule {
         habitRecommendDao: HabitRecommendDao,
         taskDao: TaskDao,
         taskCatalogDao: TaskCatalogDao,
-        scheduleDao: ScheduleDao
+        scheduleDao: ScheduleDao,
+        attachmentDao: AttachmentDao
     ): LocalSourceManager {
         return LocalSourceManagerImpl(
             noteCategoryDao = noteCategoryDao,
@@ -71,7 +72,8 @@ object DatabaseModule {
             habitRecommendDao = habitRecommendDao,
             taskDao = taskDao,
             taskCatalogDao = taskCatalogDao,
-            scheduleDao = scheduleDao
+            scheduleDao = scheduleDao,
+            attachmentDao = attachmentDao
         )
     }
 
@@ -97,6 +99,14 @@ object DatabaseModule {
         database: EightyTwentyDatabase
     ): ScheduleDao {
         return database.getScheduleDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providesAttachmentDao(
+        database: EightyTwentyDatabase
+    ): AttachmentDao {
+        return database.getAttachmentDao()
     }
 
 }
