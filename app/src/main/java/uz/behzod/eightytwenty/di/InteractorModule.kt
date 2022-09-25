@@ -6,6 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import uz.behzod.eightytwenty.domain.interactor.habit.*
 import uz.behzod.eightytwenty.domain.interactor.habit_recommend.*
+import uz.behzod.eightytwenty.domain.interactor.manager.ReadStorePermission
+import uz.behzod.eightytwenty.domain.interactor.manager.ReadStorePermissionImpl
 import uz.behzod.eightytwenty.domain.interactor.note.*
 import uz.behzod.eightytwenty.domain.interactor.note_category.*
 import uz.behzod.eightytwenty.domain.interactor.task.*
@@ -218,4 +220,9 @@ interface InteractorModule {
         interactor: SearchTasksImpl
     ): SearchTasks
 
+    @Binds
+    @Singleton
+    fun providesReadStorePermission(
+        interactor: ReadStorePermissionImpl
+    ): ReadStorePermission
 }
