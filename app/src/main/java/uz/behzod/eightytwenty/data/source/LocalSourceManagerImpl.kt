@@ -12,7 +12,8 @@ class LocalSourceManagerImpl @Inject constructor(
     private val habitRecommendDao: HabitRecommendDao,
     private val taskDao: TaskDao,
     private val taskCatalogDao: TaskCatalogDao,
-    private val scheduleDao: ScheduleDao
+    private val scheduleDao: ScheduleDao,
+    private val attachmentDao: AttachmentDao
 ) : LocalSourceManager {
 
     override suspend fun insertNote(note: NoteEntity): Long {
@@ -207,5 +208,25 @@ class LocalSourceManagerImpl @Inject constructor(
 
     override fun searchTasks(taskName: String): Flow<List<TaskEntity>> {
         return taskDao.searchTasks(taskName)
+    }
+
+    override suspend fun insertAttachment(attachment: AttachmentEntity) {
+        return attachmentDao.insertAttachment(attachment)
+    }
+
+    override suspend fun updateAttachment(attachment: AttachmentEntity) {
+        return attachmentDao.updateAttachment(attachment)
+    }
+
+    override suspend fun deleteAttachment(attachment: AttachmentEntity) {
+        return attachmentDao.deleteAttachment(attachment)
+    }
+
+    override fun fetchAttachmentByUid(attachmentUid: Long) {
+        return attachmentDao.fetchAttachmentByUid(attachmentUid)
+    }
+
+    override fun fetchAttachments(): Flow<List<AttachmentEntity>> {
+        return attachmentDao.fetchAttachments()
     }
 }
