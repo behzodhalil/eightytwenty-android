@@ -23,7 +23,7 @@ data class AttachmentEntity(
     val attachmentTimestamp: ZonedDateTime = ZonedDateTime.now(),
     @ColumnInfo(name = ATTACHMENT_TASK_UID) val attachmentTaskUid: Long? = null,
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "") val attachmentUid: Long = Long.Zero
+    @ColumnInfo(name = ATTACHMENT_UID) val attachmentUid: Long = Long.Zero
 ) {
     companion object {
         const val ATTACHMENT_TABLE = "attachment_table"
