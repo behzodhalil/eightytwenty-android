@@ -1,9 +1,6 @@
 package uz.behzod.eightytwenty.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Update
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.AttachmentEntity
 
@@ -13,7 +10,10 @@ interface AttachmentDao {
     suspend fun insertAttachment(attachment: AttachmentEntity)
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateAttachment(attachment: AttachmentEntity)
+    @Delete
     suspend fun deleteAttachment(attachment: AttachmentEntity)
-    fun fetchAttachmentByUid(attachment: AttachmentEntity)
-    fun fetchAttachment(): Flow<List<AttachmentEntity>>
+    @Query("SELECT * FROM attachment_table WHERE attachment_uid =:attachmentUid")
+    fun fetchAttachmentByUid(attachmentUid: Long)
+    @Query("SELECT * FROM attachment_table")
+    fun fetchAttachments(): Flow<List<AttachmentEntity>>
 }
