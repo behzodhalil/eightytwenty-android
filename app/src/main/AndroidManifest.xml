@@ -31,6 +31,9 @@
             android:name=".features.main.MainActivity"
             android:exported="true" />
 
+        <service android:name=".utils.services.FileImportService"
+            android:exported="false"/>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
