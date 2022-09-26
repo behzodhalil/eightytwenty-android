@@ -222,7 +222,7 @@ class LocalSourceManagerImpl @Inject constructor(
         return attachmentDao.deleteAttachment(attachment)
     }
 
-    override fun fetchAttachmentByUid(attachmentUid: Long) {
+    override fun fetchAttachmentByUid(attachmentUid: Long): Flow<AttachmentEntity> {
         return attachmentDao.fetchAttachmentByUid(attachmentUid)
     }
 
