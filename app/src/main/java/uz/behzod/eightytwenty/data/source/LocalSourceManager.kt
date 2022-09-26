@@ -82,6 +82,6 @@ interface LocalSourceManager {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateAttachment(attachment: AttachmentEntity)
     suspend fun deleteAttachment(attachment: AttachmentEntity)
-    fun fetchAttachmentByUid(attachmentUid: Long)
+    fun fetchAttachmentByUid(attachmentUid: Long): Flow<AttachmentEntity>
     fun fetchAttachments(): Flow<List<AttachmentEntity>>
 }
