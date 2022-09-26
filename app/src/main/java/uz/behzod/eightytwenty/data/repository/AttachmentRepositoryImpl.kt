@@ -22,7 +22,7 @@ class AttachmentRepositoryImpl @Inject constructor(
         return sourceManager.deleteAttachment(attachment)
     }
 
-    override fun fetchAttachmentByUid(attachmentUid: Long) {
+    override fun fetchAttachmentByUid(attachmentUid: Long): Flow<AttachmentEntity> {
         return sourceManager.fetchAttachmentByUid(attachmentUid)
     }
 
