@@ -13,7 +13,7 @@ interface AttachmentDao {
     @Delete
     suspend fun deleteAttachment(attachment: AttachmentEntity)
     @Query("SELECT * FROM attachment_table WHERE attachment_uid =:attachmentUid")
-    fun fetchAttachmentByUid(attachmentUid: Long)
+    fun fetchAttachmentByUid(attachmentUid: Long): Flow<AttachmentEntity>
     @Query("SELECT * FROM attachment_table")
     fun fetchAttachments(): Flow<List<AttachmentEntity>>
 }
