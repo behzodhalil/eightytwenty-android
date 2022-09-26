@@ -143,5 +143,6 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:datetime:3.3.0'
     implementation 'com.afollestad.material-dialogs:lifecycle:3.3.0'
 
+    implementation 'commons-io:commons-io:2.7'
 
 }
