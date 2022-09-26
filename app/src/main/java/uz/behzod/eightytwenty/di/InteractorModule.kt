@@ -18,93 +18,77 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 interface InteractorModule {
 
-    @Binds
-    @Singleton
-    fun providesInsertNote(interactor: InsertNoteImpl): InsertNote
+    @get: Binds
+    @get: Singleton
+    val InsertNoteImpl.bindInsertNote: InsertNote
 
-    @Binds
-    @Singleton
-    fun providesUpdateNote(interactor: UpdateNoteImpl): UpdateNote
+    @get: Binds
+    @get: Singleton
+    val UpdateNoteImpl.bindUpdateNote: UpdateNote
 
-    @Binds
-    @Singleton
-    fun providesDeleteNote(interactor: DeleteNoteImpl): DeleteNote
+    @get: Binds
+    @get: Singleton
+    val DeleteNoteImpl.bindDeleteNote: DeleteNote
 
-    @Binds
-    @Singleton
-    fun providesFetchTrashedNotes(interactor: FetchTrashedNotesImpl): FetchTrashedNotes
+    @get: Binds
+    @get: Singleton
+    val FetchTrashedNotesImpl.bindTrashedNotes: FetchTrashedNotes
 
-    @Binds
-    @Singleton
-    fun providesFetchAllNotes(interactor: FetchNotesImpl): FetchNotes
+    @get:Binds
+    @get: Singleton
+    val FetchNotesImpl.bindFetchNotes: FetchNotes
 
-    @Binds
-    @Singleton
-    fun providesInsertNoteCategory(interactor: InsertNoteCategoryImpl): InsertNoteCategory
+    @get: Binds
+    @get: Singleton
+    val InsertNoteCategoryImpl.bindInsertNoteCategory: InsertNoteCategory
 
-    @Binds
-    @Singleton
-    fun providesUpdateNoteCategory(interactor: UpdateNoteCategoryImpl): UpdateNoteCategory
+    @get: Binds
+    @get: Singleton
+    val UpdateNoteCategoryImpl.bindUpdateNoteCategory: UpdateNoteCategory
 
-    @Binds
-    @Singleton
-    fun providesDeleteNoteCategory(interactor: DeleteNoteCategoryImpl): DeleteNoteCategory
+    @get: Binds
+    @get: Singleton
+    val DeleteNoteCategoryImpl.bindDeleteNoteCategory: DeleteNoteCategory
 
-    @Binds
-    @Singleton
-    fun providesFetchAllCategories(interactor: FetchAllCategoriesImpl): FetchAllCategories
+    @get: Binds
+    @get: Singleton
+    val FetchAllCategoriesImpl.bindAllCategories: FetchAllCategories
 
-    @Binds
-    @Singleton
-    fun providesFetchAllCategoriesAndNotes(interactor: FetchAllCategoriesAndNotesImpl): FetchAllCategoriesAndNotes
+    @get: Binds
+    @get: Singleton
+    val FetchAllCategoriesAndNotesImpl.bindFetchAllCategoriesAndNotes: FetchAllCategoriesAndNotes
 
-    @Binds
-    @Singleton
-    fun providesFetchNotesByCategoryId(
-        interactor: FetchNotesByCategoryIdImpl
-    ): FetchNotesByCategoryId
+    @get: Binds
+    @get: Singleton
+    val FetchNotesByCategoryIdImpl.bindFetchNotesByCategoryId: FetchNotesByCategoryId
 
-    @Binds
-    @Singleton
-    fun providesFetchNoteById(
-        interactor: FetchNoteByIdImpl
-    ): FetchNoteById
+    @get: Binds
+    @get: Singleton
+    val FetchNoteByIdImpl.bindFetchNoteById: FetchNoteById
 
-    @Binds
-    @Singleton
-    fun providesSearchNotes(
-        interactor: SearchNotesImpl
-    ): SearchNotes
+    @get: Binds
+    @get: Singleton
+    val SearchNotesImpl.bindSearchNotes: SearchNotes
 
-    @Binds
-    @Singleton
-    fun providesInsertHabit(
-        interactor: InsertHabitImpl
-    ): InsertHabit
+    @get: Binds
+    @get: Singleton
+    val InsertHabitImpl.bindInsertHabit: InsertHabit
 
-    @Binds
-    @Singleton
-    fun providesUpdateHabit(
-        interactor: UpdateHabitImpl
-    ): UpdateHabit
+    @get: Binds
+    @get: Singleton
+    val UpdateHabitImpl.bindUpdateHabit: UpdateHabit
 
-    @Binds
-    @Singleton
-    fun providesDeleteHabit(
-        interactor: DeleteHabitImpl
-    ): DeleteHabit
+    @get: Binds
+    @get: Singleton
+    val DeleteHabitImpl.bindDeleteHabit: DeleteHabit
 
-    @Binds
-    @Singleton
-    fun providesFetchAllHabits(
-        interactor: FetchAllHabitsImpl
-    ): FetchAllHabits
+    @get: Binds
+    @get: Singleton
+    val FetchAllHabitsImpl.bindFetchAllHabits: FetchAllHabits
 
-    @Binds
-    @Singleton
-    fun providesFetchHabitByUid(
-        interactor: FetchHabitByUidImpl
-    ): FetchHabitByUid
+    @get: Binds
+    @get: Singleton
+    val FetchHabitByUidImpl.bindFetchHabitByUid: FetchHabitByUid
 
     @Binds
     @Singleton
