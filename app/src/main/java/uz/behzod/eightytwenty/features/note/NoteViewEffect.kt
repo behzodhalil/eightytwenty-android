@@ -1,6 +1,8 @@
 package uz.behzod.eightytwenty.features.note
 
-sealed interface NoteViewEffect {
+import uz.behzod.eightytwenty.core.state.ViewEffect
+
+sealed interface NoteViewEffect : ViewEffect {
     object NewNoteClickViewEffect: NoteViewEffect
     object CategoryViewEffect: NoteViewEffect
     object DetailViewEffect: NoteViewEffect
