@@ -29,19 +29,19 @@ class NoteViewModel @Inject constructor(
 
     private var _uiStateCategoryAndNotes: MutableStateFlow<CategoryAndNotesUiState> =
         MutableStateFlow(CategoryAndNotesUiState.Loading)
-    val uiStateCategoryAndNotes: Flow<CategoryAndNotesUiState> = _uiStateCategoryAndNotes.asStateFlow()
+    val uiStateCategoryAndNotes: Flow<CategoryAndNotesUiState> =
+        _uiStateCategoryAndNotes.asStateFlow()
 
     init {
-        viewModelScope.launch {
-            iFetchNotes.invoke().collect { result ->
-                _uiState.value = NoteUIState.Loading
-                if (result.isEmpty()) {
-                    _uiState.value = NoteUIState.Empty
-                } else {
-                    _uiState.value = NoteUIState.Success(result)
-                }
+        iFetchNotes.invoke().onEach { result ->
+            _uiState.value = NoteUIState.Loading
+            if (result.isEmpty()) {
+                _uiState.value = NoteUIState.Empty
+            } else {
+                _uiState.value = NoteUIState.Success(result)
             }
-        }
+        }.launchIn(viewModelScope)
+
         iFetchCategoryAndNotes.invoke().onEach {
             _uiStateCategoryAndNotes.value = CategoryAndNotesUiState.Loading
             if (it.isNotEmpty()) {
@@ -49,7 +49,7 @@ class NoteViewModel @Inject constructor(
             } else {
                 _uiStateCategoryAndNotes.value = CategoryAndNotesUiState.Empty
             }
-        }
+        }.launchIn(viewModelScope)
     }
 
     fun onEvent(event: NoteEvent) {
