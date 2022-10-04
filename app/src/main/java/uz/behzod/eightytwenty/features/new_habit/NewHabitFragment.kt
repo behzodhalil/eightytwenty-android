@@ -142,7 +142,7 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
         val title = binding.etHabitName.text.toString()
         val description = binding.etDescription.text.toString()
         val perDayCount = binding.etPerDayCount.text.toString()
-        val endGoalCount = binding.etEndGoalCount.text.toString().toLong()
+        val endGoalCount: Long?=  binding.etEndGoalCount.text.toString().toLongOrNull()
 
         var perDayCountType = PerDayGoalType.ONCE
 
@@ -191,12 +191,13 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
             }
         }
 
+
         val habit = HabitDomainModel(
             title = title,
             description = description,
             perDayGoalCount = perDayCount.toLong(),
             perDayGoalType = perDayCountType,
-            endGoalCount = endGoalCount,
+            endGoalCount = endGoalCount ?: 0L,
             timestamp = timestamp,
             color = Colors.list[currentColorPosition],
             isComplete = false
