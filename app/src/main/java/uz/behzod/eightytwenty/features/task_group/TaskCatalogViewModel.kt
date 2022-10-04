@@ -1,4 +1,4 @@
-package uz.behzod.eightytwenty.features.task_catalog
+package uz.behzod.eightytwenty.features.task_group
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
