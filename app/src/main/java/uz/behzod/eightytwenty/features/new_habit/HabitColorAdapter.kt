@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.behzod.eightytwenty.R
+import uz.behzod.eightytwenty.databinding.ViewHolderColorBinding
 import uz.behzod.eightytwenty.utils.view.Colors
 
 class HabitColorAdapter(
