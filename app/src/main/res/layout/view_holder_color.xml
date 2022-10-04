@@ -1,13 +1,14 @@
-<com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.button.MaterialButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/btn_color"
     android:layout_width="48dp"
     android:layout_height="56dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="10dp"
     android:backgroundTint="@color/pan_purple"
     app:cornerRadius="64dp"
     app:strokeColor="@color/solitude"
-    app:strokeWidth="8dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="10dp"
-    />
+    app:strokeWidth="8dp" />
