@@ -7,11 +7,12 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.afollestad.materialdialogs.MaterialDialog
@@ -19,13 +20,10 @@ import com.afollestad.materialdialogs.datetime.datePicker
 import com.afollestad.materialdialogs.datetime.dateTimePicker
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import uz.behzod.eightytwenty.R
-import uz.behzod.eightytwenty.data.local.entities.Frequency
-import uz.behzod.eightytwenty.data.local.entities.ScheduleEntity
-import uz.behzod.eightytwenty.data.local.entities.TaskEntity
 import uz.behzod.eightytwenty.databinding.FragmentNewTaskDetailBinding
-import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import uz.behzod.eightytwenty.utils.constants.*
 import uz.behzod.eightytwenty.utils.constants.BroadcastConstants.BROADCAST_ACTION_IMPORT_SUCCESS
 import uz.behzod.eightytwenty.utils.constants.BroadcastConstants.BROADCAST_INTENT_DATA
@@ -39,7 +37,6 @@ import uz.behzod.eightytwenty.utils.formatter.DateTimeFormatter
 import uz.behzod.eightytwenty.utils.formatter.StringFormatter
 import uz.behzod.eightytwenty.utils.services.FileImportService
 import uz.behzod.eightytwenty.utils.view.viewBinding
-import java.time.LocalDate
 import java.time.ZonedDateTime
 import java.util.*
 
@@ -48,29 +45,15 @@ import java.util.*
 class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
 
     private val binding by viewBinding(FragmentNewTaskDetailBinding::bind)
-    private val viewModel: NewTaskViewModel by viewModels()
-
-    private var endDate: ZonedDateTime? = null
-    private var reminder: ZonedDateTime? = null
-    private var daysOfWeekModel: Int = Int.Zero
-    private var frequencyTypeModel: Int = Int.Zero
-    private val timestamp: ZonedDateTime =
-        ZonedDateTime.now()
-    private var noteTitle: String = ""
-    private var noteDesc: String = ""
-    private var noteTimestamp: String = ""
-    private var noteIsTrashed: Boolean = false
-    private var catalogUid: Long = Long.Zero
-
-    private var attachmentName = String.Empty
+    private val viewModel: NewTaskWithReduxViewModel by viewModels()
 
     private var isShown = true
 
     private lateinit var attachmentLauncher: ActivityResultLauncher<Intent>
-    private var task: TaskEntity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         attachmentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == Activity.RESULT_OK) {
@@ -87,54 +70,103 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initSchedule()
+        setupView()
+        setupFragmentResultListeners()
 
-        setupUi()
-
-        showCompletionDate()
-        showReminder()
-        showRepeat()
-        showFolder()
-        showNewNote()
-
-        onNavigateToNewNote()
-        onOpenDocument()
-
-        insertTaskWithScheduleAndNote()
+        observeState()
     }
 
     override fun onStart() {
         super.onStart()
-
         LocalBroadcastManager.getInstance(requireContext())
             .registerReceiver(receiver, IntentFilter(SERVICE_ACTION_WITH_BROADCAST))
+    }
+
+
+
+    private fun formatDayOfWeek(): String {
+        val lists = StringFormatter.parseDayOfWeek(viewModel.currentState.scheduleDaysOfWeek)
+        return StringFormatter.asDayOfWeek(requireContext(), true, lists)
+    }
+
+    private fun setupFragmentResultListeners() {
+        supportFragmentManager.setFragmentResultListener(
+            "NoteTitle",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            viewModel.modifyNoteTitle(bundle.getString("NoteTitle") ?: "")
+        }
+        supportFragmentManager.setFragmentResultListener(
+            "NoteDescription",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            viewModel.modifyNoteDesc(bundle.getString("NoteDescription") ?: "")
+        }
+        supportFragmentManager.setFragmentResultListener(
+            "NoteTimestamp",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            viewModel.modifyNoteTimestamp(bundle.getString("NoteTimestamp") ?: "")
+        }
+
+        supportFragmentManager.setFragmentResultListener(
+            "TaskCatalogName",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            val result = bundle.getString("TaskCatalogName") ?: "Входящий"
+            viewModel.modifyTaskGroupName(result)
+        }
+        supportFragmentManager.setFragmentResultListener(
+            "TaskCatalogUid",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            val result = bundle.getLong("TaskCatalogUid")
+            viewModel.modifyTaskGroupUid(result)
+        }
+
 
     }
 
-    private fun setupUi() {
-        binding.tvTimestamp.text = timestamp.toString()
+    private fun openDocument() {
+        attachmentLauncher.launch(
+            Intent(Intent.ACTION_OPEN_DOCUMENT).setType(INTENT_OPEN_DOCUMENT_TYPE)
+        )
     }
 
-    private fun showCompletionDate() {
-        binding.btnSelectDateOfCompletion.setOnClickListener {
-            MaterialDialog(requireContext()).show {
-                lifecycleOwner(viewLifecycleOwner)
-                datePicker(
-                    requireFutureDate = true,
-                    currentDate = ZonedDateTime.now().toCalendar()
-                ) { _, timestamp ->
-                    endDate = timestamp.toZonedDateTime()
-                }
-                positiveButton(R.string.text_btn_done) {
-                    with(binding.btnSelectDateOfCompletion) {
-                        text = endDate?.format(DateTimeFormatter.asMonthAndWeek(context))
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == SERVICE_ACTION_WITH_BROADCAST) {
+                when (intent.getStringExtra(BROADCAST_INTENT_STATUS)) {
+                    BROADCAST_ACTION_IMPORT_SUCCESS -> {
+                        if (intent.hasExtra(BROADCAST_INTENT_DATA)
+                            && intent.hasExtra(BROADCAST_INTENT_EXTRA)
+                        ) {
+
+                            val id = intent.getStringExtra(BROADCAST_INTENT_DATA)
+                            val attachmentName =
+                                intent.getStringExtra(BROADCAST_INTENT_EXTRA) ?: ""
+
+                            viewModel.modifyAttachmentState(attachmentName, isLoaded = true)
+
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun showReminder() {
+    private fun setupView() {
+        binding.tvTimestamp.text = ZonedDateTime.now().toString()
+
+        binding.etNewTaskTitle.addTextChangedListener {
+            viewModel.modifyTaskTitle(it.asStringOrEmpty())
+        }
+        binding.cvAttachment.setOnClickListener {
+            if (viewModel.currentState.isReadStorePermission) {
+                openDocument()
+            }
+        }
+
         binding.btnSelectReminder.setOnClickListener {
             MaterialDialog(requireContext()).show {
                 lifecycleOwner(viewLifecycleOwner)
@@ -142,93 +174,52 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
                     requireFutureDateTime = true,
                     currentDateTime = ZonedDateTime.now().toCalendar()
                 ) { _, timestamp ->
-                    reminder = timestamp.toZonedDateTime()
+                    timestamp.toZonedDateTime()?.let {
+                        viewModel.modifyTaskReminder(it)
+                    }
                 }
                 positiveButton(R.string.text_btn_done) {
-                    binding.btnSelectReminder.text =
-                        reminder?.format(DateTimeFormatter.asTime(requireContext(), true))
-                }
-            }
-        }
-    }
-
-    private fun showRepeat() {
-        with(binding) {
-            btnSelectRepeat.setOnClickListener {
-                isShown = if (isShown) {
-                    viewHolderSchedule.root.show()
-                    btnApplySchedule.show()
-                    btnCancelSchedule.show()
-                    initSchedule()
-                    false
-                } else {
-                    viewHolderSchedule.root.gone()
-                    btnApplySchedule.gone()
-                    btnCancelSchedule.gone()
-                    true
+                    viewModel.hasDisplayedReminder(true)
                 }
             }
         }
 
-    }
-
-
-    private fun initSchedule() = with(binding.viewHolderSchedule) {
-
-        chipMondayTask.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                daysOfWeekModel += BIT_VALUE_OF_MONDAY
-            } else {
-                daysOfWeekModel -= BIT_VALUE_OF_MONDAY
-            }
+        binding.cvNote.setOnClickListener {
+            val screen = NewNoteDialog()
+            transaction(screen)
+            screen.setCloseListener(object : NewNoteDialog.NewNoteListener {
+                override fun close() {
+                    viewModel.hasDisplayedSingleNote(true)
+                }
+            })
         }
 
-        chipTuesdayTask.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                daysOfWeekModel += BIT_VALUE_OF_TUESDAY
-            } else {
-                daysOfWeekModel -= BIT_VALUE_OF_TUESDAY
-            }
+        binding.viewHolderSchedule.chipMondayTask.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.modifyScheduleDaysOfWeek(value = BIT_VALUE_OF_MONDAY, isChecked = isChecked)
         }
 
-        chipWednesdayTask.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                daysOfWeekModel += BIT_VALUE_OF_WEDNESDAY
-            } else {
-                daysOfWeekModel -= BIT_VALUE_OF_WEDNESDAY
-            }
+        binding.viewHolderSchedule.chipTuesdayTask.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.modifyScheduleDaysOfWeek(BIT_VALUE_OF_TUESDAY, isChecked)
         }
 
-        chipThursdayTask.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                daysOfWeekModel += BIT_VALUE_OF_THURSDAY
-            } else {
-                daysOfWeekModel -= BIT_VALUE_OF_THURSDAY
-            }
+        binding.viewHolderSchedule.chipWednesdayTask.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.modifyScheduleDaysOfWeek(BIT_VALUE_OF_WEDNESDAY, isChecked)
         }
 
-        chipFridayTask.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                daysOfWeekModel += BIT_VALUE_OF_FRIDAY
-            } else {
-                daysOfWeekModel -= BIT_VALUE_OF_FRIDAY
-            }
+        binding.viewHolderSchedule.chipThursdayTask.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.modifyScheduleDaysOfWeek(BIT_VALUE_OF_THURSDAY, isChecked)
         }
 
-        chipSaturdayTask.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                daysOfWeekModel += BIT_VALUE_OF_SATURDAY
-            } else {
-                daysOfWeekModel -= BIT_VALUE_OF_SATURDAY
-            }
+        binding.viewHolderSchedule.chipFridayTask.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.modifyScheduleDaysOfWeek(BIT_VALUE_OF_FRIDAY, isChecked)
         }
 
-        chipSundayTask.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                daysOfWeekModel += BIT_VALUE_OF_SUNDAY
-            } else {
-                daysOfWeekModel -= BIT_VALUE_OF_SUNDAY
-            }
+        binding.viewHolderSchedule.chipSaturdayTask.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.modifyScheduleDaysOfWeek(BIT_VALUE_OF_SATURDAY, isChecked)
+        }
+
+        binding.viewHolderSchedule.chipSundayTask.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.modifyScheduleDaysOfWeek(BIT_VALUE_OF_SUNDAY, isChecked)
         }
 
         binding.btnApplySchedule.setOnClickListener {
@@ -243,201 +234,107 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
             binding.viewHolderSchedule.root.gone()
             binding.btnApplySchedule.gone()
             binding.btnCancelSchedule.gone()
-            isShown = true
+            viewModel.hasDisplayedReminder(true)
         }
 
-    }
-
-    private fun showFolder() {
         binding.btnSelectFolder.setOnClickListener {
             val dialog = CatalogDialog()
             transaction(dialog)
             dialog.setFetchingNameAndUid(object : CatalogDialog.CatalogDialogListener {
                 override fun fetchNameAndUid() {
-                    onUpdateCatalogNameAndUid()
+                    viewModel.hasDisplayedGroup(true)
                 }
             })
         }
-    }
 
-    private fun formatDayOfWeek(): String {
-        val lists = StringFormatter.parseDayOfWeek(daysOfWeekModel)
-        return StringFormatter.asDayOfWeek(requireContext(), true, lists)
-    }
-
-    private fun onUpdateCatalogNameAndUid() {
-        requireActivity().supportFragmentManager.setFragmentResultListener(
-            "TaskCatalogName",
-            viewLifecycleOwner
-        ) { _, bundle ->
-            val result = bundle.getString("TaskCatalogName")
-            binding.btnSelectFolder.text = result.toString()
+        binding.btnSelectRepeat.setOnClickListener {
+            isShown = if (isShown) {
+                binding.viewHolderSchedule.root.show()
+                binding.btnApplySchedule.show()
+                binding.btnCancelSchedule.show()
+                false
+            } else {
+                binding.viewHolderSchedule.root.gone()
+                binding.btnApplySchedule.gone()
+                binding.btnCancelSchedule.gone()
+                true
+            }
         }
-        requireActivity().supportFragmentManager.setFragmentResultListener(
-            "TaskCatalogUid",
-            viewLifecycleOwner
-        ) { _, bundle ->
-            catalogUid = bundle.getLong("TaskCatalogUid")
-        }
-    }
 
-    private fun onNavigateToNewNote() {
-        binding.cvNote.setOnClickListener {
-            val route = NewTaskFragmentDirections.actionNewTaskFragmentToNewNoteFragment()
-            navController.navigate(route)
-        }
-    }
-
-    private fun showNewNote() {
-        binding.cvNote.setOnClickListener {
-            val screen = NewNoteDialog()
-            transaction(screen)
-            screen.setCloseListener(object : NewNoteDialog.NewNoteListener {
-                override fun close() {
-                    listenerNewNote()
+        binding.btnSelectDateOfCompletion.setOnClickListener {
+            MaterialDialog(requireContext()).show {
+                lifecycleOwner(viewLifecycleOwner)
+                datePicker(
+                    requireFutureDate = true,
+                    currentDate = ZonedDateTime.now().toCalendar()
+                ) { _, timestamp ->
+                    viewModel.modifyTaskCompletionDate(timestamp.toZonedDateTime()!!)
                 }
-            })
-        }
-    }
-
-    private fun listenerNewNote() {
-        supportFragmentManager.setFragmentResultListener(
-            "NoteTitle",
-            viewLifecycleOwner
-        ) { _, bundle ->
-            noteTitle = bundle.getString("NoteTitle") ?: ""
-            setNoteTitle(noteTitle)
-        }
-        supportFragmentManager.setFragmentResultListener(
-            "NoteDescription",
-            viewLifecycleOwner
-        ) { _, bundle ->
-            noteDesc = bundle.getString("NoteDescription") ?: ""
-            binding.viewHolderNote.tvDesc.text = noteDesc
-        }
-        supportFragmentManager.setFragmentResultListener(
-            "NoteTimestamp",
-            viewLifecycleOwner
-        ) { _, bundle ->
-            noteTimestamp = bundle.getString("NoteTimestamp") ?: ""
-            setNoteTimestamp(noteTimestamp)
-        }
-        showSingleNote()
-    }
-
-    private fun showSingleNote() {
-        binding.cvNote.gone()
-        binding.viewHolderNote.root.show()
-    }
-
-    private fun insertTaskWithScheduleAndNote() {
-        binding.btnSaveNewTask.setOnClickListener {
-            setTaskAndNotesAndSchedules()
-            lifecycleScope.launch {
-                viewModel.uiState.collect { state ->
-                    when (state) {
-                        is NewTaskUiState.Empty -> {
-                            Toast.makeText(requireContext(), "Task is empty", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                        is NewTaskUiState.Loading -> {
-
-                        }
-                        is NewTaskUiState.Success -> {
-                            Toast.makeText(requireContext(), "Task is saved", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    }
-
+                positiveButton(R.string.text_btn_done) {
+                    viewModel.hasDisplayedCompletionDate(true)
                 }
             }
         }
-    }
-
-    private fun setTaskAndNotesAndSchedules() {
-        val scheduleEntity = ScheduleEntity(
-            frequencyTypes = frequencyTypeModel,
-            daysOfWeek = daysOfWeekModel,
-            dateOfCompletion = LocalDate.now().toString()
-        )
-
-        val note = NoteDomainModel(
-            title = noteTitle,
-            description = noteDesc,
-            timestamp = noteTimestamp.asZoneDateTime(),
-            isTrashed = false
-        )
-        val schedules = arrayListOf<ScheduleEntity>()
-
-        schedules.add(scheduleEntity)
-
-        val notes = arrayListOf<NoteDomainModel>()
-
-        notes.add(note)
-
-        viewModel.insertTaskWithScheduleAndNote(
-            TaskEntity(
-                title = binding.etNewTaskTitle.text.toString(),
-                endDate = endDate,
-                frequency = Frequency.DAILY,
-                reminderDateTime = reminder,
-                timestamp = timestamp,
-                isComplete = false,
-                isTrashed = false,
-                catalogUid = catalogUid
-            ), notes, schedules
-        )
 
     }
 
-    private fun onOpenDocument() {
-        val isReadPermission = viewModel.readStorePermission()
+    private fun observeState() {
+        viewModel.state
+            .flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach { renderState(it) }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
+    }
 
-        if (isReadPermission) {
-            attachmentLauncher.launch(
-                Intent(Intent.ACTION_OPEN_DOCUMENT).setType(INTENT_OPEN_DOCUMENT_TYPE)
+    private fun renderState(state: NewTaskState) {
+        if (state.isSuccess) {
+            showMessage("Task is saved successfully")
+        }
+
+        if (state.isFailure) {
+            showMessage("Failed to save task")
+        }
+
+        if (state.isLoadedAttachment) {
+            binding.cvAttachment.gone()
+            binding.viewHolderAttachment.root.show()
+            binding.viewHolderAttachment.tvAttachmentName.text =
+                viewModel.currentState.attachmentTitle
+        }
+
+        if (state.isDisplayedSingleNote) {
+            binding.cvNote.gone()
+            binding.viewHolderNote.root.show()
+        }
+
+        binding.viewHolderNote.tvTitle.text = viewModel.currentState.noteTitle
+        binding.viewHolderNote.tvDesc.text = viewModel.currentState.noteDesc
+        binding.viewHolderNote.tvDate.text = viewModel.currentState.noteTimestamp
+
+        if (state.isDisplayedGroup) {
+            binding.btnSelectFolder.text = viewModel.currentState.taskGroupName
+        }
+
+        if (state.isDisplayedCompletionDate) {
+            binding.btnSelectDateOfCompletion.text =
+                viewModel.currentState.taskCompletionDate?.format(
+                    DateTimeFormatter.asMonthAndWeek(requireContext())
+                )
+        }
+
+        if (state.isDisplayedReminder) {
+            binding.btnSelectReminder.text = viewModel.currentState.taskReminder?.format(
+                DateTimeFormatter.asTime(
+                    requireContext(),
+                    true
+                )
             )
+            viewModel.hasDisplayedReminder(false)
         }
-    }
 
-    private fun setNoteTitle(title: String) {
-        binding.viewHolderNote.tvTitle.text = title
-    }
 
-    private fun setNoteTimestamp(timestamp: String) {
-        binding.viewHolderNote.tvDate.text = timestamp
-    }
 
-    private fun setNoteDesc(description: String) {
+        showMessage("Current checked days: ${viewModel.currentState.scheduleDaysOfWeek}")
 
-    }
-
-    private val receiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent?.action == SERVICE_ACTION_WITH_BROADCAST) {
-                when (intent.getStringExtra(BROADCAST_INTENT_STATUS)) {
-                    BROADCAST_ACTION_IMPORT_SUCCESS -> {
-                        if (intent.hasExtra(BROADCAST_INTENT_DATA)
-                            && intent.hasExtra(BROADCAST_INTENT_EXTRA)
-                        ) {
-
-                            val id = intent.getStringExtra(BROADCAST_INTENT_DATA)
-                            attachmentName =
-                                intent.getStringExtra(BROADCAST_INTENT_EXTRA) ?: ""
-
-                            setAttachmentName(attachmentName)
-
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun setAttachmentName(name: String) {
-        binding.cvAttachment.gone()
-        binding.viewHolderAttachment.root.show()
-        binding.viewHolderAttachment.tvAttachmentName.text = name
     }
 
     companion object {
