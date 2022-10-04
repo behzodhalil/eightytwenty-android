@@ -1,4 +1,4 @@
-package uz.behzod.eightytwenty.features.task_catalog
+package uz.behzod.eightytwenty.features.task_group
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import uz.behzod.eightytwenty.data.local.entities.TaskCatalogEntity
 import uz.behzod.eightytwenty.databinding.ViewHolderCatalogBinding
 
 class TaskCatalogAdapter :
-    ListAdapter<TaskCatalogEntity, TaskCatalogAdapter.TaskCatalogViewHolder>(TaskCatalogDiffUtil) {
+    ListAdapter<TaskCatalogEntity, TaskCatalogAdapter.TaskCatalogViewHolder>(TaskGroupDiffUtil) {
 
     inner class TaskCatalogViewHolder(
         val binding: ViewHolderCatalogBinding
