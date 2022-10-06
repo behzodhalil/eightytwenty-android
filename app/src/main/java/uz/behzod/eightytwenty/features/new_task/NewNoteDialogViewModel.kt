@@ -24,7 +24,7 @@ class NewNoteDialogViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = loading()
             try {
-                iInsertNote.invoke(note)
+                iInsertNote.invoke(note, emptyList())
                 _uiState.value = success()
             } catch (e: Exception) {
                 _uiState.value = failure()
