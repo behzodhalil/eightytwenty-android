@@ -13,7 +13,8 @@ class LocalSourceManagerImpl @Inject constructor(
     private val taskDao: TaskDao,
     private val taskCatalogDao: TaskCatalogDao,
     private val scheduleDao: ScheduleDao,
-    private val attachmentDao: AttachmentDao
+    private val attachmentDao: AttachmentDao,
+    private val imagesDao: NoteImageDao
 ) : LocalSourceManager {
 
     override suspend fun insertNote(note: NoteEntity): Long {
@@ -228,5 +229,25 @@ class LocalSourceManagerImpl @Inject constructor(
 
     override fun fetchAttachments(): Flow<List<AttachmentEntity>> {
         return attachmentDao.fetchAttachments()
+    }
+
+    override suspend fun insertNoteImage(image: NoteImageEntity): Long {
+        return imagesDao.insertNoteImage(image)
+    }
+
+    override suspend fun updateNoteImage(image: NoteImageEntity) {
+        return imagesDao.updateNoteImage(image)
+    }
+
+    override suspend fun deleteNoteImage(image: NoteImageEntity) {
+        return imagesDao.deleteNoteImage(image)
+    }
+
+    override fun fetchImagesByNoteUid(uuid: Long): Flow<NoteImageEntity> {
+        return imagesDao.fetchImagesByNoteUid(uuid)
+    }
+
+    override fun fetchNoteImages(): Flow<List<NoteImageEntity>> {
+        return imagesDao.fetchNoteImages()
     }
 }
