@@ -1,9 +1,11 @@
 package uz.behzod.eightytwenty.features.new_note
 
+import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.core.ReduxViewModel
+import uz.behzod.eightytwenty.data.local.entities.NoteImageEntity
 import uz.behzod.eightytwenty.domain.interactor.note.InsertNote
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import java.time.ZonedDateTime
@@ -34,12 +36,21 @@ class NewNoteWithReduxViewModel @Inject constructor(
         modifyState { state -> state.copy(categoryUid = uid) }
     }
 
+    fun modifyUri(uri: Uri?) {
+        modifyState { state -> state.copy(uri = uri) }
+    }
+
     fun insertNote() {
         viewModelScope.launch {
             val title = state.value.title.trim()
             val desc = state.value.description.trim()
             val timestamp = state.value.timestamp
             val isTrashed = state.value.isTrashed
+            val image = state.value.image
+
+            val images = mutableListOf<NoteImageEntity>()
+
+            image?.let { images.add(it) }
 
             modifyState { state -> state.copy(isLoading = true) }
 
@@ -50,7 +61,8 @@ class NewNoteWithReduxViewModel @Inject constructor(
                         description = desc,
                         timestamp = timestamp,
                         isTrashed = isTrashed
-                    )
+                    ),
+                    images
                 )
             }.onSuccess {
                 modifyState { state ->
