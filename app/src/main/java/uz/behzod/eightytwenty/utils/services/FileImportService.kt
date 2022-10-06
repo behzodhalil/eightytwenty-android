@@ -18,7 +18,7 @@ import uz.behzod.eightytwenty.utils.constants.ServiceConstants.SERVICE_ACTION_CA
 import uz.behzod.eightytwenty.utils.constants.ServiceConstants.SERVICE_ACTION_START
 import uz.behzod.eightytwenty.utils.constants.ServiceConstants.SERVICE_ACTION_WITH_BROADCAST
 import uz.behzod.eightytwenty.utils.constants.ServiceConstants.SERVICE_EXTRA_UID
-import uz.behzod.eightytwenty.utils.extension.debugger
+import uz.behzod.eightytwenty.utils.extension.printDebug
 import uz.behzod.eightytwenty.utils.extension.getFileName
 import java.io.File
 import java.lang.Exception
@@ -34,14 +34,14 @@ class FileImportService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             SERVICE_ACTION_START -> {
-                debugger { "[FileImportService]: Service is started" }
+                printDebug { "[FileImportService]: Service is started" }
                 targetFolder = File(getExternalFilesDir(null), FILE_ATTACHMENT)
                 intent.data?.let {
                     onReproduce(it, intent.getStringExtra(SERVICE_EXTRA_UID)!!)
                 }
             }
             SERVICE_ACTION_CANCEL -> {
-                debugger { "[FileImportService]: Service is canceled" }
+                printDebug { "[FileImportService]: Service is canceled" }
                 terminateService()
             }
 
@@ -50,7 +50,7 @@ class FileImportService : Service() {
     }
 
     private fun onReproduce(uri: Uri, uid: String) {
-        debugger { "[FileImportService]: onReproduce() is started" }
+        printDebug { "[FileImportService]: onReproduce() is started" }
 
         if (Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED) {
             terminateService(BROADCAST_ACTION_IMPORT_FAILED)
@@ -86,10 +86,10 @@ class FileImportService : Service() {
     private fun sendLocalBroadcast(status: String, data: String? = null) {
         LocalBroadcastManager.getInstance(this)
             .sendBroadcast(Intent(SERVICE_ACTION_WITH_BROADCAST).apply {
-                debugger { "[FileImportService]: sendLocalBroadcast() is started" }
+                printDebug { "[FileImportService]: sendLocalBroadcast() is started" }
                 putExtra(BROADCAST_INTENT_STATUS, status)
                 if (data != null)
-                    debugger { "[FileImportService]: Data is not null" }
+                    printDebug { "[FileImportService]: Data is not null" }
                 putExtra(BROADCAST_INTENT_DATA, data)
             })
     }
@@ -105,7 +105,7 @@ class FileImportService : Service() {
     private fun broadcastResultThenTerminate(id: String, name: String) {
         LocalBroadcastManager.getInstance(this)
             .sendBroadcast(Intent(SERVICE_ACTION_WITH_BROADCAST).apply {
-                debugger { "[FileImportService]: broadcastResultThenTerminate is started" }
+                printDebug { "[FileImportService]: broadcastResultThenTerminate is started" }
                 // This function is only called when the import is
                 // completed and therefore we should just
                 // put a completed status in the broadcast
@@ -117,9 +117,9 @@ class FileImportService : Service() {
                 // Send the file name back to the calling activity
                 putExtra(BROADCAST_INTENT_EXTRA, name)
             })
-        debugger { "[FileImportService]: broadcastResultThenTerminate is stopped" }
+        printDebug { "[FileImportService]: broadcastResultThenTerminate is stopped" }
         stopSelf()
-        debugger { "[FileImportService]: broadcastResultThenTerminate is stopped" }
+        printDebug { "[FileImportService]: broadcastResultThenTerminate is stopped" }
     }
 
 }
