@@ -1,13 +1,11 @@
 package uz.behzod.eightytwenty.data.local.entities
 
-import android.graphics.Color
 import androidx.room.*
 import uz.behzod.eightytwenty.data.local.entities.HabitEntity.Companion.HABIT_TABLE
 import uz.behzod.eightytwenty.domain.model.HabitDomainModel
 import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
 import uz.behzod.eightytwenty.utils.view.Colors
-import java.util.HashMap
 
 @Entity(
     tableName = HABIT_TABLE
