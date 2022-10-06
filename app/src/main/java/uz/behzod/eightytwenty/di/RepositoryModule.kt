@@ -60,4 +60,8 @@ interface RepositoryModule {
     fun providesAttachmentRepository(
         repository: AttachmentRepositoryImpl
     ): AttachmentRepository
+
+    @get:Binds
+    @get:Singleton
+    val ImageRepositoryImpl.bindImageRepository: ImageRepository
 }
