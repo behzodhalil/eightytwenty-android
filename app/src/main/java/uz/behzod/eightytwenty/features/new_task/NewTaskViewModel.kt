@@ -1,6 +1,5 @@
 package uz.behzod.eightytwenty.features.new_task
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,7 +14,7 @@ import uz.behzod.eightytwenty.data.local.entities.TaskEntity
 import uz.behzod.eightytwenty.domain.interactor.manager.ReadStorePermission
 import uz.behzod.eightytwenty.domain.interactor.task.InsertTask
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
-import uz.behzod.eightytwenty.utils.extension.debugger
+import uz.behzod.eightytwenty.utils.extension.printDebug
 import java.time.ZonedDateTime
 import javax.inject.Inject
 
@@ -59,7 +58,7 @@ class NewTaskViewModel @Inject constructor(
                 )
             } catch (e: Exception) {
                 _uiState.value = NewTaskUiState.Empty
-                debugger { "Message is $e" }
+                printDebug { "Message is $e" }
             }
 
         }
