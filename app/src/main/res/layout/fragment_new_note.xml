@@ -98,6 +98,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
+            android:id="@+id/iv_image"
             android:layout_width="0dp"
             android:layout_height="28dp"
             android:layout_marginStart="20dp"
