@@ -55,6 +55,12 @@ object DatabaseModule {
 
     @Provides
     @Singleton
+    fun providesImagesDao(database: EightyTwentyDatabase): NoteImageDao {
+        return database.getNoteImageDao()
+    }
+
+    @Provides
+    @Singleton
     fun providesLocalSourceManager(
         noteCategoryDao: NoteCategoryDao,
         noteDao: NoteDao,
@@ -63,7 +69,8 @@ object DatabaseModule {
         taskDao: TaskDao,
         taskCatalogDao: TaskCatalogDao,
         scheduleDao: ScheduleDao,
-        attachmentDao: AttachmentDao
+        attachmentDao: AttachmentDao,
+        imageDao: NoteImageDao
     ): LocalSourceManager {
         return LocalSourceManagerImpl(
             noteCategoryDao = noteCategoryDao,
@@ -73,7 +80,8 @@ object DatabaseModule {
             taskDao = taskDao,
             taskCatalogDao = taskCatalogDao,
             scheduleDao = scheduleDao,
-            attachmentDao = attachmentDao
+            attachmentDao = attachmentDao,
+            imagesDao = imageDao
         )
     }
 
