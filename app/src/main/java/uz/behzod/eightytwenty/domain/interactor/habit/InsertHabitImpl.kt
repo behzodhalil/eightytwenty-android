@@ -1,6 +1,5 @@
 package uz.behzod.eightytwenty.domain.interactor.habit
 
-import android.util.Log
 import kotlinx.coroutines.withContext
 import uz.behzod.eightytwenty.data.local.dao.HabitDao
 import uz.behzod.eightytwenty.data.local.entities.ScheduleEntity
@@ -8,7 +7,7 @@ import uz.behzod.eightytwenty.data.local.entities.asEntity
 import uz.behzod.eightytwenty.domain.model.HabitDomainModel
 import uz.behzod.eightytwenty.domain.repository.HabitRepository
 import uz.behzod.eightytwenty.domain.repository.ScheduleRepository
-import uz.behzod.eightytwenty.utils.extension.debugger
+import uz.behzod.eightytwenty.utils.extension.printDebug
 import uz.behzod.eightytwenty.utils.providers.IDispatcherProvider
 import javax.inject.Inject
 
@@ -25,7 +24,7 @@ class InsertHabitImpl @Inject constructor(
             scheduleEntity.forEach {
                 scheduleRepository.insertSchedule(it.copy(habitId = data))
             }
-            debugger { "Inserted schedule is $scheduleEntity" }
+            printDebug { "Inserted schedule is $scheduleEntity" }
         }
     }
 }
