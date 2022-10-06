@@ -10,7 +10,7 @@ import uz.behzod.eightytwenty.domain.repository.AttachmentRepository
 import uz.behzod.eightytwenty.domain.repository.NoteRepository
 import uz.behzod.eightytwenty.domain.repository.ScheduleRepository
 import uz.behzod.eightytwenty.domain.repository.TaskRepository
-import uz.behzod.eightytwenty.utils.extension.debugger
+import uz.behzod.eightytwenty.utils.extension.printDebug
 import uz.behzod.eightytwenty.utils.providers.IDispatcherProvider
 import javax.inject.Inject
 
@@ -40,7 +40,7 @@ class InsertTaskImpl @Inject constructor(
                 attachmentRepository.insertAttachment(it.copy(attachmentTaskUid = data))
             }
 
-            debugger { "Inserted with note and task is $scheduleList and $noteList" }
+            printDebug { "Inserted with note and task is $scheduleList and $noteList" }
         }
     }
 
