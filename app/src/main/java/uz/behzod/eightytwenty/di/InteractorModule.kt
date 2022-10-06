@@ -90,123 +90,79 @@ interface InteractorModule {
     @get: Singleton
     val FetchHabitByUidImpl.bindFetchHabitByUid: FetchHabitByUid
 
-    @Binds
-    @Singleton
-    fun providesFetchHabitsByDate(
-        interactor: FetchHabitsByDateImpl
-    ): FetchHabitsByDate
+    @get:Binds
+    @get:Singleton
+    val FetchHabitsByDateImpl.bindHabitsByDate: FetchHabitsByDate
 
-    @Binds
-    @Singleton
-    fun providesInsertHabitRecommend(
-        interactor: InsertHabitRecommendImpl
-    ): InsertHabitRecommend
+    @get:Binds
+    @get:Singleton
+    val InsertHabitRecommendImpl.bindInsertHabitRecommend: InsertHabitRecommend
 
-    @Binds
-    @Singleton
-    fun providesUpdateHabitRecommend(
-        interactor: UpdateHabitRecommendImpl
-    ): UpdateHabitRecommend
+    @get:Binds
+    @get:Singleton
+    val UpdateHabitRecommendImpl.bindUpdateHabitRecommend: UpdateHabitRecommend
 
-    @Binds
-    @Singleton
-    fun providesDeleteHabitRecommend(
-        interactor: DeleteHabitRecommendImpl
-    ): DeleteHabitRecommend
+    @get:Binds
+    @get:Singleton
+    val DeleteHabitRecommendImpl.bindDeleteHabitRecommend: DeleteHabitRecommend
 
-    @Binds
-    @Singleton
-    fun providesFetchHabitRecommendsByCategory(
-        interactor: FetchHabitRecommendsByCategoryImpl
-    ): FetchHabitRecommendsByCategory
+    @get:Binds
+    @get:Singleton
+    val FetchHabitRecommendsByCategoryImpl.bindHabitRecommendsByCategory: FetchHabitRecommendsByCategory
 
-    @Binds
-    @Singleton
-    fun providesInsertHabitRecommends(
-        interactor: InsertHabitRecommendsImpl
-    ): InsertHabitRecommends
+    @get:Binds
+    @get:Singleton
+    val InsertHabitRecommendsImpl.bindInsertHabitRecommends: InsertHabitRecommends
 
-    @Binds
-    @Singleton
-    fun providesFetchHabitRecommendByUid(
-        interactor: FetchHabitRecommendByUidImpl
-    ): FetchHabitRecommendByUid
+    @get:Binds
+    @get:Singleton
+    val FetchHabitRecommendByUidImpl.bindHabitRecommendByUid: FetchHabitRecommendByUid
 
-    /**
-     * This part uses the declared interactors
-     * associated with the task catalog.
-     */
+    @get:Binds
+    @get:Singleton
+    val InsertTaskCatalogImpl.bindInsertTaskCatalog: InsertTaskCatalog
 
-    @Binds
-    @Singleton
-    fun providesInsertTaskCatalog(
-        interactor: InsertTaskCatalogImpl
-    ): InsertTaskCatalog
+    @get:Binds
+    @get:Singleton
+    val UpdateTaskCatalogImpl.bindUpdateTaskCatalog: UpdateTaskCatalog
 
+    @get:Binds
+    @get:Singleton
+    val DeleteTaskCatalogImpl.bindDeleteTaskCatalog: DeleteTaskCatalog
 
-    @Binds
-    @Singleton
-    fun providesUpdateTaskCatalog(
-        interactor: UpdateTaskCatalogImpl
-    ): UpdateTaskCatalog
+    @get:Binds
+    @get:Singleton
+    val IncrementTaskCountImpl.bindIncrementTaskCount: IncrementTaskCount
 
-    @Binds
-    @Singleton
-    fun providesDeleteTaskCatalog(
-        interactor: DeleteTaskCatalogImpl
-    ): DeleteTaskCatalog
+    @get:Binds
+    @get:Singleton
+    val DecrementTaskCountImpl.bindDecrementTaskCount: DecrementTaskCount
 
-    @Binds
-    @Singleton
-    fun providesIncrementTaskCount(
-        interactor: IncrementTaskCountImpl
-    ): IncrementTaskCount
+    @get:Binds
+    @get:Singleton
+    val FetchTaskCatalogsImpl.bindTaskCatalogs: FetchTaskCatalogs
 
-    @Binds
-    @Singleton
-    fun providesDecrementTaskCount(
-        interactor: DecrementTaskCountImpl
-    ): DecrementTaskCountImpl
+    @get:Binds
+    @get:Singleton
+    val FetchTaskAndCatalogsImpl.bindTaskAndCatalogs: FetchTaskAndCatalogs
 
-    @Binds
-    @Singleton
-    fun providesFetchTaskCatalogs(
-        interactor: FetchTaskCatalogsImpl
-    ): FetchTaskCatalogs
+    @get:Binds
+    @get:Singleton
+    val SearchTaskCatalogImpl.bindSearchTaskCatalog: SearchTaskCatalog
 
-    @Binds
-    @Singleton
-    fun providesFetchTaskAndCatalogs(
-        interactor: FetchTaskAndCatalogsImpl
-    ): FetchTaskAndCatalogs
+    @get:Binds
+    @get:Singleton
+    val InsertTaskImpl.bindInsertTask: InsertTask
 
-    @Binds
-    @Singleton
-    fun providesSearchTaskCatalog(
-        interactor: SearchTaskCatalogImpl
-    ): SearchTaskCatalog
+    @get:Binds
+    @get:Singleton
+    val FetchTasksImpl.bindTasks: FetchTasks
 
-    @Binds
-    @Singleton
-    fun providesInsertTask(
-        interactor: InsertTaskImpl
-    ): InsertTask
+    @get:Binds
+    @get:Singleton
+    val SearchTasksImpl.bindSearchTasks: SearchTasks
 
-    @Binds
-    @Singleton
-    fun providesFetchTasks(
-        interactor: FetchTasksImpl
-    ): FetchTasks
-
-    @Binds
-    @Singleton
-    fun providesSearchTasks(
-        interactor: SearchTasksImpl
-    ): SearchTasks
-
-    @Binds
-    @Singleton
-    fun providesReadStorePermission(
-        interactor: ReadStorePermissionImpl
-    ): ReadStorePermission
+    @get:Binds
+    @get:Singleton
+    val ReadStorePermissionImpl.bindReadStorePermission: ReadStorePermission
 }
