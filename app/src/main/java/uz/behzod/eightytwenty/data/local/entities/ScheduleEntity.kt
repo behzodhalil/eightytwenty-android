@@ -8,7 +8,6 @@ import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.utils.constants.*
 import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
-import uz.behzod.eightytwenty.utils.extension.debugger
 import java.time.DayOfWeek
 
 @Entity(
