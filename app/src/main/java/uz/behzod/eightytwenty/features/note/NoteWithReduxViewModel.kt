@@ -4,12 +4,11 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
 import uz.behzod.eightytwenty.core.ReduxViewModel
 import uz.behzod.eightytwenty.domain.interactor.note.FetchNotes
 import uz.behzod.eightytwenty.domain.interactor.note.FetchNotesByCategoryId
 import uz.behzod.eightytwenty.domain.interactor.note_category.FetchAllCategoriesAndNotes
-import uz.behzod.eightytwenty.utils.extension.debugger
+import uz.behzod.eightytwenty.utils.extension.printDebug
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,7 +29,7 @@ class NoteWithReduxViewModel @Inject constructor(
                             isEmpty = false
                         )
                     }
-                    debugger { "Result is $result" }
+                    printDebug { "Result is $result" }
                 } else {
                     modifyState { state ->
                         state.copy(
