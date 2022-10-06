@@ -2,25 +2,25 @@ package uz.behzod.eightytwenty.utils.extension
 
 import timber.log.Timber
 
-inline fun debugger(t: Throwable? = null, message : () -> String) {
+inline fun printDebug(t: Throwable? = null, message : () -> String) {
     return log {
         Timber.d(t,message())
     }
 }
 
-inline fun info(message: () -> String) {
+inline fun printInfo(message: () -> String) {
     return log {
         Timber.i(message())
     }
 }
 
-inline fun failure(t: Throwable? = null, message: () -> String) {
+inline fun printFailure(t: Throwable? = null, message: () -> String) {
     return log {
         Timber.e(t,message())
     }
 }
 
-inline fun warning(message: () -> String,vararg args: Any? ) {
+inline fun printWarning(message: () -> String, vararg args: Any? ) {
     return log {
         Timber.w(message(),args)
     }
