@@ -2,7 +2,9 @@ package uz.behzod.eightytwenty.utils.extension
 
 import android.content.Context
 import android.graphics.Paint
+import android.net.Uri
 import android.view.View
+import android.webkit.MimeTypeMap
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorRes
@@ -13,6 +15,16 @@ import androidx.fragment.app.Fragment
 val Context.layoutInflaterService: Any
     get() = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
 
+fun Context.getUriMimeType(uri: Uri): String? {
+    return contentResolver.getType(uri)
+}
+
+fun Context.getUriExtension(uri: Uri): String? {
+    val mimeType = contentResolver.getType(uri)
+    return MimeTypeMap.getSingleton().getExtensionFromMimeType(
+        mimeType
+    )
+}
 fun View.show(): View {
     if (visibility != View.VISIBLE) {
         visibility = View.VISIBLE
