@@ -5,8 +5,10 @@ import uz.behzod.eightytwenty.data.local.entities.NoteImageEntity
 
 interface ImageRepository {
     suspend fun insertNoteImage(image: NoteImageEntity): Long
+    suspend fun insertNoteImages(images: List<NoteImageEntity>)
     suspend fun updateNoteImage(image: NoteImageEntity)
     suspend fun deleteNoteImage(image: NoteImageEntity)
-    fun fetchImagesByNoteUid(uuid: Long): Flow<NoteImageEntity>
+    fun fetchImageByNoteUid(uuid: Long): Flow<NoteImageEntity>
+    fun fetchImagesByNoteByNoteUid(uuid: Long): Flow<List<NoteImageEntity>>
     fun fetchNoteImages(): Flow<List<NoteImageEntity>>
 }
