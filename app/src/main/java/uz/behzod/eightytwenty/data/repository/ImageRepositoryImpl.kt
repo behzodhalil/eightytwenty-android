@@ -21,11 +21,19 @@ class ImageRepositoryImpl @Inject constructor(
         return sourceManager.deleteNoteImage(image)
     }
 
-    override fun fetchImagesByNoteUid(uuid: Long): Flow<NoteImageEntity> {
-        return sourceManager.fetchImagesByNoteUid(uuid)
+    override fun fetchImageByNoteUid(uuid: Long): Flow<NoteImageEntity> {
+        return sourceManager.fetchImageByNoteUid(uuid)
     }
 
     override fun fetchNoteImages(): Flow<List<NoteImageEntity>> {
         return sourceManager.fetchNoteImages()
+    }
+
+    override suspend fun insertNoteImages(images: List<NoteImageEntity>) {
+        return sourceManager.insertNoteImages(images)
+    }
+
+    override fun fetchImagesByNoteByNoteUid(uuid: Long): Flow<List<NoteImageEntity>> {
+        return sourceManager.fetchImagesByNoteByNoteUid(uuid)
     }
 }
