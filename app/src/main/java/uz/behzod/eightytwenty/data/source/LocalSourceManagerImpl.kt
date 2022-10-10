@@ -243,11 +243,19 @@ class LocalSourceManagerImpl @Inject constructor(
         return imagesDao.deleteNoteImage(image)
     }
 
-    override fun fetchImagesByNoteUid(uuid: Long): Flow<NoteImageEntity> {
-        return imagesDao.fetchImagesByNoteUid(uuid)
+    override fun fetchImageByNoteUid(uuid: Long): Flow<NoteImageEntity> {
+        return imagesDao.fetchImageByNoteUid(uuid)
     }
 
     override fun fetchNoteImages(): Flow<List<NoteImageEntity>> {
         return imagesDao.fetchNoteImages()
+    }
+
+    override suspend fun insertNoteImages(images: List<NoteImageEntity>) {
+        return imagesDao.insertNoteImages(images)
+    }
+
+    override fun fetchImagesByNoteByNoteUid(uuid: Long): Flow<List<NoteImageEntity>> {
+        return imagesDao.fetchImagesByNoteByNoteUid(uuid)
     }
 }
