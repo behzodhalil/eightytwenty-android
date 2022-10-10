@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import uz.behzod.eightytwenty.domain.interactor.habit.*
 import uz.behzod.eightytwenty.domain.interactor.habit_recommend.*
+import uz.behzod.eightytwenty.domain.interactor.image.*
 import uz.behzod.eightytwenty.domain.interactor.manager.ReadStorePermission
 import uz.behzod.eightytwenty.domain.interactor.manager.ReadStorePermissionImpl
 import uz.behzod.eightytwenty.domain.interactor.note.*
@@ -165,4 +166,32 @@ interface InteractorModule {
     @get:Binds
     @get:Singleton
     val ReadStorePermissionImpl.bindReadStorePermission: ReadStorePermission
+
+    @get: Binds
+    @get: Singleton
+    val DeleteNoteImageImpl.bindDeleteNoteImage: DeleteNoteImage
+
+    @get: Binds
+    @get: Singleton
+    val FetchImageByNoteUidImpl.bindImageByNoteUid: FetchImageByNoteUid
+
+    @get: Binds
+    @get: Singleton
+    val FetchImagesByNoteByNoteUidImpl.bindImagesByNoteUid: FetchImagesByNoteByNoteUid
+
+    @get: Binds
+    @get: Singleton
+    val FetchNoteImagesImpl.bindNoteImages: FetchNoteImages
+
+    @get: Binds
+    @get: Singleton
+    val InsertNoteImageImpl.bindInsertNoteImage: InsertNoteImage
+
+    @get: Binds
+    @get: Singleton
+    val InsertNoteImagesImpl.bindInsertNoteImages: InsertNoteImages
+
+    @get: Binds
+    @get: Singleton
+    val UpdateNoteImageImpl.bindUpdateNoteImage: UpdateNoteImage
 }
