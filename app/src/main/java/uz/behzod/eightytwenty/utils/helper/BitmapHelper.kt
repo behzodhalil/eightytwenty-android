@@ -102,7 +102,5 @@ object BitmapHelper {
         }
 
         return inSampleSize
-
-
     }
 }
