@@ -13,30 +13,13 @@ import uz.behzod.eightytwenty.domain.model.HabitRecommendDomainModel
 
 class HabitRecommendAdapter(private val onClickListener: (data: HabitRecommendDomainModel) -> Unit) :
     ListAdapter<HabitRecommendDomainModel, HabitRecommendAdapter.HabitRecommendViewHolder>(
-        COMPARATOR
+        HabitRecommendDiffUtil
     ) {
 
     inner class HabitRecommendViewHolder(
         val binding: ViewHolderRecommendHabitBinding
     ) : RecyclerView.ViewHolder(binding.root)
 
-    companion object {
-        private val COMPARATOR = object : DiffUtil.ItemCallback<HabitRecommendDomainModel>() {
-            override fun areItemsTheSame(
-                oldItem: HabitRecommendDomainModel,
-                newItem: HabitRecommendDomainModel
-            ): Boolean {
-                return oldItem.uid == newItem.uid
-            }
-
-            override fun areContentsTheSame(
-                oldItem: HabitRecommendDomainModel,
-                newItem: HabitRecommendDomainModel
-            ): Boolean {
-                return oldItem == newItem
-            }
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitRecommendViewHolder {
         val binding = ViewHolderRecommendHabitBinding.inflate(
