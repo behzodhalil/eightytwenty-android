@@ -22,33 +22,34 @@ import uz.behzod.eightytwenty.utils.view.viewBinding
 import java.time.ZonedDateTime
 
 @AndroidEntryPoint
-class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
+class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListener {
 
     private val binding by viewBinding(FragmentNewNoteBinding::bind)
     private val viewModel: NewNoteWithReduxViewModel by viewModels()
     private val args: NewNoteFragmentArgs by navArgs()
 
+    private lateinit var imageAdapter: ImageAdapter
+
     private val takePictureLauncher = registerForActivityResult(
         ActivityResultContracts.TakePicture()
     ) { state -> onTakePictureListener(state)}
 
+    private val pickImageLauncher = registerForActivityResult(
+        ActivityResultContracts.OpenMultipleDocuments(),
+        PickImagesCallback(this)
+    )
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setupUI()
-        setupUi()
+        setupView()
         observerState()
     }
 
-    private fun setupUI() {
-        initTimestamp()
-    }
+    private fun setupView() {
+        imageAdapter = ImageAdapter()
+        binding.rvImage.adapter = imageAdapter
 
-    private fun initTimestamp() {
         binding.tvDate.text = ZonedDateTime.now().toString()
-    }
 
-    private fun setupUi() {
         binding.etTitle.addTextChangedListener { viewModel.modifyTitle(it.asStringOrEmpty()) }
         binding.etDesc.addTextChangedListener { viewModel.modifyDesc(it.asStringOrEmpty()) }
         binding.tvDate.addTextChangedListener { viewModel.modifyTimestamp(it.asStringOrEmpty().asZoneDateTime()) }
@@ -101,8 +102,13 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
 
     }
 
+    override fun addImages(uriSource: UriSources) {
+        TODO("Not yet implemented")
+    }
+
     private fun onPickFromGallery() {}
     private fun onPickFromGalleryListener() {}
+
     private fun onTakePictureListener(state: Boolean) {
         if (state) {
             showMessage("Photo was taken")
