@@ -4,17 +4,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentStudyHabitRecommendBinding
+import uz.behzod.eightytwenty.domain.model.HabitRecommendDomainModel
 import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
-class StudyHabitRecommendFragment: Fragment(R.layout.fragment_study_habit_recommend) {
+class StudyHabitRecommendFragment : Fragment(R.layout.fragment_study_habit_recommend) {
 
     private val binding by viewBinding(FragmentStudyHabitRecommendBinding::bind)
     private val viewModel: HabitRecommendViewModel by viewModels()
@@ -23,42 +24,33 @@ class StudyHabitRecommendFragment: Fragment(R.layout.fragment_study_habit_recomm
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupUI()
+
+        setupView()
+        observeState()
     }
 
-    private fun setupUI() {
-        initRecyclerView()
-
-        fetchHabitRecommendsByCategory()
-    }
-
-    private fun initRecyclerView() {
-        adapter = HabitRecommendAdapter {
-
-        }
+    private fun setupView() {
+        adapter = HabitRecommendAdapter {}
         binding.rvRecommendHabit.adapter = adapter
         binding.rvRecommendHabit.setHasFixedSize(true)
+
+        viewModel.modifyCategory("Study")
     }
 
-    private fun fetchHabitRecommendsByCategory() = lifecycleScope.launch {
-        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-            viewModel.fetchHabitRecommendByCategory("Study")
-            viewModel.uiState.collect { result ->
-                when(result) {
-                    is HabitRecommendUIState.Empty -> {
+    private fun observeState() {
+        viewModel.state
+            .flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach { renderState(it) }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
+    }
 
-                    }
-                    is HabitRecommendUIState.Failure -> {
+    private fun renderState(state: HabitRecommendState) {
+        viewModel.fetchHabitRecommendsByCategory()
 
-                    }
-                    is HabitRecommendUIState.Loading -> {
-
-                    }
-                    is HabitRecommendUIState.Success -> {
-                        adapter.submitList(result.data)
-                    }
-                }
-            }
+        if (state.habits.isNotEmpty()) {
+            getHabitRecommends(state.habits)
         }
     }
+
+    private fun getHabitRecommends(list: List<HabitRecommendDomainModel>) = adapter.submitList(list)
 }
