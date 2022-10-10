@@ -11,8 +11,12 @@ import uz.behzod.eightytwenty.data.local.entities.NoteImageEntity
 
 @Dao
 interface NoteImageDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNoteImage(image: NoteImageEntity): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNoteImages(images: List<NoteImageEntity>)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateNoteImage(image: NoteImageEntity)
@@ -21,7 +25,10 @@ interface NoteImageDao {
     suspend fun deleteNoteImage(image: NoteImageEntity)
 
     @Query("SELECT * FROM note_image_table WHERE note_uid =:uuid")
-    fun fetchImagesByNoteUid(uuid: Long): Flow<NoteImageEntity>
+    fun fetchImageByNoteUid(uuid: Long): Flow<NoteImageEntity>
+
+    @Query("SELECT * FROM note_image_table WHERE note_uid =:uuid")
+    fun fetchImagesByNoteByNoteUid(uuid: Long): Flow<List<NoteImageEntity>>
 
     @Query("SELECT * FROM note_image_table")
     fun fetchNoteImages(): Flow<List<NoteImageEntity>>
