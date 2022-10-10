@@ -1,14 +1,13 @@
 package uz.behzod.eightytwenty.features.habit
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
-import android.graphics.Rect
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginStart
 import androidx.recyclerview.widget.RecyclerView
 import com.tejpratapsingh.recyclercalendar.adapter.RecyclerCalendarBaseAdapter
 import com.tejpratapsingh.recyclercalendar.model.RecyclerCalendarConfiguration
@@ -38,6 +37,7 @@ class HorizontalCalendarAdapter(
         )
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
         position: Int,
@@ -45,10 +45,10 @@ class HorizontalCalendarAdapter(
     ) {
         val monthViewHolder: MonthCalendarViewHolder = holder as MonthCalendarViewHolder
         val context: Context = monthViewHolder.itemView.context
+
         monthViewHolder.itemView.visibility = View.VISIBLE
 
         monthViewHolder.itemView.setOnClickListener(null)
-
         monthViewHolder.itemView.background = null
 
         monthViewHolder.textViewDay.setTextColor(
@@ -63,6 +63,7 @@ class HorizontalCalendarAdapter(
                 R.color.black
             )
         )
+        monthViewHolder.textViewDate.background = null
 
         if (calendarItem.isHeader) {
             val selectedCalendar = Calendar.getInstance()
@@ -79,6 +80,7 @@ class HorizontalCalendarAdapter(
             monthViewHolder.textViewDate.text = month
 
             monthViewHolder.itemView.setOnClickListener(null)
+
         } else if (calendarItem.isEmpty) {
             monthViewHolder.itemView.visibility = View.GONE
             monthViewHolder.textViewDay.text = ""
@@ -109,16 +111,12 @@ class HorizontalCalendarAdapter(
                         R.color.white
                     )
                 )
-                monthViewHolder.textViewDay.setTextColor(
-                    ContextCompat.getColor(
+                monthViewHolder.textViewDate.setBackgroundDrawable(
+                    ContextCompat.getDrawable(
                         context,
-                        R.color.black_40
+                        R.drawable.bg_selected_filled
                     )
                 )
-                monthViewHolder.textViewDate.background =
-                    ContextCompat.getDrawable(
-                        context, R.drawable.bg_selected_filled
-                    )
             }
 
             val day: String = CalendarUtils.dateStringFromFormat(
@@ -139,7 +137,7 @@ class HorizontalCalendarAdapter(
             monthViewHolder.itemView.setOnClickListener {
                 selectedDate = calendarItem.date
                 dateSelectListener.onDateSelected(calendarItem.date)
-                notifyDataSetChanged()
+                this.notifyDataSetChanged()
             }
         }
     }
