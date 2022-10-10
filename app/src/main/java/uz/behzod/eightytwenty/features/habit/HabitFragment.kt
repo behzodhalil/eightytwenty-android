@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
@@ -13,11 +14,13 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.tejpratapsingh.recyclercalendar.model.RecyclerCalendarConfiguration
 import com.tejpratapsingh.recyclercalendar.utilities.CalendarUtils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentHabitBinding
-import uz.behzod.eightytwenty.utils.extension.hide
-import uz.behzod.eightytwenty.utils.extension.show
+import uz.behzod.eightytwenty.domain.model.HabitDomainModel
+import uz.behzod.eightytwenty.utils.extension.*
 import uz.behzod.eightytwenty.utils.view.viewBinding
 import java.util.*
 
@@ -68,7 +71,9 @@ class HabitFragment : Fragment(R.layout.fragment_habit) {
             date = date,
             format = "yyyy-MM-dd"
         ) ?: ""
+
         searchByDate(timestamp)
+
         horizontalAdapter = HorizontalCalendarAdapter(
             startDate = startCalendar.time,
             endDate = endCalendar.time,
@@ -131,7 +136,7 @@ class HabitFragment : Fragment(R.layout.fragment_habit) {
                     }
                 }
             }
-            }
+        }
 
     }
 
