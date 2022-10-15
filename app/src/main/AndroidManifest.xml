@@ -4,6 +4,7 @@
     package="uz.behzod.eightytwenty">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
 
     <application
         android:name=".features.EightyTwentyApplication"
@@ -15,11 +16,13 @@
         android:theme="@style/Theme.EightyTwenty"
         tools:ignore="AllowBackup"
         android:hardwareAccelerated="false"
+        android:requestLegacyExternalStorage="true"
         >
 
         <activity
             android:name=".features.onboarding.OnboardingActivity"
-            android:exported="true">
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,6 +40,16 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="uz.behzod.eightytwenty"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
