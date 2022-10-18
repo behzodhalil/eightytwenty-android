@@ -1,7 +1,6 @@
 package uz.behzod.eightytwenty.utils.formatter
 
 import uz.behzod.eightytwenty.R
-import uz.behzod.eightytwenty.utils.extension.Zero
 import java.time.DayOfWeek
 
 object StringUtils {
