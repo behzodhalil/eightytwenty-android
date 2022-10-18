@@ -194,4 +194,8 @@ interface InteractorModule {
     @get: Binds
     @get: Singleton
     val UpdateNoteImageImpl.bindUpdateNoteImage: UpdateNoteImage
+
+    @get: Binds
+    @get: Singleton
+    val DefaultFetchNoteRelationByUid.bindNoteRelationByUid: FetchNoteRelationByUid
 }
