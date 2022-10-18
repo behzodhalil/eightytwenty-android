@@ -11,7 +11,7 @@ class InsertNoteImageImpl @Inject constructor(
     private val dispatcher: IDispatcherProvider
 ): InsertNoteImage {
 
-    override suspend fun execute(value: NoteImageEntity): Long {
+    override suspend fun execute(value: NoteImageEntity) {
         return withContext(dispatcher.io) {
             imageRepository.insertNoteImage(value)
         }
