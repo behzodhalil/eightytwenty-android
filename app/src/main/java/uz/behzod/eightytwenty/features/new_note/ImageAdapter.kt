@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import coil.load
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.data.local.entities.NoteImageEntity
 import uz.behzod.eightytwenty.databinding.ViewHolderMultipleImageItemBinding
 import uz.behzod.eightytwenty.databinding.ViewHolderSingleImageItemBinding
+import uz.behzod.eightytwenty.utils.extension.printDebug
 import uz.behzod.eightytwenty.utils.view.bindBitmap
 
 class ImageAdapter : ListAdapter<NoteImageEntity, ImageViewHolder>(ImageDiffUtil) {
@@ -60,7 +62,8 @@ sealed class ImageViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(bin
         private val binding: ViewHolderSingleImageItemBinding
     ) : ImageViewHolder(binding) {
         fun bind(image: NoteImageEntity) {
-            binding.ivSingleItem.bindBitmap(image.uri, 150, 150)
+            printDebug { "ImageViewHolder is called" }
+            binding.ivSingleItem.load(image.uri)
         }
     }
 
@@ -68,7 +71,7 @@ sealed class ImageViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(bin
         private val binding: ViewHolderMultipleImageItemBinding
     ) : ImageViewHolder(binding) {
         fun bind(image: NoteImageEntity) {
-            binding.ivMultipleItem.bindBitmap(image.uri, 100, 100)
+            binding.ivMultipleItem.load(image.uri)
         }
     }
 }
