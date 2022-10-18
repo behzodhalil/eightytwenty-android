@@ -13,7 +13,7 @@ import uz.behzod.eightytwenty.data.local.entities.NoteImageEntity
 interface NoteImageDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNoteImage(image: NoteImageEntity): Long
+    suspend fun insertNoteImage(image: NoteImageEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNoteImages(images: List<NoteImageEntity>)
