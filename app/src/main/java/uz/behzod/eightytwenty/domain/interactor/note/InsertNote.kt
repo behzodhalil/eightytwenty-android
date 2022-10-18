@@ -4,5 +4,5 @@ import uz.behzod.eightytwenty.data.local.entities.NoteImageEntity
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 
 interface InsertNote {
-    suspend operator fun invoke(data: NoteDomainModel,images: List<NoteImageEntity>)
+    suspend operator fun invoke(data: NoteDomainModel,images: List<NoteImageEntity> = emptyList())
 }
