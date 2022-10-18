@@ -2,6 +2,7 @@ package uz.behzod.eightytwenty.data.repository
 
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
+import uz.behzod.eightytwenty.data.local.entities.NoteRelation
 import uz.behzod.eightytwenty.data.source.LocalSourceManager
 import uz.behzod.eightytwenty.domain.repository.NoteRepository
 import javax.inject.Inject
@@ -41,5 +42,9 @@ class NoteRepositoryImpl @Inject constructor(
 
     override fun searchNotes(query: String): Flow<List<NoteEntity>> {
         return sourceManager.searchNotes(query)
+    }
+
+    override fun fetchNoteRelationByUid(noteUid: Long): Flow<NoteRelation> {
+        return sourceManager.fetchNoteRelationByUid(noteUid)
     }
 }
