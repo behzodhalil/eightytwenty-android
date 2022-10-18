@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CategoryNoteViewModel @Inject constructor(
     private val iInsertCategoryNote: InsertNoteCategory,
-    private val iFetchAllCategory: FetchAllCategories
+    iFetchAllCategory: FetchAllCategories
 ) : ViewModel() {
 
     private var _uiState: MutableStateFlow<CategoryNoteUIState> =
