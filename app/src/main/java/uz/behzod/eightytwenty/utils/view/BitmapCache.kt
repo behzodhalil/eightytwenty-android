@@ -4,8 +4,12 @@ import android.graphics.Bitmap
 import android.util.LruCache
 
 
+private const val SIZE = 1024
+
 // Create the object to working with memory cache
 object BitmapCache {
+
+    private const val SIZE = 1024
 
     private var memoryCache: LruCache<String, Bitmap>
 
