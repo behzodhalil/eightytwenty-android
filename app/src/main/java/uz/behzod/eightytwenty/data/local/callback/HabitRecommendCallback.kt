@@ -1,18 +1,16 @@
 package uz.behzod.eightytwenty.data.local.callback
 
-import android.util.Log
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.data.local.db.EightyTwentyDatabase
 import uz.behzod.eightytwenty.data.local.entities.Frequency
-import uz.behzod.eightytwenty.data.local.entities.HabitRecommendEntity
 import uz.behzod.eightytwenty.data.local.entities.PerDayGoalType
 import uz.behzod.eightytwenty.data.local.entities.asEntity
 import uz.behzod.eightytwenty.di.CallbackScope
 import uz.behzod.eightytwenty.domain.model.HabitRecommendDomainModel
+import uz.behzod.eightytwenty.utils.extension.printDebug
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -24,7 +22,7 @@ class HabitRecommendCallback @Inject constructor(
     override fun onCreate(db: SupportSQLiteDatabase) {
         super.onCreate(db)
 
-        Log.d("Callback","Callback is called")
+        printDebug { "Callback is called" }
         val dao = database.get().getHabitRecommendDao()
 
         scope.launch {
