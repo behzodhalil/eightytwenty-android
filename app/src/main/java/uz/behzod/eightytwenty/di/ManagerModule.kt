@@ -6,8 +6,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import uz.behzod.eightytwenty.data.manager.PermissionManager
 import uz.behzod.eightytwenty.data.manager.PermissionManagerImpl
-import uz.behzod.eightytwenty.utils.manager.ImageStorageManagerImpl
-import uz.behzod.eightytwenty.utils.manager.ImageStoreManager
 import javax.inject.Singleton
 
 @Module
@@ -20,7 +18,4 @@ interface ManagerModule {
         manager: PermissionManagerImpl
     ): PermissionManager
 
-    @get: Binds
-    @get: Singleton
-    val ImageStorageManagerImpl.bindImageStoreManager: ImageStoreManager
 }
