@@ -2,6 +2,7 @@ package uz.behzod.eightytwenty.features.note_detail
 
 import uz.behzod.eightytwenty.core.state.ViewState
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
+import uz.behzod.eightytwenty.data.local.entities.NoteRelation
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import uz.behzod.eightytwenty.utils.extension.Empty
 import java.sql.Timestamp
@@ -18,4 +19,11 @@ data class NoteDetailViewState(
     val isLoading: Boolean = false,
     val isFailure: Boolean = false,
     val isSuccess: Boolean = false,
+): ViewState
+
+data class NoteDetailState(
+    val note: NoteRelation? = null,
+    val isLoading: Boolean = false,
+    val isFailure: Boolean = false,
+    val isSuccess: Boolean = false
 ): ViewState
