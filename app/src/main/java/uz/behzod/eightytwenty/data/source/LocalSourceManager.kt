@@ -14,6 +14,7 @@ interface LocalSourceManager {
     fun fetchAllNotes(): Flow<List<NoteEntity>>
     fun fetchNotesByCategoryId(categoryId: Long): Flow<List<NoteEntity>>
     fun fetchNoteById(noteId: Long): Flow<NoteEntity>
+    fun fetchNoteRelationByUid(noteUid: Long): Flow<NoteRelation>
     fun searchNotes(query: String): Flow<List<NoteEntity>>
 
     // NoteCategory: Dao functions
@@ -83,7 +84,7 @@ interface LocalSourceManager {
 
     // Note Image: Dao functions
 
-    suspend fun insertNoteImage(image: NoteImageEntity): Long
+    suspend fun insertNoteImage(image: NoteImageEntity)
     suspend fun insertNoteImages(images: List<NoteImageEntity>)
     suspend fun updateNoteImage(image: NoteImageEntity)
     suspend fun deleteNoteImage(image: NoteImageEntity)
