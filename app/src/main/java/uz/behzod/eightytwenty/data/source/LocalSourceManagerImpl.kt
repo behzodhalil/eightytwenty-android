@@ -3,6 +3,7 @@ package uz.behzod.eightytwenty.data.source
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.dao.*
 import uz.behzod.eightytwenty.data.local.entities.*
+import uz.behzod.eightytwenty.utils.extension.printDebug
 import javax.inject.Inject
 
 class LocalSourceManagerImpl @Inject constructor(
@@ -31,6 +32,10 @@ class LocalSourceManagerImpl @Inject constructor(
 
     override fun fetchTrashedNotes(): Flow<List<NoteEntity>> {
         return noteDao.fetchTrashedNotes()
+    }
+
+    override fun fetchNoteRelationByUid(noteUid: Long): Flow<NoteRelation> {
+        return noteDao.fetchNoteRelationByUid(noteUid)
     }
 
     override fun fetchAllNotes(): Flow<List<NoteEntity>> {
@@ -231,7 +236,8 @@ class LocalSourceManagerImpl @Inject constructor(
         return attachmentDao.fetchAttachments()
     }
 
-    override suspend fun insertNoteImage(image: NoteImageEntity): Long {
+    override suspend fun insertNoteImage(image: NoteImageEntity) {
+        printDebug { "SourceManager: Images are $image" }
         return imagesDao.insertNoteImage(image)
     }
 
