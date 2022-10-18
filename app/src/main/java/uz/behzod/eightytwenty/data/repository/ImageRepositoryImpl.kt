@@ -4,12 +4,14 @@ import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.NoteImageEntity
 import uz.behzod.eightytwenty.data.source.LocalSourceManager
 import uz.behzod.eightytwenty.domain.repository.ImageRepository
+import uz.behzod.eightytwenty.utils.extension.printDebug
 import javax.inject.Inject
 
 class ImageRepositoryImpl @Inject constructor(
     private val sourceManager: LocalSourceManager
 ): ImageRepository {
-    override suspend fun insertNoteImage(image: NoteImageEntity): Long {
+    override suspend fun insertNoteImage(image: NoteImageEntity) {
+        printDebug { "ImageRepository: Images are $image" }
         return sourceManager.insertNoteImage(image)
     }
 
