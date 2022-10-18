@@ -96,9 +96,12 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/et_desc"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/layout_bottom"
         app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/view_holder_multiple_image_item"
         app:layout_constraintEnd_toEndOf="parent"
         />
     <LinearLayout

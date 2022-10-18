@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -13,7 +14,7 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/sun_glow"
         android:fontFamily="@font/roboto_bold"
-        android:text="Сохранить"
+        android:text="@string/text_btn_save"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:cornerRadius="16dp"
@@ -27,6 +28,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/bg_oval_undo_redo"
+        android:contentDescription="@string/text_iv_undo"
         android:padding="6dp"
         android:src="@drawable/ic_undo"
         app:layout_constraintStart_toEndOf="@id/btn_save_or_cancel"
@@ -39,6 +41,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/bg_oval_undo_redo"
+        android:contentDescription="@string/text_iv_redo"
         android:padding="6dp"
         android:src="@drawable/ic_redo"
         app:layout_constraintStart_toEndOf="@id/iv_undo"
@@ -50,9 +53,11 @@
         android:layout_height="56dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:autofillHints=""
         android:background="#FFFFFF"
         android:fontFamily="@font/roboto"
-        android:hint="Заголовок"
+        android:hint="@string/text_new_note_title"
+        android:inputType="text"
         android:textSize="25sp"
         app:layout_constraintTop_toBottomOf="@id/btn_save_or_cancel" />
 
@@ -63,24 +68,44 @@
         android:layout_marginStart="22dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/roboto"
-        android:text="Создано: 20/12/2022 22:00"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/et_title" />
+        app:layout_constraintTop_toBottomOf="@id/et_title"
+        tools:text="Создано: 20/12/2022 22:00" />
 
     <EditText
         android:id="@+id/et_desc"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:autofillHints=""
         android:background="#FFFFFF"
         android:fontFamily="@font/roboto"
         android:gravity="top"
-        android:hint="Заметка"
+        android:hint="@string/text_new_note_desc"
+        android:inputType="text"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rv_image"
         app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/et_desc"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/layout_bottom"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/view_holder_multiple_image_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
     <LinearLayout
+        android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#FFFAFA"
@@ -91,11 +116,13 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
+            android:id="@+id/iv_image"
             android:layout_width="0dp"
             android:layout_height="28dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
+            android:contentDescription="@string/text_iv_image"
             android:src="@drawable/ic_image" />
 
         <ImageView
@@ -104,6 +131,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
+            android:contentDescription="@string/text_iv_move_to_inbox"
             android:src="@drawable/ic_move_to_inbox" />
 
         <ImageView
@@ -112,6 +140,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
+            android:contentDescription="@string/text_iv_delete"
             android:src="@drawable/ic_delete" />
 
     </LinearLayout>
