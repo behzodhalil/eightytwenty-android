@@ -9,6 +9,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
+import java.util.UUID
 
 @Entity(
     tableName = "note_image_table",
@@ -25,10 +26,10 @@ data class NoteImageEntity(
     @ColumnInfo(name = URI) val uri: Uri? = null,
     @ColumnInfo(name = MIME_TYPE) val mimeType: String = String.Empty,
     @ColumnInfo(name = DESCRIPTION) val description: String = String.Empty,
-    @ColumnInfo(name = NOTE_UID) val noteUid: Long = Long.Zero,
-    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = NOTE_UID) var noteUid: Long = Long.Zero,
+    @PrimaryKey
     @ColumnInfo(name = IMAGE_UID)
-    val imageUid: Long = Long.Zero
+    var imageUid: String = UUID.randomUUID().toString()
 ) {
     companion object {
         private const val URI = "uri"
@@ -36,5 +37,9 @@ data class NoteImageEntity(
         private const val DESCRIPTION = "description"
         private const val NOTE_UID = "note_uid"
         private const val IMAGE_UID = "image_uid"
+        fun generateUid(): String {
+            return UUID.randomUUID().toString()
+        }
     }
+
 }
