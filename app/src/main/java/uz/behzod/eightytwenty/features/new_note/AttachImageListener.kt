@@ -2,8 +2,6 @@ package uz.behzod.eightytwenty.features.new_note
 
 import android.net.Uri
 
-interface AttachImageListener {
-    fun addImages(uriSource: UriSources)
+interface AttachImageListeners {
+    fun addImages(uriSource: List<Uri>)
 }
-
-typealias UriSources = List<Uri>
