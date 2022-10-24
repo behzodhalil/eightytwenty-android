@@ -20,7 +20,6 @@ class DefaultUndoRedoManager @Inject constructor(
     ) {
         checkCurrentState(before)
 
-
         if (isCompletedDeletion) {
             isCompletedDeletion = false
             redo(
@@ -36,11 +35,21 @@ class DefaultUndoRedoManager @Inject constructor(
 
         when (type) {
             All -> {
+                undoRedoHistory.getPreviousPosition()
+                onCompletedEvent(originalText, originalText.length, true, true)
+            }
+            Once -> {
                 if (before == originalText && !isDeleted) {
-                    onCompletedEvent(before, before.length, false, true)
+                    onCompletedEvent(before, before.length,false, true)
+                } else {
+                    undoRedoHistory.redo(
+                        before,
+                        isDeleted,
+                    ) { text, endIndex, isUndo, isDeactivateUndo ->
+                        onCompletedEvent(text, endIndex, isUndo, isDeactivateUndo)
+                    }
                 }
             }
-            Once -> TODO()
         }
     }
 
@@ -50,15 +59,41 @@ class DefaultUndoRedoManager @Inject constructor(
         isDeleted: Boolean,
         onCompletedEvent: (new: String, index: Int, isSuccessful: Boolean, isDeactivate: Boolean) -> Unit
     ) {
-        TODO("Not yet implemented")
+        if (isCompletedDeletion) {
+            isCompletedDeletion = false
+            undo(type, after, true) { newText, index, isSuccessful, shouldDeactivate ->
+                isCompletedDeletion = true
+                onCompletedEvent(newText, index, isSuccessful, shouldDeactivate)
+            }
+            return
+        }
+
+        when (type) {
+            Once -> {
+                if (after == currentText && !isDeleted) {
+                    onCompletedEvent(after, after.length, false, true)
+                } else {
+                    undoRedoHistory.redo(
+                        after,
+                        isDeleted
+                    ) { text, endIndex, isSuccessful, shouldDeactivate ->
+                        onCompletedEvent(text, endIndex, isSuccessful, shouldDeactivate)
+                    }
+                }
+            }
+            All -> {
+                undoRedoHistory.getNextPosition()
+                onCompletedEvent(currentText, currentText.length, true, true)
+            }
+        }
     }
 
     override fun clear() {
-        TODO("Not yet implemented")
+        undoRedoHistory.clear()
     }
 
     override fun add(param: UndoRedoItem) {
-        TODO("Not yet implemented")
+        undoRedoHistory.add(param = param)
     }
 
     private fun checkCurrentState(text: String) {
