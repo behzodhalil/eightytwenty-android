@@ -4,7 +4,6 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.util.Log
 import androidx.appcompat.widget.AppCompatEditText
 
 class UndoEditText @JvmOverloads constructor(
@@ -15,9 +14,9 @@ class UndoEditText @JvmOverloads constructor(
         const val HISTORY_INFINITE = -1
     }
 
-    private val careTaker: CareTaker = CareTaker()
+    private val undoRedoManager: UndoRedoManager = UndoRedoManager()
     private val textChangeListener: TextChangeListener = TextChangeListener()
-    private var undoStatusListener: UndoStatusListener? = null
+    private var undoStateListener: UndoStateListener? = null
     private var undoStatus: Boolean = false
     private var redoStatus: Boolean = false
 
@@ -25,16 +24,16 @@ class UndoEditText @JvmOverloads constructor(
         addTextChangedListener(textChangeListener)
     }
 
-    fun setUndoStatusListener(listener: UndoStatusListener) {
-        undoStatusListener = listener
+    fun setUndoStatusListener(listener: UndoStateListener) {
+        undoStateListener = listener
     }
 
     fun canUndo(): Boolean {
-        return careTaker.canUndo()
+        return undoRedoManager.canUndo()
     }
 
     fun undo() {
-        val memento: Memento = careTaker.undo() ?: return
+        val memento: UndoRedoItem = undoRedoManager.undo() ?: return
         val start: Int = memento.start
         val end: Int = start + (memento.after?.length ?: 0)
 
@@ -43,7 +42,7 @@ class UndoEditText @JvmOverloads constructor(
     }
 
     fun redo() {
-        val memento: Memento = careTaker.redo() ?: return
+        val memento: UndoRedoItem = undoRedoManager.redo() ?: return
         val start: Int = memento.start
         val end: Int = start + (memento.before?.length ?: 0)
 
@@ -52,16 +51,16 @@ class UndoEditText @JvmOverloads constructor(
     }
 
     fun canRedo(): Boolean {
-        return careTaker.canRedo()
+        return undoRedoManager.canRedo()
     }
 
     fun clearHistory() {
-        careTaker.clear()
+        undoRedoManager.clear()
         notifyUndoStatusChanged()
     }
 
     fun setMaxHistorySize(size: Int) {
-        careTaker.maxSize = size
+        undoRedoManager.maxSize = size
     }
 
     private fun replace(start: Int, end: Int, s: CharSequence?) {
@@ -76,13 +75,13 @@ class UndoEditText @JvmOverloads constructor(
 
         if (undoStatus != newUndoStatus) {
             undoStatus = newUndoStatus
-            undoStatusListener?.onUndoStatusChanged(undoStatus)
+            undoStateListener?.onUndoStatusChanged(undoStatus)
         }
 
         if (redoStatus != newRedoStatus) {
             redoStatus = newRedoStatus
 
-            undoStatusListener?.onRedoStatusChanged(redoStatus)
+            undoStateListener?.onRedoStatusChanged(redoStatus)
         }
     }
 
@@ -105,7 +104,7 @@ class UndoEditText @JvmOverloads constructor(
             }
 
             afterText = s?.subSequence(start, start + count)
-            careTaker.add(Memento(start, beforeText, afterText))
+            undoRedoManager.add(UndoRedoItem(start, beforeText, afterText))
             notifyUndoStatusChanged()
         }
 
