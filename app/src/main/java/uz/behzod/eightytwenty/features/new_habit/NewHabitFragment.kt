@@ -36,7 +36,7 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
     private val args: NewHabitFragmentArgs by navArgs()
     private val viewModel: NewHabitViewModel by viewModels()
 
-    private var daysOfWeekModel: Int = Int.Zero
+    private var daysOfWeekModel = Int.Zero
     private var frequencyTypeModel: Int = Int.Zero
     private var currentColorPosition = Colors.list[0]
 
@@ -74,18 +74,22 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
             button.setBackgroundColor(button.context.getColor(Colors.list[position]))
 
             button.setOnClickListener {
-                (binding.rvColors.layoutManager as LinearLayoutManager).getChildAt(
-                    currentColorPosition
-                ).let {
-                    (it as? MaterialButton)?.setStrokeWidthResource(R.dimen.eight)
-                    (it as? MaterialButton)?.setStrokeColorResource(R.color.solitude)
-                }
-                currentColorPosition = position
-                button.setStrokeColorResource(R.color.color_primary_dark)
-                button.setStrokeWidthResource(R.dimen.color_button_stroke_width)
+                onDrawCurrentColor(position,button)
             }
 
         }
+    }
+
+    private fun onDrawCurrentColor(position: Int, view: MaterialButton) {
+        (binding.rvColors.layoutManager as LinearLayoutManager).getChildAt(
+            currentColorPosition
+        ).let {
+            (it as? MaterialButton)?.setStrokeWidthResource(R.dimen.eight)
+            (it as? MaterialButton)?.setStrokeColorResource(R.color.solitude)
+        }
+        currentColorPosition = position
+        view.setStrokeColorResource(R.color.color_primary_dark)
+        view.setStrokeWidthResource(R.dimen.color_button_stroke_width)
     }
 
     private fun fetchHabitRecommendUi() {
