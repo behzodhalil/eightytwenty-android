@@ -27,6 +27,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:clickable="true"
         android:background="@drawable/bg_oval_undo_redo"
         android:contentDescription="@string/text_iv_undo"
         android:padding="6dp"
@@ -40,6 +41,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:clickable="true"
         android:background="@drawable/bg_oval_undo_redo"
         android:contentDescription="@string/text_iv_redo"
         android:padding="6dp"
@@ -72,9 +74,9 @@
         app:layout_constraintTop_toBottomOf="@id/et_title"
         tools:text="Создано: 20/12/2022 22:00" />
 
-    <EditText
+    <uz.behzod.undo_redo.UndoEditText
         android:id="@+id/et_desc"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
