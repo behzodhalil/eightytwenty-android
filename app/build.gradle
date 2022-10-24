@@ -148,5 +148,6 @@ dependencies {
 
     implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.24"
     implementation("io.coil-kt:coil:2.2.2")
+    implementation(project(":undo-redo"))
 
 }
