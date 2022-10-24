@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -21,6 +22,8 @@ import uz.behzod.eightytwenty.databinding.FragmentNewNoteBinding
 import uz.behzod.eightytwenty.utils.extension.*
 import uz.behzod.eightytwenty.utils.helper.BitmapHelper
 import uz.behzod.eightytwenty.utils.view.viewBinding
+import uz.behzod.undo_redo.UndoEditText
+import uz.behzod.undo_redo.UndoStatusListener
 import java.time.ZonedDateTime
 
 @AndroidEntryPoint
@@ -46,6 +49,8 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
         super.onViewCreated(view, savedInstanceState)
         setupView()
         observerState()
+        undo()
+        redo()
     }
 
     private fun setupView() {
@@ -70,6 +75,21 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
             viewModel.insertNote()
         }
 
+        binding.ivRedo.setOnClickListener {
+            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+            if (binding.etDesc.canRedo()) {
+                binding.etDesc.redo()
+            }
+        }
+
+        binding.ivUndo.setOnClickListener {
+            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+            printDebug { "Undo is clicked" }
+            if (binding.etDesc.canUndo()) {
+               binding.etDesc.undo()
+            }
+        }
+
         binding.ivImage.setOnClickListener {
             val screen = ImagePickerFragment().apply {
                 setTakePictureListener {
@@ -82,6 +102,11 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
             }
             transaction(screen)
         }
+
+        binding.etDesc.setMaxHistorySize(UndoEditText.HISTORY_INFINITE)
+
+        setUndoRedoListener()
+
     }
 
     private fun observerState() {
@@ -138,5 +163,32 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
             showMessage("No photo was taken")
         }
     }
+
+    private fun undo() {
+        printDebug { "undo() method is called" }
+
+    }
+
+    private fun redo() {
+
+    }
+
+    private fun setUndoRedoListener() {
+
+
+        binding.etDesc.setUndoStatusListener(object: UndoStatusListener {
+
+            override fun onUndoStatusChanged(canUndo: Boolean) {
+                binding.ivUndo.isEnabled = canUndo
+            }
+
+            override fun onRedoStatusChanged(canRedo: Boolean) {
+                binding.ivRedo.isEnabled = canRedo
+            }
+
+        })
+    }
+
+
 
 }
