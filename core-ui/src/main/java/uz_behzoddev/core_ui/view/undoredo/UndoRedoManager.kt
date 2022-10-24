@@ -2,7 +2,7 @@ package uz_behzoddev.core_ui.view.undoredo
 
 import uz_behzoddev.core_ui.view.edit_text.UndoRedoItem
 
-internal interface UndoRedoManager {
+interface UndoRedoManager {
 
     fun undo(
         type: UndoRedoType,
