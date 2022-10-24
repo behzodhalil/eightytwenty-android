@@ -23,7 +23,7 @@ import uz.behzod.eightytwenty.utils.extension.*
 import uz.behzod.eightytwenty.utils.helper.BitmapHelper
 import uz.behzod.eightytwenty.utils.view.viewBinding
 import uz.behzod.undo_redo.UndoEditText
-import uz.behzod.undo_redo.UndoStatusListener
+import uz.behzod.undo_redo.UndoStateListener
 import java.time.ZonedDateTime
 
 @AndroidEntryPoint
@@ -176,7 +176,7 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
     private fun setUndoRedoListener() {
 
 
-        binding.etDesc.setUndoStatusListener(object: UndoStatusListener {
+        binding.etDesc.setUndoStatusListener(object: UndoStateListener {
 
             override fun onUndoStatusChanged(canUndo: Boolean) {
                 binding.ivUndo.isEnabled = canUndo
