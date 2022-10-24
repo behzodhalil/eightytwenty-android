@@ -6,7 +6,7 @@ EightyTwenty is life planner application with beautiful user interface.
 ### Features of 80|20
 
 - [x] Add images to note
-- [ ] Undo & redo note
+- [x] Undo & redo note
 - [ ] Delete note
 - [ ] Move note to other group
 - [ ] Save note to othe group
