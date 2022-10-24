@@ -1,6 +1,6 @@
 package uz.behzod.undo_redo
 
-interface UndoStatusListener {
+interface UndoStateListener {
     fun onUndoStatusChanged(canUndo: Boolean)
     fun onRedoStatusChanged(canRedo: Boolean)
 }
