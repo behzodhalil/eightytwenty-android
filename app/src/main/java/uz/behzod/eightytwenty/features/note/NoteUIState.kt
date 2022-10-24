@@ -2,6 +2,7 @@ package uz.behzod.eightytwenty.features.note
 
 import uz.behzod.eightytwenty.core.state.ViewState
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
+import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
 
 sealed class NoteUIState {
@@ -15,6 +16,6 @@ data class NoteViewState(
     val notes: List<NoteDomainModel> = emptyList(),
     val isLoading: Boolean = false,
     val isEmpty: Boolean = false,
-    val errorMessage: String = "",
+    val errorMessage: String = String.Empty,
     val uid: Long = Long.Zero
 ) : ViewState
