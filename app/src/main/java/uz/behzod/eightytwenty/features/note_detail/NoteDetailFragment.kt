@@ -41,72 +41,15 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
     }
 
     private fun setupView() {
+        setupRecyclerView()
+
+    }
+
+    private fun setupRecyclerView() {
         imageAdapter = ImageAdapter()
         binding.rvImage.adapter = imageAdapter
-
-
     }
-    /*private fun fetchNoteByUid(uid: Long) {
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.fetchNoteByUid(uid)
-                viewModel.uiState.collect { state ->
-                    when (state) {
-                        is NoteDetailUIState.Empty -> {
-
-                        }
-                        is NoteDetailUIState.Failure -> {
-
-                        }
-                        is NoteDetailUIState.Loading -> {
-
-                        }
-                        is NoteDetailUIState.Success -> {
-                            val data = state.data
-                            Log.d("NoteDetailFragment", "Detail data is ${state.data}")
-
-                            initNote(data)
-                            updateNote(param = data)
-
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-
-    private fun updateNote(param: NoteDomainModel) {
-        lifecycleScope.launch {
-            binding.btnSaveOrCancel.setOnClickListener {
-                param.title = binding.etTitle.text.toString()
-                param.description = binding.etDesc.text.toString()
-                param.timestamp = ZonedDateTime.now()
-
-//                viewModel.updateNote(
-//                    param
-//                ).run {
-//                    Toast.makeText(requireContext(), "Note is updated", Toast.LENGTH_SHORT).show()
-//                    val action =
-//                        NoteDetailFragmentDirections.actionNoteDetailFragmentToNoteFragment()
-//                    Log.d("TAG", "Note detail value is ${getNotes()}")
-//                    findNavController().navigate(action)
-//                }
-//            }
-
-
-        }
-
-    }
-*/
-    private fun initNote(data: NoteDomainModel) {
-        with(binding) {
-            etTitle.setText(data.title)
-            etDesc.setText(data.description)
-            tvDate.text = data.timestamp.toString()
-        }
-    }
-
+    
     private fun observerState() {
         viewModel.state
             .flowWithLifecycle(viewLifecycleOwner.lifecycle)
@@ -127,11 +70,30 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
         }
     }
 
-    private fun getNotes(): NoteDomainModel {
-        val title = binding.etTitle.text.toString()
-        val description = binding.etDesc.text.toString()
-        val timestamp = ZonedDateTime.now()
-        return NoteDomainModel(title = title, description = description, timestamp = timestamp)
+    private fun undoDescription() {
+        binding.ivUndo.setOnClickListener {
+            if (binding.etDesc.canUndo()) {
+                binding.etDesc.undo()
+            }
+        }
+    }
+
+    private fun redoDescription() {
+        binding.ivRedo.setOnClickListener {
+            if (binding.etDesc.canRedo()) {
+                binding.etDesc.redo()
+            }
+        }
+    }
+
+    private fun delete() {
+        binding.ivDelete.setOnClickListener {
+            binding.etTitle.setText("")
+            binding.etDesc.setText("")
+        }
+    }
+
+    private fun setUndoRedoListener() {
 
     }
 }

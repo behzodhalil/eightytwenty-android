@@ -32,8 +32,6 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
     private val binding by viewBinding(FragmentNewNoteBinding::bind)
     private val viewModel: NewNoteWithReduxViewModel by viewModels()
     private val args: NewNoteFragmentArgs by navArgs()
-    private var images: ArrayList<NoteImageEntity> = arrayListOf()
-    private var uriSources: ArrayList<Uri> = arrayListOf()
     private lateinit var imageAdapter: ImageAdapter
 
     private val takePictureLauncher = registerForActivityResult(
@@ -49,12 +47,15 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
         super.onViewCreated(view, savedInstanceState)
         setupView()
         observerState()
+
         undo()
         redo()
+        delete()
     }
 
     private fun setupView() {
         imageAdapter = ImageAdapter()
+
         binding.rvImage.adapter = imageAdapter
 
         binding.tvDate.text = ZonedDateTime.now().toString()
@@ -73,21 +74,6 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
 
         binding.btnSaveOrCancel.setOnClickListener {
             viewModel.insertNote()
-        }
-
-        binding.ivRedo.setOnClickListener {
-            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
-            if (binding.etDesc.canRedo()) {
-                binding.etDesc.redo()
-            }
-        }
-
-        binding.ivUndo.setOnClickListener {
-            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
-            printDebug { "Undo is clicked" }
-            if (binding.etDesc.canUndo()) {
-               binding.etDesc.undo()
-            }
         }
 
         binding.ivImage.setOnClickListener {
@@ -141,18 +127,12 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
 
     override fun addImages(uriSource: List<Uri>) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            printDebug { "[NewNoteFragment]: addImages() is started" }
             uriSource.forEach {
                 viewModel.currentState.images += listOf(NoteImageEntity(uri = it, imageUid = NoteImageEntity.generateUid() ))
             }
             imageAdapter.submitList(viewModel.currentState.images)
-            printDebug { "[Test Image] Images are ${viewModel.currentState.images}" }
-
         }
     }
-
-    private fun onPickFromGallery() {}
-    private fun onPickFromGalleryListener() {}
 
     private fun onTakePictureListener(state: Boolean) {
         val tempUri = viewModel.currentState.uri
@@ -165,16 +145,29 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
     }
 
     private fun undo() {
-        printDebug { "undo() method is called" }
-
+        binding.ivUndo.setOnClickListener {
+            if (binding.etDesc.canUndo()) {
+                binding.etDesc.undo()
+            }
+        }
     }
 
     private fun redo() {
+        binding.ivRedo.setOnClickListener {
+            if (binding.etDesc.canRedo()) {
+                binding.etDesc.redo()
+            }
+        }
+    }
 
+    private fun delete() {
+        binding.ivDelete.setOnClickListener {
+            binding.etDesc.setText("")
+            binding.etTitle.setText("")
+        }
     }
 
     private fun setUndoRedoListener() {
-
 
         binding.etDesc.setUndoStatusListener(object: UndoStateListener {
 
@@ -188,7 +181,5 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
 
         })
     }
-
-
 
 }

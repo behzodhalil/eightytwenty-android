@@ -137,6 +137,7 @@
             android:src="@drawable/ic_move_to_inbox" />
 
         <ImageView
+            android:id="@+id/iv_delete"
             android:layout_width="0dp"
             android:layout_height="28dp"
             android:layout_marginStart="20dp"
