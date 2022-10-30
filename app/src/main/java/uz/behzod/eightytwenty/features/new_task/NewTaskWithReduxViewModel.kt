@@ -18,7 +18,7 @@ import javax.inject.Inject
 class NewTaskWithReduxViewModel @Inject constructor(
     private val insertTask: InsertTask,
     private val readStorePermission: ReadStorePermission
-) : ReduxViewModel<NewTaskState, NewTaskAction>(NewTaskState()) {
+) : ReduxViewModel<NewTaskState>(NewTaskState()) {
 
     init {
         readStorePermission()
