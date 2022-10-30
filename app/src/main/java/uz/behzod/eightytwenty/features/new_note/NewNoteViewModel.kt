@@ -18,9 +18,9 @@ import java.time.ZonedDateTime
 import javax.inject.Inject
 
 @HiltViewModel
-class NewNoteWithReduxViewModel @Inject constructor(
+class NewNoteViewModel @Inject constructor(
     private val iInsertNote: InsertNote
-) : ReduxViewModel<NewNoteViewState, NewNoteViewEffect>(initialState = NewNoteViewState()) {
+) : ReduxViewModel<NewNoteViewState>(initialState = NewNoteViewState()) {
 
     fun modifyTitle(title: String) {
         modifyState { state -> state.copy(title = title) }
