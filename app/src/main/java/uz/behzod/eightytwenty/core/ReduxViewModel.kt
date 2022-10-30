@@ -6,13 +6,10 @@ import kotlinx.coroutines.flow.*
 import uz.behzod.eightytwenty.core.state.ViewEffect
 import uz.behzod.eightytwenty.core.state.ViewState
 
-abstract class ReduxViewModel<VS: ViewState,VE: ViewEffect>(initialState: VS): ViewModel() {
+abstract class ReduxViewModel<VS: ViewState>(initialState: VS): ViewModel() {
 
     private var _state: MutableStateFlow<VS> = MutableStateFlow(initialState)
     val state: StateFlow<VS> = _state.asStateFlow()
-
-    private var _viewEffect: Channel<VE> = Channel(Channel.BUFFERED)
-    val viewEffect: Flow<VE> = _viewEffect.receiveAsFlow()
 
     val currentState: VS get() = state.value
 
