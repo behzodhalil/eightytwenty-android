@@ -8,6 +8,7 @@ import android.webkit.MimeTypeMap
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
@@ -25,6 +26,7 @@ fun Context.getUriExtension(uri: Uri): String? {
         mimeType
     )
 }
+
 fun View.show(): View {
     if (visibility != View.VISIBLE) {
         visibility = View.VISIBLE
@@ -53,8 +55,11 @@ fun Context.showMessage(message: String, duration: Int = Toast.LENGTH_SHORT) {
 fun Fragment.showMessage(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(requireContext(), message, duration).show()
 }
+
 /**
- * An extension function used to set the strikethrough effect of the drawn text
- * in the view, and the status determines whether to add or remove the effect
- * to the text.
+ * The extension function for set the background to a given resource.
+ * The resource should refer to a Drawable object or
+ * 0 to remove the background.
  */
+fun View.drawable(@DrawableRes id: Int) = setBackgroundResource(id)
+
