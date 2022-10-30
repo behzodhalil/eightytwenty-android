@@ -1,8 +1,8 @@
 package uz.behzod.eightytwenty.features.note_detail
 
-import android.media.Image
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -13,11 +13,10 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentNoteDetailBinding
-import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import uz.behzod.eightytwenty.features.new_note.ImageAdapter
-import uz.behzod.eightytwenty.utils.extension.printDebug
+import uz.behzod.eightytwenty.utils.extension.*
 import uz.behzod.eightytwenty.utils.view.viewBinding
-import java.time.ZonedDateTime
+import uz.behzod.undo_redo.UndoStateListener
 
 @AndroidEntryPoint
 class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
@@ -29,25 +28,38 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupUI()
         setupView()
         observerState()
-    }
 
-    private fun setupUI() {
-        val uid = args.noteId
-        viewModel.fetchNoteRelationByUid(uid)
-        //fetchNoteByUid(uid)
+        setUndoRedoListener()
+
+        onUndoDescription()
+        onRedoDescription()
+        onDeleteNote()
     }
 
     private fun setupView() {
+        initArgs()
+
         setupRecyclerView()
 
+        binding.etTitle.addTextChangedListener { title -> viewModel.updateTitle(title.toString()) }
+        binding.etDesc.addTextChangedListener { desc -> viewModel.updateDesc(desc.toString()) }
+        binding.tvDate.addTextChangedListener { time -> viewModel.updateTimestamp(
+            time.asStringOrEmpty().asZoneDateTime()
+        )}
+    }
+
+    private fun initArgs() {
+        val uid = args.noteId
+        viewModel.fetchNoteRelationByUid(uid)
+        viewModel.updateNoteUid(uid)
     }
 
     private fun setupRecyclerView() {
         imageAdapter = ImageAdapter()
         binding.rvImage.adapter = imageAdapter
+        viewModel.updateImages(imageAdapter.currentList)
     }
     
     private fun observerState() {
@@ -58,19 +70,55 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
     }
 
     private fun renderState(state: NoteDetailState) {
-        val note = state.note
+        val noteState = state.note
+        val isDeleted = state.isDeleted
+        val isDeleteFailed = state.isDeleteFailed
 
-        note?.let {
-            binding.etTitle.setText(it.note.title)
-            binding.etDesc.setText(it.note.description)
-            binding.tvDate.text = it.note.timestamp.toString()
-            imageAdapter.submitList(it.images)
-            printDebug { "[NoteDetailFragment]: Fetched images are ${it.images}" }
+        if(noteState != null) {
+            binding.etTitle.setText(noteState.note.title)
+            binding.etDesc.setText(noteState.note.description)
+            binding.tvDate.text = noteState.note.timestamp.toString()
+            imageAdapter.submitList(noteState.images)
+        }
 
+        if (isDeleted) {
+            val route = NoteDetailFragmentDirections.actionNoteDetailFragmentToNoteFragment()
+            navigateTo(route)
+        }
+        if (isDeleteFailed) {
+            showMessage("You cannot delete note. Please, try it!")
         }
     }
 
-    private fun undoDescription() {
+    private fun setUndoRedoListener() {
+        binding.ivUndo.isEnabled = true
+        binding.ivRedo.isEnabled = true
+
+        binding.etDesc.setUndoStatusListener(object : UndoStateListener {
+
+            override fun onUndoStatusChanged(canUndo: Boolean) {
+                binding.ivUndo.isEnabled = if (canUndo) {
+                    binding.ivUndo.drawable(R.drawable.bg_oval_undo_redo_fill)
+                    true
+                } else   {
+                    binding.ivUndo.drawable(R.drawable.bg_oval_undo_redo)
+                    false
+                }
+            }
+
+            override fun onRedoStatusChanged(canRedo: Boolean) {
+                binding.ivRedo.isEnabled = if (canRedo) {
+                    binding.ivRedo.drawable(R.drawable.bg_oval_undo_redo_fill)
+                    true
+                } else {
+                    binding.ivRedo.drawable(R.drawable.bg_oval_undo_redo)
+                    false
+                }
+            }
+        })
+    }
+
+    private fun onUndoDescription() {
         binding.ivUndo.setOnClickListener {
             if (binding.etDesc.canUndo()) {
                 binding.etDesc.undo()
@@ -78,7 +126,7 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
         }
     }
 
-    private fun redoDescription() {
+    private fun onRedoDescription() {
         binding.ivRedo.setOnClickListener {
             if (binding.etDesc.canRedo()) {
                 binding.etDesc.redo()
@@ -86,14 +134,11 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
         }
     }
 
-    private fun delete() {
+    private fun onDeleteNote() {
         binding.ivDelete.setOnClickListener {
-            binding.etTitle.setText("")
-            binding.etDesc.setText("")
+            viewModel.deleteNote()
         }
     }
 
-    private fun setUndoRedoListener() {
 
-    }
 }
