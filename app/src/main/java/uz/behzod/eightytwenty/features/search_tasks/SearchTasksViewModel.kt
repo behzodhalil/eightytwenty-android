@@ -10,7 +10,7 @@ import uz.behzod.eightytwenty.domain.interactor.task.SearchTasks
 import javax.inject.Inject
 
 /**
- * Construct a <strong> new <strong>SearchTaskViewModel</strong> an instance.
+ * Construct a new [SearchTasksViewModel] an instance.
  *
  */
 
