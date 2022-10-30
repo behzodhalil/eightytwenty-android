@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_success">Success</string>
+    <string name="text_info">Информация</string>
+    <string name="text_warning">Warning</string>
+    <string name="text_error">Error</string>
+</resources>
