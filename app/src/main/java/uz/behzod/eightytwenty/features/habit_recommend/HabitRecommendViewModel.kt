@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import uz.behzod.eightytwenty.core.ReduxViewModel
 import uz.behzod.eightytwenty.domain.interactor.habit_recommend.FetchHabitRecommendsByCategory
-import uz.behzod.eightytwenty.utils.extension.printDebug
 import uz.behzod.eightytwenty.utils.extension.printFailure
 import javax.inject.Inject
 
@@ -15,7 +14,7 @@ import javax.inject.Inject
 class HabitRecommendViewModel @Inject constructor(
     private  val iFetchHabitRecommendsByCategory: FetchHabitRecommendsByCategory
 ) :
-    ReduxViewModel<HabitRecommendState, HabitRecommendAction>(initialState = HabitRecommendState()) {
+    ReduxViewModel<HabitRecommendState>(initialState = HabitRecommendState()) {
 
     fun fetchHabitRecommendsByCategory() {
         val category = currentState.category
@@ -33,7 +32,6 @@ class HabitRecommendViewModel @Inject constructor(
                         )
                     }
 
-                    printDebug { "Result is $habitRecommends" }
                 } else {
                     modifyState { state ->
                         state.copy(
