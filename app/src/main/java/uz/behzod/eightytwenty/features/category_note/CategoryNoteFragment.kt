@@ -2,52 +2,50 @@ package uz.behzod.eightytwenty.features.category_note
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentCategoryNoteBinding
-import uz.behzod.eightytwenty.domain.model.NoteCategoryDomainModel
-import uz.behzod.eightytwenty.utils.extension.gone
-import uz.behzod.eightytwenty.utils.extension.hide
-import uz.behzod.eightytwenty.utils.extension.show
+import uz.behzod.eightytwenty.utils.extension.*
 import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
 class CategoryNoteFragment : Fragment(R.layout.fragment_category_note) {
 
     private val binding by viewBinding(FragmentCategoryNoteBinding::bind)
-    private val viewModel: CategoryNoteViewModel by viewModels()
+    private val viewModel: CategoryViewModel by viewModels()
     private lateinit var adapter: CategoryNoteAdapter
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupUI()
-    }
+        setupView()
 
-    private fun setupUI() {
-        initRecyclerView()
+        observeState()
 
-        fetchCategories()
-
-        onDoNewCategory()
-        onDoCancel()
-        onAddNewCategory()
-
+        onSaveOrCancel()
         onNavigateNote()
-        onNavigateNotesByName()
         onNavigateToSearchNote()
+
+        swipeToDelete()
     }
 
-    private fun initRecyclerView() {
+    private fun setupView() {
+        setupRecyclerView()
+
+        binding.etNewCategory.addTextChangedListener { name -> viewModel.updateCategoryName(name.asStringOrEmpty()) }
+    }
+
+    private fun setupRecyclerView() {
         adapter = CategoryNoteAdapter {
             val action = CategoryNoteFragmentDirections.actionCategoryNoteFragmentToNoteFragment(
                 it.uid,
@@ -58,88 +56,99 @@ class CategoryNoteFragment : Fragment(R.layout.fragment_category_note) {
         binding.rvNoteCategories.adapter = adapter
     }
 
+    private fun observeState() {
+        viewModel.state
+            .flowWithLifecycle(lifecycle)
+            .onEach { state -> renderState(state) }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun renderState(state: CategoryState) {
+        val isSaved = state.onSaved
+        val isSuccess = state.onSuccess
+        val isDeleted = state.onDeleted
+
+        if (isSaved) {
+            showMessage("Category is successfully saved")
+            binding.btnNewCategory.hide()
+            binding.btnNewSubCategory.hide()
+            binding.btnCancel.hide()
+            binding.btnNewCategoryNote.show()
+            binding.etNewCategory.gone()
+            viewModel.hasSaved(value = false)
+        }
+        if (isSuccess) {
+            adapter.submitList(state.categories)
+        }
+
+        if (isDeleted) {
+            showMessage("Category is successfully deleted")
+        }
+    }
+
+
     private fun onNavigateNote() {
         binding.ivBack.setOnClickListener {
             findNavController().navigate(R.id.action_categoryNoteFragment_to_noteFragment)
         }
     }
 
-    private fun onNavigateNotesByName() {
-
-    }
-
     private fun onNavigateToSearchNote() {
         binding.ivSearch.setOnClickListener {
             val action =
                 CategoryNoteFragmentDirections.actionCategoryNoteFragmentToSearchNotesFragment()
-            findNavController().navigate(action)
+            navigateTo(action)
         }
     }
 
-    private fun onDoNewCategory() {
+
+    private fun onSaveOrCancel() {
         binding.btnNewCategoryNote.setOnClickListener {
             binding.btnNewCategory.show()
             binding.btnNewSubCategory.show()
             binding.btnCancel.show()
             binding.btnNewCategoryNote.hide()
         }
-    }
 
-    private fun onDoCancel() {
+        binding.btnNewCategory.setOnClickListener {
+            binding.etNewCategory.show()
+            binding.btnNewCategory.setOnClickListener {
+                viewModel.insertCategory()
+            }
+        }
+
         binding.btnCancel.setOnClickListener {
 
         }
     }
 
-    private fun onAddNewCategory() {
-        binding.btnNewCategory.setOnClickListener {
-            binding.etNewCategory.show()
-            binding.btnNewCategory.setOnClickListener {
-                onInsertNewCategory().run {
-                    Toast.makeText(
-                        requireContext(),
-                        "Category is successfully saved",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    binding.btnNewCategory.hide()
-                    binding.btnNewSubCategory.hide()
-                    binding.btnCancel.hide()
-                    binding.btnNewCategoryNote.show()
-                    binding.etNewCategory.gone()
+    private fun swipeToDelete() {
+        val itemTouchHelperCallback =
+            object : ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+            ) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    return true
                 }
 
-            }
-        }
-    }
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val position = viewHolder.absoluteAdapterPosition
+                    val category = adapter.currentList[position]
 
-    private fun onInsertNewCategory() {
-        lifecycleScope.launch {
-            viewModel.insertNoteCategory(
-                NoteCategoryDomainModel(name = binding.etNewCategory.text.toString())
-            )
-        }
-    }
+                    viewModel.updateCategoryName(category.name)
+                    viewModel.updateUid(category.uid)
 
-    private fun fetchCategories() {
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect { result ->
-                    when (result) {
-                        is CategoryNoteUIState.Empty -> {
-
-                        }
-                        is CategoryNoteUIState.Failure -> {
-
-                        }
-                        is CategoryNoteUIState.Loading -> {
-
-                        }
-                        is CategoryNoteUIState.Success -> {
-                            adapter.submitList(result.data)
-                        }
-                    }
+                    viewModel.deleteCategory()
                 }
             }
+        ItemTouchHelper(itemTouchHelperCallback).apply {
+            attachToRecyclerView(binding.rvNoteCategories)
         }
     }
+
 }
