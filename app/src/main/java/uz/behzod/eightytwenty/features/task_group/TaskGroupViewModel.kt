@@ -16,7 +16,7 @@ import javax.inject.Inject
 class TaskGroupViewModel @Inject constructor(
     fetchGroups: FetchTaskCatalogs,
     private val insertGroup: InsertTaskCatalog
-) : ReduxViewModel<TaskGroupState, TaskGroupAction>(initialState = TaskGroupState()) {
+) : ReduxViewModel<TaskGroupState>(initialState = TaskGroupState()) {
 
     init {
         fetchGroups.invoke()
