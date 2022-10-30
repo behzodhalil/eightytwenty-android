@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HabitDetailWithReduxViewModel @Inject constructor(
     private val iFetchHabitByUid: FetchHabitByUid
-) : ReduxViewModel<HabitDetailState, HabitDetailAction>(
+) : ReduxViewModel<HabitDetailState>(
     initialState = HabitDetailState()
 ) {
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Success color -->
+    <color name="banana">#b4fac4</color>
+    <!-- Info color -->
+    <color name="bellagio">#b4e3f3</color>
+    <!-- Warning color-->
+    <color name="carrot_orange">#fbe3c4</color>
+    <!-- Error color -->
+    <color name="mammary">#fbb4bb</color>
+    <color name="black">#000000</color>
+</resources>
