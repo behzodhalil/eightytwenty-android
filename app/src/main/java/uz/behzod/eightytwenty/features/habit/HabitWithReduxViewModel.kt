@@ -12,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HabitWithReduxViewModel @Inject constructor(
     private val iFetchHabitsByDate: FetchHabitsByDate
-) : ReduxViewModel<HabitState, HabitAction>(
+) : ReduxViewModel<HabitState>(
     initialState = HabitState()
 ) {
     fun modifyTimestamp(value: String) {
