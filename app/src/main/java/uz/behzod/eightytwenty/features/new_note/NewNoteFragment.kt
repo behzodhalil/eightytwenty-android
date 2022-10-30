@@ -4,7 +4,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -24,13 +23,17 @@ import uz.behzod.eightytwenty.utils.helper.BitmapHelper
 import uz.behzod.eightytwenty.utils.view.viewBinding
 import uz.behzod.undo_redo.UndoEditText
 import uz.behzod.undo_redo.UndoStateListener
+import uz.behzoddev.ui_toast.XToast
+import uz.behzoddev.ui_toast.XToastStyle
+import uz.behzoddev.ui_toast.errorMessage
+import uz.behzoddev.ui_toast.successMessage
 import java.time.ZonedDateTime
 
 @AndroidEntryPoint
 class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListeners {
 
     private val binding by viewBinding(FragmentNewNoteBinding::bind)
-    private val viewModel: NewNoteWithReduxViewModel by viewModels()
+    private val viewModel: NewNoteViewModel by viewModels()
     private val args: NewNoteFragmentArgs by navArgs()
     private lateinit var imageAdapter: ImageAdapter
 
@@ -48,15 +51,19 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
         setupView()
         observerState()
 
-        undo()
-        redo()
-        delete()
+        initImagePicker()
+        initMaxHistorySize()
+
+        setUndoRedoListener()
+
+        onUndoDescription()
+        onRedoDescription()
+        onRemoveTitleAndDesc()
+        onSaveOrCancel()
     }
 
     private fun setupView() {
-        imageAdapter = ImageAdapter()
-
-        binding.rvImage.adapter = imageAdapter
+        setupRecyclerView()
 
         binding.tvDate.text = ZonedDateTime.now().toString()
 
@@ -69,30 +76,12 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
         }
 
         viewModel.modifyIsTrashed(false)
-
         viewModel.modifyGroupUid(args.categoryId)
+    }
 
-        binding.btnSaveOrCancel.setOnClickListener {
-            viewModel.insertNote()
-        }
-
-        binding.ivImage.setOnClickListener {
-            val screen = ImagePickerFragment().apply {
-                setTakePictureListener {
-                    onTakePicture()
-                }
-                setPickFromGalleryListener {
-                    pickImageLauncher.launch(arrayOf("image/*"))
-                    printDebug { "Pick image launcher is launched." }
-                }
-            }
-            transaction(screen)
-        }
-
-        binding.etDesc.setMaxHistorySize(UndoEditText.HISTORY_INFINITE)
-
-        setUndoRedoListener()
-
+    private fun setupRecyclerView() {
+        imageAdapter = ImageAdapter()
+        binding.rvImage.adapter = imageAdapter
     }
 
     private fun observerState() {
@@ -116,6 +105,54 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
 
     }
 
+    private fun initImagePicker() {
+        binding.ivImage.setOnClickListener {
+            val screen = ImagePickerFragment().apply {
+                setTakePictureListener {
+                    onTakePicture()
+                }
+                setPickFromGalleryListener {
+                    pickImageLauncher.launch(arrayOf("image/*"))
+                    printDebug { "Pick image launcher is launched." }
+                }
+            }
+            transaction(screen)
+        }
+    }
+
+    private fun initMaxHistorySize() {
+        binding.etDesc.setMaxHistorySize(UndoEditText.HISTORY_INFINITE)
+    }
+
+    private fun setUndoRedoListener() {
+        binding.ivUndo.isEnabled = true
+        binding.ivRedo.isEnabled = true
+
+        binding.etDesc.setUndoStatusListener(object : UndoStateListener {
+
+            override fun onUndoStatusChanged(canUndo: Boolean) {
+                binding.ivUndo.isEnabled = if (canUndo) {
+                    binding.ivUndo.drawable(R.drawable.bg_oval_undo_redo_fill)
+                    true
+                } else   {
+                    binding.ivUndo.drawable(R.drawable.bg_oval_undo_redo)
+                    false
+                }
+            }
+
+            override fun onRedoStatusChanged(canRedo: Boolean) {
+                binding.ivRedo.isEnabled = if (canRedo) {
+                    binding.ivRedo.drawable(R.drawable.bg_oval_undo_redo_fill)
+                    true
+                } else {
+                    binding.ivRedo.drawable(R.drawable.bg_oval_undo_redo)
+                    false
+                }
+            }
+        })
+
+    }
+
     private fun onTakePicture() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             val uri = BitmapHelper.saveImage(requireContext())
@@ -128,7 +165,12 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
     override fun addImages(uriSource: List<Uri>) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             uriSource.forEach {
-                viewModel.currentState.images += listOf(NoteImageEntity(uri = it, imageUid = NoteImageEntity.generateUid() ))
+                viewModel.currentState.images += listOf(
+                    NoteImageEntity(
+                        uri = it,
+                        imageUid = NoteImageEntity.generateUid()
+                    )
+                )
             }
             imageAdapter.submitList(viewModel.currentState.images)
         }
@@ -138,13 +180,14 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
         val tempUri = viewModel.currentState.uri
         if (state && tempUri != null) {
             addImages(listOf(tempUri))
-            showMessage("Photo was taken")
+            successMessage("Photo was taken")
         } else {
-            showMessage("No photo was taken")
+            errorMessage("No photo was taken")
         }
     }
 
-    private fun undo() {
+
+    private fun onUndoDescription() {
         binding.ivUndo.setOnClickListener {
             if (binding.etDesc.canUndo()) {
                 binding.etDesc.undo()
@@ -152,7 +195,7 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
         }
     }
 
-    private fun redo() {
+    private fun onRedoDescription() {
         binding.ivRedo.setOnClickListener {
             if (binding.etDesc.canRedo()) {
                 binding.etDesc.redo()
@@ -160,26 +203,21 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
         }
     }
 
-    private fun delete() {
+    private fun onRemoveTitleAndDesc() {
         binding.ivDelete.setOnClickListener {
             binding.etDesc.setText("")
             binding.etTitle.setText("")
         }
     }
 
-    private fun setUndoRedoListener() {
+    private fun onSaveOrCancel() {
+        binding.btnSaveOrCancel.setOnClickListener {
+            viewModel.insertNote()
+        }
+    }
 
-        binding.etDesc.setUndoStatusListener(object: UndoStateListener {
+    private fun onMoveToGroup() {
 
-            override fun onUndoStatusChanged(canUndo: Boolean) {
-                binding.ivUndo.isEnabled = canUndo
-            }
-
-            override fun onRedoStatusChanged(canRedo: Boolean) {
-                binding.ivRedo.isEnabled = canRedo
-            }
-
-        })
     }
 
 }
