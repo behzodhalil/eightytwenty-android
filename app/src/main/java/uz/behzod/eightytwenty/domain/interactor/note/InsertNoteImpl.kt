@@ -20,16 +20,13 @@ class InsertNoteImpl @Inject constructor(
 ): InsertNote {
 
     override suspend fun invoke(data: NoteDomainModel, images: List<NoteImageEntity>) {
-        return withContext(dispatcherProvider.io + NonCancellable) {
+        return withContext(dispatcherProvider.io) {
             iNoteCategoryRepository.incrementNoteCount(data.categoryId)
             val noteUid = iNoteRepository.insertNote(data.asEntity())
             images.forEach {
                 it.noteUid = noteUid
                 iImageRepository.insertNoteImage(it)
             }
-
-            printDebug { "[Test Images] InsertNoteUseCase are $images" }
-
         }
     }
 }
