@@ -13,10 +13,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NoteWithReduxViewModel @Inject constructor(
-    private val iFetchNotes: FetchNotes,
+    iFetchNotes: FetchNotes,
     private val iFetchNotesByCategoryId: FetchNotesByCategoryId,
     private val iFetchCategoryAndNotes: FetchAllCategoriesAndNotes
-) : ReduxViewModel<NoteViewState,NoteViewEffect>(initialState = NoteViewState()) {
+) : ReduxViewModel<NoteViewState>(initialState = NoteViewState()) {
 
     init {
         iFetchNotes.invoke()
