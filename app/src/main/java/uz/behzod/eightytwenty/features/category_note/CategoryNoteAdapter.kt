@@ -1,5 +1,6 @@
 package uz.behzod.eightytwenty.features.category_note
 
+import android.provider.ContactsContract.CommonDataKinds.Note
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.behzod.eightytwenty.databinding.ViewHolderCategoryNoteBinding
 import uz.behzod.eightytwenty.domain.model.NoteCategoryDomainModel
 
-class CategoryNoteAdapter(private val onClickListener: (data: NoteCategoryDomainModel) -> Unit) :
+private typealias OnClickListener = (data: NoteCategoryDomainModel) -> Unit
+
+class CategoryNoteAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<NoteCategoryDomainModel, CategoryNoteAdapter.CategoryNoteViewHolder>(COMPARATOR) {
 
     companion object {
