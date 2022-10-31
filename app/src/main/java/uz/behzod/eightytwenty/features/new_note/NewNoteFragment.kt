@@ -23,8 +23,6 @@ import uz.behzod.eightytwenty.utils.helper.BitmapHelper
 import uz.behzod.eightytwenty.utils.view.viewBinding
 import uz.behzod.undo_redo.UndoEditText
 import uz.behzod.undo_redo.UndoStateListener
-import uz.behzoddev.ui_toast.XToast
-import uz.behzoddev.ui_toast.XToastStyle
 import uz.behzoddev.ui_toast.errorMessage
 import uz.behzoddev.ui_toast.successMessage
 import java.time.ZonedDateTime
@@ -32,10 +30,19 @@ import java.time.ZonedDateTime
 @AndroidEntryPoint
 class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListeners {
 
+    companion object {
+        private const val REQ_NAME_KEY = "NOTE_GROUP_PICKER_NAME_KEY"
+        private const val REQ_NAME_VALUE = "NOTE_GROUP_PICKER_NAME_VALUE"
+        private const val REQ_UID_KEY = "NOTE_GROUP_PICKER_UID_KEY"
+        private const val REQ_UID_VALUE = "NOTE_GROUP_PICKER_UID_VALUE"
+    }
+
     private val binding by viewBinding(FragmentNewNoteBinding::bind)
     private val viewModel: NewNoteViewModel by viewModels()
     private val args: NewNoteFragmentArgs by navArgs()
-    private lateinit var imageAdapter: ImageAdapter
+    private val imageAdapter: ImageAdapter by lazy {
+        ImageAdapter()
+    }
 
     private val takePictureLauncher = registerForActivityResult(
         ActivityResultContracts.TakePicture()
@@ -59,7 +66,9 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
         onUndoDescription()
         onRedoDescription()
         onRemoveTitleAndDesc()
+        onMoveToGroup()
         onSaveOrCancel()
+        onTakeGroupListener()
     }
 
     private fun setupView() {
@@ -80,7 +89,6 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
     }
 
     private fun setupRecyclerView() {
-        imageAdapter = ImageAdapter()
         binding.rvImage.adapter = imageAdapter
     }
 
@@ -134,7 +142,7 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
                 binding.ivUndo.isEnabled = if (canUndo) {
                     binding.ivUndo.drawable(R.drawable.bg_oval_undo_redo_fill)
                     true
-                } else   {
+                } else {
                     binding.ivUndo.drawable(R.drawable.bg_oval_undo_redo)
                     false
                 }
@@ -216,8 +224,25 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
         }
     }
 
-    private fun onMoveToGroup() {
+    private fun onTakeGroupListener() {
+        supportFragmentManager.setFragmentResultListener(
+            REQ_UID_KEY, viewLifecycleOwner
+        ) { _, bundle ->
+            val result = bundle.getLong(REQ_UID_VALUE)
+            viewModel.modifyGroupUid(result)
+        }
+    }
 
+    private fun onMoveToGroup() {
+        binding.ivMoveToGroup.setOnClickListener {
+            val screen = NoteGroupPickerFragment()
+            transaction(screen)
+            screen.setOnClickListener(object: NoteGroupPickerListener {
+                override fun onClickListener() {
+                    successMessage("You taken the ${viewModel.currentState.categoryUid}")
+                }
+            })
+        }
     }
 
 }
