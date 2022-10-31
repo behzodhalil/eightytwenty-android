@@ -13,6 +13,7 @@ EightyTwenty is life planner application with beautiful user interface.
 - [ ] Move note to other group
 - [x] Save note to other group
 - [ ] Show notes by group
+- [ ] Bind images with note in home page
 - [ ] Draw 'Setting' UI
 - [ ] Draw 'Sign In' UI
 - [ ] Draw 'Sign Up' UI
