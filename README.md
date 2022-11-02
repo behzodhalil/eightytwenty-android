@@ -10,7 +10,7 @@ EightyTwenty is life planner application with beautiful user interface.
 - [x] Delete note
 - [x] Custom toast message
 - [x] Delete note category
-- [ ] Move note to other group
+- [x] Move note to other group
 - [x] Save note to other group
 - [ ] Show notes by group
 - [ ] Bind images with note in home page
