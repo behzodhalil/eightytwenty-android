@@ -11,12 +11,12 @@ import uz.behzod.eightytwenty.data.local.entities.*
         HabitEntity::class, HabitRecommendEntity::class,
         TaskEntity::class, TaskCatalogEntity::class,
         ScheduleEntity::class, AttachmentEntity::class,
-        NoteImageEntity::class],
-    version = 7,
+        NoteImageEntity::class, UserEntity::class],
+    version = 8,
     exportSchema = true
 )
 
-@TypeConverters(ZonedDateTimeConverter::class,UriConverter::class)
+@TypeConverters(ZonedDateTimeConverter::class, UriConverter::class)
 abstract class EightyTwentyDatabase : RoomDatabase() {
     abstract fun getNoteDao(): NoteDao
     abstract fun getNoteCategoryDao(): NoteCategoryDao
@@ -27,6 +27,7 @@ abstract class EightyTwentyDatabase : RoomDatabase() {
     abstract fun getScheduleDao(): ScheduleDao
     abstract fun getAttachmentDao(): AttachmentDao
     abstract fun getNoteImageDao(): NoteImageDao
+    abstract fun getUserDao(): UserDao
 }
 
 class SpecMigration : AutoMigrationSpec
