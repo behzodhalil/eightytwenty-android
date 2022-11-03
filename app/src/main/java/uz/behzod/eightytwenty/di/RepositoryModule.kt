@@ -64,4 +64,8 @@ interface RepositoryModule {
     @get:Binds
     @get:Singleton
     val ImageRepositoryImpl.bindImageRepository: ImageRepository
+
+    @get:Binds
+    @get:Singleton
+    val DefaultLoginRepository.bindLogin: LoginRepository
 }
