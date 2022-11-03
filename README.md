@@ -14,8 +14,10 @@ EightyTwenty is life planner application with beautiful user interface.
 - [x] Save note to other group
 - [ ] Show notes by group
 - [x] Bind images with note in home page
+- [x] Connect with Firebase
+- [x] Setup shows once onboarding screen
 - [ ] Draw 'Setting' UI
-- [ ] Draw 'Sign In' UI
+- [x] Draw 'Sign In' UI
 - [ ] Draw 'Sign Up' UI
 - [ ] Draw 'Calendar' UI
 - [ ] Separate task by active & complete
