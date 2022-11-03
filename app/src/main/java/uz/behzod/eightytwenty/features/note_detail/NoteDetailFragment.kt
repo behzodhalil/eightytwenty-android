@@ -12,14 +12,23 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.behzod.eightytwenty.R
+import uz.behzod.eightytwenty.data.local.entities.asDomain
 import uz.behzod.eightytwenty.databinding.FragmentNoteDetailBinding
 import uz.behzod.eightytwenty.features.new_note.ImageAdapter
+import uz.behzod.eightytwenty.features.new_note.NoteGroupPickerFragment
+import uz.behzod.eightytwenty.features.new_note.NoteGroupPickerListener
 import uz.behzod.eightytwenty.utils.extension.*
 import uz.behzod.eightytwenty.utils.view.viewBinding
 import uz.behzod.undo_redo.UndoStateListener
+import uz.behzoddev.ui_toast.errorMessage
 
 @AndroidEntryPoint
 class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
+
+    companion object {
+        private const val REQ_UID_KEY = "NOTE_GROUP_PICKER_UID_KEY"
+        private const val REQ_UID_VALUE = "NOTE_GROUP_PICKER_UID_VALUE"
+    }
 
     private val binding by viewBinding(FragmentNoteDetailBinding::bind)
     private val viewModel: NoteDetailViewModel by viewModels()
@@ -28,6 +37,7 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupView()
         observerState()
 
@@ -36,6 +46,7 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
         onUndoDescription()
         onRedoDescription()
         onDeleteNote()
+        onMoveToGroup()
     }
 
     private fun setupView() {
@@ -45,9 +56,11 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
 
         binding.etTitle.addTextChangedListener { title -> viewModel.updateTitle(title.toString()) }
         binding.etDesc.addTextChangedListener { desc -> viewModel.updateDesc(desc.toString()) }
-        binding.tvDate.addTextChangedListener { time -> viewModel.updateTimestamp(
-            time.asStringOrEmpty().asZoneDateTime()
-        )}
+        binding.tvDate.addTextChangedListener { time ->
+            viewModel.updateTimestamp(
+                time.asStringOrEmpty().asZoneDateTime()
+            )
+        }
     }
 
     private fun initArgs() {
@@ -61,7 +74,7 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
         binding.rvImage.adapter = imageAdapter
         viewModel.updateImages(imageAdapter.currentList)
     }
-    
+
     private fun observerState() {
         viewModel.state
             .flowWithLifecycle(viewLifecycleOwner.lifecycle)
@@ -73,11 +86,14 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
         val noteState = state.note
         val isDeleted = state.isDeleted
         val isDeleteFailed = state.isDeleteFailed
+        val isMoved = state.isMoved
+        val isMoveFailed = state.isMoveFailed
 
-        if(noteState != null) {
+        if (noteState != null) {
             binding.etTitle.setText(noteState.note.title)
             binding.etDesc.setText(noteState.note.description)
             binding.tvDate.text = noteState.note.timestamp.toString()
+            viewModel.updateNotes(listOf(noteState.note.asDomain()))
             imageAdapter.submitList(noteState.images)
         }
 
@@ -87,6 +103,13 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
         }
         if (isDeleteFailed) {
             showMessage("You cannot delete note. Please, try it!")
+        }
+        if (isMoved) {
+            val route = NoteDetailFragmentDirections.actionNoteDetailFragmentToNoteFragment()
+            navigateTo(route)
+        }
+        if (isMoveFailed) {
+            errorMessage("Cannot move to group")
         }
     }
 
@@ -100,7 +123,7 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
                 binding.ivUndo.isEnabled = if (canUndo) {
                     binding.ivUndo.drawable(R.drawable.bg_oval_undo_redo_fill)
                     true
-                } else   {
+                } else {
                     binding.ivUndo.drawable(R.drawable.bg_oval_undo_redo)
                     false
                 }
@@ -140,5 +163,28 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
         }
     }
 
+    private fun onTakeGroupListener() {
+        supportFragmentManager.setFragmentResultListener(
+            REQ_UID_KEY,
+            viewLifecycleOwner
+        ) { _, bundle ->
+            val result = bundle.getLong(REQ_UID_VALUE)
+            printDebug { "NoteDetailFragment: Uid value is $result" }
+            viewModel.updateGroupUid(result)
+            viewModel.moveToGroup()
+        }
+    }
+
+    private fun onMoveToGroup() {
+        binding.ivMoveToGroup.setOnClickListener {
+            val screen = NoteGroupPickerFragment()
+            transaction(screen)
+            screen.setOnClickListener(object : NoteGroupPickerListener {
+                override fun onClickListener() {
+                    onTakeGroupListener()
+                }
+            })
+        }
+    }
 
 }
