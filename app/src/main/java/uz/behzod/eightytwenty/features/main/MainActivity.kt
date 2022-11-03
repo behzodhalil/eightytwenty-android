@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity() {
 
         navHost.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.newNoteFragment, R.id.categoryNoteFragment, R.id.newHabitFragment
+                R.id.newNoteFragment, R.id.categoryNoteFragment, R.id.newHabitFragment,
+                R.id.signInFragment
                 -> {
                     binding.bottomNav.gone()
                 }
@@ -47,15 +48,14 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun setFullContent() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-            private fun setFullContent() {
-                requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
 
-                window.setFlags(
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN
-                )
-
-                supportActionBar?.hide()
-            }
-        }
+        supportActionBar?.hide()
+    }
+}
