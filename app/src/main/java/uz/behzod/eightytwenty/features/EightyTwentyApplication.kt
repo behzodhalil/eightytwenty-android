@@ -3,6 +3,7 @@ package uz.behzod.eightytwenty.features
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
+import com.google.firebase.FirebaseApp
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
@@ -23,6 +24,7 @@ class EightyTwentyApplication: Application(),Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
+        initializeFirebaseApp()
         val prettyFormatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
             .showThreadInfo(true)
             .methodCount(METHOD_COUNT)
@@ -44,6 +46,10 @@ class EightyTwentyApplication: Application(),Configuration.Provider {
         return Configuration.Builder()
             .setMinimumLoggingLevel(android.util.Log.INFO)
             .setWorkerFactory(workerFactory).build()
+    }
+
+    private fun initializeFirebaseApp() {
+        FirebaseApp.initializeApp(this)
     }
 }
 
