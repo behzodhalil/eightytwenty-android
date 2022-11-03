@@ -1,5 +1,6 @@
 package uz.behzod.eightytwenty.features.onboarding
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Window
@@ -20,6 +21,11 @@ import uz.behzod.eightytwenty.utils.extension.show
 @AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
 
+    companion object {
+        private const val PREFS_ONBOARDING = "PREFS_ONBOARDING"
+        private const val PREFS_IS_OPENED = "PREFS_ONBOARDING_IS_OPENED"
+    }
+
     private lateinit var binding: ActivityOnboardingBinding
     private lateinit var mViewPager: OnboardingViewPagerAdapter
     private val viewModel: OnboardingViewModel by viewModels()
@@ -30,8 +36,13 @@ class OnboardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setUpFullContent()
+        if (isOnboardingOpened()) {
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         setContentView(binding.root)
-        setUpUI()
+        setupView()
     }
 
     private fun setUpFullContent() {
@@ -45,7 +56,7 @@ class OnboardingActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
-    private fun setUpUI() {
+    private fun setupView() {
         initViewPager()
 
         observeEvents()
@@ -97,6 +108,8 @@ class OnboardingActivity : AppCompatActivity() {
     private fun onNavigateToBecomeProductivity() {
         val intent = Intent(this,MainActivity::class.java)
         startActivity(intent)
+        finish()
+        setOnboardingOpened()
     }
 
     private fun onDisplayBecomeProductivity() {
@@ -105,6 +118,23 @@ class OnboardingActivity : AppCompatActivity() {
         binding.ivRight.hide()
 
         binding.btnBecomeProductivity.show()
+    }
+
+    private fun isOnboardingOpened(): Boolean {
+        val pref = applicationContext.getSharedPreferences(
+            PREFS_ONBOARDING,
+            Context.MODE_PRIVATE
+        )
+        return pref.getBoolean(PREFS_IS_OPENED,false)
+    }
+
+    private fun setOnboardingOpened() {
+        val pref = applicationContext.getSharedPreferences(
+            PREFS_ONBOARDING,
+            Context.MODE_PRIVATE
+        )
+        val editor = pref.edit().putBoolean(PREFS_IS_OPENED,true)
+        editor.commit()
     }
 
 }
