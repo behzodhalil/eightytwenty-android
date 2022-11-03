@@ -18,8 +18,10 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.core.ReduxViewModel
+import uz.behzod.eightytwenty.data.local.entities.NoteRelation
 import uz.behzod.eightytwenty.databinding.FragmentNoteBinding
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
+import uz.behzod.eightytwenty.utils.extension.printDebug
 import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
@@ -48,7 +50,7 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
 
     private fun initAdapter() {
         adapter = NoteAdapter {
-            val action = NoteFragmentDirections.actionNoteFragmentToNoteDetailFragment(it.id)
+            val action = NoteFragmentDirections.actionNoteFragmentToNoteDetailFragment(it.note.id)
             findNavController().navigate(action)
         }
         binding.rvNote.adapter = adapter
@@ -132,19 +134,29 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
     private fun observeState() {
         viewModel.state
             .flowWithLifecycle(viewLifecycleOwner.lifecycle,Lifecycle.State.STARTED)
-            .onEach { state -> renderState(state) }
+            .onEach { state ->
+                viewModel.updateGroupUid(args.categoryId)
+                // viewModel.fetchNotesByUid()
+                viewModel.fetchNotes()
+                renderState(state) }
             .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun renderState(state: NoteViewState) {
+        printDebug { "Argument is ${args.categoryId}" }
         val notes = state.notes
 
-        if (notes.isNotEmpty()) {
+        if (notes.isNotEmpty() && state.groupUid != 0L) {
             getNotes(notes)
         }
+
+        if (state.onSuccess) {
+            getNotes(notes)
+        }
+
     }
 
-    private fun getNotes(notes: List<NoteDomainModel>) = adapter.submitList(notes)
+    private fun getNotes(notes: List<NoteRelation>) = adapter.submitList(notes)
 
     companion object {
         private const val TAG = "NoteFragment"
