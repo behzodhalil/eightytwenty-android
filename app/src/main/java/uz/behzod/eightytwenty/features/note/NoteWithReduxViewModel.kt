@@ -5,6 +5,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.behzod.eightytwenty.core.ReduxViewModel
+import uz.behzod.eightytwenty.domain.interactor.note.FetchAllNoteRelation
 import uz.behzod.eightytwenty.domain.interactor.note.FetchNotes
 import uz.behzod.eightytwenty.domain.interactor.note.FetchNotesByCategoryId
 import uz.behzod.eightytwenty.domain.interactor.note_category.FetchAllCategoriesAndNotes
@@ -13,20 +14,22 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NoteWithReduxViewModel @Inject constructor(
-    iFetchNotes: FetchNotes,
+    private val iFetchNotes: FetchNotes,
+    private val iFetchAllNoteRelation: FetchAllNoteRelation,
     private val iFetchNotesByCategoryId: FetchNotesByCategoryId,
     private val iFetchCategoryAndNotes: FetchAllCategoriesAndNotes
 ) : ReduxViewModel<NoteViewState>(initialState = NoteViewState()) {
 
-    init {
-        iFetchNotes.invoke()
+    fun fetchNotes() {
+        iFetchAllNoteRelation.execute()
             .onEach { result ->
                 if (result.isNotEmpty()) {
                     modifyState { state ->
                         state.copy(
                             notes = result,
                             isLoading = false,
-                            isEmpty = false
+                            isEmpty = false,
+                            onSuccess = true
                         )
                     }
                     printDebug { "Result is $result" }
@@ -40,5 +43,23 @@ class NoteWithReduxViewModel @Inject constructor(
                     }
                 }
             }.launchIn(viewModelScope)
+
     }
+
+
+    fun fetchNotesByUid() {
+        val groupUid = currentState.groupUid
+        printDebug { "Category uid is $groupUid" }
+        iFetchNotesByCategoryId.invoke(groupUid)
+            .onEach {
+
+            }
+            .launchIn(viewModelScope)
+
+    }
+
+    fun updateGroupUid(value: Long) {
+        modifyState { state -> state.copy(groupUid = value) }
+    }
+
 }
