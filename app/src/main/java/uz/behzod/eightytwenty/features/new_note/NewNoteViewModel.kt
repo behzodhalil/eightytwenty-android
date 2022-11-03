@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.core.ReduxViewModel
 import uz.behzod.eightytwenty.domain.interactor.note.InsertNote
+import uz.behzod.eightytwenty.domain.interactor.note.MoveToGroupNote
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import uz.behzod.eightytwenty.utils.extension.getUriExtension
 import uz.behzod.eightytwenty.utils.extension.printDebug
@@ -19,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewNoteViewModel @Inject constructor(
-    private val iInsertNote: InsertNote
+    private val iInsertNote: InsertNote,
+    private val moveToGroupNote: MoveToGroupNote
 ) : ReduxViewModel<NewNoteViewState>(initialState = NewNoteViewState()) {
 
     fun modifyTitle(title: String) {
@@ -54,6 +56,7 @@ class NewNoteViewModel @Inject constructor(
             val desc = state.value.description.trim()
             val timestamp = state.value.timestamp
             val isTrashed = state.value.isTrashed
+            val groupUid = state.value.categoryUid
             val images = state.value.images
 
             modifyState { state -> state.copy(isLoading = true) }
@@ -64,7 +67,8 @@ class NewNoteViewModel @Inject constructor(
                         title = title,
                         description = desc,
                         timestamp = timestamp,
-                        isTrashed = isTrashed
+                        isTrashed = isTrashed,
+                        categoryId = groupUid
                     ), images
                 )
                 printDebug { "[Test Image] Images are $images" }
