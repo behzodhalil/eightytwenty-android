@@ -29,3 +29,17 @@ EightyTwenty is life planner application with beautiful user interface.
 - [ ] Add task group
 - [ ] Add task into task group
 
+
+### 🔨 Technologies used:
+
+- Kotlin
+- Coroutines
+- Hilt
+- Room
+- ViewPager2
+- Navigation
+- WorkManager
+- Timber
+- Logger
+- Coil
+- Truth
