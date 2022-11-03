@@ -10,8 +10,10 @@ import uz.behzod.eightytwenty.data.local.entities.NoteImageEntity
 import uz.behzod.eightytwenty.data.local.entities.isNotEmpty
 import uz.behzod.eightytwenty.domain.interactor.note.DeleteNote
 import uz.behzod.eightytwenty.domain.interactor.note.FetchNoteRelationByUid
+import uz.behzod.eightytwenty.domain.interactor.note.MoveToGroupNote
 import uz.behzod.eightytwenty.domain.interactor.note.UpdateNote
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
+import uz.behzod.eightytwenty.utils.extension.printDebug
 import java.time.ZonedDateTime
 import javax.inject.Inject
 
@@ -19,7 +21,8 @@ import javax.inject.Inject
 class NoteDetailViewModel @Inject constructor(
     private val defaultUpdateNote: UpdateNote,
     private val defaultDeleteNote: DeleteNote,
-    private val defaultFetchNoteRelationByUid: FetchNoteRelationByUid
+    private val defaultFetchNoteRelationByUid: FetchNoteRelationByUid,
+    private val defaultMoveToGroupNote: MoveToGroupNote
 ) : ReduxViewModel<NoteDetailState>(NoteDetailState()) {
 
     fun updateTitle(value: String) {
@@ -46,6 +49,9 @@ class NoteDetailViewModel @Inject constructor(
         modifyState { state -> state.copy(timestamp = value) }
     }
 
+    fun updateNotes(value: List<NoteDomainModel>) {
+        modifyState { state -> state.copy(notes = value) }
+    }
     fun updateNote() {
         viewModelScope.launch {
             val title = currentState.title
@@ -124,5 +130,28 @@ class NoteDetailViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun moveToGroup() {
+        viewModelScope.launch {
+            val notes = currentState.notes
+            val groupUid = currentState.categoryUid
+            printDebug { "Uid: $groupUid" }
+            runCatching {
+                if (groupUid!=0L) {
+                    defaultMoveToGroupNote.execute(
+                        notes,groupUid
+                    )
+                }
+            }.onSuccess {
+                modifyState { state ->
+                    state.copy(isMoveFailed = false, isMoved = true)
+                }
+            }.onFailure { modifyState { state ->
+                state.copy(isMoveFailed = true)
+            } }
+
+        }
+
     }
 }
