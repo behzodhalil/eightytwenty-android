@@ -2,6 +2,7 @@ package uz.behzod.eightytwenty.di
 
 import android.app.Application
 import androidx.room.Room
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -70,7 +71,8 @@ object DatabaseModule {
         taskCatalogDao: TaskCatalogDao,
         scheduleDao: ScheduleDao,
         attachmentDao: AttachmentDao,
-        imageDao: NoteImageDao
+        imageDao: NoteImageDao,
+        userDao: UserDao
     ): LocalSourceManager {
         return LocalSourceManagerImpl(
             noteCategoryDao = noteCategoryDao,
@@ -81,7 +83,8 @@ object DatabaseModule {
             taskCatalogDao = taskCatalogDao,
             scheduleDao = scheduleDao,
             attachmentDao = attachmentDao,
-            imagesDao = imageDao
+            imagesDao = imageDao,
+            userDao = userDao
         )
     }
 
@@ -115,6 +118,19 @@ object DatabaseModule {
         database: EightyTwentyDatabase
     ): AttachmentDao {
         return database.getAttachmentDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providesUserDao(
+        database: EightyTwentyDatabase
+    ): UserDao {
+        return database.getUserDao()
+    }
+    @Provides
+    @Singleton
+    fun providesFirebaseAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
     }
 
 }
