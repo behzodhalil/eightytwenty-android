@@ -36,4 +36,7 @@ interface NoteDao {
 
     @Query("SELECT * FROM note_table WHERE note_title LIKE :query")
     fun searchNote(query: String): Flow<List<NoteEntity>>
+
+    @Query("SELECT * FROM note_table WHERE note_is_trashed <> 1")
+    fun fetchAllNoteRelation(): Flow<List<NoteRelation>>
 }
