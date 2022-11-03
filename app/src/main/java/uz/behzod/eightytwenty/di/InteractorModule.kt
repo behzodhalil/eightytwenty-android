@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import uz.behzod.eightytwenty.domain.interactor.habit.*
 import uz.behzod.eightytwenty.domain.interactor.habit_recommend.*
 import uz.behzod.eightytwenty.domain.interactor.image.*
+import uz.behzod.eightytwenty.domain.interactor.login.*
 import uz.behzod.eightytwenty.domain.interactor.manager.ReadStorePermission
 import uz.behzod.eightytwenty.domain.interactor.manager.ReadStorePermissionImpl
 import uz.behzod.eightytwenty.domain.interactor.note.*
@@ -198,4 +199,36 @@ interface InteractorModule {
     @get: Binds
     @get: Singleton
     val DefaultFetchNoteRelationByUid.bindNoteRelationByUid: FetchNoteRelationByUid
+
+    @get:Binds
+    @get:Singleton
+    val DefaultMoveToGroupNote.bindMoveToGroupNote: MoveToGroupNote
+
+    @get:Binds
+    @get:Singleton
+    val DefaultFetchAllNoteRelation.bindAllNoteRelation:FetchAllNoteRelation
+
+    @get:Binds
+    @get:Singleton
+    val DefaultCreateUserWithEmailAndPassword.bindCreateUser: CreateUserWithEmailAndPassword
+
+    @get:Binds
+    @get:Singleton
+    val DefaultSignInEmailWithPassword.bindSignIn: SignInEmailWithPassword
+
+    @get:Binds
+    @get:Singleton
+    val DefaultInsertUser.bindInsertUser: InsertUser
+
+    @get:Binds
+    @get:Singleton
+    val DefaultUpdateUser.bindUpdateUser: UpdateUser
+
+    @get:Binds
+    @get:Singleton
+    val DefaultDeleteUser.bindDeleteUser: DeleteUser
+
+    @get:Binds
+    @get:Singleton
+    val DefaultFetchUser.bindUser: FetchUser
 }
