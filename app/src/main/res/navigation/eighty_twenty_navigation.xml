@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/eighty_twenty_navigation"
-    app:startDestination="@id/noteFragment">
+    app:startDestination="@id/signInFragment">
 
     <fragment
         android:id="@+id/noteFragment"
@@ -174,4 +174,12 @@
         android:id="@+id/searchTasksFragment"
         android:name="uz.behzod.eightytwenty.features.search_tasks.SearchTasksFragment"
         android:label="SearchTasksFragment" />
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="uz.behzod.eightytwenty.features.sign_in.SignInFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/action_signInFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
 </navigation>
