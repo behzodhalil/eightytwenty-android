@@ -47,4 +47,8 @@ class NoteRepositoryImpl @Inject constructor(
     override fun fetchNoteRelationByUid(noteUid: Long): Flow<NoteRelation> {
         return sourceManager.fetchNoteRelationByUid(noteUid)
     }
+
+    override fun fetchAllNoteRelation(): Flow<List<NoteRelation>> {
+        return sourceManager.fetchAllNoteRelation()
+    }
 }
