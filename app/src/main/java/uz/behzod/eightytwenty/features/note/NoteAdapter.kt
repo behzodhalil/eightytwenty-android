@@ -5,40 +5,52 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import uz.behzod.eightytwenty.data.local.entities.NoteRelation
 import uz.behzod.eightytwenty.databinding.ViewHolderNoteBinding
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 
-class NoteAdapter (private val onClickListener: (data: NoteDomainModel) -> Unit): ListAdapter<NoteDomainModel,NoteAdapter.NoteViewHolder>(COMPARATOR) {
+class NoteAdapter(private val onClickListener: (data: NoteRelation) -> Unit) :
+    ListAdapter<NoteRelation, NoteAdapter.NoteViewHolder>(COMPARATOR) {
 
     inner class NoteViewHolder(val binding: ViewHolderNoteBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: NoteRelation) {
+            binding.apply {
+                tvTitle.text = item.note.title
+                tvDesc.text = item.note.description
+                tvDate.text = item.note.timestamp.toString()
+                if (item.images.isNotEmpty()){
+                    val image = item.images.first()
+                    ivImage.load(image.uri)
+                }
+            }
+        }
+    }
 
 
     companion object {
-        private val COMPARATOR = object : DiffUtil.ItemCallback<NoteDomainModel>() {
-            override fun areItemsTheSame(oldItem: NoteDomainModel, newItem: NoteDomainModel): Boolean {
-                return oldItem.id == newItem.id
+        private val COMPARATOR = object : DiffUtil.ItemCallback<NoteRelation>() {
+            override fun areItemsTheSame(oldItem: NoteRelation, newItem: NoteRelation): Boolean {
+                return oldItem.note.id == newItem.note.id
             }
 
-            override fun areContentsTheSame(oldItem: NoteDomainModel, newItem: NoteDomainModel): Boolean {
+            override fun areContentsTheSame(oldItem: NoteRelation, newItem: NoteRelation): Boolean {
                 return oldItem == newItem
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
-        val binding = ViewHolderNoteBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            ViewHolderNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return NoteViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.apply {
             currentList[position].let { data ->
-                binding.apply {
-                    tvTitle.text = data.title
-                    tvDesc.text = data.description
-                    tvDate.text = data.timestamp.toString()
-                }
+                bind(data)
                 binding.root.setOnClickListener {
                     onClickListener(data)
                 }
