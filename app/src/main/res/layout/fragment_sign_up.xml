@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <TextView
         android:id="@+id/tv_headline_sign_up"
         android:layout_width="wrap_content"

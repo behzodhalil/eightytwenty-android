@@ -181,5 +181,16 @@
         <action
             android:id="@+id/action_signInFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="uz.behzod.eightytwenty.features.sign_up.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
     </fragment>
 </navigation>
