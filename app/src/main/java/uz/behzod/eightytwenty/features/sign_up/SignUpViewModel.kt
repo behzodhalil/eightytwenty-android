@@ -15,13 +15,26 @@ class SignUpViewModel @Inject constructor(
     private val createUserWithEmailAndPassword: CreateUserWithEmailAndPassword,
     private val firebaseAuth: FirebaseAuth,
     private val defaultInsertUser: InsertUser
-) : ReduxViewModel<SignUpUiState>(
-    initialState = SignUpUiState()
+) : ReduxViewModel<SignUpState>(
+    initialState = SignUpState()
 ) {
+
+    fun updateEmail(value: String) {
+        modifyState { state -> state.copy(email = value) }
+    }
+
+    fun updateName(value: String) {
+        modifyState { state -> state.copy(name = value) }
+    }
+
+    fun updatePassword(value: String) {
+        modifyState { state -> state.copy(password = value) }
+    }
 
     fun createUser() {
         val email = currentState.email
         val password = currentState.password
+
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
@@ -53,13 +66,13 @@ class SignUpViewModel @Inject constructor(
             }.onSuccess {
                 modifyState { state ->
                     state.copy(
-                        isSaved = true
+                        isCreated = true
                     )
                 }
             }.onFailure {
                 modifyState { state ->
                     state.copy(
-                        isSaveFailed = false
+                        isCreateFailed = false
                     )
                 }
             }
