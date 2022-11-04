@@ -18,7 +18,7 @@ EightyTwenty is life planner application with beautiful user interface.
 - [x] Setup shows once onboarding screen
 - [ ] Draw 'Setting' UI
 - [x] Draw 'Sign In' UI
-- [ ] Draw 'Sign Up' UI
+- [x] Draw 'Sign Up' UI
 - [ ] Draw 'Calendar' UI
 - [ ] Draw 'No connection' UI
 - [ ] Draw 'Empty' UI
