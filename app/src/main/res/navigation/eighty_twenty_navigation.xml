@@ -29,6 +29,7 @@
             android:id="@+id/action_noteFragment_to_searchNotesFragment"
             app:destination="@id/searchNotesFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/newNoteFragment"
         android:name="uz.behzod.eightytwenty.features.new_note.NewNoteFragment"
@@ -193,4 +194,8 @@
             android:id="@+id/action_signUpFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/productivityFragment"
+        android:name="uz.behzod.eightytwenty.features.productivity.ProductivityFragment"
+        android:label="ProductivityFragment" />
 </navigation>
