@@ -6,8 +6,8 @@
 
     <io.getstream.avatarview.AvatarView
         android:id="@+id/avatar_view"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         app:avatarViewIndicatorBorderColor="@color/white"
@@ -20,6 +20,20 @@
         app:avatarViewShape="circle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+        <kr.sns.ui_expandable_view.ExpandableSingleSelectionView
+            android:id="@+id/rv_concat_adapter"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/avatar_view"
+            />
+        <kr.sns.ui_expandable_view.ExpandableSingleSelectionView
+            android:id="@+id/rv_habits_adapter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/rv_concat_adapter"
+            />
 
     <SearchView
         android:id="@+id/search_view"
@@ -36,47 +50,48 @@
         android:id="@+id/tv_quote"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Сконструйтесь на самом важном"
-        android:textSize="20sp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:textAlignment="center"
         android:fontFamily="@font/roboto_bold"
+        android:text="Сконструйтесь на самом важном"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto"
         android:text="Начните свой день правильно"
         android:textAlignment="center"
-        android:textSize="14sp"
-        android:fontFamily="@font/roboto"
+        android:visibility="gone"
         android:textColor="@color/black_60"
-        app:layout_constraintTop_toBottomOf="@id/tv_quote"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_quote" />
+
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_start"
         android:layout_width="0dp"
         android:layout_height="65dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/roboto_bold"
         android:text="Начать мой день"
         android:textAllCaps="false"
         android:textSize="18sp"
         app:cornerRadius="16dp"
-        android:fontFamily="@font/roboto_bold"
-        android:layout_marginBottom="32dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
