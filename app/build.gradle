@@ -154,4 +154,8 @@ dependencies {
 
     // Firebase
     implementation 'com.google.firebase:firebase-auth:21.0.3'
+
+    // Avatar image view
+    implementation "io.getstream:avatarview-coil:1.0.7"
+
 }
