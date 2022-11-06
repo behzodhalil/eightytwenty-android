@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    android:layout_margin="10dp"
+    android:elevation="8dp"
+    app:cardCornerRadius="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_task_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/cb_task"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Моя новая задача" />
+
+        <ImageView
+            android:id="@+id/iv_task_reminder"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="6dp"
+            android:src="@drawable/ic_notification"
+            app:layout_constraintStart_toEndOf="@id/cb_task"
+            app:layout_constraintTop_toBottomOf="@id/tv_task_title" />
+
+        <TextView
+            android:id="@+id/tv_task_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_task_reminder"
+            app:layout_constraintStart_toEndOf="@id/iv_task_reminder"
+            app:layout_constraintTop_toTopOf="@id/iv_task_reminder"
+            tools:text="2022.10.12" />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_folder"
+            android:layout_marginStart="6dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_task_timestamp"
+            app:layout_constraintStart_toEndOf="@id/tv_task_timestamp"
+            app:layout_constraintTop_toTopOf="@id/tv_task_timestamp" />
+
+        <CheckBox
+            android:id="@+id/cb_task"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

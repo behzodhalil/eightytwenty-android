@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/setting_tv_headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Параметры"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <io.getstream.avatarview.AvatarView
+        android:id="@+id/setting_av_user"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="14dp"
+        android:src="@drawable/ic_cancel"
+        app:avatarViewIndicatorBorderColor="@color/white"
+        app:avatarViewIndicatorBorderSizeCriteria="10"
+        app:avatarViewIndicatorColor="@color/sun_glow"
+        app:avatarViewIndicatorEnabled="true"
+        app:avatarViewIndicatorPosition="bottomRight"
+        app:avatarViewIndicatorSizeCriteria="9"
+        app:avatarViewInitialsTextStyle="bold"
+        app:avatarViewShape="circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setting_tv_headline" />
+
+    <TextView
+        android:id="@+id/setting_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/setting_av_user"
+        app:layout_constraintTop_toBottomOf="@id/setting_tv_headline"
+        tools:text="Name" />
+
+    <TextView
+        android:id="@+id/setting_tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/black_60"
+        app:layout_constraintStart_toEndOf="@id/setting_av_user"
+        app:layout_constraintTop_toBottomOf="@id/setting_tv_name"
+        tools:text="behzoddev@gmail.com" />
+
+    <ImageView
+        android:id="@+id/setting_iv_right"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="@color/black_60"
+        android:src="@drawable/ic_arrow_right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setting_tv_headline"
+        tools:viewBindingIgnore="true" />
+
+    <TextView
+        android:id="@+id/setting_tv_extra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Дополнительно"
+        android:textColor="@color/black_50"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setting_av_user" />
+
+    <TextView
+        android:id="@+id/setting_tv_change_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Изменить тему"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setting_tv_extra" />
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/ic_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@id/setting_tv_change_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/setting_tv_change_theme" />
+
+    <TextView
+        android:id="@+id/setting_tv_about_application"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="О приложения"
+        android:textSize="15sp"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/black_50"
+        android:layout_marginStart="@dimen/dimen_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setting_tv_change_theme" />
+
+    <TextView
+        android:id="@+id/setting_tv_version_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Версия приложения"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setting_tv_about_application" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="1.0"
+        android:textSize="18sp"
+        android:textColor="@color/black_70"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintBottom_toBottomOf="@id/setting_tv_version_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/setting_tv_version_app" />
+
+    <TextView
+        android:id="@+id/setting_tv_sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/roboto"
+        android:text="Выйти из своего аккаунта"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setting_tv_version_app" />
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/ic_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@id/setting_tv_sign_out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/setting_tv_sign_out" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+

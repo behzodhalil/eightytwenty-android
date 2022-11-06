@@ -161,4 +161,11 @@ dependencies {
     // Expandable Custom View
     implementation(project(":ui-expandable-view"))
 
+    // Kotest
+    androidTestImplementation 'io.kotest:kotest-assertions-core:5.5.3'
+    testImplementation 'io.kotest:kotest-assertions-core:5.5.3'
+
+    // Kaspresso
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.4.2'
+
 }

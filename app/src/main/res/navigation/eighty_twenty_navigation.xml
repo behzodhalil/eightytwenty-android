@@ -197,5 +197,13 @@
     <fragment
         android:id="@+id/productivityFragment"
         android:name="uz.behzod.eightytwenty.features.productivity.ProductivityFragment"
-        android:label="ProductivityFragment" />
+        android:label="ProductivityFragment" >
+        <action
+            android:id="@+id/action_productivityFragment_to_selectProductivityFragment"
+            app:destination="@id/selectProductivityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectProductivityFragment"
+        android:name="uz.behzod.eightytwenty.features.select_productivity.SelectProductivityFragment"
+        android:label="SelectProductivityFragment" />
 </navigation>
