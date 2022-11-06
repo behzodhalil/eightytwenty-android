@@ -12,7 +12,7 @@ import uz.behzod.eightytwenty.data.local.entities.*
         TaskEntity::class, TaskCatalogEntity::class,
         ScheduleEntity::class, AttachmentEntity::class,
         NoteImageEntity::class, UserEntity::class],
-    version = 8,
+    version = 16,
     exportSchema = true
 )
 
