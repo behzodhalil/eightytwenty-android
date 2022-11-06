@@ -11,4 +11,7 @@ interface TaskRepository {
     fun fetchTaskByUid(uid: Long): Flow<List<TaskEntity>>
     fun fetchTasks(): Flow<List<TaskEntity>>
     fun searchTasks(taskName: String): Flow<List<TaskEntity>>
+    fun fetchTasksRecent(): Flow<List<TaskEntity>>
+    fun fetchTasksNearTime(): Flow<List<TaskEntity>>
+    fun fetchLimitedTasks(): Flow<List<TaskEntity>>
 }
