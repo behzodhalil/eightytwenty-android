@@ -44,6 +44,11 @@ import java.util.*
 @AndroidEntryPoint
 class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
 
+    companion object {
+        private const val INTENT_OPEN_DOCUMENT_TYPE = "*/*"
+        private const val REQ_KEY = ""
+    }
+
     private val binding by viewBinding(FragmentNewTaskDetailBinding::bind)
     private val viewModel: NewTaskWithReduxViewModel by viewModels()
 
@@ -74,6 +79,7 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
         setupFragmentResultListeners()
 
         observeState()
+        saveNewTasks()
     }
 
     override fun onStart() {
@@ -81,7 +87,6 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
         LocalBroadcastManager.getInstance(requireContext())
             .registerReceiver(receiver, IntentFilter(SERVICE_ACTION_WITH_BROADCAST))
     }
-
 
 
     private fun formatDayOfWeek(): String {
@@ -157,7 +162,10 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
 
     private fun setupView() {
         binding.tvTimestamp.text = ZonedDateTime.now().toString()
-
+        binding.tvTimestamp.addTextChangedListener {
+            viewModel.modifyTaskTimestamp(it.asStringOrEmpty().asZoneDateTime())
+        }
+        viewModel.modifyTaskTimestamp(ZonedDateTime.now())
         binding.etNewTaskTitle.addTextChangedListener {
             viewModel.modifyTaskTitle(it.asStringOrEmpty())
         }
@@ -331,13 +339,12 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
             viewModel.hasDisplayedReminder(false)
         }
 
-
-
-        showMessage("Current checked days: ${viewModel.currentState.scheduleDaysOfWeek}")
-
     }
 
-    companion object {
-        private const val INTENT_OPEN_DOCUMENT_TYPE = "*/*"
+    private fun saveNewTasks() {
+        binding.btnSaveNewTask.setOnClickListener {
+            viewModel.insertTask()
+        }
     }
+
 }
