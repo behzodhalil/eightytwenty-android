@@ -31,4 +31,14 @@ interface TaskDao {
 
     @Query("SELECT * FROM task_entity_table_name WHERE task_uid LIKE :taskUid")
     fun fetchTaskAndAttachment(taskUid: Long): Flow<TaskAndAttachment>
+
+    @Query("SELECT * FROM task_entity_table_name WHERE task_is_complete <>1 AND task_is_trashed <>1 ORDER BY task_timestamp LIMIT 3")
+    fun fetchTasksRecent(): Flow<List<TaskEntity>>
+
+    @Query("SELECT * FROM task_entity_table_name WHERE task_is_complete <>1 AND task_is_trashed <>1 ORDER BY task_reminder LIMIT 3")
+    fun fetchTasksNearTime(): Flow<List<TaskEntity>>
+
+    @Query("SELECT * FROM task_entity_table_name WHERE task_is_complete <>1 AND task_is_trashed <>1 ORDER BY task_uid LIMIT 5")
+    fun fetchLimitedTasks(): Flow<List<TaskEntity>>
+
 }
