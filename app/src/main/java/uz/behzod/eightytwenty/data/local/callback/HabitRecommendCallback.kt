@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.data.local.db.EightyTwentyDatabase
 import uz.behzod.eightytwenty.data.local.entities.Frequency
 import uz.behzod.eightytwenty.data.local.entities.PerDayGoalType
+import uz.behzod.eightytwenty.data.local.entities.TaskCatalogEntity
 import uz.behzod.eightytwenty.data.local.entities.asEntity
 import uz.behzod.eightytwenty.di.CallbackScope
 import uz.behzod.eightytwenty.domain.model.HabitRecommendDomainModel
@@ -24,9 +25,11 @@ class HabitRecommendCallback @Inject constructor(
 
         printDebug { "Callback is called" }
         val dao = database.get().getHabitRecommendDao()
+        val taskGroupDao = database.get().getTaskCatalogDao()
 
         scope.launch {
             dao.insertHabitRecommends(habitRecommends.map { it.asEntity() })
+            taskGroupDao.insertTaskCatalog(group)
         }
     }
 
@@ -101,3 +104,5 @@ private val habitRecommends = listOf(
         category = "Study"
     )
 )
+
+private val group = TaskCatalogEntity(name = "Входящий")
