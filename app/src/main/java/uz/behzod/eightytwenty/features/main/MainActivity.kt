@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         navHost.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.newNoteFragment, R.id.categoryNoteFragment, R.id.newHabitFragment,
-                R.id.signInFragment, R.id.signUpFragment
+                R.id.signInFragment, R.id.signUpFragment, R.id.selectProductivityFragment
                 -> {
                     binding.bottomNav.gone()
                 }
