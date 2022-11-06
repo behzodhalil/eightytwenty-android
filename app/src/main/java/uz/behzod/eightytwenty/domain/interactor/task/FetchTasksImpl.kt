@@ -19,6 +19,7 @@ class FetchTasksImpl @Inject constructor(
                 if (it.isNotEmpty()) {
                     emit(it)
                 }
+
             }
         }.flowOn(dispatchers.io)
     }
