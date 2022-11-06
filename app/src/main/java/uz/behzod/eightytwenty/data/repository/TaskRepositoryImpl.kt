@@ -1,7 +1,6 @@
 package uz.behzod.eightytwenty.data.repository
 
 import kotlinx.coroutines.flow.Flow
-import uz.behzod.eightytwenty.data.local.entities.TaskAndSchedule
 import uz.behzod.eightytwenty.data.local.entities.TaskEntity
 import uz.behzod.eightytwenty.data.source.LocalSourceManager
 import uz.behzod.eightytwenty.domain.repository.TaskRepository
@@ -33,5 +32,17 @@ class TaskRepositoryImpl @Inject constructor(
 
     override fun searchTasks(taskName: String): Flow<List<TaskEntity>> {
         return sourceManager.searchTasks(taskName)
+    }
+
+    override fun fetchTasksRecent(): Flow<List<TaskEntity>> {
+        return sourceManager.fetchTasksRecent()
+    }
+
+    override fun fetchTasksNearTime(): Flow<List<TaskEntity>> {
+        return sourceManager.fetchTasksNearTime()
+    }
+
+    override fun fetchLimitedTasks(): Flow<List<TaskEntity>> {
+        return sourceManager.fetchLimitedTasks()
     }
 }
