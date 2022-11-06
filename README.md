@@ -3,7 +3,7 @@
 EightyTwenty is life planner application with beautiful user interface. 
 
 
-### Features of 80|20
+### TODO
 
 - [x] Add images to note
 - [x] Undo & redo note
@@ -35,6 +35,10 @@ EightyTwenty is life planner application with beautiful user interface.
 - [ ] Add task group
 - [ ] Add task into task group
 
+### Tests TODO
+- [ ] Write unit tests (Kotest)
+- [ ] Write UI/E2E tests (Kaspresso)
+- [ ] Write intergartion tests
 
 ### 🔨 Technologies used:
 
@@ -49,3 +53,5 @@ EightyTwenty is life planner application with beautiful user interface.
 - Logger
 - Coil
 - Truth
+- Firebase
+- Avatar Image View
