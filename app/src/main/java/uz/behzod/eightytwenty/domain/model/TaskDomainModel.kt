@@ -10,7 +10,7 @@ data class TaskDomainModel(
     val dueDate: String = String.Empty,
     val frequency: Frequency = Frequency.DAILY,
     val category: String = String.Empty,
-    val note: NoteEntity,
+    val note: NoteEntity? = null,
     val timestamp: String = String.Empty,
     val deadline: String = String.Empty,
     val isComplete: Boolean = false,
