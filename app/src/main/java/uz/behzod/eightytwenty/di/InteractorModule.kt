@@ -231,4 +231,16 @@ interface InteractorModule {
     @get:Binds
     @get:Singleton
     val DefaultFetchUser.bindUser: FetchUser
+
+    @get:Binds
+    @get:Singleton
+    val DefaultFetchTasksNearTime.bindTasksNearTime: FetchTasksNearTime
+
+    @get:Binds
+    @get:Singleton
+    val DefaultFetchTasksRecent.bindTasksRecent: FetchTasksRecent
+
+    @get:Binds
+    @get:Singleton
+    val DefaultFetchLimitedTasks.bindTasksLimited: FetchLimitedTasks
 }
