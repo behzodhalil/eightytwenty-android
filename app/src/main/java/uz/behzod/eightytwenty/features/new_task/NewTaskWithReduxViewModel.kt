@@ -11,6 +11,7 @@ import uz.behzod.eightytwenty.domain.interactor.manager.ReadStorePermission
 import uz.behzod.eightytwenty.domain.interactor.task.InsertTask
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 import uz.behzod.eightytwenty.utils.extension.asZoneDateTime
+import uz.behzod.eightytwenty.utils.extension.printDebug
 import java.time.ZonedDateTime
 import javax.inject.Inject
 
@@ -52,7 +53,7 @@ class NewTaskWithReduxViewModel @Inject constructor(
         modifyState { state -> state.copy(taskGroupName = value) }
     }
 
-    fun modifyTaskTimestamp(value: ZonedDateTime) {
+    fun modifyTaskTimestamp(value: ZonedDateTime?) {
         modifyState { state -> state.copy(taskTimestamp = value) }
     }
 
@@ -114,7 +115,7 @@ class NewTaskWithReduxViewModel @Inject constructor(
             val attachmentTitle = state.value.attachmentTitle
 
             val taskTitle = state.value.taskTitle
-            val taskTimestamp = state.value.taskTimestamp
+            val taskTimestamp: ZonedDateTime? = state.value.taskTimestamp
             val taskReminder = state.value.taskReminder
             val taskGroupUid = state.value.taskCatalogUid
 
@@ -144,14 +145,14 @@ class NewTaskWithReduxViewModel @Inject constructor(
             )
 
             attachments.add(AttachmentEntity(attachmentName = attachmentTitle))
-
+            printDebug { "[NTVM]: Timestamp is $taskTimestamp" }
             modifyState { state -> state.copy(isLoading = true) }
 
             runCatching {
                 insertTask.invoke(
                     TaskEntity(
                         title = taskTitle,
-                        timestamp = taskTimestamp,
+                        timestamp = ZonedDateTime.now(),
                         reminderDateTime = taskReminder,
                         catalogUid = taskGroupUid
                     ),
@@ -159,16 +160,11 @@ class NewTaskWithReduxViewModel @Inject constructor(
                     scheduleList = schedules,
                     attachmentList = attachments
                 )
+                printDebug { "[NTVM]: Timestamp is $taskTimestamp" }
             }.onSuccess {
                 modifyState { state -> state.copy(isSuccess = true, isLoading = false) }
             }.onFailure {
-                modifyState { state ->
-                    state.copy(
-                        isFailure = true,
-                        isLoading = false,
-                        isSuccess = false
-                    )
-                }
+                throw  it
             }
 
         }
