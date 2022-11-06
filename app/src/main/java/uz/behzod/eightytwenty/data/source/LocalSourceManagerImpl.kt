@@ -221,6 +221,18 @@ class LocalSourceManagerImpl @Inject constructor(
         return taskDao.searchTasks(taskName)
     }
 
+    override fun fetchTasksRecent(): Flow<List<TaskEntity>> {
+        return taskDao.fetchTasksRecent()
+    }
+
+    override fun fetchTasksNearTime(): Flow<List<TaskEntity>> {
+        return taskDao.fetchTasksNearTime()
+    }
+
+    override fun fetchLimitedTasks(): Flow<List<TaskEntity>> {
+        return taskDao.fetchLimitedTasks()
+    }
+
     override suspend fun insertAttachment(attachment: AttachmentEntity) {
         return attachmentDao.insertAttachment(attachment)
     }
