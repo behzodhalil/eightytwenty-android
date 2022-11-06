@@ -58,8 +58,6 @@ data class TaskEntity(
     }
 
     fun formatEndDate(context: Context): String? {
-        return endDate?.let {
-            it.format(DateTimeFormatter.asTime(context, true))
-        }
+        return endDate?.format(DateTimeFormatter.asTime(context, true))
     }
 }
