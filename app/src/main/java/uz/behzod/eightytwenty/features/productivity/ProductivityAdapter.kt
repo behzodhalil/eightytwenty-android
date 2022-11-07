@@ -44,9 +44,7 @@ class ProductivityAdapter(
         desc.text = list[position].description
     }
 
-    override fun bindHeaderView(headerView: View, selectedIndices: List<Int>) {
-
-    }
+    override fun bindHeaderView(headerView: View, selectedIndices: List<Int>) {}
 
     override fun onViewStateChanged(headerView: View, state: ExpandableSelectionView.State) {
         val imageView = headerView.findViewById<ImageView>(R.id.iv_indicator)
