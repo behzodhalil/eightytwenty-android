@@ -18,9 +18,7 @@ import java.util.UUID
         parentColumns = ["note_id"],
         childColumns = ["note_uid"],
         onDelete = CASCADE
-    )],
-    indices = [Index(value = ["note_uid"], unique = true)]
-
+    )]
 )
 data class NoteImageEntity(
     @ColumnInfo(name = URI) val uri: Uri? = null,
@@ -29,7 +27,7 @@ data class NoteImageEntity(
     @ColumnInfo(name = NOTE_UID) var noteUid: Long = Long.Zero,
     @PrimaryKey
     @ColumnInfo(name = IMAGE_UID)
-    var imageUid: String = UUID.randomUUID().toString()
+    var imageUid: String = UUID.randomUUID().toString(),
 ) {
     companion object {
         private const val URI = "uri"
@@ -37,6 +35,7 @@ data class NoteImageEntity(
         private const val DESCRIPTION = "description"
         private const val NOTE_UID = "note_uid"
         private const val IMAGE_UID = "image_uid"
+
         fun generateUid(): String {
             return UUID.randomUUID().toString()
         }
