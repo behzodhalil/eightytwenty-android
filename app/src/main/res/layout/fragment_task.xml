@@ -34,8 +34,8 @@
         android:text="Входящий "
         android:textColor="@color/kashmir_blue"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -43,10 +43,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        tools:itemCount="4"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/tv_title_category"
+        tools:itemCount="4"
         tools:listitem="@layout/view_holder_task" />
+
+    <kr.sns.ui_expandable_view.ExpandableSingleSelectionView
+        android:id="@+id/rv_complete_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/rv_task" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_new_note"
