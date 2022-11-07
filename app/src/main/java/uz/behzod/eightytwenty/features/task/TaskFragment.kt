@@ -16,6 +16,7 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 
     private val binding by viewBinding(FragmentTaskBinding::bind)
     private lateinit var adapter: TaskAdapter
+    private lateinit var completeAdapter: TaskCompleteAdapter
     private val viewModel: TaskViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,6 +37,13 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
         binding.rvTask.adapter = adapter
     }
 
+    private fun setupView() {
+        adapter = TaskAdapter()
+
+        completeAdapter = TaskCompleteAdapter(emptyList(), title = "Завершенный", count = "5")
+    }
+
+
     private fun onNavigateToNewTask() {
         binding.btnNewNote.setOnClickListener {
             val route = TaskFragmentDirections.actionTaskFragmentToNewTaskFragment()
@@ -45,8 +53,7 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 
     private fun onNavigateToSearchTasks() {
         binding.ivSearch.setOnClickListener {
-            val route = TaskFragmentDirections.actionTaskFragmentToSearchTasksFragment()
-            navController.navigate(route)
+            route(TaskRoute.SearchTaskRoute)
         }
     }
 
@@ -76,6 +83,24 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
                 }
             }
         }
+    }
+
+
+
+    private fun route(route: TaskRoute) {
+        when(route) {
+            TaskRoute.FolderRoute -> {
+
+            }
+            TaskRoute.NewTaskRoute -> {
+
+            }
+            TaskRoute.SearchTaskRoute -> {
+                val direction = TaskFragmentDirections.actionTaskFragmentToSearchTasksFragment()
+                navController.navigate(direction)
+            }
+        }
+
     }
 
 }
