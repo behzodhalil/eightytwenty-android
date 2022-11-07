@@ -30,6 +30,7 @@ class InsertTaskImpl @Inject constructor(
     ) {
         return withContext(dispatchers.io) {
             val data = repository.insertTask(task)
+            printDebug { "[InsertTaskUseCase]: Task uid :$data" }
             scheduleList.forEach {
                 scheduleRepository.insertSchedule(it.copy(taskUid = data))
             }
