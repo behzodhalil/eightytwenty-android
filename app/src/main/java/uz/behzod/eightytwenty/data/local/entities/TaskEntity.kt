@@ -18,11 +18,13 @@ import java.time.ZonedDateTime
         childColumns = ["task_catalog_uid"],
         onDelete = CASCADE
     )],
-    indices = [Index(value = ["task_catalog_uid"], unique = true)]
+    indices = [
+        Index(value = ["task_title"], unique = true),
+        Index(value = ["task_timestamp"], unique = true)]
 )
 data class TaskEntity(
     @ColumnInfo(name = TITLE) val title: String = String.Empty,
-    @ColumnInfo(name = DUE_DATE) var endDate: ZonedDateTime? = null,
+    @ColumnInfo(name = DUE_DATE) val endDate: ZonedDateTime? = null,
     @ColumnInfo(name = FREQUENCY) val frequency: Frequency = Frequency.DAILY,
     @ColumnInfo(name = REMINDER) val reminderDateTime: ZonedDateTime? = null,
     @ColumnInfo(name = TIMESTAMP) val timestamp: ZonedDateTime? = null,
