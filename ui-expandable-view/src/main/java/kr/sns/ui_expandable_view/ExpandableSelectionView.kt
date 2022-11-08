@@ -1,5 +1,6 @@
 package kr.sns.ui_expandable_view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
@@ -73,6 +74,7 @@ abstract class ExpandableSelectionView @JvmOverloads constructor(
             return
         toggleAndSetState()
     }
+
 
     internal fun getSelectedIndices(): List<Int> = selectedIndices
 
@@ -172,6 +174,11 @@ abstract class ExpandableSelectionView @JvmOverloads constructor(
         selectedIndices.remove(index)
         expandableSelectionAdapter?.bindHeaderView(headerView, selectedIndices)
         recyclerAdapter?.notifyItemChanged(index)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun notifyDataChanged() {
+        this.recyclerAdapter?.notifyDataSetChanged()
     }
 
     sealed class State {
