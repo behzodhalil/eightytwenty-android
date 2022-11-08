@@ -11,7 +11,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core-data" />
             <option value="$PROJECT_DIR$/core-ui" />
+            <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/ui-collapsible-calendar" />
             <option value="$PROJECT_DIR$/ui-expandable-view" />
             <option value="$PROJECT_DIR$/ui-toast" />
