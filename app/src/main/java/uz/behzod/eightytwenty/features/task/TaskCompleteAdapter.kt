@@ -10,11 +10,11 @@ import kr.sns.ui_expandable_view.ExpandableSelectionView
 import kr.sns.ui_expandable_view.inflate
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.data.local.entities.TaskEntity
+import uz.behzod.eightytwenty.domain.model.TaskDomainModel
 
 class TaskCompleteAdapter(
-    private val list: List<TaskEntity> = emptyList(),
     var title: String,
-    var count: String
+    var counter: String
 ): ExpandableItemAdapter {
 
     @DrawableRes
@@ -22,13 +22,14 @@ class TaskCompleteAdapter(
     @DrawableRes
     var expandedStateResId: Int? = null
 
+    private val list = mutableListOf<TaskEntity>()
 
     override fun inflateHeaderView(parent: ViewGroup): View {
         val view = parent.inflate(R.layout.header_item)
         val header = view.findViewById<TextView>(R.id.tv_header)
         val count = view.findViewById<TextView>(R.id.tv_count)
         header.text = title
-        count.text = count.toString()
+        count.text = counter
         return view
     }
 
@@ -60,5 +61,9 @@ class TaskCompleteAdapter(
 
     override fun getItemsCount(): Int {
         return list.size
+    }
+
+    fun setData(values: List<TaskEntity>) {
+        list.addAll(values)
     }
 }
