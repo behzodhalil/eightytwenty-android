@@ -54,6 +54,11 @@ android {
         // Adds exported schema location as test app assets.
         getByName("androidTest").assets.srcDir("$projectDir/schemas")
     }
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
@@ -162,7 +167,6 @@ dependencies {
     implementation(project(":ui-expandable-view"))
 
     // Kotest
-    androidTestImplementation 'io.kotest:kotest-assertions-core:5.5.3'
     testImplementation 'io.kotest:kotest-assertions-core:5.5.3'
 
     // Kaspresso

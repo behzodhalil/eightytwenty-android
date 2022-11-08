@@ -42,6 +42,9 @@
         <entry key="app/src/main/res/layout/view_holder_schedule.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/view_holder_task.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.46927083333333336" />
+        <entry key="ui-collapsible-calendar/src/main/res/layout/view_holder_calendar.xml" value="0.4864583333333333" />
+        <entry key="ui-collapsible-calendar/src/main/res/layout/view_holder_day.xml" value="0.33489583333333334" />
+        <entry key="ui-collapsible-calendar/src/main/res/layout/view_holder_day_of_month.xml" value="0.4864583333333333" />
         <entry key="ui-expandable-view/src/main/res/layout/divider_item.xml" value="0.29583333333333334" />
         <entry key="ui-expandable-view/src/main/res/layout/header_item.xml" value="0.4864583333333333" />
       </map>
