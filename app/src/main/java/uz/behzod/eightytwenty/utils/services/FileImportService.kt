@@ -117,9 +117,7 @@ class FileImportService : Service() {
                 // Send the file name back to the calling activity
                 putExtra(BROADCAST_INTENT_EXTRA, name)
             })
-        printDebug { "[FileImportService]: broadcastResultThenTerminate is stopped" }
         stopSelf()
-        printDebug { "[FileImportService]: broadcastResultThenTerminate is stopped" }
     }
 
 }
