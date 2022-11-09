@@ -2,7 +2,6 @@ package uz.behzoddev.ui_collapsible_calendar
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.time.LocalDate
 import java.util.*
 
 const val YEAR = 1
