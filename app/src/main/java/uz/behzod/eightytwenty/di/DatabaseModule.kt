@@ -72,7 +72,10 @@ object DatabaseModule {
         scheduleDao: ScheduleDao,
         attachmentDao: AttachmentDao,
         imageDao: NoteImageDao,
-        userDao: UserDao
+        userDao: UserDao,
+        waterDao: WaterDao,
+        billDao: BillDao,
+        pillDao: PillDao
     ): LocalSourceManager {
         return LocalSourceManagerImpl(
             noteCategoryDao = noteCategoryDao,
@@ -84,7 +87,10 @@ object DatabaseModule {
             scheduleDao = scheduleDao,
             attachmentDao = attachmentDao,
             imagesDao = imageDao,
-            userDao = userDao
+            userDao = userDao,
+            waterDao = waterDao,
+            billDao = billDao,
+            pillDao = pillDao
         )
     }
 
@@ -131,6 +137,30 @@ object DatabaseModule {
     @Singleton
     fun providesFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
+    }
+
+    @Provides
+    @Singleton
+    fun providesWaterDao(
+        db: EightyTwentyDatabase
+    ): WaterDao {
+        return db.getWaterDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providesBillDao(
+        db: EightyTwentyDatabase
+    ): BillDao {
+        return db.getBillDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providesPillDao(
+        db: EightyTwentyDatabase
+    ): PillDao {
+        return db.getPillDao()
     }
 
 }
