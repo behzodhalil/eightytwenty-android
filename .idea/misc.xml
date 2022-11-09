@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/bg_btn_default.xml" value="0.2055" />
         <entry key="app/src/main/res/drawable/bg_habit_color.xml" value="0.155" />
         <entry key="app/src/main/res/drawable/bg_habit_detail.xml" value="0.205" />
@@ -22,6 +23,7 @@
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.205" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.4895833333333333" />
+        <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.4864583333333333" />
         <entry key="app/src/main/res/layout/fragment_habit.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_habit_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_new_habit.xml" value="0.5065359477124183" />
@@ -42,8 +44,12 @@
         <entry key="app/src/main/res/layout/view_holder_schedule.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/view_holder_task.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.46927083333333336" />
+        <entry key="ui-collapsible-calendar/src/main/res/drawable/circle_black_solid_background.xml" value="0.229" />
+        <entry key="ui-collapsible-calendar/src/main/res/drawable/circle_black_stroke_background.xml" value="0.229" />
+        <entry key="ui-collapsible-calendar/src/main/res/drawable/circle_white_solid_background.xml" value="0.229" />
+        <entry key="ui-collapsible-calendar/src/main/res/drawable/circle_white_stroke_background.xml" value="0.229" />
         <entry key="ui-collapsible-calendar/src/main/res/layout/view_holder_calendar.xml" value="0.4864583333333333" />
-        <entry key="ui-collapsible-calendar/src/main/res/layout/view_holder_day.xml" value="0.33489583333333334" />
+        <entry key="ui-collapsible-calendar/src/main/res/layout/view_holder_day.xml" value="0.33" />
         <entry key="ui-collapsible-calendar/src/main/res/layout/view_holder_day_of_month.xml" value="0.4864583333333333" />
         <entry key="ui-expandable-view/src/main/res/layout/divider_item.xml" value="0.29583333333333334" />
         <entry key="ui-expandable-view/src/main/res/layout/header_item.xml" value="0.4864583333333333" />

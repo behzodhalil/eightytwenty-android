@@ -4,6 +4,6 @@
     <solid
         android:color="@android:color/white" />
     <corners
-        android:radius="@dimen/day_circle_radius" />
+        android:radius="24dp" />
 
 </shape>

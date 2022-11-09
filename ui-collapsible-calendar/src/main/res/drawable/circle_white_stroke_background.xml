@@ -3,8 +3,8 @@
 
     <stroke
         android:color="@android:color/white"
-        android:width="@dimen/day_circle_stroke_width" />
+        android:width="24dp" />
     <corners
-        android:radius="@dimen/day_circle_radius" />
+        android:radius="24dp" />
 
 </shape>

@@ -47,7 +47,6 @@ android {
 
     buildFeatures {
         viewBinding true
-        dataBinding true
     }
 
     sourceSets {
@@ -156,15 +155,16 @@ dependencies {
     implementation("io.coil-kt:coil:2.2.2")
     implementation(project(":ui-undo-redo"))
     implementation(project(":ui-toast"))
-
+    implementation(project((":ui-collapsible-calendar")))
+    // Expandable Custom View
+    implementation(project(":ui-expandable-view"))
     // Firebase
     implementation 'com.google.firebase:firebase-auth:21.0.3'
 
     // Avatar image view
     implementation "io.getstream:avatarview-coil:1.0.7"
 
-    // Expandable Custom View
-    implementation(project(":ui-expandable-view"))
+
 
     // Kotest
     testImplementation 'io.kotest:kotest-assertions-core:5.5.3'
