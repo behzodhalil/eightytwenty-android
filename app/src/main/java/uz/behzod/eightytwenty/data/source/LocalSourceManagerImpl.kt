@@ -3,6 +3,9 @@ package uz.behzod.eightytwenty.data.source
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.dao.*
 import uz.behzod.eightytwenty.data.local.entities.*
+import uz.behzod.eightytwenty.data.local.entities.reminder.BillEntity
+import uz.behzod.eightytwenty.data.local.entities.reminder.PillEntity
+import uz.behzod.eightytwenty.data.local.entities.reminder.WaterEntity
 import uz.behzod.eightytwenty.utils.extension.printDebug
 import javax.inject.Inject
 
@@ -16,7 +19,10 @@ class LocalSourceManagerImpl @Inject constructor(
     private val scheduleDao: ScheduleDao,
     private val attachmentDao: AttachmentDao,
     private val imagesDao: NoteImageDao,
-    private val userDao: UserDao
+    private val userDao: UserDao,
+    private val waterDao: WaterDao,
+    private val billDao: BillDao,
+    private val pillDao: PillDao
 ) : LocalSourceManager {
 
     override suspend fun insertNote(note: NoteEntity): Long {
@@ -296,5 +302,53 @@ class LocalSourceManagerImpl @Inject constructor(
 
     override fun fetchUser(): Flow<UserEntity> {
         return userDao.fetchUser()
+    }
+
+    override suspend fun insertWater(water: WaterEntity): Long {
+        return waterDao.insert(water)
+    }
+
+    override suspend fun updateWater(water: WaterEntity) {
+        return waterDao.update(water)
+    }
+
+    override fun fetchWaterAfterTimestamp(timestamp: Long): Flow<List<WaterEntity>> {
+        return waterDao.fetchWaterAfterTimestamp(timestamp)
+    }
+
+    override fun fetchWaters(): Flow<List<WaterEntity>> {
+        return waterDao.fetchWaters()
+    }
+
+    override suspend fun insertPill(pill: PillEntity) {
+        return pillDao.insert(pill)
+    }
+
+    override suspend fun updatePill(pill: PillEntity) {
+        return pillDao.update(pill)
+    }
+
+    override suspend fun deletePill(pill: PillEntity) {
+        return pillDao.delete(pill)
+    }
+
+    override fun fetchPills(): Flow<List<PillEntity>> {
+        return pillDao.fetchPills()
+    }
+
+    override suspend fun insertBill(bill: BillEntity): Long {
+        return billDao.insert(bill)
+    }
+
+    override suspend fun updateBill(bill: BillEntity) {
+        return billDao.update(bill)
+    }
+
+    override suspend fun deleteBill(bill: BillEntity) {
+        return billDao.delete(bill)
+    }
+
+    override fun fetchBills(): Flow<List<BillEntity>> {
+        return billDao.fetchBills()
     }
 }
