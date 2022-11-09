@@ -3,6 +3,9 @@ package uz.behzod.eightytwenty.data.source
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.*
+import uz.behzod.eightytwenty.data.local.entities.reminder.BillEntity
+import uz.behzod.eightytwenty.data.local.entities.reminder.PillEntity
+import uz.behzod.eightytwenty.data.local.entities.reminder.WaterEntity
 
 interface LocalSourceManager {
     // Note: Dao functions
@@ -102,5 +105,30 @@ interface LocalSourceManager {
     suspend fun updateUser(user: UserEntity)
     suspend fun deleteUser(user: UserEntity)
     fun fetchUser(): Flow<UserEntity>
+
+    /**
+     * The DAO functions of WATER.
+     */
+    suspend fun insertWater(water: WaterEntity): Long
+    suspend fun updateWater(water: WaterEntity)
+    fun fetchWaterAfterTimestamp(timestamp: Long): Flow<List<WaterEntity>>
+    fun fetchWaters(): Flow<List<WaterEntity>>
+
+
+    /**
+     * The DAO functions of PILL.
+      */
+    suspend fun insertPill(pill: PillEntity)
+    suspend fun updatePill(pill: PillEntity)
+    suspend fun deletePill(pill: PillEntity)
+    fun fetchPills(): Flow<List<PillEntity>>
+
+    /**
+     * The DAO functions of BILL.
+     */
+    suspend fun insertBill(bill: BillEntity):Long
+    suspend fun updateBill(bill: BillEntity)
+    suspend fun deleteBill(bill: BillEntity)
+    fun fetchBills(): Flow<List<BillEntity>>
 
 }
