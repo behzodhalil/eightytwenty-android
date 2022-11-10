@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import uz.behzod.eightytwenty.domain.interactor.bill.*
 import uz.behzod.eightytwenty.domain.interactor.habit.*
 import uz.behzod.eightytwenty.domain.interactor.habit_recommend.*
 import uz.behzod.eightytwenty.domain.interactor.image.*
@@ -12,8 +13,10 @@ import uz.behzod.eightytwenty.domain.interactor.manager.ReadStorePermission
 import uz.behzod.eightytwenty.domain.interactor.manager.ReadStorePermissionImpl
 import uz.behzod.eightytwenty.domain.interactor.note.*
 import uz.behzod.eightytwenty.domain.interactor.note_category.*
+import uz.behzod.eightytwenty.domain.interactor.pill.*
 import uz.behzod.eightytwenty.domain.interactor.task.*
 import uz.behzod.eightytwenty.domain.interactor.task_catalog.*
+import uz.behzod.eightytwenty.domain.interactor.water.*
 import javax.inject.Singleton
 
 @Module
@@ -243,4 +246,57 @@ interface InteractorModule {
     @get:Binds
     @get:Singleton
     val DefaultFetchLimitedTasks.bindTasksLimited: FetchLimitedTasks
+
+    @get:Binds
+    @get:Singleton
+    val DefaultInsertWater.bindInsertWater: InsertWater
+
+    @get:Binds
+    @get:Singleton
+    val DefaultUpdateWater.bindUpdateWater: UpdateWater
+
+    @get:Binds
+    @get:Singleton
+    val DefaultDeleteWater.bindDeleteWater: DeleteWater
+
+    @get:Binds
+    @get:Singleton
+    val DefaultFetchWaters.bindWaters: FetchWaters
+
+    @get:Binds
+    @get:Singleton
+    val DefaultFetchWaterAfterTimestamp.bindWaterAfterTimestamp: FetchWaterAfterTimestamp
+
+    @get:Binds
+    @get:Singleton
+    val DefaultInsertPill.bindInsertPill: InsertPill
+
+    @get:Binds
+    @get:Singleton
+    val DefaultUpdatePill.bindUpdatePill: UpdatePill
+
+
+    @get:Binds
+    @get:Singleton
+    val DefaultDeletePill.bindDeletePill: DeletePill
+
+    @get:Binds
+    @get:Singleton
+    val DefaultFetchPills.bindPills: FetchPills
+
+    @get:Binds
+    @get:Singleton
+    val DefaultInsertBill.bindInsertBill: InsertBill
+
+    @get:Binds
+    @get:Singleton
+    val DefaultUpdateBill.bindUpdateBill: UpdateBill
+
+    @get:Binds
+    @get:Singleton
+    val DefaultDeleteBill.bindDeleteBill: DeleteBill
+
+    @get:Binds
+    @get:Singleton
+    val DefaultFetchBills.bindBills: FetchBills
 }
