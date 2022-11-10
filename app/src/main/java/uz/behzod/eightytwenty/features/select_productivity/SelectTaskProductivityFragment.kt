@@ -71,9 +71,6 @@ class SelectTaskProductivityFragment : Fragment(R.layout.fragment_select_task_pr
     }
 
     private fun renderState(state: SelectTaskState) {
-        printDebug { "[STPF]: renderState() ${state.tasksNearTime}" }
-        printDebug { "[STPF]: renderState() ${state.tasksRecent}" }
-        printDebug { "[STPF]: renderState() ${state.tasksLimited}" }
         if (state.tasksLimited.isNotEmpty()) {
             fetchTasksLimited(state.tasksLimited)
         }
