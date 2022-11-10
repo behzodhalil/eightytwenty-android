@@ -4,12 +4,15 @@ import android.content.Context
 import android.graphics.Paint
 import android.net.Uri
 import android.view.View
+import android.view.ViewTreeObserver
+import android.view.inputmethod.InputMethodManager
 import android.webkit.MimeTypeMap
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 
 
@@ -63,3 +66,38 @@ fun Fragment.showMessage(message: String, duration: Int = Toast.LENGTH_SHORT) {
  */
 fun View.drawable(@DrawableRes id: Int) = setBackgroundResource(id)
 
+
+fun View.focusAndShowKeyboard() {
+
+    fun View.showTheKeyboardNow() {
+        if (isFocused) {
+            post {
+                val imm =
+                    context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+            }
+        }
+    }
+
+    requestFocus()
+    if (hasWindowFocus()) {
+        showTheKeyboardNow()
+    } else {
+        viewTreeObserver.addOnWindowFocusChangeListener(
+            object : ViewTreeObserver.OnWindowFocusChangeListener {
+                override fun onWindowFocusChanged(hasFocus: Boolean) {
+                    if (hasFocus) {
+                        this@focusAndShowKeyboard.showTheKeyboardNow()
+                        viewTreeObserver.removeOnWindowFocusChangeListener(this)
+                    }
+                }
+            })
+    }
+}
+
+
+fun View.showKeyboard() {
+    val manager: InputMethodManager =
+        this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    manager.showSoftInput(this, 0)
+}
