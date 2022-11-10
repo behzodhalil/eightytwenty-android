@@ -54,6 +54,7 @@ EightyTwenty is life planner application with beautiful user interface.
 - [ ] Check task, it will move to complete task
 - [ ] Add task group
 - [ ] Add task into task group
+- [ ] Fix soft keyboard overlaps
 
 ### Tests TODO
 - [ ] Write unit tests (Kotest)
