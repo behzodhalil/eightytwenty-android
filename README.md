@@ -2,6 +2,8 @@
 
 EightyTwenty is life planner application with beautiful user interface. 
 
+<img width="428" alt="image" src="https://user-images.githubusercontent.com/72313937/201051413-c7a56c55-634b-4783-adcd-3c8f8ddb44ba.png">
+
 
 ### TODO
 
@@ -27,14 +29,15 @@ EightyTwenty is life planner application with beautiful user interface.
 - [x] Write bill entity
 - [x] Write pill entity
 - [x] Write water entity
-- [ ] Write bill dao functions
-- [ ] Write pill dao functions
-- [ ] Write water dao functions
+- [x] Write bill dao functions
+- [x] Write pill dao functions
+- [x] Write water dao functions
 - [ ] Write the logic reminder fragment
 - [ ] Write the logic bill reminder fragment
 - [ ] Write the logic pill reminder fragment
 - [ ] Write the logic water reminder fragment
 - [ ] Add bill reminder
+- [x] Add pill reminder
 - [ ] Adding succesfully bill reminder process
 - [ ] Adding successfully pill reminder process
 - [ ] Adding successfully water reminder process
