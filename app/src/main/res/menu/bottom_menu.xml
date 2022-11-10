@@ -27,8 +27,8 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/goalAndChallengeFragment"
+        android:id="@+id/reminderFragment"
         android:icon="@drawable/ic_check"
-        android:title="Цели"
+        android:title="Напоминание"
         app:showAsAction="ifRoom" />
 </menu>
