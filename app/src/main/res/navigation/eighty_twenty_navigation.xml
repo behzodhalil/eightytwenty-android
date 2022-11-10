@@ -206,4 +206,8 @@
         android:id="@+id/selectProductivityFragment"
         android:name="uz.behzod.eightytwenty.features.select_productivity.SelectProductivityFragment"
         android:label="SelectProductivityFragment" />
+    <fragment
+        android:id="@+id/reminderFragment"
+        android:name="uz.behzod.eightytwenty.features.reminder.ReminderFragment"
+        android:label="ReminderFragment" />
 </navigation>
