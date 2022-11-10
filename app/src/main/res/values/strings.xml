@@ -23,6 +23,10 @@
     <string name="study_text">Учёба</string>
     <string name="thinking_text">Мышление</string>
 
+    <string name="reminder_bill_text">Платежи</string>
+    <string name="reminder_pill_text">Лекарства</string>
+    <string name="reminder_water_text">Вода</string>
+
     <string name="text_btn_done">Done</string>
     <string name="per_day_count">%d /</string>
 
