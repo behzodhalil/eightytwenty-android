@@ -25,4 +25,8 @@ class DefaultWaterRepository @Inject constructor(
     override fun fetchWaters(): Flow<List<WaterEntity>> {
         return sourceManager.fetchWaters()
     }
+
+    override suspend fun deleteWater(water: WaterEntity) {
+        return sourceManager.deleteWater(water)
+    }
 }
