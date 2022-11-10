@@ -32,6 +32,10 @@ data class BillEntity(
     @ColumnInfo(name = "bill_duration")
     val duration: Long = Long.Zero,
     /**
+     * It represents the name of bill.
+     */
+    val name: String = String.Empty,
+    /**
      * It represents the id of bill.
      */
     @ColumnInfo(name = "bill_uid")
