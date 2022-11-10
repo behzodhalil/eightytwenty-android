@@ -312,6 +312,10 @@ class LocalSourceManagerImpl @Inject constructor(
         return waterDao.update(water)
     }
 
+    override suspend fun deleteWater(water: WaterEntity) {
+        return waterDao.delete(water)
+    }
+
     override fun fetchWaterAfterTimestamp(timestamp: Long): Flow<List<WaterEntity>> {
         return waterDao.fetchWaterAfterTimestamp(timestamp)
     }
