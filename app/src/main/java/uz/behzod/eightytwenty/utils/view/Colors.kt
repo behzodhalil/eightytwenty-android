@@ -3,7 +3,6 @@ package uz.behzod.eightytwenty.utils.view
 import uz.behzod.eightytwenty.R
 
 object Colors {
-
     val list = listOf(
         R.color.habit_1,
         R.color.habit_2,
