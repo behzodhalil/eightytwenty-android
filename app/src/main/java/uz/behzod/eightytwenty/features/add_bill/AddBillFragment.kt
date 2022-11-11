@@ -1,22 +1,21 @@
 package uz.behzod.eightytwenty.features.add_bill
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
-import uz.behzod.eightytwenty.R
+import kotlinx.coroutines.launch
 import uz.behzod.eightytwenty.databinding.FragmentAddBillBinding
-import uz.behzod.eightytwenty.utils.extension.focusAndShowKeyboard
-import uz.behzod.eightytwenty.utils.extension.showKeyboard
-import uz.behzod.eightytwenty.utils.view.SoftKeyboardListener
+import uz.behzod.eightytwenty.utils.view.FormField
+import uz.behzod.eightytwenty.utils.view.FormFieldText
+import uz.behzoddev.ui_toast.successMessage
 
 
 @AndroidEntryPoint
@@ -24,6 +23,19 @@ class AddBillFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentAddBillBinding? = null
     private val binding: FragmentAddBillBinding get() = _binding!!
+    private val fieldName by lazy {
+        FormFieldText(
+            scope = lifecycleScope,
+            textInputLayout = binding.tilAddBillName,
+            textInputText = binding.tieAddBillName,
+            validation = { value ->
+                when {
+                    value.isNullOrBlank() -> "Bill name is required"
+                    else -> null
+                }
+            }
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,11 +43,14 @@ class AddBillFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentAddBillBinding.inflate(inflater, container, false)
+        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return binding.root
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = BottomSheetDialog(requireContext(), theme)
+
+
         dialog.setOnShowListener {
             val bottomSheet = it as BottomSheetDialog
 
@@ -44,6 +59,7 @@ class AddBillFragment : BottomSheetDialogFragment() {
             parentLayout?.let { result ->
                 val behavior = BottomSheetBehavior.from(result)
                 setupHeight(result)
+                behavior.skipCollapsed = true
                 behavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
         }
@@ -56,7 +72,7 @@ class AddBillFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupView() {
-
+        renderName()
         //
     }
 
@@ -64,6 +80,14 @@ class AddBillFragment : BottomSheetDialogFragment() {
         val layoutParams = v.layoutParams
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
         v.layoutParams = layoutParams
+    }
+
+    private fun renderName() = lifecycleScope.launch() {
+        fieldName.disable()
+        if (fieldName.validate()) {
+            successMessage("Name is saved")
+        }
+        fieldName.enable()
     }
 
 
