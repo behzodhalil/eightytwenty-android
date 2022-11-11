@@ -275,7 +275,6 @@ interface InteractorModule {
     @get:Singleton
     val DefaultUpdatePill.bindUpdatePill: UpdatePill
 
-
     @get:Binds
     @get:Singleton
     val DefaultDeletePill.bindDeletePill: DeletePill
