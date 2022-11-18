@@ -165,8 +165,6 @@ dependencies {
     // Avatar image view
     implementation "io.getstream:avatarview-coil:1.0.7"
 
-
-
     // Kotest
     testImplementation 'io.kotest:kotest-assertions-core:5.5.3'
 
@@ -174,4 +172,8 @@ dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.4.2'
 
     implementation(project(":core"))
+
+    // FlowBinding
+    def flowBindingVersion = "1.2.0"
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-android:$flowBindingVersion"
 }
