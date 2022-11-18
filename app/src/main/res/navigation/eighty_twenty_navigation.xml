@@ -209,5 +209,13 @@
     <fragment
         android:id="@+id/reminderFragment"
         android:name="uz.behzod.eightytwenty.features.reminder.ReminderFragment"
-        android:label="ReminderFragment" />
+        android:label="ReminderFragment" >
+        <action
+            android:id="@+id/action_reminderFragment_to_addPillFragment"
+            app:destination="@id/addPillFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPillFragment"
+        android:name="uz.behzod.eightytwenty.features.add_pill.AddPillFragment"
+        android:label="AddPillFragment" />
 </navigation>
