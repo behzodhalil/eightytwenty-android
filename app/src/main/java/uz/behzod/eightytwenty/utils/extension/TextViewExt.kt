@@ -31,3 +31,11 @@ fun TextView?.asStringOrEmpty(): String {
 fun Editable?.asStringOrEmpty(): String {
     return this?.toString() ?: ""
 }
+
+fun Editable?.asLongOrEmpty(): Long {
+    return this?.toString()?.toLong() ?: 0L
+}
+
+fun Editable?.asIntOrEmpty(): Int {
+    return this?.toString()?.toInt() ?: 0
+}
