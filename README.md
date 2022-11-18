@@ -2,6 +2,7 @@
 
 EightyTwenty is life planner application with beautiful user interface. 
 
+
 <img width="428" alt="image" src="https://user-images.githubusercontent.com/72313937/201051413-c7a56c55-634b-4783-adcd-3c8f8ddb44ba.png">
 
 
@@ -22,9 +23,9 @@ EightyTwenty is life planner application with beautiful user interface.
 - [x] Draw 'Sign In' UI
 - [x] Draw 'Sign Up' UI
 - [x] Draw 'Productivity' UI
-- [ ] Draw 'Reminder' UI
-- [ ] Draw 'Bill Reminder' UI
-- [ ] Draw 'Pil Reminder' UI
+- [x] Draw 'Reminder' UI
+- [x] Draw 'Bill Reminder' UI
+- [x] Draw 'Pil Reminder' UI
 - [ ] Draw 'Water Reminder' UI
 - [x] Write bill entity
 - [x] Write pill entity
@@ -36,7 +37,7 @@ EightyTwenty is life planner application with beautiful user interface.
 - [ ] Write the logic bill reminder fragment
 - [ ] Write the logic pill reminder fragment
 - [ ] Write the logic water reminder fragment
-- [ ] Add bill reminder
+- [x] Add bill reminder
 - [x] Add pill reminder
 - [ ] Adding succesfully bill reminder process
 - [ ] Adding successfully pill reminder process
@@ -54,7 +55,8 @@ EightyTwenty is life planner application with beautiful user interface.
 - [ ] Check task, it will move to complete task
 - [ ] Add task group
 - [ ] Add task into task group
-- [ ] Fix soft keyboard overlaps
+- [x] Fix soft keyboard overlaps
+- [ ] Validation for input fields
 
 ### Tests TODO
 - [ ] Write unit tests (Kotest)
