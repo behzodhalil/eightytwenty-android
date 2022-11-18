@@ -3,7 +3,6 @@ package uz.behzod.eightytwenty.features.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
-import android.view.WindowManager
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,6 +14,10 @@ import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        const val FLAG_FULL_SCREEN = 1024
+    }
 
     private val binding by viewBinding(ActivityMainBinding::inflate)
     private lateinit var navHost: NavHostFragment
@@ -36,7 +39,8 @@ class MainActivity : AppCompatActivity() {
         navHost.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.newNoteFragment, R.id.categoryNoteFragment, R.id.newHabitFragment,
-                R.id.signInFragment, R.id.signUpFragment, R.id.selectProductivityFragment
+                R.id.signInFragment, R.id.signUpFragment, R.id.selectProductivityFragment,
+                R.id.addPillFragment
                 -> {
                     binding.bottomNav.gone()
                 }
@@ -50,10 +54,7 @@ class MainActivity : AppCompatActivity() {
     private fun setFullContent() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
+        window.setFlags(FLAG_FULL_SCREEN, FLAG_FULL_SCREEN)
 
         supportActionBar?.hide()
     }
