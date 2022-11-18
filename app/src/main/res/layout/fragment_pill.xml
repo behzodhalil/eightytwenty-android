@@ -16,4 +16,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_pill"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/sun_glow"
+        android:paddingTop="4dp"
+        app:cornerRadius="360dp"
+        app:icon="@drawable/ic_add"
+        app:iconGravity="top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

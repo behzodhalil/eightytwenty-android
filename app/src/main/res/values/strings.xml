@@ -92,4 +92,22 @@
     <string name="text_btn_save">Сохранить</string>
     <string name="text_btn_apply">Применить</string>
 
+    <string-array name="pill_type">
+        <item>Таблетка</item>
+        <item>Жидкость</item>
+        <item>Капсула</item>
+        <item>Инъекция</item>
+        <item>Капли</item>
+    </string-array>
+
+    <string-array name="pill_units">
+        <item>mg</item>
+        <item>time</item>
+        <item>drop</item>
+    </string-array>
+
+    <string-array name="pill_frequency">
+        <item>Ежедневный</item>
+        <item>Еженедельно</item>
+    </string-array>
 </resources>
