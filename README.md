@@ -78,3 +78,5 @@ EightyTwenty is life planner application with beautiful user interface.
 - Truth
 - Firebase
 - Avatar Image View
+- Ktlint
+- Kfluent
