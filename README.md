@@ -35,12 +35,12 @@ EightyTwenty is life planner application with beautiful user interface.
 - [x] Write water dao functions
 - [x] Write the logic reminder fragment
 - [x] Write the logic bill reminder fragment
-- [ ] Write the logic pill reminder fragment
+- [x] Write the logic pill reminder fragment
 - [ ] Write the logic water reminder fragment
 - [x] Add bill reminder
 - [x] Add pill reminder
 - [x] Adding succesfully bill reminder process
-- [ ] Adding successfully pill reminder process
+- [x] Adding successfully pill reminder process
 - [ ] Adding successfully water reminder process
 - [x] Draw 'Select Productivity' UI
 - [x] Write logic for productivity fragment
