@@ -26,7 +26,7 @@ EightyTwenty is life planner application with beautiful user interface.
 - [x] Draw 'Reminder' UI
 - [x] Draw 'Bill Reminder' UI
 - [x] Draw 'Pil Reminder' UI
-- [ ] Draw 'Water Reminder' UI
+- [x] Draw 'Water Reminder' UI
 - [x] Write bill entity
 - [x] Write pill entity
 - [x] Write water entity
