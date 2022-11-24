@@ -176,20 +176,11 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
         }
 
         binding.btnSelectReminder.setOnClickListener {
-            MaterialDialog(requireContext()).show {
-                lifecycleOwner(viewLifecycleOwner)
-                dateTimePicker(
-                    requireFutureDateTime = true,
-                    currentDateTime = ZonedDateTime.now().toCalendar()
-                ) { _, timestamp ->
-                    timestamp.toZonedDateTime()?.let {
-                        viewModel.modifyTaskReminder(it)
-                    }
-                }
-                positiveButton(R.string.text_btn_done) {
-                    viewModel.hasDisplayedReminder(true)
-                }
-            }
+            datePicker(action = { timestamp ->
+                viewModel.modifyTaskReminder(timestamp)
+            }, finish = {
+                viewModel.hasDisplayedReminder(true)
+            })
         }
 
         binding.cvNote.setOnClickListener {
@@ -270,20 +261,12 @@ class NewTaskFragment : Fragment(R.layout.fragment_new_task_detail) {
         }
 
         binding.btnSelectDateOfCompletion.setOnClickListener {
-            MaterialDialog(requireContext()).show {
-                lifecycleOwner(viewLifecycleOwner)
-                datePicker(
-                    requireFutureDate = true,
-                    currentDate = ZonedDateTime.now().toCalendar()
-                ) { _, timestamp ->
-                    viewModel.modifyTaskCompletionDate(timestamp.toZonedDateTime()!!)
-                }
-                positiveButton(R.string.text_btn_done) {
-                    viewModel.hasDisplayedCompletionDate(true)
-                }
-            }
+            datePicker(action = {
+                 viewModel.modifyTaskCompletionDate(it)
+            }, finish = {
+                viewModel.hasDisplayedCompletionDate(true)
+            })
         }
-
     }
 
     private fun observeState() {
