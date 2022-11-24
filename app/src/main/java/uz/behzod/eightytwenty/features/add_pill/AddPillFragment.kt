@@ -13,11 +13,10 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentAddPillBinding
-import uz.behzod.eightytwenty.utils.extension.asLongOrEmpty
-import uz.behzod.eightytwenty.utils.extension.asStringOrEmpty
-import uz.behzod.eightytwenty.utils.extension.stringArray
-import uz.behzod.eightytwenty.utils.view.FormFieldText
+import uz.behzod.eightytwenty.utils.extension.*
 import uz.behzod.eightytwenty.utils.view.viewBinding
+import uz.behzoddev.ui_toast.errorMessage
+import uz.behzoddev.ui_toast.successMessage
 
 @AndroidEntryPoint
 class AddPillFragment : Fragment(R.layout.fragment_add_pill) {
@@ -29,6 +28,8 @@ class AddPillFragment : Fragment(R.layout.fragment_add_pill) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupView()
+        observeState()
+        savePill()
     }
 
 
@@ -37,10 +38,11 @@ class AddPillFragment : Fragment(R.layout.fragment_add_pill) {
         renderUnit()
         renderFrequency()
 
-        binding.actAddPillDose.addTextChangedListener { viewModel.reduceDose(it.asLongOrEmpty()) }
+        binding.etAddPillDose.addTextChangedListener { viewModel.reduceDose(it.asLongOrEmpty()) }
         binding.actAddPillForm.addTextChangedListener { viewModel.reduceForm(it.asStringOrEmpty()) }
         binding.actAddPillFrequency.addTextChangedListener { viewModel.reduceFrequency(it.asStringOrEmpty()) }
         binding.etAddPillName.addTextChangedListener { viewModel.reduceName(it.asStringOrEmpty()) }
+        binding.etAddPillDuration.addTextChangedListener { viewModel.reduceDuration(it.asStringOrEmpty()) }
     }
 
     private fun observeState() {
@@ -51,7 +53,13 @@ class AddPillFragment : Fragment(R.layout.fragment_add_pill) {
     }
 
     private fun renderState(state: AddPillState) {
-
+        if (state.isSaved) {
+            successMessage("Лекарства успешно сохранена")
+            route(RouteAP.Pill)
+        }
+        if (state.isSaveFailed) {
+            errorMessage("Не удалось сохранить лекарство")
+        }
     }
 
     private fun renderForm() {
@@ -66,6 +74,7 @@ class AddPillFragment : Fragment(R.layout.fragment_add_pill) {
             requireContext(),
             R.layout.view_holder_auto_complete,
             stringArray(R.array.pill_units))
+
         binding.actAddPillDose.setAdapter(unit)
     }
 
@@ -75,6 +84,35 @@ class AddPillFragment : Fragment(R.layout.fragment_add_pill) {
             R.layout.view_holder_auto_complete,
             stringArray(R.array.pill_frequency)
         )
-        binding.actAddPillDose.setAdapter(frequency)
+        binding.actAddPillFrequency.setAdapter(frequency)
+    }
+
+    private fun savePill() {
+        binding.btnSavePill.setOnClickListener {
+            val name = binding.etAddPillName
+            val form = binding.actAddPillForm
+            val dose = binding.etAddPillDose
+            val time = binding.etAddPillTime
+            val frequency = binding.actAddPillFrequency
+            val duration = binding.etAddPillDuration
+
+            if (name.checkNotNull { errorMessage("Пожалуйста, введите имя") }
+                && form.checkNotNull { errorMessage("Пожалуйста, введите форму") }
+                && dose.checkNotNull { errorMessage("Пожалуйста, введите дозу") }
+                && time.checkNotNull { errorMessage("Пожалуйста, введите время") }
+                && frequency.checkNotNull { errorMessage("Пожалуйста, введите частоту") }
+                && duration.checkNotNull { errorMessage("Пожалуйста, введите продолжительность") }) {
+                viewModel.insertPill()
+            }
+        }
+    }
+
+    private fun route(route: RouteAP) {
+        when(route) {
+            RouteAP.Pill -> {
+                val direction = AddPillFragmentDirections.actionAddPillFragmentToReminderFragment()
+                navigateTo(direction)
+            }
+        }
     }
 }
