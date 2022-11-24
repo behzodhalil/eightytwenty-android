@@ -13,6 +13,7 @@ import uz.behzod.eightytwenty.utils.view.viewBinding
 class ReminderFragment: Fragment(R.layout.fragment_reminder) {
 
     private val binding: FragmentReminderBinding by viewBinding(FragmentReminderBinding::bind)
+
     private lateinit var viewPager: ReminderViewPager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
