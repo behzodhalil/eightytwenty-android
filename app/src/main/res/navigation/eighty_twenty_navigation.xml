@@ -217,5 +217,9 @@
     <fragment
         android:id="@+id/addPillFragment"
         android:name="uz.behzod.eightytwenty.features.add_pill.AddPillFragment"
-        android:label="AddPillFragment" />
+        android:label="AddPillFragment" >
+        <action
+            android:id="@+id/action_addPillFragment_to_reminderFragment"
+            app:destination="@id/reminderFragment" />
+    </fragment>
 </navigation>
