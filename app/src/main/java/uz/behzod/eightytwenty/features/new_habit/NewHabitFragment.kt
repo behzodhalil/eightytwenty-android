@@ -25,6 +25,7 @@ import uz.behzod.eightytwenty.domain.model.HabitDomainModel
 import uz.behzod.eightytwenty.domain.model.HabitRecommendDomainModel
 import uz.behzod.eightytwenty.utils.constants.*
 import uz.behzod.eightytwenty.utils.extension.Zero
+import uz.behzod.eightytwenty.utils.extension.navigateTo
 import uz.behzod.eightytwenty.utils.view.Colors
 import uz.behzod.eightytwenty.utils.view.viewBinding
 import java.time.LocalDate
@@ -124,6 +125,7 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
             etHabitName.setText(habitRecommend.title)
             etDescription.setText(habitRecommend.description)
             etPerDayCount.setText(habitRecommend.perDayGoalCount.toString())
+
             when (habitRecommend.perDayGoalType) {
                 PerDayGoalType.ONCE -> actGoalType.setText("Раз")
                 PerDayGoalType.HOUR -> actGoalType.setText("Час")
@@ -137,12 +139,11 @@ class NewHabitFragment : Fragment(R.layout.fragment_new_habit) {
     private fun onNavigateToHabitRecommend() {
         binding.ivBack.setOnClickListener {
             val action = NewHabitFragmentDirections.actionNewHabitFragmentToHabitRecommendFragment()
-            findNavController().navigate(action)
+            navigateTo(action)
         }
     }
 
     private fun insertHabitWithSchedule() {
-
         val title = binding.etHabitName.text.toString()
         val description = binding.etDescription.text.toString()
         val perDayCount = binding.etPerDayCount.text.toString()
