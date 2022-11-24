@@ -54,11 +54,8 @@ android {
         // Adds exported schema location as test app assets.
         getByName("androidTest").assets.srcDir("$projectDir/schemas")
     }
-    testOptions {
-        unitTests.all {
-            useJUnitPlatform()
-        }
-    }
+
+
 }
 
 dependencies {
@@ -154,9 +151,11 @@ dependencies {
     implementation 'commons-io:commons-io:2.7'
 
     implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.24"
+
     implementation("io.coil-kt:coil:2.2.2")
     implementation(project(":ui-undo-redo"))
     implementation(project(":ui-toast"))
+
     // Expandable Custom View
     implementation(project(":ui-expandable-view"))
     // Firebase
@@ -165,8 +164,10 @@ dependencies {
     // Avatar image view
     implementation "io.getstream:avatarview-coil:1.0.7"
 
-    // Kotest
-    testImplementation 'io.kotest:kotest-assertions-core:5.5.3'
+    // KFluent
+    def kfluent_version = "1.72"
+    testImplementation ("org.amshove.kluent:kluent-android:$kfluent_version")
+    androidTestImplementation("org.amshove.kluent:kluent-android:$kfluent_version")
 
     // Kaspresso
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.4.2'
@@ -176,4 +177,9 @@ dependencies {
     // FlowBinding
     def flowBindingVersion = "1.2.0"
     implementation "io.github.reactivecircus.flowbinding:flowbinding-android:$flowBindingVersion"
+}
+
+ktlint {
+  android.set(true)
+  outputColorName.set("RED")
 }
