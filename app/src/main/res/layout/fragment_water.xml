@@ -6,12 +6,28 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
+        android:id="@+id/rv_water"
+        android:layout_width="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_height="wrap_content"
-
-        tools:listitem="@layout/view_holder_water_item"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/view_holder_water_item"
         />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_water"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/sun_glow"
+        android:paddingTop="4dp"
+        app:cornerRadius="360dp"
+        app:icon="@drawable/ic_add"
+        app:iconGravity="top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -66,7 +66,7 @@
             app:hintAnimationEnabled="true">
 
             <AutoCompleteTextView
-                android:id="@+id/act_add_pill_form"
+                android:id="@+id/act_add_bill_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
@@ -91,12 +91,14 @@
             app:hintAnimationEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_add_bill_amount_due"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_et_pill"
                 android:fontFamily="@font/roboto"
                 android:inputType="text"
                 android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -109,22 +111,26 @@
             android:background="@color/black_50" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_add_bill_date"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp">
+            android:layout_marginBottom="4dp"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/ic_calendar"
+            app:endIconTint="@color/black_50"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_add_bill_date"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_et_pill"
-                android:drawableEnd="@drawable/ic_calendar"
-                android:drawableTint="@color/black_50"
                 android:fontFamily="@font/roboto"
                 android:hint="Select a date"
                 android:inputType="text"
-                android:paddingStart="8dp"
+                android:labelFor="@id/til_add_bill_date"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -133,6 +139,7 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save_bill"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginStart="24dp"
