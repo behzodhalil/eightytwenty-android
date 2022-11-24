@@ -59,7 +59,7 @@ EightyTwenty is life planner application with beautiful user interface.
 - [ ] Validation for input fields
 
 ### Tests TODO
-- [ ] Write unit tests (Kotest)
+- [ ] Write unit tests (Junit4)
 - [ ] Write UI/E2E tests (Kaspresso)
 - [ ] Write intergartion tests
 
