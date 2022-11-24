@@ -13,7 +13,7 @@ class DefaultFetchWaters @Inject constructor(
     private val dispatchers: IDispatcherProvider,
 ) : FetchWaters {
 
-    override fun fetchWaters(): Flow<List<WaterEntity>> {
+    override fun execute(): Flow<List<WaterEntity>> {
         return flow {
             waterRepository.fetchWaters().collect {
                 if (it.isNotEmpty()) {
