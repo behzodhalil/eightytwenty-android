@@ -18,5 +18,4 @@ interface ManagerModule {
         manager: PermissionManagerImpl
     ): PermissionManager
 
-
 }
