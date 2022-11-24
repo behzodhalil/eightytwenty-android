@@ -26,21 +26,21 @@ EightyTwenty is life planner application with beautiful user interface.
 - [x] Draw 'Reminder' UI
 - [x] Draw 'Bill Reminder' UI
 - [x] Draw 'Pil Reminder' UI
-- [ ] Draw 'Water Reminder' UI
+- [x] Draw 'Water Reminder' UI
 - [x] Write bill entity
 - [x] Write pill entity
 - [x] Write water entity
 - [x] Write bill dao functions
 - [x] Write pill dao functions
 - [x] Write water dao functions
-- [ ] Write the logic reminder fragment
-- [ ] Write the logic bill reminder fragment
-- [ ] Write the logic pill reminder fragment
-- [ ] Write the logic water reminder fragment
+- [x] Write the logic reminder fragment
+- [x] Write the logic bill reminder fragment
+- [x] Write the logic pill reminder fragment
+- [x] Write the logic water reminder fragment
 - [x] Add bill reminder
 - [x] Add pill reminder
-- [ ] Adding succesfully bill reminder process
-- [ ] Adding successfully pill reminder process
+- [x] Adding succesfully bill reminder process
+- [x] Adding successfully pill reminder process
 - [ ] Adding successfully water reminder process
 - [x] Draw 'Select Productivity' UI
 - [x] Write logic for productivity fragment
@@ -59,9 +59,9 @@ EightyTwenty is life planner application with beautiful user interface.
 - [ ] Validation for input fields
 
 ### Tests TODO
-- [ ] Write unit tests (Kotest)
+- [ ] Write unit tests (Junit4)
 - [ ] Write UI/E2E tests (Kaspresso)
-- [ ] Write intergartion tests
+- [ ] Write intergration tests
 
 ### 🔨 Technologies used:
 
@@ -78,3 +78,5 @@ EightyTwenty is life planner application with beautiful user interface.
 - Truth
 - Firebase
 - Avatar Image View
+- Ktlint
+- Kfluent
