@@ -8,3 +8,4 @@ val perDayGoalType = listOf(
     "Страница",
     "Минута"
 )
+
