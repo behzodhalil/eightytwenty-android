@@ -17,7 +17,7 @@ import uz.behzod.eightytwenty.data.local.entities.reminder.WaterEntity
         NoteImageEntity::class, UserEntity::class,
         WaterEntity::class, BillEntity::class,
         PillEntity::class],
-    version = 21,
+    version = 22,
     exportSchema = true
 )
 
