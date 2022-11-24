@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import uz.behzod.eightytwenty.data.local.callback.HabitRecommendCallback
 import uz.behzod.eightytwenty.data.local.dao.*
@@ -21,7 +22,7 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideLocalDatabase(
-        context: Application,
+        @ApplicationContext context: Application,
         callback: HabitRecommendCallback
     ): EightyTwentyDatabase {
         return Room.databaseBuilder(context, EightyTwentyDatabase::class.java, "eighty_database")
