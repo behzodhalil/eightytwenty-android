@@ -36,7 +36,7 @@ EightyTwenty is life planner application with beautiful user interface.
 - [x] Write the logic reminder fragment
 - [x] Write the logic bill reminder fragment
 - [x] Write the logic pill reminder fragment
-- [ ] Write the logic water reminder fragment
+- [x] Write the logic water reminder fragment
 - [x] Add bill reminder
 - [x] Add pill reminder
 - [x] Adding succesfully bill reminder process
