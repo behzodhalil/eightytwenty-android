@@ -5,10 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import uz.behzod.eightytwenty.utils.extension.Empty
 import uz.behzod.eightytwenty.utils.extension.Zero
+import java.time.ZonedDateTime
 
-/**
- * https://www.behance.net/gallery/149541325/Bill-reminder-PayDay-app-Case-Stusy?tracking_source=search_projects%7Cbill+reminder+ui
- */
 @Entity(tableName = "bill_table")
 data class BillEntity(
     /**
@@ -25,7 +23,7 @@ data class BillEntity(
      * It represents the date of bill.
      */
     @ColumnInfo(name = "bill_date")
-    val timestamp: String = String.Empty,
+    val timestamp: ZonedDateTime? = null,
     /**
      * It represents the duration of bill.
      */
