@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.reminder.WaterEntity
 
 interface FetchWaters {
-    fun fetchWaters(): Flow<List<WaterEntity>>
+    fun execute(): Flow<List<WaterEntity>>
 }
