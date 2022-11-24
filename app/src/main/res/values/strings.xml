@@ -110,4 +110,19 @@
         <item>Ежедневный</item>
         <item>Еженедельно</item>
     </string-array>
+
+    <string-array name="bill_types">
+        <item>Жилье</item>
+        <item>За коммунал</item>
+        <item>Газ</item>
+        <item>Нетфликс</item>
+        <item>Плата за обучение</item>
+    </string-array>
+
+    <string-array name="water_frequency">
+        <item>В течение одного часа</item>
+        <item>Через два часа</item>
+        <item>Через шесть часов</item>
+        <item>В день</item>
+    </string-array>
 </resources>
