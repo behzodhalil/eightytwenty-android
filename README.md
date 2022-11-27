@@ -41,7 +41,7 @@ EightyTwenty is life planner application with beautiful user interface.
 - [x] Add pill reminder
 - [x] Adding succesfully bill reminder process
 - [x] Adding successfully pill reminder process
-- [ ] Adding successfully water reminder process
+- [x] Adding successfully water reminder process
 - [x] Draw 'Select Productivity' UI
 - [x] Write logic for productivity fragment
 - [x] Write logic for select productivity fragment
