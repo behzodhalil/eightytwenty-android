@@ -48,8 +48,6 @@ class NewNoteViewModel @Inject constructor(
         modifyState { state -> state.copy(uri = uri) }
     }
 
-
-
     fun insertNote() {
         viewModelScope.launch {
             val title = state.value.title.trim()
@@ -60,6 +58,7 @@ class NewNoteViewModel @Inject constructor(
             val images = state.value.images
 
             modifyState { state -> state.copy(isLoading = true) }
+
 
             runCatching {
                 iInsertNote.invoke(
