@@ -101,4 +101,8 @@ class CategoryViewModel @Inject constructor(
             }
         }
     }
+
+    fun hasDeleted(value: Boolean) {
+        modifyState { state -> state.copy(onDeleted = false) }
+    }
 }
