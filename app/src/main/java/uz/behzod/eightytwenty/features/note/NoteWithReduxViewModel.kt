@@ -47,4 +47,8 @@ class NoteWithReduxViewModel @Inject constructor(
         modifyState { state -> state.copy(groupUid = value) }
     }
 
+    fun updateFolderName(folderName: String)  {
+        modifyState { state -> state.copy(folderName = folderName) }
+    }
+
 }
