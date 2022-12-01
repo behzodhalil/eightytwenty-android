@@ -85,7 +85,12 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
         }
 
         viewModel.modifyIsTrashed(false)
-        viewModel.modifyGroupUid(args.categoryId)
+
+        if (args.categoryId==0L) {
+            viewModel.modifyGroupUid(1L)
+        } else {
+            viewModel.modifyGroupUid(args.categoryId)
+        }
     }
 
     private fun setupRecyclerView() {
@@ -99,7 +104,7 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
             .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    private fun renderState(state: NewNoteViewState) {
+    private suspend fun renderState(state: NewNoteViewState) {
         if (state.isSuccess) {
             if (navController.currentDestination?.id == R.id.newNoteFragment) {
                 val route = NewNoteFragmentDirections.actionNewNoteFragmentToNoteFragment()

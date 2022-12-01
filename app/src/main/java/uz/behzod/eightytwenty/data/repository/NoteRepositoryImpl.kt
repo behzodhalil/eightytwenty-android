@@ -32,7 +32,7 @@ class NoteRepositoryImpl @Inject constructor(
         return sourceManager.fetchAllNotes()
     }
 
-    override fun fetchNotesByCategoryId(categoryId: Long): Flow<List<NoteEntity>> {
+    override fun fetchNotesByCategoryId(categoryId: Long): Flow<List<NoteRelation>> {
         return sourceManager.fetchNotesByCategoryId(categoryId)
     }
 

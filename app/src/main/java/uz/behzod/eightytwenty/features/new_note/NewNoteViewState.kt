@@ -18,7 +18,7 @@ data class NewNoteViewState(
     var images: List<NoteImageEntity> = emptyList(),
     var noteRelation: NoteRelation? = null,
     var uriSource: List<Uri> = emptyList(),
-    val categoryUid: Long = Long.Zero,
+    val categoryUid: Long = 1L,
     val isLoading: Boolean = false,
     val isFailure: Boolean = false,
     val isSuccess: Boolean = false

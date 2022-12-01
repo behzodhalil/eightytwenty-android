@@ -27,17 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/all_task_catalogs"
-        layout="@layout/view_holder_category_note"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_back" />
+
 
     <include
         android:id="@+id/trashed_notes"
@@ -48,7 +38,7 @@
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_note_categories" />
+        app:layout_constraintTop_toBottomOf="@id/et_new_category" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_note_categories"
@@ -56,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/et_new_category"
+        app:layout_constraintTop_toBottomOf="@id/iv_back"
         tools:itemCount="3"
         tools:listitem="@layout/view_holder_catalog" />
 
@@ -100,7 +90,7 @@
         android:layout_marginBottom="15dp"
         android:backgroundTint="@color/sun_glow"
         android:paddingTop="4dp"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:cornerRadius="360dp"
         app:icon="@drawable/ic_folder"
         app:iconGravity="top"
@@ -109,6 +99,22 @@
         app:layout_constraintTop_toTopOf="@+id/btn_new_category_note"
         app:layout_constraintVertical_bias="0.0" />
 
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/btn_last_save"
+    android:layout_width="70dp"
+    android:layout_height="60dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginBottom="15dp"
+    android:backgroundTint="@color/sun_glow"
+    android:paddingTop="4dp"
+    android:visibility="gone"
+    app:cornerRadius="360dp"
+    app:icon="@drawable/ic_check"
+    app:iconGravity="top"
+    app:layout_constraintBottom_toBottomOf="@+id/btn_new_category_note"
+    app:layout_constraintStart_toEndOf="@+id/btn_new_category_note"
+    app:layout_constraintTop_toTopOf="@+id/btn_new_category_note"
+    app:layout_constraintVertical_bias="0.0" />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_cancel"
         android:layout_width="70dp"
@@ -137,5 +143,5 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/all_task_catalogs" />
+        app:layout_constraintTop_toBottomOf="@id/rv_note_categories" />
 </androidx.constraintlayout.widget.ConstraintLayout>

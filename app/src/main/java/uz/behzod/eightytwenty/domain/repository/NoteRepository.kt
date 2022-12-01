@@ -11,7 +11,7 @@ interface NoteRepository {
     suspend fun deleteNote(note: NoteEntity)
     fun fetchTrashedNotes(): Flow<List<NoteEntity>>
     fun fetchAllNotes(): Flow<List<NoteEntity>>
-    fun fetchNotesByCategoryId(categoryId: Long): Flow<List<NoteEntity>>
+    fun fetchNotesByCategoryId(categoryId: Long): Flow<List<NoteRelation>>
     fun fetchNoteById(noteId: Long): Flow<NoteEntity>
     fun fetchNoteRelationByUid(noteUid: Long): Flow<NoteRelation>
     fun searchNotes(query: String): Flow<List<NoteEntity>>

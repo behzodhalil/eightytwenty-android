@@ -12,11 +12,13 @@ data class CategoryState(
     val onSuccess: Boolean = false,
     val onEmpty: Boolean = false,
     val onLoading: Boolean = false,
+    val isTyping: Boolean = false,
     val onSaved: Boolean = false,
     val onSaveFailed: Boolean = false,
     val onFillCategory: Boolean = false,
     val onDeleted: Boolean = false,
-    val onDeleteFailed: Boolean = false
+    val onDeleteFailed: Boolean = false,
+    val isValid: Boolean = false
 ): ViewState {
     companion object {
         val empty  = CategoryState()

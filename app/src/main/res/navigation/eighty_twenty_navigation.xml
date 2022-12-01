@@ -13,7 +13,8 @@
             app:destination="@id/newNoteFragment" />
         <action
             android:id="@+id/action_noteFragment_to_categoryNoteFragment"
-            app:destination="@id/categoryNoteFragment" />
+            app:destination="@id/categoryNoteFragment"
+          app:popUpTo="@id/noteFragment" />
         <argument
             android:name="category_id"
             app:argType="long"
