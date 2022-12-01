@@ -78,7 +78,11 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
         viewModel.state
             .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
             .onEach { state ->
-                viewModel.updateGroupUid(args.categoryId)
+                if (args.categoryId == 0L) {
+                    viewModel.updateGroupUid(1L)
+                } else {
+                    viewModel.updateGroupUid(args.categoryId)
+                }
 
                 viewModel.fetchNotesByUid()
 
@@ -89,19 +93,18 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
 
     private suspend fun renderState(state: NoteViewState) {
 
-        if(state.isEmptyByUid) {
+        if(state.isEmpty) {
             printDebug { "State is empty by uid" }
             binding.tvEmpty.show()
             binding.lawEmpty.show()
         }
 
-        if (state.isSuccessByUid) {
+        if (state.isSuccess) {
             withContext(Dispatchers.IO) {
                 binding.lawEmpty.gone()
                 binding.tvEmpty.gone()
             }
-            printDebug { "State is success by uid" }
-            getNotes(state.notesByUid)
+            getNotes(state.notes)
         }
 
     }
