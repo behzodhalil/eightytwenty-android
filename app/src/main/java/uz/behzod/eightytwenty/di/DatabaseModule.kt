@@ -1,6 +1,6 @@
 package uz.behzod.eightytwenty.di
 
-import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
@@ -9,10 +9,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import uz.behzod.eightytwenty.data.local.callback.HabitRecommendCallback
+import uz.behzod.eightytwenty.data.local.callback.NoteFolderCallback
+import uz.behzod.eightytwenty.data.local.callback.TaskFolderCallback
 import uz.behzod.eightytwenty.data.local.dao.*
 import uz.behzod.eightytwenty.data.local.db.EightyTwentyDatabase
 import uz.behzod.eightytwenty.data.source.LocalSourceManager
 import uz.behzod.eightytwenty.data.source.LocalSourceManagerImpl
+import uz.behzod.eightytwenty.utils.constants.DatabaseConstants
 import javax.inject.Singleton
 
 @Module
@@ -22,12 +25,16 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideLocalDatabase(
-        @ApplicationContext context: Application,
-        callback: HabitRecommendCallback
+        @ApplicationContext context: Context,
+        callback: HabitRecommendCallback,
+        taskFolderCallback: TaskFolderCallback,
+        noteFolderCallback: NoteFolderCallback
     ): EightyTwentyDatabase {
-        return Room.databaseBuilder(context, EightyTwentyDatabase::class.java, "eighty_database")
+        return Room.databaseBuilder(context, EightyTwentyDatabase::class.java, DatabaseConstants.DB_NAME)
             .fallbackToDestructiveMigration()
             .addCallback(callback)
+            .addCallback(taskFolderCallback)
+            .addCallback(noteFolderCallback)
             .build()
     }
 
