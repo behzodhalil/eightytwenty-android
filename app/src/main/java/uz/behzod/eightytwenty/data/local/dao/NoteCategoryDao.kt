@@ -24,7 +24,7 @@ interface NoteCategoryDao {
     suspend fun decrementNoteCount(noteCategoryId: Long)
 
     @Transaction
-    @Query("SELECT * FROM note_category_table ORDER BY note_category_name")
+    @Query("SELECT * FROM note_category_table ORDER BY id")
     fun fetchAllCategories(): Flow<List<NoteCategoryEntity>>
 
     @Transaction
