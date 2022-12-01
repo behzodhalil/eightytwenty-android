@@ -22,7 +22,9 @@ import uz.behzod.eightytwenty.utils.view.viewBinding
 class CategoryNoteFragment : Fragment(R.layout.fragment_category_note) {
 
     private val binding by viewBinding(FragmentCategoryNoteBinding::bind)
+
     private val viewModel: CategoryViewModel by viewModels()
+
     private lateinit var adapter: CategoryNoteAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,19 +72,25 @@ class CategoryNoteFragment : Fragment(R.layout.fragment_category_note) {
 
         if (isSaved) {
             showMessage("Category is successfully saved")
-            binding.btnNewCategory.hide()
-            binding.btnNewSubCategory.hide()
-            binding.btnCancel.hide()
+            binding.btnNewCategory.gone()
+            binding.btnNewSubCategory.gone()
+            binding.btnCancel.gone()
             binding.btnNewCategoryNote.show()
             binding.etNewCategory.gone()
-            viewModel.hasSaved(value = false)
+            binding.btnLastSave.gone()
+            binding.etNewCategory.text.clear()
+            viewModel.updateCategoryName("")
+            viewModel.hasSaved(false)
         }
+
         if (isSuccess) {
             adapter.submitList(state.categories)
         }
 
+
         if (isDeleted) {
             showMessage("Category is successfully deleted")
+            viewModel.hasDeleted(false)
         }
     }
 
@@ -104,6 +112,7 @@ class CategoryNoteFragment : Fragment(R.layout.fragment_category_note) {
 
     private fun onSaveOrCancel() {
         binding.btnNewCategoryNote.setOnClickListener {
+            printDebug { "New category note is clicked" }
             binding.btnNewCategory.show()
             binding.btnNewSubCategory.show()
             binding.btnCancel.show()
@@ -111,12 +120,14 @@ class CategoryNoteFragment : Fragment(R.layout.fragment_category_note) {
         }
 
         binding.btnNewCategory.setOnClickListener {
+            printDebug { "New category is clicked" }
             binding.etNewCategory.show()
-            binding.btnNewCategory.setOnClickListener {
-                viewModel.insertCategory()
-            }
+            binding.btnLastSave.show()
         }
 
+        binding.btnLastSave.setOnClickListener {
+            viewModel.insertCategory()
+        }
         binding.btnCancel.setOnClickListener {
 
         }
