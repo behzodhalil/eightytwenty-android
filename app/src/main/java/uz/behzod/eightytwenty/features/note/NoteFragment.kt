@@ -84,6 +84,12 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
                     viewModel.updateGroupUid(args.categoryId)
                 }
 
+                if (args.categoryName.isEmpty()) {
+                    viewModel.updateFolderName("Все заметки")
+                } else {
+                    viewModel.updateFolderName(args.categoryName)
+                }
+
                 viewModel.fetchNotesByUid()
 
                 renderState(state)
@@ -106,6 +112,7 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
             }
             getNotes(state.notes)
         }
+        binding.tvTitleCategory.text = viewModel.currentState.folderName
 
     }
 
