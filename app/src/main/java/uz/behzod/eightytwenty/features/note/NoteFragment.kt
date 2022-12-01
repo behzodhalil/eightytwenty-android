@@ -21,7 +21,9 @@ import uz.behzod.eightytwenty.core.ReduxViewModel
 import uz.behzod.eightytwenty.data.local.entities.NoteRelation
 import uz.behzod.eightytwenty.databinding.FragmentNoteBinding
 import uz.behzod.eightytwenty.domain.model.NoteDomainModel
+import uz.behzod.eightytwenty.utils.extension.gone
 import uz.behzod.eightytwenty.utils.extension.printDebug
+import uz.behzod.eightytwenty.utils.extension.show
 import uz.behzod.eightytwenty.utils.view.viewBinding
 
 @AndroidEntryPoint
@@ -34,7 +36,6 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG,"onViewCreated() is created")
         setupUI()
         observeState()
 
@@ -58,10 +59,10 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
 
     private fun onInitializerById(value: Long) {
         if (value == 0L) {
-            Log.d("NoteFragment","Category identifier is $value")
+            Log.d("NoteFragment", "Category identifier is $value")
             observeState()
         } else {
-            Log.d("NoteFragment","Category identifier is $value")
+            Log.d("NoteFragment", "Category identifier is $value")
             // fetchNotesById(value)
         }
     }
@@ -133,12 +134,13 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
 
     private fun observeState() {
         viewModel.state
-            .flowWithLifecycle(viewLifecycleOwner.lifecycle,Lifecycle.State.STARTED)
+            .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
             .onEach { state ->
                 viewModel.updateGroupUid(args.categoryId)
                 // viewModel.fetchNotesByUid()
                 viewModel.fetchNotes()
-                renderState(state) }
+                renderState(state)
+            }
             .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
@@ -146,11 +148,14 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
         printDebug { "Argument is ${args.categoryId}" }
         val notes = state.notes
 
-        if (notes.isNotEmpty() && state.groupUid != 0L) {
-            getNotes(notes)
+        if (notes.isEmpty()) {
+            binding.tvEmpty.show()
+            binding.lawEmpty.show()
         }
 
         if (state.onSuccess) {
+            binding.lawEmpty.gone()
+            binding.tvEmpty.gone()
             getNotes(notes)
         }
 
@@ -162,3 +167,4 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
         private const val TAG = "NoteFragment"
     }
 }
+
