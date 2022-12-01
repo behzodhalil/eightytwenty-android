@@ -11,6 +11,7 @@ data class NoteViewState(
     val errorMessage: String = String.Empty,
     val uid: Long = Long.Zero,
     val groupUid: Long = Long.Zero,
+    val folderName: String = String.Empty,
     val isLoading: Boolean = false,
     val isEmpty: Boolean = false,
     val isSuccess: Boolean = false
