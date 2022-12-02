@@ -7,13 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -21,7 +25,10 @@ import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.databinding.FragmentAddWaterBinding
 import uz.behzod.eightytwenty.utils.constants.Water
 import uz.behzod.eightytwenty.utils.extension.asStringOrEmpty
+import uz.behzod.eightytwenty.utils.extension.datePicker
 import uz.behzod.eightytwenty.utils.extension.stringArray
+import uz.behzod.eightytwenty.utils.formatter.DateTimeFormatter
+import uz.behzoddev.ui_toast.errorMessage
 import uz.behzoddev.ui_toast.successMessage
 
 @AndroidEntryPoint
@@ -65,33 +72,78 @@ class AddWaterFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupView()
+        observeState()
+        saveWater()
     }
 
     private fun setupView() {
         initFrequencyAdapter()
 
-        binding.actAddWaterFrequency.addTextChangedListener { viewModel.reduceFrequency(it.asStringOrEmpty()) }
+        binding.apply {
 
-        binding.llHotCup.setOnClickListener {
-            viewModel.reduceQuantity(Water.HOT_CUP.quantity)
-            viewModel.reduceImage(Water.HOT_CUP.image)
+            tieReminderTimeWater.isEnabled = false
+
+            actAddWaterFrequency.addTextChangedListener { viewModel.reduceFrequency(it.asStringOrEmpty()) }
+
+            llHotCup.setOnClickListener {
+                llHotCup.alpha = 1F
+                llMug.alpha = 0.3F
+                llMineralWater.alpha = 0.3F
+                llBottle.alpha = 0.3F
+                llGlass.alpha = 0.3F
+
+                viewModel.reduceQuantity(Water.HOT_CUP.quantity)
+            }
+
+            llMug.setOnClickListener {
+                llMug.alpha = 1F
+
+                llHotCup.alpha = 0.3F
+                llMineralWater.alpha = 0.3F
+                llBottle.alpha = 0.3F
+                llGlass.alpha = 0.3F
+                viewModel.reduceQuantity(Water.MUG.quantity)
+            }
+
+            llMineralWater.setOnClickListener {
+                llMineralWater.alpha = 1F
+
+                llMug.alpha = 0.3F
+                llHotCup.alpha = 0.3F
+                llBottle.alpha = 0.3F
+                llGlass.alpha = 0.3F
+
+                viewModel.reduceQuantity(Water.MINERAL_WATER.quantity)
+            }
+
+            llBottle.setOnClickListener {
+                llBottle.alpha = 1F
+                llMug.alpha = 0.3F
+                llMineralWater.alpha = 0.3F
+                llHotCup.alpha = 0.3F
+                llGlass.alpha = 0.3F
+                viewModel.reduceQuantity(Water.BOTTLE.quantity)
+            }
+
+            llGlass.setOnClickListener {
+                llGlass.alpha = 1F
+
+                llMug.alpha = 0.3F
+                llMineralWater.alpha = 0.3F
+                llBottle.alpha = 0.3F
+                llHotCup.alpha = 0.3F
+                viewModel.reduceQuantity(Water.GLASS.quantity)
+            }
+
+            tilReminderTimeWater.setEndIconOnClickListener {
+                datePicker(action = {
+                    viewModel.reduceReminderTime(it)
+                }, finish = {
+                    viewModel.isDatePicked(true)
+                })
+            }
         }
-        binding.llMug.setOnClickListener {
-            viewModel.reduceQuantity(Water.MUG.quantity)
-            viewModel.reduceImage(Water.MUG.image)
-        }
-        binding.llMineralWater.setOnClickListener {
-            viewModel.reduceQuantity(Water.MINERAL_WATER.quantity)
-            viewModel.reduceImage(Water.MINERAL_WATER.image)
-        }
-        binding.llBottle.setOnClickListener {
-            viewModel.reduceQuantity(Water.BOTTLE.quantity)
-            viewModel.reduceImage(Water.BOTTLE.image)
-        }
-        binding.llGlass.setOnClickListener {
-            viewModel.reduceQuantity(Water.GLASS.quantity)
-            viewModel.reduceImage(Water.GLASS.image)
-        }
+
     }
 
     private fun setupHeight(v: View) {
@@ -121,9 +173,22 @@ class AddWaterFragment : BottomSheetDialogFragment() {
         if (state.isSaved) {
             successMessage("Напоминание о воде успешно сохранено")
         }
+        if (state.isSaveFailed) {
+            errorMessage("Не удалось сохранить напоминание о воде")
+        }
+
+        if (state.isDatePicked) {
+            val reminderTime = state.reminderTime?.format(
+                DateTimeFormatter.asTime(requireContext(), false)
+            )
+            binding.tieReminderTimeWater.setText(reminderTime)
+        }
     }
 
     private fun saveWater() {
-
+        binding.btnSaveWater.setOnClickListener {
+            viewModel.insertWater()
+        }
     }
+
 }
