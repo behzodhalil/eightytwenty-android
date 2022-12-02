@@ -13,6 +13,8 @@ import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.data.local.entities.reminder.BillEntity
 import uz.behzod.eightytwenty.databinding.FragmentBillBinding
 import uz.behzod.eightytwenty.features.add_bill.AddBillFragment
+import uz.behzod.eightytwenty.utils.extension.gone
+import uz.behzod.eightytwenty.utils.extension.show
 import uz.behzod.eightytwenty.utils.extension.transaction
 import uz.behzod.eightytwenty.utils.view.viewBinding
 
@@ -47,6 +49,8 @@ class BillFragment : Fragment(R.layout.fragment_bill) {
 
     private fun renderState(state: BillState) {
         if (state.isSuccess) {
+
+
             getBills(state.bills)
         }
         if (state.isEmpty) {
