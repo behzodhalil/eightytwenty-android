@@ -17,6 +17,6 @@ interface BillDao {
     suspend fun update(bill: BillEntity)
     @Delete
     suspend fun delete(bill: BillEntity)
-    @Query("SELECT * FROM bill_table ORDER BY bill_date DESC")
+    @Query("SELECT * FROM bill_table ORDER BY bill_timestamp DESC")
     fun fetchBills(): Flow<List<BillEntity>>
 }
