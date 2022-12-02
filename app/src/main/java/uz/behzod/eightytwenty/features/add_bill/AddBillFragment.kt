@@ -82,6 +82,7 @@ class AddBillFragment : BottomSheetDialogFragment() {
             viewModel.reduceAmount(it.asLongOrEmpty())
         }
         binding.actAddBillForm.addTextChangedListener { viewModel.reduceBiller(it.asStringOrEmpty()) }
+
         binding.tilAddBillDate.setEndIconOnClickListener {
             datePicker(action = { timestamp ->
                 viewModel.reduceTimestamp(timestamp)
