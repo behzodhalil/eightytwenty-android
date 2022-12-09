@@ -45,4 +45,12 @@ class TaskRepositoryImpl @Inject constructor(
     override fun fetchLimitedTasks(): Flow<List<TaskEntity>> {
         return sourceManager.fetchLimitedTasks()
     }
+
+    override fun fetchTasksByFolderUid(folderUid: Long): Flow<List<TaskEntity>> {
+        return sourceManager.fetchTasksByFolderUid(folderUid)
+    }
+
+    override fun fetchCompletedTasksByFolderUid(folderUid: Long): Flow<List<TaskEntity>> {
+        return sourceManager.fetchCompletedTasksByFolderUid(folderUid)
+    }
 }
