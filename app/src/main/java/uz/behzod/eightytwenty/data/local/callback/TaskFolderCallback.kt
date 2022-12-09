@@ -11,17 +11,16 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class TaskFolderCallback @Inject constructor(
-    private val datababe: Provider<EightyTwentyDatabase>,
+    private val database: Provider<EightyTwentyDatabase>,
     @CallbackScope private val scope: CoroutineScope
 ): RoomDatabase.Callback() {
 
     override fun onCreate(db: SupportSQLiteDatabase) {
         super.onCreate(db)
 
-        val taskDao = datababe.get().getTaskCatalogDao()
+        val taskDao = database.get().getTaskCatalogDao()
 
         scope.launch {
-
             taskDao.insertTaskCatalog(createTaskFolder())
         }
     }
