@@ -1,7 +1,6 @@
 package uz.behzod.eightytwenty.domain.repository
 
 import kotlinx.coroutines.flow.Flow
-import uz.behzod.eightytwenty.data.local.entities.TaskAndSchedule
 import uz.behzod.eightytwenty.data.local.entities.TaskEntity
 
 interface TaskRepository {
@@ -14,4 +13,6 @@ interface TaskRepository {
     fun fetchTasksRecent(): Flow<List<TaskEntity>>
     fun fetchTasksNearTime(): Flow<List<TaskEntity>>
     fun fetchLimitedTasks(): Flow<List<TaskEntity>>
+    fun fetchTasksByFolderUid(folderUid: Long): Flow<List<TaskEntity>>
+    fun fetchCompletedTasksByFolderUid(folderUid: Long): Flow<List<TaskEntity>>
 }
