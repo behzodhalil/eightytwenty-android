@@ -7,16 +7,17 @@ import android.view.Window
 import android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import uz.behzod.eightytwenty.databinding.ActivityOnboardingBinding
 import uz.behzod.eightytwenty.features.main.MainActivity
 import uz.behzod.eightytwenty.utils.extension.Zero
 import uz.behzod.eightytwenty.utils.extension.hide
 import uz.behzod.eightytwenty.utils.extension.show
+import uz.behzod.eightytwenty.utils.extension.startAndFinishActivity
 
 @AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
@@ -37,7 +38,7 @@ class OnboardingActivity : AppCompatActivity() {
         binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setUpFullContent()
         if (isOnboardingOpened()) {
-            val intent = Intent(this,MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -71,14 +72,11 @@ class OnboardingActivity : AppCompatActivity() {
         binding.btnBecomeProductivity.setOnClickListener { viewModel.onEvent(OnboardingEvent.GetStartedEvent) }
     }
 
-    private fun observeEvents() =
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.viewEffect.collect { effect ->
-                    observeEffects(effect)
-                }
-            }
-        }
+    private fun observeEvents() {
+        viewModel.viewEffect.flowWithLifecycle(lifecycle)
+            .onEach { observeEffects(it) }
+            .launchIn(this.lifecycleScope)
+    }
 
     private fun observeEffects(effect: OnboardingViewEffect) {
         when (effect) {
@@ -97,7 +95,9 @@ class OnboardingActivity : AppCompatActivity() {
             binding.viewPager.currentItem = position
         }
 
-
+        if (position == viewModel.lists.size - 1) {
+            onDisplayBecomeProductivity()
+        }
     }
 
     private fun onNavigateToSkip() {
@@ -106,9 +106,7 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun onNavigateToBecomeProductivity() {
-        val intent = Intent(this,MainActivity::class.java)
-        startActivity(intent)
-        finish()
+        startAndFinishActivity<MainActivity>()
         setOnboardingOpened()
     }
 
@@ -125,7 +123,7 @@ class OnboardingActivity : AppCompatActivity() {
             PREFS_ONBOARDING,
             Context.MODE_PRIVATE
         )
-        return pref.getBoolean(PREFS_IS_OPENED,false)
+        return pref.getBoolean(PREFS_IS_OPENED, false)
     }
 
     private fun setOnboardingOpened() {
@@ -133,8 +131,8 @@ class OnboardingActivity : AppCompatActivity() {
             PREFS_ONBOARDING,
             Context.MODE_PRIVATE
         )
-        val editor = pref.edit().putBoolean(PREFS_IS_OPENED,true)
-        editor.commit()
+        val editor = pref.edit().putBoolean(PREFS_IS_OPENED, true)
+        editor.apply()
     }
 
 }
