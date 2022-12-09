@@ -13,14 +13,15 @@ import uz.behzod.eightytwenty.data.local.entities.TaskEntity
 import uz.behzod.eightytwenty.domain.model.TaskDomainModel
 
 class TaskCompleteAdapter(
-    var title: String,
-    var counter: String
+    var title: String
 ): ExpandableItemAdapter {
 
     @DrawableRes
     var collapsedStateResId: Int? = null
     @DrawableRes
     var expandedStateResId: Int? = null
+
+    private var counter = 0
 
     private val list = mutableListOf<TaskEntity>()
 
@@ -29,7 +30,7 @@ class TaskCompleteAdapter(
         val header = view.findViewById<TextView>(R.id.tv_header)
         val count = view.findViewById<TextView>(R.id.tv_count)
         header.text = title
-        count.text = counter
+        count.text = counter.toString()
         return view
     }
 
@@ -66,4 +67,9 @@ class TaskCompleteAdapter(
     fun setData(values: List<TaskEntity>) {
         list.addAll(values)
     }
+
+    fun setCount(value: Int) {
+        counter = value
+    }
+
 }
