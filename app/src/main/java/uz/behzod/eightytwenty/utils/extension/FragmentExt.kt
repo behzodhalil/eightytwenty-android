@@ -1,5 +1,10 @@
 package uz.behzod.eightytwenty.utils.extension
 
+import android.content.res.Resources
+import android.graphics.Color
+import android.graphics.Rect
+import android.graphics.drawable.ColorDrawable
+import android.view.ViewGroup
 import androidx.annotation.ArrayRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -12,6 +17,10 @@ import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.afollestad.materialdialogs.utils.MDUtil.getStringArray
 import uz.behzod.eightytwenty.R
 import java.time.ZonedDateTime
+
+private const val leftPixels = 0
+private const val topPixels = 0
+private const val dimenAmount = 0.0F
 
 val Fragment.navController: NavController
     get() = this.findNavController()
@@ -56,4 +65,19 @@ fun Fragment.datePicker(action: (timestamp: ZonedDateTime) -> Unit, finish:() ->
             finish()
         }
     }
+}
+
+fun DialogFragment.setWidthPercent(percentage: Int) {
+    val percent = percentage.toFloat() / 100
+    val dm = Resources.getSystem().displayMetrics
+    val rect = dm.run { Rect(leftPixels, topPixels, widthPixels, heightPixels) }
+    val percentWidth = rect.width() * percent
+    dialog?.window?.setLayout(percentWidth.toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
+}
+
+
+
+fun DialogFragment.setTransparent() {
+    dialog?.window?.setDimAmount(dimenAmount)
+    dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 }
