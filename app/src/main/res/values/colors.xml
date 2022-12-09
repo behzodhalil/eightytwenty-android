@@ -31,6 +31,8 @@
     <color name="black_90">#E6000000</color>
     <color name="black_100">#000000</color>
 
+  <!-- A set of colors to express transparency with while color -->
+
     <color name="white_10">#1AFFFFFF</color>
     <color name="white_20">#33FFFFFF</color>
     <color name="white_30">#4DFFFFFF</color>
@@ -97,4 +99,7 @@
     <color name="habit_16">#FFB2EC</color>
     <color name="habit_17">#FF99C2</color>
 
+  <color name="background">@color/white</color>
+  <color name="headline">@color/kashmir_blue</color>
+  <color name="icon">@color/black</color>
 </resources>
