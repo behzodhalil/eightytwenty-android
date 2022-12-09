@@ -41,4 +41,9 @@ interface TaskDao {
     @Query("SELECT * FROM task_entity_table_name WHERE task_is_complete <>1 AND task_is_trashed <>1 ORDER BY task_uid LIMIT 5")
     fun fetchLimitedTasks(): Flow<List<TaskEntity>>
 
+    @Query("SELECT * FROM task_entity_table_name WHERE task_catalog_uid =:folderUid AND task_is_complete<>1")
+    fun fetchTaskByFolderUid(folderUid: Long): Flow<List<TaskEntity>>
+
+    @Query("SELECT * FROM task_entity_table_name WHERE task_catalog_uid =:folderUid AND task_is_complete == 1")
+    fun fetchCompletedTasksByFolderUid(folderUid: Long): Flow<List<TaskEntity>>
 }
