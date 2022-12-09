@@ -24,6 +24,7 @@ class ReminderFragment: Fragment(R.layout.fragment_reminder) {
     private fun setupView() {
         viewPager = ReminderViewPager(this)
         binding.vpReminder.adapter = viewPager
+        binding.vpReminder.offscreenPageLimit = 3
 
         TabLayoutMediator(binding.tableLayout, binding.vpReminder) { tab, position ->
             tab.text = getTabTitle(position)
