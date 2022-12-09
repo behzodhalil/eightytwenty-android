@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rv_bill"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:listitem="@layout/view_holder_bill_item" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_bill"
-        android:layout_width="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/view_holder_bill_item"
-        />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_add_bill"
-        android:layout_width="70dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="15dp"
-        android:backgroundTint="@color/sun_glow"
-        android:paddingTop="4dp"
-        app:cornerRadius="360dp"
-        app:icon="@drawable/ic_add"
-        app:iconGravity="top"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/btn_add_bill"
+    android:layout_width="70dp"
+    android:layout_height="60dp"
+    android:layout_marginBottom="15dp"
+    android:backgroundTint="@color/sun_glow"
+    android:paddingTop="4dp"
+    app:cornerRadius="360dp"
+    app:icon="@drawable/ic_add"
+    app:iconGravity="top"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

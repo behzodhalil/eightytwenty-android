@@ -27,17 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/all_notes_category"
-        layout="@layout/view_holder_category_note"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_back" />
 
     <include
         android:id="@+id/trashed_notes"
@@ -58,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/et_new_category"
+        app:layout_constraintTop_toBottomOf="@id/iv_back"
         tools:itemCount="3"
         tools:listitem="@layout/view_holder_category_note" />
 
@@ -139,5 +128,5 @@
         android:autofillHints=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/all_notes_category" />
+        app:layout_constraintTop_toBottomOf="@id/rv_task_catalogs" />
 </androidx.constraintlayout.widget.ConstraintLayout>

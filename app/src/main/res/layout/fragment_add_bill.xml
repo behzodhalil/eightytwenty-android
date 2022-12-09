@@ -1,156 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical">
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="20dp"
+    android:fontFamily="@font/roboto_bold"
+    android:text="Установить напоминание о счете"
+    android:textColor="@color/kashmir_blue"
+    android:textSize="18sp" />
+
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="24dp"
+    android:background="@drawable/bg_all_bill"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Установить напоминание о счете"
-        android:textColor="@color/kashmir_blue"
-        android:textSize="18sp" />
 
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/til_add_bill_name"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:hint="Bill Name"
+      android:paddingStart="2dp"
+      android:paddingTop="2dp"
+      android:paddingEnd="2dp"
+      app:hintAnimationEnabled="true">
+
+      <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/tie_add_bill_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_et_pill"
+        android:fontFamily="@font/roboto"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:paddingStart="8dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="2dp"
+      android:background="@color/black_50" />
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/til_add_bill_biller"
+      style="@style/DropDown"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:hint="Select a biller"
+      android:paddingStart="2dp"
+      android:paddingEnd="2dp"
+      app:hintAnimationEnabled="true">
+
+      <AutoCompleteTextView
+        android:id="@+id/act_add_bill_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/bg_all_bill"
-        android:orientation="vertical">
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/roboto"
+        android:inputType="none"
+        android:labelFor="@id/til_add_bill_biller"
+        tools:ignore="LabelFor" />
 
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_add_bill_name"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Bill Name"
-            android:paddingStart="2dp"
-            android:paddingTop="2dp"
-            android:paddingEnd="2dp"
-            app:hintAnimationEnabled="true">
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="2dp"
+      android:background="@color/black_50" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tie_add_bill_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_et_pill"
-                android:fontFamily="@font/roboto"
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:paddingStart="8dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+    <com.google.android.material.textfield.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:hint="Amount due"
+      android:paddingStart="2dp"
+      android:paddingEnd="2dp"
+      app:hintAnimationEnabled="true">
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/black_50" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_add_bill_biller"
-            style="@style/DropDown"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Select a biller"
-            android:paddingStart="2dp"
-            android:paddingEnd="2dp"
-            app:hintAnimationEnabled="true">
-
-            <AutoCompleteTextView
-                android:id="@+id/act_add_bill_form"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:fontFamily="@font/roboto"
-                android:inputType="none"
-                android:labelFor="@id/til_add_bill_biller"
-                tools:ignore="LabelFor" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/black_50" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Amount due"
-            android:paddingStart="2dp"
-            android:paddingEnd="2dp"
-            app:hintAnimationEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tie_add_bill_amount_due"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_et_pill"
-                android:fontFamily="@font/roboto"
-                android:inputType="text"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/black_50" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_add_bill_date"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            app:endIconMode="custom"
-            app:endIconDrawable="@drawable/ic_calendar"
-            app:endIconTint="@color/black_50"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tie_add_bill_date"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_et_pill"
-                android:fontFamily="@font/roboto"
-                android:hint="Select a date"
-                android:inputType="text"
-                android:labelFor="@id/til_add_bill_date"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_save_bill"
+      <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/tie_add_bill_amount_due"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="@color/sun_glow"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Добавить напоминание о счете"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:cornerRadius="12dp" />
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_et_pill"
+        android:fontFamily="@font/roboto"
+        android:inputType="text"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="2dp"
+      android:background="@color/black_50" />
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/til_add_bill_date"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="4dp"
+      app:endIconDrawable="@drawable/ic_calendar"
+      app:endIconMode="custom"
+      app:endIconTint="@color/black_50">
+
+      <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/tie_add_bill_date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_et_pill"
+        android:fontFamily="@font/roboto"
+        android:hint="Select a date"
+        android:inputType="text"
+        android:labelFor="@id/til_add_bill_date"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+  </LinearLayout>
+
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/btn_save_bill"
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginBottom="24dp"
+    android:backgroundTint="@color/sun_glow"
+    android:fontFamily="@font/roboto_medium"
+    android:text="Добавить напоминание о счете"
+    android:textAllCaps="false"
+    android:textColor="@color/white"
+    app:cornerRadius="12dp" />
 
 </LinearLayout>

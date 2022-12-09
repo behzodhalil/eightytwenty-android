@@ -3,7 +3,9 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:background="@color/background"
+  >
 
   <ImageView
     android:id="@+id/iv_folder"
@@ -33,7 +35,7 @@
     android:layout_marginTop="20dp"
     android:fontFamily="@font/roboto_bold"
     tools:text="Несортированные"
-    android:textColor="@color/kashmir_blue"
+    android:textColor="@color/headline"
     android:textSize="18sp"
     app:layout_constraintStart_toEndOf="@id/iv_folder"
     app:layout_constraintTop_toTopOf="parent" />
