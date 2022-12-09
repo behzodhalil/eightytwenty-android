@@ -298,4 +298,12 @@ interface InteractorModule {
     @get:Binds
     @get:Singleton
     val DefaultFetchBills.bindBills: FetchBills
+
+    @get:Binds
+    @get:Singleton
+    val DefaultFetchTasksByFolderUid.bindTasksByFolderUid: FetchTasksByFolderUid
+
+    @get:Binds
+    @get:Singleton
+    val DefaultFetchCompletedTasksByFolderUid.bindCompletedTasksByFolderUid: FetchCompletedTasksByFolderUid
 }
