@@ -11,6 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import uz.behzod.eightytwenty.databinding.FragmentSettingBinding
+import uz.behzod.eightytwenty.utils.extension.transaction
 
 @AndroidEntryPoint
 class SettingFragment : BottomSheetDialogFragment() {
@@ -53,6 +54,7 @@ class SettingFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupView()
     }
 
     override fun onDestroyView() {
@@ -60,13 +62,26 @@ class SettingFragment : BottomSheetDialogFragment() {
         super.onDestroyView()
     }
 
+    private fun setupView() {
+        binding.settingTvChangeTheme.setOnClickListener {
+            route(SettingRoute.Theme)
+        }
+    }
+
+
+
     private fun height(view: View) {
         val layoutParams = view.layoutParams
         layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
         view.layoutParams = layoutParams
     }
 
-    private fun route(direction: SettingRoute) {
-
+    private fun route(route: SettingRoute) {
+        when(route) {
+            SettingRoute.Theme -> {
+                val theme = ThemeFragment.instance()
+                transaction(theme)
+            }
+        }
     }
 }
