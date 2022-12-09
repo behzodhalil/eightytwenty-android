@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kr.sns.ui_expandable_view.ExpandableSelectionView
 import uz.behzod.eightytwenty.R
 import uz.behzod.eightytwenty.data.local.entities.TaskEntity
@@ -14,21 +17,21 @@ import uz.behzod.eightytwenty.utils.extension.navController
 import uz.behzod.eightytwenty.utils.extension.printDebug
 import uz.behzod.eightytwenty.utils.view.viewBinding
 
-
 @AndroidEntryPoint
 class TaskFragment : Fragment(R.layout.fragment_task) {
 
     private val binding by viewBinding(FragmentTaskBinding::bind)
+
     private lateinit var taskAdapter: TaskAdapter
+
     private lateinit var completeAdapter: TaskCompleteAdapter
-    private val viewModel: TaskViewModel by viewModels()
+
+    private val viewModel: TaskReduxViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupView()
-
-        fetchTasks()
 
         onNavigateToNewTask()
         onNavigateToCatalog()
@@ -39,22 +42,17 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
     private fun setupView() {
         taskAdapter = TaskAdapter()
         binding.rvTask.adapter = taskAdapter
+
         completeAdapter = TaskCompleteAdapter(
-            title = "Завершенный",
-            counter = "5")
+            title = "Завершенный")
+
         binding.rvCompleteTasks.setAdapter(completeAdapter)
         binding.rvCompleteTasks.setState(ExpandableSelectionView.State.Expanded)
-        completeAdapter.setData(listOf(
-            TaskEntity(title = "Test 1")
-        ))
     }
 
 
     private fun onNavigateToNewTask() {
         binding.btnNewNote.setOnClickListener {
-            completeAdapter.setData(listOf(
-                TaskEntity(title = "Test 2")
-            ))
             binding.rvCompleteTasks.notifyDataChanged()
         }
     }
@@ -73,33 +71,38 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
         }
     }
 
-    private fun fetchTasks() = lifecycleScope.launchWhenCreated {
-        viewModel.uiState.collect { state ->
-            when (state) {
-                is TaskUiState.Empty -> {
-
-                }
-                is TaskUiState.Failure -> {
-
-                }
-                is TaskUiState.Loading -> {
-
-                }
-                is TaskUiState.Success -> {
-                    taskAdapter.submitList(state.data)
-                    printDebug { "[TaskFragment]: Tasks are ${state.data}" }
-                }
+    private fun observeState() {
+        viewModel.state
+            .flowWithLifecycle(lifecycle)
+            .onEach {
+                viewModel.fetchTasksByFolderUid()
+                viewModel.fetchCompletedTasksByFolderUid()
+                renderState(it)
             }
-        }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
+    private fun renderState(state: TaskState) {
+        val tasks = state.tasks
+        val completedTasks = state.completedTasks
 
+        val completedCount = state.completedTasks.size
+
+        if (state.isSuccess) {
+            getTasks(tasks)
+        }
+
+        if (state.isCompleteSuccess) {
+            getCompletedTasks(completedTasks)
+            completeAdapter.setCount(completedCount)
+        }
+
+    }
     private fun route(route: TaskRoute) {
         when (route) {
             TaskRoute.FolderRoute -> {
                 val direction = TaskFragmentDirections.actionTaskFragmentToTaskCatalogFragment()
                 navController.navigate(direction)
-
                 binding.rvCompleteTasks.notifyDataChanged()
             }
             TaskRoute.NewTaskRoute -> {
@@ -116,4 +119,12 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 
     }
 
+    private fun getTasks(tasks: List<TaskEntity>) {
+        taskAdapter.submitList(tasks)
+    }
+
+    private fun getCompletedTasks(tasks: List<TaskEntity>) {
+        completeAdapter.setData(tasks)
+        binding.rvCompleteTasks.notifyDataChanged()
+    }
 }
