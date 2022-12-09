@@ -355,4 +355,12 @@ class LocalSourceManagerImpl @Inject constructor(
     override fun fetchBills(): Flow<List<BillEntity>> {
         return billDao.fetchBills()
     }
+
+    override fun fetchTasksByFolderUid(folderUid: Long): Flow<List<TaskEntity>> {
+        return taskDao.fetchTaskByFolderUid(folderUid)
+    }
+
+    override fun fetchCompletedTasksByFolderUid(folderUid: Long): Flow<List<TaskEntity>> {
+        return taskDao.fetchCompletedTasksByFolderUid(folderUid)
+    }
 }

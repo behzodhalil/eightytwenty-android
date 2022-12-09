@@ -61,7 +61,8 @@ interface LocalSourceManager {
     fun fetchTasksRecent(): Flow<List<TaskEntity>>
     fun fetchTasksNearTime(): Flow<List<TaskEntity>>
     fun fetchLimitedTasks(): Flow<List<TaskEntity>>
-
+    fun fetchTasksByFolderUid(folderUid: Long): Flow<List<TaskEntity>>
+    fun fetchCompletedTasksByFolderUid(folderUid: Long): Flow<List<TaskEntity>>
     // TaskCatalog: Dao functions
 
     suspend fun insertTaskCatalog(taskCatalog: TaskCatalogEntity)
