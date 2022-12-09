@@ -173,10 +173,19 @@ dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.4.2'
 
     implementation(project(":core"))
+    implementation(project(":core-ui"))
 
     // FlowBinding
     def flowBindingVersion = "1.2.0"
     implementation "io.github.reactivecircus.flowbinding:flowbinding-android:$flowBindingVersion"
+
+    // Lottie
+    implementation 'com.airbnb.android:lottie:5.2.0'
+
+    implementation(project(":domain"))
+
+    implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:1.1.1'
+
 }
 
 ktlint {
