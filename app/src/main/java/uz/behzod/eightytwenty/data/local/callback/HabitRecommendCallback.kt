@@ -11,7 +11,6 @@ import uz.behzod.eightytwenty.data.local.entities.TaskCatalogEntity
 import uz.behzod.eightytwenty.data.local.entities.asEntity
 import uz.behzod.eightytwenty.di.CallbackScope
 import uz.behzod.eightytwenty.domain.model.HabitRecommendDomainModel
-import uz.behzod.eightytwenty.utils.extension.printDebug
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -23,7 +22,6 @@ class HabitRecommendCallback @Inject constructor(
     override fun onCreate(db: SupportSQLiteDatabase) {
         super.onCreate(db)
 
-        printDebug { "Callback is called" }
         val dao = database.get().getHabitRecommendDao()
         val taskGroupDao = database.get().getTaskCatalogDao()
 
@@ -105,4 +103,4 @@ private val habitRecommends = listOf(
     )
 )
 
-private val group = TaskCatalogEntity(name = "Входящий")
+private val group = TaskCatalogEntity(name = "Входящий", taskCount = 0)
