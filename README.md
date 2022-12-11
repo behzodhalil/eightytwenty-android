@@ -24,7 +24,9 @@ EightyTwenty is life planner application with beautiful user interface.
 :white_circle: | :white_circle: | Move note to other group
 Check task, it will move to complete task| :white_circle: | :white_circle:
 Add task into task group | :white_circle: |  :white_circle:
-Validation for input fields | :white_circle: | :white_circle:
+Move to note group cancel | :white_circle: | :white_circle:
+Move to note group back | :white_circle: | :white_circle:
+Move to note group new note group| :white_circle: | :white_circle:
 
 
 ### Tests TODO
