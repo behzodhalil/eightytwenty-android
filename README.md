@@ -27,6 +27,7 @@ Add task into task group | :white_circle: |  :white_circle:
 Move to note group cancel | :white_circle: | :white_circle:
 Move to note group back | :white_circle: | :white_circle:
 Move to note group new note group| :white_circle: | :white_circle:
+FTS technique| :white_circle: | :white_circle:
 
 
 ### Tests TODO
