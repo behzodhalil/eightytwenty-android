@@ -24,7 +24,6 @@ class AddPillFragment : Fragment(R.layout.fragment_add_pill) {
     private val binding: FragmentAddPillBinding by viewBinding(FragmentAddPillBinding::bind)
     private val viewModel: AddPillViewModel by viewModels()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupView()
