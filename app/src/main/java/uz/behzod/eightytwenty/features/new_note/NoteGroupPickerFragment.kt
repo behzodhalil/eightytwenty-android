@@ -22,23 +22,19 @@ import uz.behzod.eightytwenty.utils.extension.supportFragmentManager
 @AndroidEntryPoint
 class NoteGroupPickerFragment : BottomSheetDialogFragment() {
 
-    companion object {
-        private const val REQ_NAME_KEY = "NOTE_GROUP_PICKER_NAME_KEY"
-        private const val REQ_NAME_VALUE = "NOTE_GROUP_PICKER_NAME_VALUE"
-        private const val REQ_UID_KEY = "NOTE_GROUP_PICKER_UID_KEY"
-        private const val REQ_UID_VALUE = "NOTE_GROUP_PICKER_UID_VALUE"
-    }
-
     private var _binding: FragmentNoteGroupPickerBinding? = null
     private val binding: FragmentNoteGroupPickerBinding get() = _binding!!
+
     private val viewModel: NoteGroupPickerViewModel by viewModels()
+
     private lateinit var listener: NoteGroupPickerListener
+
     private lateinit var adapter: NoteGroupPickerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentNoteGroupPickerBinding.inflate(
             inflater, container, false
@@ -81,6 +77,14 @@ class NoteGroupPickerFragment : BottomSheetDialogFragment() {
             dismiss()
         }
         binding.rvNoteGroup.adapter = adapter
+
+        binding.ivBack.setOnClickListener {
+            route(NoteGroupRoute.Back)
+        }
+
+        binding.ivCancel.setOnClickListener {
+            route(NoteGroupRoute.Cancel)
+        }
     }
 
     private fun initRequests(name: String, uid: Long) {
@@ -111,8 +115,29 @@ class NoteGroupPickerFragment : BottomSheetDialogFragment() {
         view.layoutParams = layoutParams
     }
 
+    private fun route(path: NoteGroupRoute) {
+        when (path) {
+            NoteGroupRoute.Back -> {
+                dismiss()
+            }
+            NoteGroupRoute.Cancel -> {
+                dismiss()
+            }
+            NoteGroupRoute.AddNoteGroup -> {
+
+            }
+        }
+    }
+
     fun setOnClickListener(param: NoteGroupPickerListener) {
         listener = param
+    }
+
+    companion object {
+        private const val REQ_NAME_KEY = "NOTE_GROUP_PICKER_NAME_KEY"
+        private const val REQ_NAME_VALUE = "NOTE_GROUP_PICKER_NAME_VALUE"
+        private const val REQ_UID_KEY = "NOTE_GROUP_PICKER_UID_KEY"
+        private const val REQ_UID_VALUE = "NOTE_GROUP_PICKER_UID_VALUE"
     }
 
 }
