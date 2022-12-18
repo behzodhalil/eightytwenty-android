@@ -38,8 +38,11 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note), AttachImageListene
     }
 
     private val binding by viewBinding(FragmentNewNoteBinding::bind)
+
     private val viewModel: NewNoteViewModel by viewModels()
+
     private val args: NewNoteFragmentArgs by navArgs()
+
     private val imageAdapter: ImageAdapter by lazy {
         ImageAdapter()
     }
