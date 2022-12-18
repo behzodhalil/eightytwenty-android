@@ -24,6 +24,7 @@ class NewNoteDialog : BottomSheetDialogFragment() {
     private val binding: DialogNewNoteBinding get() = _binding!!
 
     private val viewModel: NewNoteDialogViewModel by viewModels()
+
     private lateinit var closeListener: NewNoteListener
 
     override fun onCreateView(
