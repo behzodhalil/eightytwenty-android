@@ -306,4 +306,8 @@ interface InteractorModule {
     @get:Binds
     @get:Singleton
     val DefaultFetchCompletedTasksByFolderUid.bindCompletedTasksByFolderUid: FetchCompletedTasksByFolderUid
+
+    @get:Binds
+    @get:Singleton
+    val DefaultSearchNoteFTS.bindSearchNoteFts: SearchNoteFTS
 }
