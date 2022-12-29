@@ -3,6 +3,7 @@ package uz.behzod.eightytwenty.data.local.dao
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
+import uz.behzod.eightytwenty.data.local.entities.NoteFTS
 import uz.behzod.eightytwenty.data.local.entities.NoteRelation
 
 @Dao
@@ -36,6 +37,13 @@ interface NoteDao {
 
     @Query("SELECT * FROM note_table WHERE note_title LIKE :query")
     fun searchNote(query: String): Flow<List<NoteEntity>>
+
+    @Query("""
+        SELECT *
+        FROM note_fts_table
+        WHERE note_fts_table LIKE:query """
+    )
+    fun searchNoteFts(query: String):Flow<List<NoteFTS>>
 
     @Query("SELECT * FROM note_table WHERE note_is_trashed <> 1")
     fun fetchAllNoteRelation(): Flow<List<NoteRelation>>
