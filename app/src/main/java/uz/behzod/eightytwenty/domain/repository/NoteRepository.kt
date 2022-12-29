@@ -2,6 +2,7 @@ package uz.behzod.eightytwenty.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
+import uz.behzod.eightytwenty.data.local.entities.NoteFTS
 import uz.behzod.eightytwenty.data.local.entities.NoteRelation
 import uz.behzod.eightytwenty.utils.Resource
 
@@ -16,4 +17,5 @@ interface NoteRepository {
     fun fetchNoteRelationByUid(noteUid: Long): Flow<NoteRelation>
     fun searchNotes(query: String): Flow<List<NoteEntity>>
     fun fetchAllNoteRelation(): Flow<List<NoteRelation>>
+    fun searchNoteFTS(query: String): Flow<List<NoteFTS>>
 }
