@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun Onboarding() {
+fun Onboarding(onBecomeProductivityClick: () -> Unit) {
     val context = LocalContext.current
 
     val items = OnboardingItem.items()
@@ -73,7 +73,7 @@ fun Onboarding() {
                 }
             },
             onBeProductivityClick = {
-                Toast.makeText(context, "Hey", Toast.LENGTH_SHORT).show()
+                onBecomeProductivityClick()
             }
         )
     }
@@ -208,7 +208,7 @@ fun ColumnScope.Indicators(modifier: Modifier = Modifier, size: Int, index: Int)
 @Composable
 fun OnboardingPreview() {
     Surface {
-        Onboarding()
+        Onboarding {}
     }
 
 }

@@ -1,188 +1,207 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
-    id 'kotlin-parcelize'
-    id 'com.google.gms.google-services'
-    id 'androidx.navigation.safeargs.kotlin'
+  id 'com.android.application'
+  id 'org.jetbrains.kotlin.android'
+  id 'kotlin-kapt'
+  id 'dagger.hilt.android.plugin'
+  id 'kotlin-parcelize'
+  id 'com.google.gms.google-services'
+  id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
-    compileSdk 33
+  compileSdk 33
 
-    defaultConfig {
-        applicationId "uz.behzod.eightytwenty"
-        minSdk 26
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+  defaultConfig {
+    applicationId "uz.behzod.eightytwenty"
+    minSdk 26
+    targetSdk 33
+    versionCode 1
+    versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += [
-                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
-                        "room.incremental"     : "true",
-                        "room.expandProjection": "true"]
-            }
-        }
-
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments += [
+          "room.schemaLocation"  : "$projectDir/schemas".toString(),
+          "room.incremental"     : "true",
+          "room.expandProjection": "true"]
+      }
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+  }
 
-    buildFeatures {
-        viewBinding true
-        dataBinding = true
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  kotlinOptions {
+    jvmTarget = '1.8'
+  }
 
-    sourceSets {
-        // Adds exported schema location as test app assets.
-        getByName("androidTest").assets.srcDir("$projectDir/schemas")
-    }
+  buildFeatures {
+    viewBinding true
+    dataBinding = true
+  }
 
+  sourceSets {
+    // Adds exported schema location as test app assets.
+    getByName("androidTest").assets.srcDir("$projectDir/schemas")
+  }
+  buildFeatures {
+    compose true
+  }
+
+  composeOptions {
+    kotlinCompilerExtensionVersion = "1.4.6"
+  }
 
 }
 
 dependencies {
+  implementation(project(":features:onboarding"))
+  implementation(project(":core:features"))
+  implementation 'androidx.core:core-ktx:1.9.0'
+  implementation 'androidx.appcompat:appcompat:1.5.0'
+  implementation 'com.google.android.material:material:1.6.1'
+  implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+  testImplementation 'junit:junit:4.13.2'
+  androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.0'
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+  implementation "androidx.compose.ui:ui:1.4.1"
+  implementation "androidx.compose.material:material:1.4.1"
+  implementation "androidx.compose.ui:ui-tooling-preview:1.4.1"
+  implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+  implementation 'androidx.activity:activity-compose:1.7.0'
+  testImplementation 'junit:junit:4.13.2'
+  androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+  androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.4.1"
+  debugImplementation "androidx.compose.ui:ui-tooling:1.4.1"
+  implementation("com.google.accompanist:accompanist-pager:0.28.0")
 
-    // Hilt
-    def hiltVersion = "2.45"
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
+  // Hilt
+  def hiltVersion = "2.45"
+  implementation("com.google.dagger:hilt-android:$hiltVersion")
+  kapt("com.google.dagger:hilt-compiler:$hiltVersion")
 
-    // Room
-    def roomVersion = "2.4.2"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
+  // Room
+  def roomVersion = "2.4.2"
+  implementation("androidx.room:room-runtime:$roomVersion")
+  implementation("androidx.room:room-ktx:$roomVersion")
+  kapt("androidx.room:room-compiler:$roomVersion")
 
-    // Coroutine
-    def coroutineVersion = "1.6.2"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+  // Coroutine
+  def coroutineVersion = "1.6.2"
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
 
-    // Lifecycle KTX x Fragment KTX
-    def lifecycleKtxVersion = "2.4.1"
-    def fragmentKtxVersion = "1.4.1"
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleKtxVersion")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleKtxVersion")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleKtxVersion")
-    implementation("androidx.fragment:fragment-ktx:$fragmentKtxVersion")
+  // Lifecycle KTX x Fragment KTX
+  def lifecycleKtxVersion = "2.4.1"
+  def fragmentKtxVersion = "1.4.1"
+  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleKtxVersion")
+  implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleKtxVersion")
+  implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleKtxVersion")
+  implementation("androidx.fragment:fragment-ktx:$fragmentKtxVersion")
 
-    // ViewPager2
-    def viewPagerVersion = "1.0.0"
-    implementation("androidx.viewpager2:viewpager2:$viewPagerVersion")
+  // ViewPager2
+  def viewPagerVersion = "1.0.0"
+  implementation("androidx.viewpager2:viewpager2:$viewPagerVersion")
 
-    // Navigation
-    def navVersion = "2.5.1"
-    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+  // Navigation
+  def navVersion = "2.5.1"
+  implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+  implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
-    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
+  testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
+  androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
 
-    testImplementation "com.google.truth:truth:1.1.3"
-    androidTestImplementation "com.google.truth:truth:1.1.3"
+  testImplementation "com.google.truth:truth:1.1.3"
+  androidTestImplementation "com.google.truth:truth:1.1.3"
 
-    androidTestImplementation "junit:junit:4.13.2"
+  androidTestImplementation "junit:junit:4.13.2"
 
-    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+  androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test:runner:1.4.0'
+  androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+  androidTestImplementation 'androidx.test:runner:1.4.0'
 
-    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.36'
-    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.36'
+  androidTestImplementation 'com.google.dagger:hilt-android-testing:2.36'
+  kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.36'
 
-    androidTestImplementation 'io.github.kakaocup:kakao:3.1.0'
+  androidTestImplementation 'io.github.kakaocup:kakao:3.1.0'
 
-    debugImplementation 'com.guolindev.glance:glance:1.1.0'
+  debugImplementation 'com.guolindev.glance:glance:1.1.0'
 
-    implementation 'com.nex3z:toggle-button-group:1.2.3'
-    implementation 'nl.bryanderidder:themed-toggle-button-group:1.4.1'
-    //Calendar
-    implementation 'com.github.tejpratap46:RecyclerCalendarAndroid:2.0.1'
-    implementation "androidx.viewpager2:viewpager2:1.0.0"
+  implementation 'com.nex3z:toggle-button-group:1.2.3'
+  implementation 'nl.bryanderidder:themed-toggle-button-group:1.4.1'
+  //Calendar
+  implementation 'com.github.tejpratap46:RecyclerCalendarAndroid:2.0.1'
+  implementation "androidx.viewpager2:viewpager2:1.0.0"
 
-    def workManagerVersion = "2.7.1"
-    implementation "androidx.work:work-runtime-ktx:$workManagerVersion"
+  def workManagerVersion = "2.7.1"
+  implementation "androidx.work:work-runtime-ktx:$workManagerVersion"
 
-    implementation 'androidx.hilt:hilt-work:1.0.0'
-    // When using Kotlin.
-    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+  implementation 'androidx.hilt:hilt-work:1.0.0'
+  // When using Kotlin.
+  kapt 'androidx.hilt:hilt-compiler:1.0.0'
 
-    implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
+  implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
 
-    // Timber
-    implementation 'com.jakewharton.timber:timber:5.0.1'
+  // Timber
+  implementation 'com.jakewharton.timber:timber:5.0.1'
 
-    // Logger
-    implementation 'com.orhanobut:logger:2.2.0'
+  // Logger
+  implementation 'com.orhanobut:logger:2.2.0'
 
-    implementation 'com.afollestad.material-dialogs:core:3.3.0'
-    implementation 'com.afollestad.material-dialogs:color:3.3.0'
-    implementation 'com.afollestad.material-dialogs:datetime:3.3.0'
-    implementation 'com.afollestad.material-dialogs:lifecycle:3.3.0'
+  implementation 'com.afollestad.material-dialogs:core:3.3.0'
+  implementation 'com.afollestad.material-dialogs:color:3.3.0'
+  implementation 'com.afollestad.material-dialogs:datetime:3.3.0'
+  implementation 'com.afollestad.material-dialogs:lifecycle:3.3.0'
 
-    implementation 'commons-io:commons-io:2.7'
+  implementation 'commons-io:commons-io:2.7'
 
-    implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.24"
+  implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.24"
 
-    implementation("io.coil-kt:coil:2.2.2")
-    implementation(project(":ui-undo-redo"))
-    implementation(project(":ui-toast"))
+  implementation("io.coil-kt:coil:2.2.2")
+  implementation(project(":ui-undo-redo"))
+  implementation(project(":ui-toast"))
 
-    // Expandable Custom View
-    implementation(project(":ui-expandable-view"))
-    // Firebase
-    implementation 'com.google.firebase:firebase-auth:21.0.3'
+  // Expandable Custom View
+  implementation(project(":ui-expandable-view"))
+  // Firebase
+  implementation 'com.google.firebase:firebase-auth:21.0.3'
 
-    // Avatar image view
-    implementation "io.getstream:avatarview-coil:1.0.7"
+  // Avatar image view
+  implementation "io.getstream:avatarview-coil:1.0.7"
 
-    // KFluent
-    def kfluent_version = "1.72"
-    testImplementation ("org.amshove.kluent:kluent-android:$kfluent_version")
-    androidTestImplementation("org.amshove.kluent:kluent-android:$kfluent_version")
+  // KFluent
+  def kfluent_version = "1.72"
+  testImplementation("org.amshove.kluent:kluent-android:$kfluent_version")
+  androidTestImplementation("org.amshove.kluent:kluent-android:$kfluent_version")
 
-    // Kaspresso
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.4.2'
+  // Kaspresso
+  androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.4.2'
 
-    implementation(project(":core-ui"))
+  implementation(project(":core-ui"))
 
-    // FlowBinding
-    def flowBindingVersion = "1.2.0"
-    implementation "io.github.reactivecircus.flowbinding:flowbinding-android:$flowBindingVersion"
+  // FlowBinding
+  def flowBindingVersion = "1.2.0"
+  implementation "io.github.reactivecircus.flowbinding:flowbinding-android:$flowBindingVersion"
 
-    // Lottie
-    implementation 'com.airbnb.android:lottie:5.2.0'
+  // Lottie
+  implementation 'com.airbnb.android:lottie:5.2.0'
 
-    implementation(project(":domain"))
+  implementation(project(":domain"))
 
-    implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:1.1.1'
+  implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:1.1.1'
 
 }
 
