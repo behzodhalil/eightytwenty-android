@@ -2,14 +2,13 @@ package uz.behzod.eightytwenty.features.search_notes
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import uz.behzod.eightytwenty.data.local.entities.NoteEntity
 import uz.behzod.eightytwenty.databinding.ViewHolderNoteBinding
-import uz.behzod.eightytwenty.domain.model.NoteDomainModel
 
 class SearchNotesAdapter :
-    ListAdapter<NoteDomainModel, SearchNotesAdapter.SearchNotesViewHolder>(SearchNotesDiffUtil) {
+    ListAdapter<NoteEntity, SearchNotesAdapter.SearchNotesViewHolder>(SearchNotesDiffUtil) {
 
     inner class SearchNotesViewHolder(
         val binding: ViewHolderNoteBinding

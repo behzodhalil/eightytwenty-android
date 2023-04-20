@@ -7,24 +7,26 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import uz.behzod.eightytwenty.domain.interactor.note.SearchNoteFTS
 import uz.behzod.eightytwenty.domain.interactor.note.SearchNotes
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchNotesViewModel @Inject constructor(
-    private val searchNotesInteractor: SearchNotes
+    private val searchNotesInteractor: SearchNoteFTS
 ) : ViewModel() {
+
 
     private var _uiState: MutableStateFlow<SearchNotesUIState> =
         MutableStateFlow(SearchNotesUIState.Loading)
     val uiState = _uiState.asStateFlow()
 
     fun searchNotes(query: String) {
-        searchNotesInteractor.invoke(query).onEach {
+        searchNotesInteractor.execute(query).onEach {
             if (it.isEmpty()) {
                 _uiState.value = SearchNotesUIState.Empty
             } else if (it.isNotEmpty()) {
-                _uiState.value = SearchNotesUIState.Success(it)
+                // _uiState.value = SearchNotesUIState.Success(it)
             }
         }.launchIn(viewModelScope)
     }

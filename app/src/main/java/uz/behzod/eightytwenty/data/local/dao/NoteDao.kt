@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import uz.behzod.eightytwenty.data.local.entities.NoteEntity
 import uz.behzod.eightytwenty.data.local.entities.NoteFTS
 import uz.behzod.eightytwenty.data.local.entities.NoteRelation
+import uz.behzod.eightytwenty.data.local.entities.NoteWithMatchInfo
 
 @Dao
 interface NoteDao {
@@ -39,13 +40,13 @@ interface NoteDao {
     fun searchNote(query: String): Flow<List<NoteEntity>>
 
     @Query("""
-        SELECT *
+        SELECT *, matchinfo(note_fts_table) as matchInfo
         FROM note_table
-        join note_fts_table on note_title = note_fts_title
+        join note_fts_table on note_table.note_title = note_fts_table.note_title
         WHERE note_fts_table MATCH:query
         """
     )
-    fun searchNoteFts(query: String): Flow<List<NoteEntity>>
+    fun searchNoteFts(query: String): Flow<List<NoteWithMatchInfo>>
 
     @Query("SELECT * FROM note_table WHERE note_is_trashed <> 1")
     fun fetchAllNoteRelation(): Flow<List<NoteRelation>>
