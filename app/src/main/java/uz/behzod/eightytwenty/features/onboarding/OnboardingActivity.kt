@@ -1,41 +1,43 @@
 package uz.behzod.eightytwenty.features.onboarding
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Window
-import android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.launchIn
+import io.behzod.onboarding.Onboarding
 import kotlinx.coroutines.flow.onEach
 import uz.behzod.eightytwenty.databinding.ActivityOnboardingBinding
 import uz.behzod.eightytwenty.features.main.MainActivity
-import uz.behzod.eightytwenty.utils.extension.Zero
-import uz.behzod.eightytwenty.utils.extension.hide
-import uz.behzod.eightytwenty.utils.extension.show
-import uz.behzod.eightytwenty.utils.extension.startAndFinishActivity
+import uz.behzod.eightytwenty.utils.extension.*
 
 @AndroidEntryPoint
-class OnboardingActivity : AppCompatActivity() {
+class OnboardingActivity : ComponentActivity() {
 
     companion object {
         private const val PREFS_ONBOARDING = "PREFS_ONBOARDING"
         private const val PREFS_IS_OPENED = "PREFS_ONBOARDING_IS_OPENED"
     }
 
-    private lateinit var binding: ActivityOnboardingBinding
-    private lateinit var mViewPager: OnboardingViewPagerAdapter
+
+    /*private lateinit var binding: ActivityOnboardingBinding
+    private lateinit var mViewPager: OnboardingViewPagerAdapter*/
     private val viewModel: OnboardingViewModel by viewModels()
 
     private var position = Int.Zero
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityOnboardingBinding.inflate(layoutInflater)
+
+        setContent {
+            Onboarding {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        /*binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setUpFullContent()
         if (isOnboardingOpened()) {
             val intent = Intent(this, MainActivity::class.java)
@@ -43,9 +45,9 @@ class OnboardingActivity : AppCompatActivity() {
             finish()
         }
         setContentView(binding.root)
-        setupView()
+        setupView()*/
     }
-
+/*
     private fun setUpFullContent() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
 
@@ -55,15 +57,15 @@ class OnboardingActivity : AppCompatActivity() {
         )
 
         supportActionBar?.hide()
-    }
+    }*/
 
-    private fun setupView() {
+  /*  private fun setupView() {
         initViewPager()
 
         observeEvents()
-    }
+    }*/
 
-    private fun initViewPager() {
+  /*  private fun initViewPager() {
         mViewPager = OnboardingViewPagerAdapter(this, viewModel.lists)
         binding.viewPager.adapter = mViewPager
 
@@ -133,6 +135,6 @@ class OnboardingActivity : AppCompatActivity() {
         )
         val editor = pref.edit().putBoolean(PREFS_IS_OPENED, true)
         editor.apply()
-    }
+    }*/
 
 }

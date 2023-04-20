@@ -8,9 +8,8 @@ class PickImagesCallbacks(
     private val listener: AttachImageListeners
 ) : ActivityResultCallback<List<Uri>> {
 
-    override fun onActivityResult(result: List<Uri>?) {
-        result?.let {
-            listener.addImages(it)
-        }
+
+    override fun onActivityResult(result: List<Uri>) {
+        listener.addImages(result)
     }
 }
