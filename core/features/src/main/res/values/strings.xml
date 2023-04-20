@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="skip">Пропустить</string>
+  <string name="continues">Продолжить</string>
+  <string name="become_productivity">Стать продуктивнее</string>
+
+  <string name="create_task">Создавай задачи</string>
+  <string name="create_task_description">Задачи с большой, но очень простой кастомизацией для любых нужд и целей. Не думай, мы подумали за тебя, просто делай</string>
+
+  <string name="write_note">Пиши заметки</string>
+  <string name="write_note_description">Записывай идеи в ту же секунду, как они приходят. Добавляй в заметки картинки,меняй оформление и делись с друзьями</string>
+
+  <string name="form_habits">Формируй привычки</string>
+  <string name="form_habit_description">Выработай в себе полезные и очень важные привычки. Становись лучшей версией себя каждый день</string>
+
+  <string name="everything_on_the_shelves">Всё по полочкам</string>
+  <string name="everything_on_the_shelves_description">Благодаря умной системе списков, тебе никогда не придётся искать свою задачу или заметку среди списка всех задач</string>
+
+</resources>

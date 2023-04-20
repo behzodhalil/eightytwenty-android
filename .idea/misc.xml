@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_new_task_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_note.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_productivity.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_search_notes.xml" value="0.3648148148148148" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.4895833333333333" />
         <entry key="app/src/main/res/layout/fragment_task.xml" value="0.4895833333333333" />

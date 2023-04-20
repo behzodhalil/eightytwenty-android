@@ -9,12 +9,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "uz.behzod.eightytwenty"
         minSdk 26
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -64,13 +64,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.core:core-ktx:1.7.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Hilt
-    def hiltVersion = "2.42"
+    def hiltVersion = "2.45"
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-compiler:$hiltVersion")
 
@@ -172,7 +171,6 @@ dependencies {
     // Kaspresso
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.4.2'
 
-    implementation(project(":core"))
     implementation(project(":core-ui"))
 
     // FlowBinding

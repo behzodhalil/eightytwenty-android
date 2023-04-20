@@ -1,4 +1,4 @@
-package uz.behzoddev.core
+package io.behzod.features
 
 import org.junit.Test
 
