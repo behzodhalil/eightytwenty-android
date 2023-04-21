@@ -16,4 +16,19 @@
   <string name="everything_on_the_shelves">Всё по полочкам</string>
   <string name="everything_on_the_shelves_description">Благодаря умной системе списков, тебе никогда не придётся искать свою задачу или заметку среди списка всех задач</string>
 
+  <!-- AUTHENTICATION -->
+  <string name="password_requirement_characters">Не менее 8 символов</string>
+  <string name="password_requirement_capital">Минимум 1 заглавная буква</string>
+  <string name="password_requirement_digit"> Минимум 1 цифра</string>
+  <string name="sign_in_to_account">Вход через почту</string>
+  <string name="sign_up_to_account">Регистрация</string>
+  <string name="email">Email</string>
+  <string name="password">Пароль</string>
+  <string name="name">Имя</string>
+  <string name="not_with_us_yet">Еще не с нами?</string>
+  <string name="join_us">Присоединиться</string>
+  <string name="next">Далее</string>
+  <string name="email_address">behzoddev@gmail.com</string>
+  <string name="show_password">Show Password</string>
+  <string name="hide_password">Hide Password</string>
 </resources>
