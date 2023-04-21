@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="4dp"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/roboto_mediumm"
             android:textColor="@color/kashmir_blue"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"

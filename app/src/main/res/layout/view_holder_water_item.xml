@@ -31,7 +31,7 @@
             android:layout_marginStart="12dp"
             android:textSize="16sp"
             android:textColor="@color/kashmir_blue"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/roboto_mediumm"
             app:layout_constraintBottom_toBottomOf="@id/iv_water_icon"
             app:layout_constraintStart_toEndOf="@id/iv_water_icon"
             app:layout_constraintTop_toTopOf="@id/iv_water_icon"

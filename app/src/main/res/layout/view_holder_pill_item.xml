@@ -31,11 +31,11 @@
             android:textColor="@color/black"
             android:layout_marginTop="18dp"
             android:layout_marginStart="12dp"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/roboto_mediumm"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_pill_icon"
             />
-        
+
         <TextView
             android:id="@+id/tv_pill_dose"
             android:layout_width="wrap_content"

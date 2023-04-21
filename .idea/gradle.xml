@@ -18,6 +18,9 @@
             <option value="$PROJECT_DIR$/core/features" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/auth" />
+            <option value="$PROJECT_DIR$/features/auth/domain" />
+            <option value="$PROJECT_DIR$/features/auth/ui" />
             <option value="$PROJECT_DIR$/features/onboarding" />
             <option value="$PROJECT_DIR$/ui-expandable-view" />
             <option value="$PROJECT_DIR$/ui-toast" />
