@@ -35,6 +35,7 @@ fun Onboarding(onBecomeProductivityClick: () -> Unit) {
     val items = OnboardingItem.items()
     val pagerState = rememberPagerState()
     val scope = rememberCoroutineScope()
+
     var isLastPage by remember {
         mutableStateOf(false)
     }
@@ -172,22 +173,18 @@ fun BottomContent(
         modifier = modifier.padding(start = 25.dp),
         shape = RoundedCornerShape(12.dp)
     ) {
-        if (isLastPage) {
-            Text(
-                text = stringResource(id = R.string.become_productivity),
-                fontSize = 18.sp,
-                modifier = modifier.padding(4.dp),
-                fontWeight = FontWeight.Medium
-            )
-        } else {
-            Text(
-                text = stringResource(id = R.string.continues),
-                fontSize = 18.sp,
-                modifier = modifier.padding(4.dp),
-                fontWeight = FontWeight.Medium
-            )
-        }
-
+        Text(
+            text = stringResource(
+                id = if (isLastPage) {
+                    R.string.become_productivity
+                } else {
+                    R.string.continues
+                }
+            ),
+            fontSize = 18.sp,
+            modifier = modifier.padding(4.dp),
+            fontWeight = FontWeight.Medium
+        )
     }
 }
 
