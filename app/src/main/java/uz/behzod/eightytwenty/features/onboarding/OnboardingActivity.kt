@@ -11,6 +11,7 @@ import io.behzod.onboarding.Onboarding
 import kotlinx.coroutines.flow.onEach
 import uz.behzod.eightytwenty.databinding.ActivityOnboardingBinding
 import uz.behzod.eightytwenty.features.main.MainActivity
+import uz.behzod.eightytwenty.ui.EightyTwentyTheme
 import uz.behzod.eightytwenty.utils.extension.*
 
 @AndroidEntryPoint
@@ -32,10 +33,13 @@ class OnboardingActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Onboarding {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+            EightyTwentyTheme() {
+                Onboarding {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
             }
+
         }
         /*binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setUpFullContent()
