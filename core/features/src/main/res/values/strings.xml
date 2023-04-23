@@ -20,6 +20,7 @@
   <string name="password_requirement_characters">Не менее 8 символов</string>
   <string name="password_requirement_capital">Минимум 1 заглавная буква</string>
   <string name="password_requirement_digit"> Минимум 1 цифра</string>
+  <string name="password_requirement_not_digit"> Only letter</string>
   <string name="sign_in_to_account">Вход через почту</string>
   <string name="sign_up_to_account">Регистрация</string>
   <string name="email">Email</string>
@@ -27,8 +28,20 @@
   <string name="name">Имя</string>
   <string name="not_with_us_yet">Еще не с нами?</string>
   <string name="join_us">Присоединиться</string>
+  <string name="already_have_account">Уже есть аккаунт</string>
   <string name="next">Далее</string>
   <string name="email_address">behzoddev@gmail.com</string>
   <string name="show_password">Show Password</string>
   <string name="hide_password">Hide Password</string>
+  <string name="this_is_required">This is required</string>
+  <string name="password_requirement_needed">%s, needed</string>
+  <string name="flag_password_requirement">%s, satisfied</string>
+  <string name="flag_password_not_requirement">%s, not satisfied</string>
+
+  <!-- BOTTOM BAR -->
+  <string name="note">Заметки</string>
+  <string name="task">Задачи</string>
+  <string name="habit">Привычки</string>
+  <string name="reminder">Напоминание</string>
+  <string name="productivity">Продуктивность</string>
 </resources>

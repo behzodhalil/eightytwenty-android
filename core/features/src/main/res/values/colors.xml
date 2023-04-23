@@ -16,4 +16,11 @@
   <color name="coral_red">#ff4444</color>
   <color name="solitude">#f0f4fd</color>
   <color name="lemon_slice">#f6efad</color>
+  <color name="purple_pan">#6270ed</color>
+
+  <color name="gloomy_purple">#865fde</color>
+  <color name="coral_commander">#ed6d62</color>
+  <color name="light_badland">#ffb444</color>
+  <color name="paris_green">#ed6d62</color>
+  <color name="alexis_blue">#425e86</color>
 </resources>

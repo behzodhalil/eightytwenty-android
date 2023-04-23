@@ -47,6 +47,7 @@
     android:layout_marginTop="20dp"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     app:layout_constraintTop_toBottomOf="@id/tv_title_category"
+    tools:layout_editor_absoluteX="0dp"
     tools:listitem="@layout/view_holder_note" />
 
   <com.airbnb.lottie.LottieAnimationView
