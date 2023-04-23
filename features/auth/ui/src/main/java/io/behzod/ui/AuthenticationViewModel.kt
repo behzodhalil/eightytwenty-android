@@ -5,9 +5,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import io.behzod.domain.ValidationForm
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AuthenticationViewModel : ViewModel() {
+@HiltViewModel
+class AuthenticationViewModel @Inject constructor(
+    private val validatorForm: ValidationForm,
+) : ViewModel() {
 
     var uiState by mutableStateOf(AuthenticationState())
         private set
@@ -32,6 +38,7 @@ class AuthenticationViewModel : ViewModel() {
             AuthenticationEvent.FailureDismissed -> {
                 dismissFailure()
             }
+
         }
     }
 
@@ -40,7 +47,7 @@ class AuthenticationViewModel : ViewModel() {
             isLoading = true
         )
         viewModelScope.launch {
-            // firebase request
+
         }
     }
 
@@ -74,7 +81,7 @@ class AuthenticationViewModel : ViewModel() {
     private fun updatePassword(password: String) {
         val requirements = mutableListOf<PasswordRequirements>()
 
-        if (password.length > 7) {
+        if (password.length > MIN_CHARACTERS_LENGTH) {
             requirements.add(PasswordRequirements.EIGHT_CHARACTERS)
         }
         if (password.any { it.isUpperCase() }) {
@@ -106,6 +113,14 @@ class AuthenticationViewModel : ViewModel() {
             name = name,
             nameRequirements = requirements
         )
+    }
+
+    fun formValid(): Boolean {
+        return validatorForm(name = uiState.name, email = uiState.email, password = uiState.password)
+    }
+
+    companion object {
+        private const val MIN_CHARACTERS_LENGTH = 7
     }
 }
 
